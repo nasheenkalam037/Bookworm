@@ -1,0 +1,33 @@
+\documentclass{standalone}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usepackage{tikzpeople}
+\usetikzlibrary{shapes,arrows}
+\begin{document}
+\pagestyle{empty}
+
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+    
+\begin{tikzpicture}[node distance = 4cm, auto]
+    \node[alice, minimum size=2cm] (user) {User};
+
+    % Place nodes
+    \node [block, right of=user] (frontend) {Front End};
+    \node [block, right of=frontend] (model) {M.L. Newest Model};
+    \node [block, below of=frontend] (db) {Database};
+    \node [block, right of=db] (training) {M.L. Training};
+    % Draw edges
+    \path [line] (frontend.east) -- (model.west);
+\end{tikzpicture}
+
+
+\end{document}
