@@ -1,9 +1,12 @@
-\documentclass{standalone}
+\documentclass[
+%       left   bottom right top
+border={-20pt  5pt   0pt   0pt}
+]{standalone}
 
 \usepackage[latin1]{inputenc}
 \usepackage{tikz}
 \usepackage{tikzpeople}
-\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{shapes,arrows, positioning,calc,fit}
 \begin{document}
 \pagestyle{empty}
 
@@ -13,20 +16,35 @@
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
 \tikzstyle{block} = [rectangle, draw, fill=blue!20, 
     text width=5em, text centered, rounded corners, minimum height=4em]
-\tikzstyle{line} = [draw, -latex']
+\tikzstyle{line} = [-latex]
+\tikzstyle{user} = [alice, minimum size=1.8cm]
 \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
     minimum height=2em]
     
 \begin{tikzpicture}[node distance = 4cm, auto]
-    \node[alice, minimum size=2cm] (user) {User};
-
     % Place nodes
-    \node [block, right of=user] (frontend) {Front End};
+    \node [block] (frontend) {Front End};
     \node [block, right of=frontend] (model) {M.L. Newest Model};
     \node [block, below of=frontend] (db) {Database};
     \node [block, right of=db] (training) {M.L. Training};
+    
+    % Side User
+    \node[user,left of=frontend, xshift=-1cm] (user1) {User 1};
+    \node[user,below of=user1] (user2) {User 2};
+    
+    % Draw Border
+    \node [draw, rectangle, dashed, rounded corners,fit={([yshift=0.5cm,xshift=-0.5cm]frontend.north west)  ([yshift=-0.5cm,xshift=0.5cm]training.south east)}] (border) {} ;
+    
     % Draw edges
-    \path [line] (frontend.east) -- (model.west);
+    \path [line] (frontend.east) edge[bend left=50] (model.west);
+    \path [line] (model.west) edge[bend left=50] (frontend.east);
+    
+    \path [line] (frontend.south) edge[bend left=50] (db.north);
+    \path [line] (db.north) edge[bend left=50] (frontend.south);
+    
+    \path [line] (db.east) edge[bend left=50] (training.west);
+    \path [line] (training.west) edge[bend left=50] (db.east);
+    \path [line] (training.north) edge node[swap]{\footnotesize Overwrite} (model.south);
 \end{tikzpicture}
 
 
