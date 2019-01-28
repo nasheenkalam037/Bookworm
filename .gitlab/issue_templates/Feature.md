@@ -1,8 +1,8 @@
 User Story
 ------------
-* As a [role], 
-* I want [feature] 
-* so that [reason].
+* *As a:* [role], 
+* *I want:* [feature] 
+* *so that:* [reason].
 
 Functional Requirements
 ----------------------------
