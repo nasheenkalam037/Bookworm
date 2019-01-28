@@ -8,7 +8,7 @@ Group Members
 * 
 * 
 
-Poject Description
+Project Description
 ------------------
 
 
