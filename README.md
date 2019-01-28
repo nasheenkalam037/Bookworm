@@ -4,9 +4,9 @@ ECE 651 -- Final Project
 Group Members
 --------------
 * Jonathan Shahen (jmshahen [at] uwaterloo [dot] ca)
+* Syeda Noor Jaha Azim (snjazim [at] uwaterloo [dot] ca)
 * Chetan Joshi (c4joshi [at] uwaterloo [dot] ca)
-* 
-* 
+* Nasheen Kalam (n2kalam [at] uwaterloo [dot] ca)
 
 Project Description
 ------------------
