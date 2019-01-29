@@ -32,8 +32,8 @@ border={-20pt  5pt   0pt   0pt}
     \node [block, below of=db] (scraping) {Scraping Public Book Data};
     
     % Side User
-    \node[user,left of=frontend, xshift=-1cm] (user1) {User 1};
-    \node[user,below of=user1] (user2) {User 2};
+    \node[user,left of=frontend, xshift=-1cm] (user1) {Authorized Users};
+    \node[user,below of=user1] (user2) {All Users};
     \node[mycloud,left of=scraping, xshift=-1cm] (public) {Public Book Repository};
     
     % Draw Border
@@ -89,21 +89,20 @@ border={-20pt  5pt   0pt   0pt}
 
     % User lines
     \path [line] (user1.east) edge 
-    node[above]{\tiny \begin{tabular}{c}
-        Request\\
-        Book\\
-        Information
+    node[above,xshift=-2mm]{\tiny \begin{tabular}{c}
+        Update Personal\\
+        Book Ratings
         \end{tabular}
     }
-    node[below]{\tiny \begin{tabular}{c}
+    node[below,xshift=-2mm]{\tiny \begin{tabular}{c}
         Request\\
         Recommendation\\
         List
         \end{tabular}
     } (frontend.west);
-    \path [line] (user2.east) edge node[above,sloped,midway,xshift=-5mm]{\tiny\begin{tabular}{c}
-        Update Personal\\
-        Book Ratings
+    \path [line] (user2.east) edge node[below,sloped,midway,xshift=-5mm]{\tiny\begin{tabular}{c}
+        Request Book\\
+        Information
         \end{tabular}} ([yshift=-2mm]frontend.west);
     \path [line] (public.east) edge node[below,midway,fill=white,inner sep=0,yshift=-1mm]{\tiny \begin{tabular}{c}
         Scrap Public\\
