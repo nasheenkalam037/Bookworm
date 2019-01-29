@@ -36,15 +36,20 @@ border={-20pt  5pt   0pt   0pt}
     \node [draw, rectangle, dashed, rounded corners,fit={([yshift=0.5cm,xshift=-0.5cm]frontend.north west)  ([yshift=-0.5cm,xshift=0.5cm]training.south east)}] (border) {} ;
     
     % Draw edges
-    \path [line] (frontend.east) edge[bend left=50] (model.west);
-    \path [line] (model.west) edge[bend left=50] (frontend.east);
+    \path [line] ([yshift=0.5mm]frontend.east) edge[bend left=50] ([yshift=0.5mm]model.west);
+    \path [line] ([yshift=-0.5mm]model.west) edge[bend left=50] ([yshift=-0.5mm]frontend.east);
     
-    \path [line] (frontend.south) edge[bend left=50] (db.north);
-    \path [line] (db.north) edge[bend left=50] (frontend.south);
+    \path [line] ([xshift=-0.5mm]db.north) edge[bend left=50] ([xshift=-0.5mm]frontend.south);
+    \path [line] ([xshift=0.5mm]frontend.south) edge[bend left=50] ([xshift=0.5mm]db.north);
     
-    \path [line] (db.east) edge[bend left=50] (training.west);
-    \path [line] (training.west) edge[bend left=50] (db.east);
+    \path [line] ([yshift=0.5mm]db.east) edge[bend left=50] ([yshift=0.5mm]training.west);
+    \path [line] ([yshift=-0.5mm]training.west) edge[bend left=50] ([yshift=-0.5mm]db.east);
+    
     \path [line] (training.north) edge node[swap]{\footnotesize Overwrite} (model.south);
+
+    % User lines
+    \path [line] (user1.east) edge node[swap]{\footnotesize Request} (frontend.west);
+    \path [line] (user2.east) edge node[swap,sloped,midway,xshift=-0.5cm]{\footnotesize Update} ([yshift=-2mm]frontend.west);
 \end{tikzpicture}
 
 
