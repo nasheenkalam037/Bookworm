@@ -6,7 +6,7 @@ border={-20pt  5pt   0pt   0pt}
 \usepackage[latin1]{inputenc}
 \usepackage{tikz}
 \usepackage{tikzpeople}
-\usetikzlibrary{shapes,arrows, positioning,calc,fit}
+\usetikzlibrary{shapes,arrows, positioning,calc,fit,arrows.meta}
 \begin{document}
 \pagestyle{empty}
 
@@ -16,7 +16,7 @@ border={-20pt  5pt   0pt   0pt}
     text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
 \tikzstyle{block} = [rectangle, draw, fill=blue!20, 
     text width=5em, text centered, rounded corners, minimum height=4em]
-\tikzstyle{line} = [-latex]
+\tikzstyle{line} = [-{Latex[length=2mm]}, thick]
 \tikzstyle{user} = [alice, minimum size=1.8cm]
 \tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
     minimum height=2em]
