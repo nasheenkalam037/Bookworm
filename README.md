@@ -12,27 +12,29 @@ Project Description
 ------------------
 Books are a shared passion among a large population of the world.
 According to BookMap:
-> The worldwide market value at consumer prices at around €122 billion (US$143.4 billion).
-> Book publishing is bigger than music, video games, or filmed entertainment, roughly equal to newspaper publishing, yet clearly smaller than in-home video entertainment, which is almost double that size.
-> (BookMap)[https://www.wischenbart.com/page-59]
+> "The worldwide market value at consumer prices at around US$143.4 billion.
+> Book publishing is bigger than music, video games, or filmed entertainment, 
+> roughly equal to newspaper publishing, yet clearly smaller than 
+> in-home video entertainment, which is almost double that size."
+> [BookMap](https://www.wischenbart.com/page-59)
 
 This level of commitment and enjoyment of novels has inspired our group to create a product that helps
-customers locate where they can find books, and creates a custom recomendation system, using machine learning, to 
+customers locate where they can find books, and creates a custom recommendation system, using machine learning, to 
 provide an "endless" list of book recommendations.
 
-The Minimum Viable Product (MVP) includes the following:
+The **Minimum Viable Product (MVP)** includes the following:
 * Details about books scraped from public sources
 * A website users can sign-up and have custom new book recommendations provided for them
 * Each book will have links to where that book can be purchased from
 * Interactive website that users can use to browse for new books and to tell us which books they have liked or disliked
 
-Our context diagram can be found here: [Context Diagram](documents/context-diagram/context-diagram.pdf).
+Our **Context Diagram** can be found here: [Context Diagram](documents/context-diagram/context-diagram.pdf).<br>
 In this diagram we show the following subsystems that we will need to create for our MVP:
 * Frontend
     * This is the webserver code that is the public interface that customers will interact with
 * Database
     * Here we store all information on the books we have scrapped from public sources
-    * We also store relavant information about each user and their book preferences
+    * We also store relevant information about each user and their book preferences
     * All machine learning data is extracted from the data stored here
 * Machine Learning Newest Model
     * This is the newest instance of our learned machine learning model
@@ -43,6 +45,14 @@ In this diagram we show the following subsystems that we will need to create for
     * The machine learning model uses an AutoEncoder to create our recommendation model
 
 Our UI Mockup can be found here: [UI Mockup](documents/ui-mockup/ui-mockup.pdf).
+This shows an early view of what our user interface will look like.
+But it is subject to change.
+
+Our product will be excluding the following features:
+* We will not be performing Sentiment Analysis on user reviews, only relying on user ratings
+* We will not be using advertisements or affiliate links
+* This product is not unique, as Amazon/Indego/BookFinder/ThiftBooks/etc have many similar systems in place.
+    * We are interested in learning the technology behind these systems
 
 ---
 
