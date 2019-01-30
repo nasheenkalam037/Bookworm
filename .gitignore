@@ -4,3 +4,4 @@
 *.bbl
 *.blg
 *.out
+src/web/node_modules/*
