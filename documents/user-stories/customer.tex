@@ -3,6 +3,8 @@
 \usepackage[left=2.50cm, right=2.50cm, top=2.50cm, bottom=2.50cm]{geometry}
 \usepackage[colorlinks]{hyperref}
 \usepackage{parskip}
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep}
 
 \title{High Level Customer User Stories}
 \author{Syeda Noor Jaha Azim}
@@ -11,27 +13,25 @@
 \maketitle
 
 \section{Epic }
-As a user I would like to have an option to search for books with any possible criteria and see all the details of the book I choose. I should be able to look for the convenient booksellers in terms of availability and price of the book. I would also like suggestions on books that matches my reading choice. So that it is easy for me to find the book I want and purchase it from the convenient bookseller. 
+As a Customer I would like to have the option to search for books with many possible criteria and see various details about the book I choose. I want to be able to look for the convenient booksellers in terms of availability and price of the book. I would also like suggestions on books that matches my reading choice. So that it is easy for me to find the book I want and purchase it from the convenient bookseller. 
 
 \section{User Stories }
+
 \subsection{Search Books}
 \begin{itemize}
 \item \emph{As a:} Customer
-\item \emph{I want:} to search for books
-\item \emph{so that:}  I can see the book’s details
-\end{itemize}
-
-
- A search form with the following fields:
+\item \emph{I want:} to search for books using a combination of these fields:
 \begin{itemize}
-	\item[--] Author
-	\item[--] Title
-	\item[--] Genre
-	\item[--] Price range
-	\item[--] Rating
-	\item[--] Number of pages
-	\item[--] Publisher
-	\item[--] Publication Year
+    \item[--] Author
+    \item[--] Title
+    \item[--] Genre
+    \item[--] Price range
+    \item[--] Rating
+    \item[--] Number of pages
+    \item[--] Publisher
+    \item[--] Publication Year
+\end{itemize}
+\item \emph{so that:} I can find specific books and view additional details about them
 \end{itemize}
 
 \subsection{Compare Booksellers}
@@ -53,22 +53,22 @@ A list of all the booksellers with the following details:
 \subsection{Recommend Books}
 \begin{itemize}
 \item \emph{As a:} Customer
-\item \emph{I want:}  suggestion on books 
-\item \emph{so that:}  I can easily find the books that matches my reading choice
+\item \emph{I want:} suggestions on books 
+\item \emph{so that:} I can easily find new books that match my reading choice
 \end{itemize}
 
-\subsection{Regular Customer}
+\subsection{Updating Customer Preferences}
 \begin{itemize}
 \item \emph{As a:} Customer
 \item \emph{I want:} to update my book preferences 
-\item \emph{so that:} I get suggestion for books according to my updated preference
+\item \emph{so that:} I get suggestion for books according to my updated preferences
 \end{itemize}
 
-\subsection{Authorized Customer}
+\subsection{Customer Privacy}
 \begin{itemize}
 \item \emph{As a:} Customer
-\item \emph{I want:}  to rate books, update my preferences and make sure no one can see my profile
-\item \emph{so that:} I can keep privacy of my book choice
+\item \emph{I want:}  to ensure that my ratings on books and preferences are protected from other Customers
+\item \emph{so that:} I can keep my privacy
 \end{itemize}
 
 \subsection{Sort Books}
