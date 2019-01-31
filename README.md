@@ -77,9 +77,10 @@ Here are the following Wiki pages related to ticket/issue management and scrum s
 
 User Stories
 ------------
-Below are a list of Customr level User Stories that we will use to help us create the end product.
+Below are a list of Customer level User Stories that we will use to help us create the end product.
 
-* As a [role], I want [feature] so that [reason].
+* [High-level Customer User Stories](https://git.uwaterloo.ca/jmshahen/ece651-project/tree/10-high-level-customer-user-stories/documents/user-stories)
+
 * 
 
 
