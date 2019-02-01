@@ -1,23 +1,33 @@
 \documentclass[10pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
-\usepackage[left=2.50cm, right=2.50cm, top=2.50cm, bottom=2.50cm]{geometry}
+\usepackage[left=1.00cm, right=1.00cm, top=2.50cm, bottom=2.50cm]{geometry}
 \usepackage[colorlinks]{hyperref}
 \usepackage{parskip}
 \usepackage{tabularx}
 \usepackage{booktabs}
 
-\title{TODO: TITLE HERE}
-\author{TODO: AUTHOR HERE}
+\title{TITLE HERE}
+\author{AUTHOR HERE}
 \begin{document}
 \maketitle
 
-\begin{tabularx}{\textwidth}{llX}
+\begin{tabularx}{\textwidth}{lllX}
 \toprule
-\textbf{Name} & \textbf{Type} & \textbf{Description}\\
+\textbf{Name} & \textbf{Type} & \textbf{Description} & \textbf{Difficulties}\\
 \midrule
-id & NUMBER & TODO: add description of column\\
-book\_title & TEXT & TODO: add description of column\\
+id & NUMBER & Unique no. given to a book & \\
+book\_title & TEXT & name on the book & \\
+author & TEXT & Name of the writer & can have more than one author\\
+isbn & VARCHAR & To search using ISBN no. & \\
+category & TEXT & What type of book it is & \\
+language & TEXT & In which language book is written & can be available in different languages \\
+publisher & TEXT & Name of the publisher & \\
+published\_year & NUMBER & Year in which book is published & one book may have different editions\\
+price & NUMBER & Cost Price of the book & price may differ for old and new book\\
+link & TEXT & links user to website where book is available & \\
+condition & BOOLEAN & Book is new or old & both old and new may be available \\
+review & TEXT & Comments about book & \\
 \bottomrule
 \end{tabularx}
 
