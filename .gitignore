@@ -5,3 +5,6 @@
 *.blg
 *.out
 src/web/node_modules/*
+src/ml/movie-recommendation/recs.tsv
+**/.ipynb_checkpoints
+
