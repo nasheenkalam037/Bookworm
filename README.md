@@ -79,10 +79,7 @@ User Stories
 ------------
 Below are a list of Customer level User Stories that we will use to help us create the end product.
 
-* [High-level Customer User Stories](https://git.uwaterloo.ca/jmshahen/ece651-project/tree/10-high-level-customer-user-stories/documents/user-stories)
-
-* 
-
+* [High-level Customer User Stories](documents/user-stories/customer.pdf)
 
 Testing Methodology
 -------------------
