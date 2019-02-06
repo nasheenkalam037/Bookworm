@@ -7,7 +7,7 @@ as well as all of the setup instructions you need to create the required users, 
 
 Installing Postgres
 -------------------
-1. Download PostgresSQL from here: https://www.postgresql.org/download/
+1. Download PostgresSQL 11 from here: https://www.postgresql.org/download/
     * Make sure that when you are configuring it you leave the port settings on 5432
     * Make sure that you memorize your login password
 1. (OPTIONAL) Install pgAdmin 4 from here: https://www.pgadmin.org/download/
@@ -70,6 +70,19 @@ Setting up the Tables
 1. Login as either the `root user` or `ece651_scraper` and run the script `./database-create_postgres.sql`
 
 
+Testing your Connection
+-----------------------
+1. `pip install psycopg2 configparser requests xmltodict unidecode threading time datetime queue`
+1. `python test_connection.py`
+    ```
+    >"C:/Program Files/Python36/python.exe" "d:/Work/Masters_Phd/workspace (GradSchool)/ece651-project/src/scraper/test_connection.py"
+    Connecting to the PostgreSQL database...
+
+    PostgreSQL database version:
+    ('PostgreSQL 11.1, compiled by Visual C++ build 1914, 64-bit',)
+    Database connection closed.
+    ```
+    * If you have an error, check google and then ask Jon if you still have trouble solving it
 
 
 Updating the Database
