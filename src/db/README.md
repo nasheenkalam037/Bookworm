@@ -96,3 +96,34 @@ If you are Jon, here are the steps:
     1. Remove line about creating the schema
 1. If there isn't too much data in the database, and there is an automated way to reimport the data, then drop all tables in `ece651` and rerun the SQL script
 1. Otherwise you will need to manually update each table that was changed and write a script to fill in an potentially NULL information
+
+Manual Updates
+--------------
+You must make these changes to the postgres SQL file:
+1. Replace this line:
+    ```sql
+    CREATE SCHEMA IF NOT EXISTS  "ece651"  ;
+    ```
+    with:
+    ```sql
+    CREATE SCHEMA IF NOT EXISTS  "public"  ;
+    ```
+1. Users table will not be finished, replace the end comma with a `);`
+    ```sql
+    CREATE TABLE  "public"."Users" (
+    "user_id" INT NOT NULL ,
+    "display_name" VARCHAR(100) NOT NULL,
+    "email" VARCHAR(200) NOT NULL,
+    "password_hash" VARCHAR(65) NOT NULL,
+    "password_salt" VARCHAR(50) NOT NULL,
+    "creation_time" TIMESTAMP NOT NULL DEFAULT now(),
+    "preferences_json" TEXT NOT NULL DEFAULT '{}',
+    "created_from" TEXT NOT NULL,
+    "login_allowed" int NOT NULL DEFAULT 0,
+    PRIMARY KEY ("user_id"));
+    ```
+1. Add all unique columns at the end of the sql file: 
+    ```sql
+    ALTER TABLE public."Users" ADD CONSTRAINT unique_email UNIQUE (email);
+    ```
+1. Replace all TINYINT with INT
