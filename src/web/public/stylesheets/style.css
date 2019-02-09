@@ -3,7 +3,9 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
 }
 a {
   color: #00b7ff;
@@ -11,16 +13,33 @@ a {
 
 /* Style the header */
 header {
-  background-color: #666;
-  padding: 30px;
-  text-align: center;
-  font-size: 35px;
-  color: white;
+  background-color: rgb(120, 139, 145);
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+  /* font-size: 35px; */
+  color: black;
+}
+header span.title {
+  padding: 0px;
+  margin: 0px;
+  font-weight: 400;
+  font-size: 26px;
 }
 
+header div.loginbox {
+  float: right;
+  width: 170px;
+}
+header div.loginbox img {
+  float:right;
+  width: 48px;
+  height: 48px;
+  margin-top: -8px; /* Center in the heading */
+}
 /* Create two columns/boxes that floats next to each other */
 nav {
-  float: left;
+  float: right;
   width: 20%;
   height: 300px; /* only for demonstration, should be removed */
   background: #ccc;
