@@ -20,6 +20,7 @@ my_deal = {
 };
 my_book_long = {
   title: "The perks of Being A Wallflower",
+  book_cover: '/images/book_cover_placeholder.png',
   authors: ["Stephen Chbosky"],
   synopsis: "I am the synopsis text, text, text, text, text, text ",
   deals: [my_deal, my_deal, my_deal]
