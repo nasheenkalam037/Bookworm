@@ -85,3 +85,9 @@ Testing Methodology
 -------------------
 
 
+Pipelines
+---------
+
+[![build status](https://git.uwaterloo.ca/jmshahen/ece651-project/badges/master/build.svg)](https://git.uwaterloo.ca/jmshahen/ece651-project/commits/master)
+
+[![coverage report](https://git.uwaterloo.ca/jmshahen/ece651-project/badges/master/coverage.svg)](https://git.uwaterloo.ca/jmshahen/ece651-project/commits/master)
