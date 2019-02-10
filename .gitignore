@@ -9,3 +9,5 @@ src/ml/movie-recommendation/recs.tsv
 **/.ipynb_checkpoints
 
 *.bak
+.vscode/settings.json
+src/scraper/__pycache__/
