@@ -13,161 +13,37 @@
 
     <div class="vert-spacing-15"></div>
 
-    <div class="book-long">
-        <img class="book-cover"
-             src="/images/book_cover_placeholder.png" />
-        <span class="book-details">
-            <a href="#"
-               class="book-title font-large">The Perks of Being A Wallflower</a>
-            <span class="book-authors font-normal">By <a href="#">Stephen Chbosky</a></span>
-            <span class="book-description font-normal">I am flavour text...</span>
-        </span>
-        <span class="book-deals">
-            <span class="book-deal">
-                <ul>
-                    <li class="center"><i class="fab fa-amazon"></i></li>
-                    <li>Rating: 4/5</li>
-                    <li><a href="#"
-                           class="font-small deal-amazon">Click here to Buy</a></li>
-                </ul>
-            </span>
-            <span class="book-deal">
-                <ul>
-                    <li class="center"><i class="fab fa-amazon"></i></li>
-                    <li>Rating: 4/5</li>
-                    <li><a href="#"
-                           class="font-small deal-amazon">Click here to Buy</a></li>
-                </ul>
-            </span>
-            <span class="book-deal">
-                <ul>
-                    <li class="center"><i class="fab fa-amazon"></i></li>
-                    <li>Rating: 4/5</li>
-                    <li><a href="#"
-                           class="font-small deal-amazon">Click here to Buy</a></li>
-                </ul>
-            </span>
-        </span>
-    </div>
-
-    <div class="vert-spacing-15"></div>
-
-    <div class="book-long">
-        <img class="book-cover"
-             src="/images/book_cover_placeholder.png" />
-        <span class="book-details">
-            <a href="#"
-               class="book-title font-large">The Perks of Being A Wallflower</a>
-            <span class="book-authors font-normal">By <a href="#">Stephen Chbosky</a></span>
-            <span class="book-description font-normal">I am flavour text...</span>
-        </span>
-        <span class="book-deals">
-            <span class="book-deal">
-                <ul>
-                    <li class="center"><i class="fab fa-amazon"></i></li>
-                    <li>Rating: 4/5</li>
-                    <li><a href="#"
-                           class="font-small deal-amazon">Click here to Buy</a></li>
-                </ul>
-            </span>
-            <span class="book-deal">
-                <ul>
-                    <li class="center"><i class="fab fa-amazon"></i></li>
-                    <li>Rating: 4/5</li>
-                    <li><a href="#"
-                           class="font-small deal-amazon">Click here to Buy</a></li>
-                </ul>
-            </span>
-            <span class="book-deal">
-                <ul>
-                    <li class="center"><i class="fab fa-amazon"></i></li>
-                    <li>Rating: 4/5</li>
-                    <li><a href="#"
-                           class="font-small deal-amazon">Click here to Buy</a></li>
-                </ul>
-            </span>
-        </span>
-    </div>
-
-    <div class="vert-spacing-15"></div>
-
-    <div class="book-long">
-        <img class="book-cover"
-             src="/images/book_cover_placeholder.png" />
-        <span class="book-details">
-            <a href="#"
-               class="book-title font-large">The Perks of Being A Wallflower</a>
-            <span class="book-authors font-normal">By <a href="#">Stephen Chbosky</a></span>
-            <span class="book-description font-normal">I am flavour text...</span>
-        </span>
-        <span class="book-deals">
-            <span class="book-deal">
-                <ul>
-                    <li class="center"><i class="fab fa-amazon"></i></li>
-                    <li>Rating: 4/5</li>
-                    <li><a href="#"
-                           class="font-small deal-amazon">Click here to Buy</a></li>
-                </ul>
-            </span>
-            <span class="book-deal">
-                <ul>
-                    <li class="center"><i class="fab fa-amazon"></i></li>
-                    <li>Rating: 4/5</li>
-                    <li><a href="#"
-                           class="font-small deal-amazon">Click here to Buy</a></li>
-                </ul>
-            </span>
-            <span class="book-deal">
-                <ul>
-                    <li class="center"><i class="fab fa-amazon"></i></li>
-                    <li>Rating: 4/5</li>
-                    <li><a href="#"
-                           class="font-small deal-amazon">Click here to Buy</a></li>
-                </ul>
-            </span>
-        </span>
-    </div>
-
-    <div class="vert-spacing-15"></div>
-
-    <div class="book-long">
-        <div class="book">
+    {{#each books}}
+        <div class="book-long">
             <img class="book-cover"
-                 src="/images/book_cover_placeholder.png" />
+                 src="{{book_cover}}" />
             <span class="book-details">
                 <a href="#"
-                   class="book-title font-large">The Perks of Being A Wallflower</a>
-                <span class="book-authors font-normal">By <a href="#">Stephen Chbosky</a></span>
-                <span class="book-description font-normal">I am flavour text...</span>
+                   class="book-title font-large">{{title}}</a>
+                <span class="book-authors font-normal">By
+                    {{#each authors}}
+                        <a href="/author/{{this}}">{{this}}</a>
+                    {{/each}}
+                </span>
+                <span class="book-description font-normal">{{synopsis}}</span>
+            </span>
+            <span class="book-deals">
+                {{#each this.deals}}
+                    <span class="book-deal">
+                        <ul>
+                            <li class="center"><i class="{{image_class}}"></i></li>
+                            <li>Rating: {{rating}}</li>
+                            <li><a href="{{link_to_buy}}"
+                                   class="font-small deal-amazon">Click here to Buy</a></li>
+                        </ul>
+                    </span>
+                {{/each}}
             </span>
         </div>
-        <span class="book-deals">
-            <span class="book-deal">
-                <ul>
-                    <li class="center"><i class="fab fa-amazon"></i></li>
-                    <li>Rating: 4/5</li>
-                    <li><a href="#"
-                           class="font-small deal-amazon">Click here to Buy</a></li>
-                </ul>
-            </span>
-            <span class="book-deal">
-                <ul>
-                    <li class="center"><i class="fab fa-amazon"></i></li>
-                    <li>Rating: 4/5</li>
-                    <li><a href="#"
-                           class="font-small deal-amazon">Click here to Buy</a></li>
-                </ul>
-            </span>
-            <span class="book-deal">
-                <ul>
-                    <li class="center"><i class="fab fa-amazon"></i></li>
-                    <li>Rating: 4/5</li>
-                    <li><a href="#"
-                           class="font-small deal-amazon">Click here to Buy</a></li>
-                </ul>
-            </span>
-        </span>
-    </div>
+
+        <div class="divider"></div>
+
+    {{/each}}
 </article>
 
 <nav>
@@ -176,12 +52,16 @@
     <div class="bookoftheday">
         <div class="book">
             <img class="book-cover"
-                 src="/images/book_cover_placeholder.png" />
+                 src="{{bookoftheday.book_cover}}" />
             <span class="book-details">
                 <a href="#"
-                   class="book-title font-large">The Perks of Being A Wallflower</a>
-                <span class="book-authors font-normal">By <a href="#">Stephen Chbosky</a></span>
-                <span class="book-description font-normal">I am flavour text...</span>
+                   class="book-title font-large">{{bookoftheday.title}}</a>
+                <span class="book-authors font-normal">By
+                    {{#each bookoftheday.authors}}
+                        <a href="/author/{{this}}">{{this}}</a>
+                    {{/each}}
+                </span>
+                <span class="book-description font-normal">{{bookoftheday.synopsis}}</span>
             </span>
         </div>
     </div>
@@ -190,45 +70,21 @@
 
     <div class="heading font-large">Recommendations</div>
     <div class="recommendationlist">
-        <div class="book">
-            <img class="book-cover"
-                 src="/images/book_cover_placeholder.png" />
-            <span class="book-details">
-                <a href="#"
-                   class="book-title font-large">The Perks of Being A Wallflower</a>
-                <span class="book-authors font-normal">By <a href="#">Stephen Chbosky</a></span>
-                <span class="book-description font-normal">I am flavour text...</span>
-            </span>
-        </div>
-        <div class="book">
-            <img class="book-cover"
-                 src="/images/book_cover_placeholder.png" />
-            <span class="book-details">
-                <a href="#"
-                   class="book-title font-large">The Perks of Being A Wallflower</a>
-                <span class="book-authors font-normal">By <a href="#">Stephen Chbosky</a></span>
-                <span class="book-description font-normal">I am flavour text...</span>
-            </span>
-        </div>
-        <div class="book">
-            <img class="book-cover"
-                 src="/images/book_cover_placeholder.png" />
-            <span class="book-details">
-                <a href="#"
-                   class="book-title font-large">The Perks of Being A Wallflower</a>
-                <span class="book-authors font-normal">By <a href="#">Stephen Chbosky</a></span>
-                <span class="book-description font-normal">I am flavour text...</span>
-            </span>
-        </div>
-        <div class="book">
-            <img class="book-cover"
-                 src="/images/book_cover_placeholder.png" />
-            <span class="book-details">
-                <a href="#"
-                   class="book-title font-large">The Perks of Being A Wallflower</a>
-                <span class="book-authors font-normal">By <a href="#">Stephen Chbosky</a></span>
-                <span class="book-description font-normal">I am flavour text...</span>
-            </span>
-        </div>
+        {{#each recommendations}}
+            <div class="book">
+                <img class="book-cover"
+                     src="{{book_cover}}" />
+                <span class="book-details">
+                    <a href="#"
+                       class="book-title font-large">{{title}}</a>
+                    <span class="book-authors font-normal">By
+                        {{#each authors}}
+                            <a href="/author/{{this}}">{{this}}</a>
+                        {{/each}}
+                    </span>
+                    <span class="book-description font-normal">{{synopsis}}</span>
+                </span>
+            </div>
+        {{/each}}
     </div>
 </nav>

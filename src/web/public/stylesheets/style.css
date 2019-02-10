@@ -16,6 +16,13 @@ a {
   height: 15px;
 }
 
+.divider {
+  width: 70%;
+  text-align: center;
+  border-bottom: 1px solid black;
+  margin: 15px auto 15px auto;
+}
+
 .center {
   margin-left: auto;
   margin-right: auto;
@@ -24,6 +31,16 @@ a {
 
 section {
   display: flex;
+}
+
+.heading {
+  display: block;
+  font-weight: 700;
+  /* font-size: 17px; */
+  width: 70%;
+  text-align: center;
+  border-bottom: 1px solid black;
+  margin: 10px auto 10px auto;
 }
 
 /* Style the footer */
@@ -202,15 +219,7 @@ section:after {
   clear: both;
 }
 
-.heading {
-  display: block;
-  font-weight: 700;
-  /* font-size: 17px; */
-  width: 70%;
-  text-align: center;
-  border-bottom: 1px solid black;
-  margin: 10px auto 10px auto;
-}
+
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
 @media (max-width: 600px) {

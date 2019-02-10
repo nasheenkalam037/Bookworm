@@ -15,9 +15,9 @@
   <header>
     <span class="title">TheBookworm</span>
     <div class="loginbox">
-      <img src="/images/headshot_placeholder.png" />
-      <div>Hello Jon</div>
-      <div><a href="/account/">My Account</a></div>
+      <img src="{{user.image}}" />
+      <div>Hello {{user.name}}</div>
+      <div><a href="/account/{{user.id}}">My Account</a></div>
     </div>
   </header>
 
