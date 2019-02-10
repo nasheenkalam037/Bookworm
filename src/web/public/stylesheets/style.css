@@ -13,6 +13,7 @@ a {
 
 /* Style the header */
 header {
+  border-radius: 5px 5px 0px 0px;
   background-color: rgb(120, 139, 145);
   padding: 10px;
   text-align: left;
@@ -37,6 +38,32 @@ header div.loginbox img {
   height: 48px;
   margin-top: -8px; /* Center in the heading */
 }
+
+.input-field {
+  width: 100%;
+  padding: 7px;
+  outline: none;
+}
+
+.input-field:focus {
+  border: 2px solid dodgerblue;
+}
+
+.input-container {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.icon {
+  padding: 10px;
+  background: dodgerblue;
+  color: white;
+  min-width: 40px;
+  text-align: center;
+}
+
 /* Create two columns/boxes that floats next to each other */
 nav {
   float: right;
