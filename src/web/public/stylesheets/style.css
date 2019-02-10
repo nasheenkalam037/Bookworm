@@ -55,10 +55,20 @@ footer {
 }
 
 /*******************************************************************************************
+       CONTAINERS
+*******************************************************************************************/
+.vert-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/*******************************************************************************************
        HEADER
 *******************************************************************************************/
 /* Style the header */
 header {
+  display: flex;
+  justify-content: space-between;
   border-radius: 5px 5px 0px 0px;
   background-color: rgb(120, 139, 145);
   padding: 15px 10px 15px 10px;
@@ -73,16 +83,12 @@ header span.title {
   font-weight: 400;
   font-size: 26px;
 }
-
-header div.loginbox {
-  float: right;
-  width: 170px;
-}
 header div.loginbox img {
   float: right;
   width: 48px;
   height: 48px;
   margin-top: -8px; /* Center in the heading */
+  margin-left: 15px;
 }
 
 /*******************************************************************************************

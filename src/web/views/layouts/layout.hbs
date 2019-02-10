@@ -15,9 +15,19 @@
   <header>
     <span class="title">TheBookworm</span>
     <div class="loginbox">
-      <img src="{{user.image}}" />
-      <div>Hello {{user.name}}</div>
-      <div><a href="/account/{{user.id}}">My Account</a></div>
+      {{#if user}}
+        <img src="{{user.image}}" />
+        <div class="vert-container">
+          <div style="overflow: hidden;">Hello {{user.name}}</div>
+          <div><a href="/account/{{user.id}}">My Account</a></div>
+        </div>
+      {{else}}
+        <img src="/images/headshot_placeholder.png" />
+        <div class="vert-container">
+          <div style="overflow: hidden;">Hello Anonymous,</div>
+          <div><a href="/account/signin">Sign in</a></div>
+        </div>
+      {{/if}}
     </div>
   </header>
 

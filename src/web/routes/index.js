@@ -26,10 +26,10 @@ my_book_long = {
 };
 dummy_data = {
   title: "The Bookworm",
+  user: my_user,
   bookoftheday: my_book,
   books: [my_book_long, my_book_long, my_book_long, my_book_long],
-  recommendations: [my_book, my_book, my_book, my_book],
-  user: my_user
+  recommendations: [my_book, my_book, my_book, my_book]
 };
 
 
