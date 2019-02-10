@@ -12,6 +12,11 @@ a {
   color: #00b7ff;
 }
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 /* Style the footer */
 footer {
   background-color: #777;
@@ -23,6 +28,9 @@ footer {
   border-radius: 0px 0px 5px 5px;
 }
 
+/*******************************************************************************************
+       HEADER
+*******************************************************************************************/
 /* Style the header */
 header {
   border-radius: 5px 5px 0px 0px;
@@ -45,12 +53,15 @@ header div.loginbox {
   width: 170px;
 }
 header div.loginbox img {
-  float:right;
+  float: right;
   width: 48px;
   height: 48px;
   margin-top: -8px; /* Center in the heading */
 }
 
+/*******************************************************************************************
+       SEARCH BOX
+*******************************************************************************************/
 .input-field {
   width: 100%;
   padding: 7px;
@@ -76,6 +87,68 @@ header div.loginbox img {
   text-align: center;
 }
 
+/*******************************************************************************************
+       FONT SIZE
+*******************************************************************************************/
+.font-small {
+  font-size: 10px;
+}
+.font-normal {
+  font-size: 12px;
+}
+.font-large {
+  font-size: 15px;
+}
+.font-xlarge {
+  font-size: 17px;
+}
+/*******************************************************************************************
+       BOOKS
+*******************************************************************************************/
+.book-long {
+  display: flex;
+}
+
+.book-cover {
+  max-width: 95px;
+  max-height: 101px;
+}
+
+.book-details {
+  padding-left: 10px;
+}
+
+.book-title {
+  display: block;
+  font-weight: 700;
+}
+.book-authors {
+  display: block;
+  margin-bottom: 5px;
+}
+.book-description {
+  display: block;
+}
+.book-deals {
+  margin-left: 50px;
+  display: flex;
+  /* justify-content: center; */
+}
+.book-deal {
+  margin-left:10px;
+  min-width: 120px;
+  text-align: center;
+}
+.book-deal ul {
+  list-style-type: none;
+  padding: 0;
+}
+.book-deal li i {
+  font-size: 26px;
+}
+/*******************************************************************************************
+       RIGHT SIDE
+*******************************************************************************************/
 /* Create two columns/boxes that floats next to each other */
 nav {
   float: right;
@@ -104,6 +177,16 @@ section:after {
   content: "";
   display: table;
   clear: both;
+}
+
+.heading {
+  display: block;
+  font-weight: 700;
+  font-size: 17px;
+  width: 70%;
+  text-align: center;
+  border-bottom: 1px solid black;
+  margin: 10px auto 10px auto;
 }
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
