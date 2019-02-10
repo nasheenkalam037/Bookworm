@@ -15,7 +15,7 @@ lint css:
   only:
     - master
   script:
-    - ./src/web/gulp.js lint-css
+    ./node_modules/gulp/bin/gulp.js lint-css
 
 lint js:
   stage: lint-js
