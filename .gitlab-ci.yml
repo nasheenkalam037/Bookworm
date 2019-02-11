@@ -10,8 +10,6 @@ lint css:
   stage: lint-css
   before_script:
     - npm install
-  cache:
-    untracked: true
   only:
     - master
   script:
@@ -20,8 +18,6 @@ lint css:
 
 lint js:
   stage: lint-js
-  cache:
-    untracked: true
   only:
     - master
   script:
@@ -30,8 +26,6 @@ lint js:
 
 run unit test:
   stage: unit-test
-  cache:
-    untracked: true
   only:
     - master
   script:
