@@ -15,6 +15,9 @@ variables:
   PG_WEB_PASS: dm2fBdodbrHPtJVvlSKF
 
 connect:
+  only:
+    - tags
+    - triggers
   stage: build
   image: postgres
   script:
@@ -30,7 +33,10 @@ connect:
     - psql -h "postgres" -U "$PG_WEB_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."Users";'
 
 
-test node:
+node version:
+  only:
+    - tags
+    - triggers
   stage: test
   image: node
   script:
