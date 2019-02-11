@@ -7,12 +7,12 @@ variables:
   POSTGRES_DB: ece651
   POSTGRES_USER: ece651_admin
   POSTGRES_PASSWORD: YbRvAizCTnbQ5W6JI69h
-  POSTGRES_USER1: ece651_scraper
-  POSTGRES_PASS1: wxJcTdJYUU3mMAsAa5YD
-  POSTGRES_USER2: ece651_ml
-  POSTGRES_PASS2: wxJcTdJYUU3mMAsAa5YD
-  POSTGRES_USER3: ece651_web
-  POSTGRES_PASS3: wxJcTdJYUU3mMAsAa5YD
+  PG_SCRAPER_USER: ece651_scraper
+  PG_SCRAPER_PASS: wxJcTdJYUU3mMAsAa5YD
+  PG_ML_USER: ece651_ml
+  PG_ML_PASS: TVL3MV0mguz0DOhLbbm2
+  PG_WEB_USER: ece651_web
+  PG_WEB_PASS: dm2fBdodbrHPtJVvlSKF
 
 connect:
   stage: build
@@ -22,12 +22,12 @@ connect:
     - export PGPASSWORD=$POSTGRES_PASSWORD
     - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/database-create_postgre.sql
     - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/create-users_postgre.sql
-    - export PGPASSWORD=$POSTGRES_PASS1
-    - psql -h "postgres" -U "$POSTGRES_USER1" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookOfTheDay";'
-    - export PGPASSWORD=$POSTGRES_PASS2
-    - psql -h "postgres" -U "$POSTGRES_USER2" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookOfTheDay";'
-    - export PGPASSWORD=$POSTGRES_PASS3
-    - psql -h "postgres" -U "$POSTGRES_USER3" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookOfTheDay";'
+    - export PGPASSWORD=$PG_SCRAPER_PASS
+    - psql -h "postgres" -U "$PG_SCRAPER_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookOfTheDay";'
+    - export PGPASSWORD=$PG_ML_PASS
+    - psql -h "postgres" -U "$PG_ML_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."Books";'
+    - export PGPASSWORD=$PG_WEB_PASS
+    - psql -h "postgres" -U "$PG_WEB_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."Users";'
 
 
 test node:
