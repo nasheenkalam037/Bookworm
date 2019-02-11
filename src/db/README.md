@@ -63,7 +63,7 @@ Setting up the Database
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
     ```
-    * You *might* need to change **SQL_ASCII** to **UT8**
+    * You *might* need to change **SQL_ASCII** to **UTF8**
 
 Setting up the Tables
 ---------------------
