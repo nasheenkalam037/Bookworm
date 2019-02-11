@@ -84,4 +84,11 @@ Below are a list of Customer level User Stories that we will use to help us crea
 Testing Methodology
 -------------------
 
+* We will be conducting unit testing, integration testing, system testing for each sprint.
+* As the requirements are planned and deployed by team, we are skipping Accpetance testing by users instead we will be assigning one of our team members to verify the requirements.
+* We are following Selenium Webdriver for test automation which will be used for integration and system testing.
+* Due to time constraints, some of the corner case testing might be completed by Manual testing.
+* Each module will have unit testing to ensure code coverage.
 
+The sample test case can be found here:
+* [Sample Test Case](https://git.uwaterloo.ca/jmshahen/ece651-project/blob/c22ef0b4d6d3ed69de5c67f6f23e8aa293fe6327/src/web/sample_test_case/sample_tc_01.xls)
