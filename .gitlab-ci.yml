@@ -1,6 +1,6 @@
 services:
   - postgres
-  - node
+  - nodejs
 
 variables:
   # Configure postgres service (https://hub.docker.com/_/postgres/)
@@ -22,8 +22,8 @@ connect:
   - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/database-create_postgre.sql
   - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/create-users_postgre.sql
   - export PGPASSWORD=$POSTGRES_PASS1
-  - psql -h "postgres" -U "$POSTGRES_USER1" -d "$POSTGRES_DB" -c 'SELECT * FROM `ece651`.`BookOfTheDay`;'
+  - psql -h "postgres" -U "$POSTGRES_USER1" -d "$POSTGRES_DB" -c 'SELECT * FROM BookOfTheDay;'
   - export PGPASSWORD=$POSTGRES_PASS2
-  - psql -h "postgres" -U "$POSTGRES_USER2" -d "$POSTGRES_DB" -c 'SELECT * FROM `ece651`.`BookOfTheDay`;'
+  - psql -h "postgres" -U "$POSTGRES_USER2" -d "$POSTGRES_DB" -c 'SELECT * FROM ece651.BookOfTheDay;'
   - export PGPASSWORD=$POSTGRES_PASS3
-  - psql -h "postgres" -U "$POSTGRES_USER3" -d "$POSTGRES_DB" -c 'SELECT * FROM `ece651`.`BookOfTheDay`;'
+  - psql -h "postgres" -U "$POSTGRES_USER3" -d "$POSTGRES_DB" -c 'SELECT * FROM "ece651"."BookOfTheDay";'
