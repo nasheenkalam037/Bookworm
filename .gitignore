@@ -10,3 +10,4 @@ src/ml/movie-recommendation/recs.tsv
 
 *.bak
 .vscode/settings.json
+src/scraper/__pycache__/
