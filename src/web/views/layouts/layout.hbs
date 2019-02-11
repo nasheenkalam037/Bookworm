@@ -4,42 +4,44 @@
 <head>
   <title>{{title}}</title>
   <link rel="stylesheet"
-        href="https://use.fontawesome.com/releases/v5.1.0/css/solid.css"
-        integrity="sha384-TbilV5Lbhlwdyc4RuIV/JhD8NR+BfMrvz4BL5QFa2we1hQu6wvREr3v6XSRfCTRp"
+        href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
         crossorigin="anonymous">
-  <link rel="stylesheet"
-        href="https://use.fontawesome.com/releases/v5.1.0/css/regular.css"
-        integrity="sha384-avJt9MoJH2rB4PKRsJRHZv7yiFZn8LrnXuzvmZoD3fh1aL6aM6s0BBcnCvBe6XSD"
-        crossorigin="anonymous">
-  <link rel="stylesheet"
-        href="https://use.fontawesome.com/releases/v5.1.0/css/fontawesome.css"
-        integrity="sha384-ozJwkrqb90Oa3ZNb+yKFW2lToAWYdTiF1vt8JiH5ptTGHTGcN7qdoR1F95e0kYyG"
-        crossorigin="anonymous">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet'
+        href='/stylesheets/style.css' />
 </head>
 
 <body>
-<header>
-  <h2>{{title}}</h2>
-</header>
+  <header>
+    <span class="title">TheBookworm</span>
+    <div class="loginbox">
+      {{#if user}}
+        <img src="{{user.image}}" />
+        <div class="vert-container">
+          <div style="overflow: hidden;">Hello {{user.name}}</div>
+          <div><a href="/account/{{user.id}}">My Account</a></div>
+        </div>
+      {{else}}
+        <img src="/images/headshot_placeholder.png" />
+        <div class="vert-container">
+          <div style="overflow: hidden;">Hello Anonymous,</div>
+          <div><a href="/account/signin">Sign in</a></div>
+        </div>
+      {{/if}}
+    </div>
+  </header>
 
-<section>
-  <nav>
-    <ul>
-      <li><a href="#">Link 1</a></li>
-      <li><a href="#">Link 2</a></li>
-      <li><a href="#">Link 3</a></li>
-    </ul>
-  </nav>
-  
-{{{body}}}
+  <section>
 
-  
-</section>
 
-<footer>
-  <p>Footer</p>
-</footer>
+    {{{body}}}
+
+
+  </section>
+
+  <footer>
+    &copy; 2019 Jonathan Shahen, Syeda Noor Jaha Azim, Nasheen Kalam, and Chetan Joshi
+  </footer>
 </body>
 
 </html>
