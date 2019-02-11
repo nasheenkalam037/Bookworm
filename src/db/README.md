@@ -21,6 +21,7 @@ Setting up the Users
 1. `ece651_scraper` user:
     ```sql
     CREATE USER ece651_scraper WITH
+    PASSWORD 'wxJcTdJYUU3mMAsAa5YD'
     LOGIN
     NOSUPERUSER
     NOINHERIT
@@ -31,6 +32,7 @@ Setting up the Users
 1. `ece651_ml` user:
     ```sql
     CREATE USER ece651_ml WITH
+    PASSWORD 'TVL3MV0mguz0DOhLbbm2'
     LOGIN
     NOSUPERUSER
     NOINHERIT
@@ -41,6 +43,7 @@ Setting up the Users
 1. `ece651_web` user:
     ```sql
     CREATE USER ece651_web WITH
+    PASSWORD 'dm2fBdodbrHPtJVvlSKF'
     LOGIN
     NOSUPERUSER
     NOINHERIT

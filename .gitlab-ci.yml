@@ -7,6 +7,12 @@ variables:
   POSTGRES_DB: ece651
   POSTGRES_USER: ece651_admin
   POSTGRES_PASSWORD: YbRvAizCTnbQ5W6JI69h
+  POSTGRES_USER1: ece651_scraper
+  POSTGRES_PASS1: wxJcTdJYUU3mMAsAa5YD
+  POSTGRES_USER2: ece651_ml
+  POSTGRES_PASS2: wxJcTdJYUU3mMAsAa5YD
+  POSTGRES_USER3: ece651_web
+  POSTGRES_PASS3: wxJcTdJYUU3mMAsAa5YD
 
 connect:
   image: postgres
@@ -15,3 +21,9 @@ connect:
   - export PGPASSWORD=$POSTGRES_PASSWORD
   - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/database-create_postgre.sql
   - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/create-users_postgre.sql
+  - export PGPASSWORD=$POSTGRES_PASS1
+  - psql -h "postgres" -U "$POSTGRES_USER1" -d "$POSTGRES_DB" -c 'SELECT * FROM `ece651`.`BookOfTheDay`;'
+  - export PGPASSWORD=$POSTGRES_PASS2
+  - psql -h "postgres" -U "$POSTGRES_USER2" -d "$POSTGRES_DB" -c 'SELECT * FROM `ece651`.`BookOfTheDay`;'
+  - export PGPASSWORD=$POSTGRES_PASS3
+  - psql -h "postgres" -U "$POSTGRES_USER3" -d "$POSTGRES_DB" -c 'SELECT * FROM `ece651`.`BookOfTheDay`;'
