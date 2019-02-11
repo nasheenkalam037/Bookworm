@@ -21,7 +21,6 @@ lint js:
   stage: lint-js
   cache:
     untracked: true
-    policy: pull
   only:
     - master
   script:
@@ -31,7 +30,6 @@ run unit test:
   stage: unit-test
   cache:
     untracked: true
-    policy: pull
   only:
     - master
   script:
