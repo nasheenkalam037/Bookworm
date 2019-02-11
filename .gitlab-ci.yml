@@ -1,13 +1,15 @@
-stages:
-  - lint-css
+services:
+  - postgres
 
-image: node:6.11.2
+variables:
+  # Configure postgres service (https://hub.docker.com/_/postgres/)
+  POSTGRES_DB: ece651
+  POSTGRES_USER: ece651_admin
+  POSTGRES_PASSWORD: YbRvAizCTnbQ5W6JI69h
 
-lint css:
-  stage: lint-css
-  before_script:
-    - cd src/web/
-    - npm install
+connect:
+  image: postgres
   script:
-    - cd src/web
-    - echo Hello
+  # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
+  - export PGPASSWORD=$POSTGRES_PASSWORD
+  - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT 'OK' AS status;"
