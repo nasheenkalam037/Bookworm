@@ -20,7 +20,6 @@ connect:
     - tags
     - triggers
   stage: build
-  image: postgres
   script:
     # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
     - export PGPASSWORD=$POSTGRES_PASSWORD
@@ -38,7 +37,6 @@ setup python:
     - tags
     - triggers
   stage: build
-  image: python:3.6-alpine
   script:
     - cd src/scraper
     - apk add --no-cache postgresql-libs
@@ -59,7 +57,6 @@ python tests:
     - tags
     - triggers
   stage: test
-  image: python:3.6-alpine
   script:
     - cd src/scraper
     - python -m unittest discover
