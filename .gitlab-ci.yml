@@ -41,6 +41,8 @@ setup python:
   image: python:3.6-alpine
   script:
     - cd src/scraper
+    - apk add --no-cache postgresql-libs
+    - apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev
     - pip install -r requirements.txt
 
 node version:
