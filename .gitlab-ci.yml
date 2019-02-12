@@ -56,5 +56,7 @@ python tests:
     - apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev
     - pip install -r requirements.txt
   script:
+    - export PGPASSWORD=$PG_SCRAPER_PASS
+    - psql -h "postgres" -U "$PG_SCRAPER_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookOfTheDay";'
     - export TESTENV=true
     - python -m unittest discover
