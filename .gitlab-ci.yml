@@ -15,12 +15,12 @@ variables:
   PG_WEB_USER: ece651_web
   PG_WEB_PASS: dm2fBdodbrHPtJVvlSKF
 
-connect:
+setup db:
+  image: postgres
   only:
     - tags
     - triggers
   stage: build
-  image: postgres
   script:
     # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
     - export PGPASSWORD=$POSTGRES_PASSWORD
@@ -41,6 +41,8 @@ node version:
   image: node
   script:
     - node --version
+    - cd src/web
+    - npm install
 
 python tests:
   only:
@@ -54,4 +56,5 @@ python tests:
     - apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev
     - pip install -r requirements.txt
   script:
+    - export TESTENV=true
     - python -m unittest discover
