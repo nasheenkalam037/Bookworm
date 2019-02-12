@@ -1,7 +1,7 @@
 services:
   - postgres
   - node
-  - alpine:3.9
+  - python:3.6-alpine
 
 variables:
   # Configure postgres service (https://hub.docker.com/_/postgres/)
@@ -38,10 +38,10 @@ connect:
     - tags
     - triggers
   stage: build
-  image: alpine:3.9
+  image: python:3.6-alpine
   script:
     - cd src/scraper
-    - pip3 install requirements.txt
+    - pip install requirements.txt
 
 node version:
   only:
@@ -57,7 +57,7 @@ python tests:
     - tags
     - triggers
   stage: test
-  image: alpine:3.9
+  image: python:3.6-alpine
   script:
     - cd src/scraper
-    - python3 -m unittest discover
+    - python -m unittest discover
