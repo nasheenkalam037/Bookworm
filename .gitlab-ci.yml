@@ -33,7 +33,7 @@ connect:
     - export PGPASSWORD=$PG_WEB_PASS
     - psql -h "postgres" -U "$PG_WEB_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."Users";'
 
-connect:
+setup python:
   only:
     - tags
     - triggers
@@ -41,7 +41,7 @@ connect:
   image: python:3.6-alpine
   script:
     - cd src/scraper
-    - pip install requirements.txt
+    - pip install -r requirements.txt
 
 node version:
   only:
