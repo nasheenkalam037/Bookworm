@@ -1,6 +1,7 @@
 services:
   - postgres
   - node
+  - alpine:3.9
 
 variables:
   # Configure postgres service (https://hub.docker.com/_/postgres/)
@@ -32,6 +33,15 @@ connect:
     - export PGPASSWORD=$PG_WEB_PASS
     - psql -h "postgres" -U "$PG_WEB_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."Users";'
 
+connect:
+  only:
+    - tags
+    - triggers
+  stage: build
+  image: alpine:3.9
+  script:
+    - cd src/scraper
+    - pip3 install requirements.txt
 
 node version:
   only:
@@ -41,3 +51,13 @@ node version:
   image: node
   script:
     - node --version
+
+python tests:
+  only:
+    - tags
+    - triggers
+  stage: test
+  image: alpine:3.9
+  script:
+    - cd src/scraper
+    - python3 -m unittest discover

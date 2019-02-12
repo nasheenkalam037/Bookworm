@@ -1,30 +1,36 @@
 #!/usr/bin/env python3
 import psycopg2
-from connect import connect
- 
-def test_connect():
-    """ Connect to the PostgreSQL database server """
-    conn = None
-    try:
-        conn, cur = connect()
-        
-        # execute a statement
-        print('PostgreSQL database version:')
-        cur.execute('SELECT version()')
- 
-        # display the PostgreSQL database server version
-        db_version = cur.fetchone()
-        print(db_version)
-       
-        # close the communication with the PostgreSQL
-        cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
- 
- 
+import unittest
+import sys
+from config import config
+
+class TestPostGresConnection(unittest.TestCase):
+    def setUp(self):
+        if sys.version_info[0] < 3:
+            raise Exception("Must be using Python 3")
+
+    def test_simply_connect(self):
+        conn = None
+        try:
+            params = config()
+            conn = psycopg2.connect(**params)
+            cur = conn.cursor()
+
+            cur.execute('SELECT version()')
+
+            # display the PostgreSQL database server version
+            db_version = cur.fetchone()
+            self.assertEqual(len(db_version), 1)
+            self.assertTrue('PostgreSQL' in db_version[0])
+
+            # close the communication with the PostgreSQL
+            cur.close()
+        except (Exception, psycopg2.DatabaseError) as error:
+            raise error
+        finally:
+            if conn is not None:
+                conn.close()
+
+
 if __name__ == '__main__':
-    test_connect()
+    unittest.main()

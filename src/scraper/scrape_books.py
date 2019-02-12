@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import psycopg2
 import requests
@@ -6,11 +7,11 @@ import unidecode
 import threading
 import time
 from datetime import datetime
+from bs4 import BeautifulSoup
 import sys
 from queue import Queue
 from psycopg2.pool import ThreadedConnectionPool
 # Local Files
-from connect import connect
 from config import config
 
 # Mutex for printing to the console
@@ -27,6 +28,47 @@ NUM_THREADS = 10
 DEBUG = 0
 
 AMAZON_SEARCH_URL = 'https://www.amazon.ca/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords=REPLACE'
+
+
+def grab_url_request(
+        url,
+        # headers={
+        #     "Accept":
+        #     "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        #     "Accept-Encoding":
+        #     "gzip, deflate, sdch, br",
+        #     "Accept-Language":
+        #     "en-US,en;q=0.8",
+        #     "User-Agent":
+        #     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36",
+        # }
+        headers={
+            "Authority":
+            "www.amazon.ca",
+            "Scheme":
+            "https",
+            "Path":
+            "/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords=REPLACE",
+            "Upgrade-Insecure-Requests":
+            "1",
+            "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
+            "DNT":
+            "1",
+            "Accept":
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+            "Accept-Encoding":
+            "gzip, deflate, br",
+            "Accept-Language":
+            "en-CA,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+        },
+        return_soup=False):
+    with requests.Session() as s:
+        r = s.get(url, headers=headers)
+
+    if return_soup:
+        return BeautifulSoup(r.text, 'html.parser'), r
+    return r
 
 
 # TODO complete search_amazon_for_book()
@@ -115,7 +157,6 @@ def worker_thread(thread_id):
 
 def setup_db():
     global tcp
-    # conn, cur = connect()
     params = config()
     tcp = ThreadedConnectionPool(1, 10, **params)
 
