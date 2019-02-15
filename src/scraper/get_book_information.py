@@ -120,14 +120,17 @@ def fetch_new_book_info(thread_id, book_url):
             m = p.search(text)
             if m:
                 pages = int(m.group(1))
-
+            # Number of Reviews
+            p = re.compile(r'([0-9]+)\s*customer reviews')
+            m = p.search(text)
+            if m:
+                num_reviews = int(m.group(1))
             # PUBLISHER & DATE
             p = re.compile(r'Publisher:\s*([\w\s]+)\(([\w\s]+)\)')
             m = p.search(text)
             if m:
                 publisher = m.group(1).strip()
                 orig_published_date = m.group(2).strip()
-
             # ISBN10
             p = re.compile(r'ISBN-10:\s*([0-9]+)')
             m = p.search(text)
@@ -152,6 +155,7 @@ def fetch_new_book_info(thread_id, book_url):
             "amazon": {
                 "book_link": book_url,
                 "rating": rating,
+                "num_reviews": num_reviews,
                 "synopsis": synopsis,
                 "price": price,
             },
