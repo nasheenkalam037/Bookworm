@@ -5,14 +5,15 @@ import requests
 import xmltodict
 import unidecode
 import threading
+import csv
 import time
 from datetime import datetime
-from bs4 import BeautifulSoup
 import sys
 from queue import Queue
 from psycopg2.pool import ThreadedConnectionPool
 # Local Files
 from config import config
+import get_book_information as getInfo
 
 # Mutex for printing to the console
 print_lock = threading.Lock()
@@ -27,94 +28,6 @@ NUM_THREADS = 10
 
 DEBUG = 0
 
-AMAZON_SEARCH_URL = 'https://www.amazon.ca/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords=REPLACE'
-
-
-def grab_url_request(
-        url,
-        # headers={
-        #     "Accept":
-        #     "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        #     "Accept-Encoding":
-        #     "gzip, deflate, sdch, br",
-        #     "Accept-Language":
-        #     "en-US,en;q=0.8",
-        #     "User-Agent":
-        #     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36",
-        # }
-        headers={
-            "Authority":
-            "www.amazon.ca",
-            "Scheme":
-            "https",
-            "Path":
-            "/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords=REPLACE",
-            "Upgrade-Insecure-Requests":
-            "1",
-            "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
-            "DNT":
-            "1",
-            "Accept":
-            "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-            "Accept-Encoding":
-            "gzip, deflate, br",
-            "Accept-Language":
-            "en-CA,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
-        },
-        return_soup=False):
-    with requests.Session() as s:
-        r = s.get(url, headers=headers)
-
-    if return_soup:
-        return BeautifulSoup(r.text, 'html.parser'), r
-    return r
-
-
-# TODO complete search_amazon_for_book()
-def search_amazon_for_book(thread_id, book_title, book_author):
-    '''
-    Search amazon for the book by that author, grab the first link and return that url or None
-
-    Returns string | None
-    '''
-    pass
-
-
-# TODO complete fetch_new_book_info()
-def fetch_new_book_info(thread_id, book_url):
-    '''
-    Returns {
-        title: string,
-        series: string | NONE,
-        series_position: int | NONE,
-        pages: int | NONE,
-        publisher: string | NONE,
-        orig_published_date: string | NONE,
-        isbn10: string | NONE,
-        isbn13: string | NONE,
-        synopsis: string | NONE,
-        amazon: {
-            book_link: string,
-            rating: decimal | NONE,
-            synopsis: string | NONE,
-            price: decimal | NONE,
-        }
-        authors: [string, ...], 
-        categories: [string, ...], 
-    } | None
-    '''
-    with print_lock:
-        print(f'[Thread {thread_id}] Grabbing book from {book_url}')
-
-    try:
-        # TODO: create the parser
-        return {}
-    except Exception as error:
-        with print_lock:
-            print(f'[Thread {thread_id}] An Error occurred while trying to read from', book_url, error)
-        return None
-
 
 def worker_thread(thread_id):
     global count
@@ -126,20 +39,18 @@ def worker_thread(thread_id):
             print(f'[Thread {thread_id}] Waiting for next Task (Queue size { book_queue.qsize()})')
 
         book = book_queue.get()
-
+        # print(book)
         if book is None:
             break
 
-        book_author = book[0]
-        book_title = book[1]
-
         with print_lock:
-            print(f'[Thread {thread_id}] Working on task {book_title} by {book_author}')
+            print(f'[Thread {thread_id}] Working on task {book["title"]} by {book["author"]}')
 
-        search_result = search_amazon_for_book(thread_id, book_title, book_author)
+        search_result = getInfo.search_amazon_for_book(thread_id, book['title'], book['author'])
 
+        status = False
         if search_result:
-            status = fetch_new_book_info(thread_id, search_result)
+            status = getInfo.fetch_new_book_info(thread_id, search_result)
 
             # If the status is good, increase the number of books added
             if status:
@@ -148,7 +59,7 @@ def worker_thread(thread_id):
 
         book_queue.task_done()
         with print_lock:
-            print(f'[Thread {thread_id}] Task Completed: {book_title}; Status: {status}')
+            print(f'[Thread {thread_id}] Task Completed: {book["title"]}; Status: {status}')
         time.sleep(SLEEP_TIME)
 
     with print_lock:
@@ -162,6 +73,30 @@ def setup_db():
 
     print('[SETUP] TCP returned:', tcp)
 
+def remove_already_found_books(books_to_search):
+    '''
+    Given a list of books, this function will get all books from the database and 
+    remove the books that match based on title.
+    '''
+    conn = tcp.getconn()
+    cur = conn.cursor()
+    
+    cur.execute('SELECT title FROM "public"."Books"')
+    
+    data = cur.fetchall()
+    tcp.putconn(conn)
+
+    if data != None:
+        for title in data:
+            books_to_remove=[]
+            for book in books_to_search:
+                if book['title'] == 'title':
+                    books_to_remove.append(book)
+            for b in books_to_remove:
+                books_to_search.remove(b)
+
+    return books_to_search
+
 
 def scrap_books():
     global tcp, count
@@ -169,26 +104,39 @@ def scrap_books():
     try:
         setup_db()
 
+        # read books from CSV file
+        books_to_search = []
+        with open('books.csv', newline='') as f:
+            reader = csv.reader(f)
+            skip_first_row = True
+            for row in reader:
+                # Skip heading
+                if skip_first_row:
+                    skip_first_row = False
+                    continue
+                
+                # Add new book
+                books_to_search.append({'title':row[1], 'author':row[0]})
+
+        # print(books_to_search)
+        # grab all books from the database
+        # remove any books that have been already added OR mark them as to be updated
+        books_to_search = remove_already_found_books(books_to_search)
+
+        # print(books_to_search)
+
         for i in range(NUM_THREADS):
             t = threading.Thread(target=worker_thread, args=(i, ))
             # t.daemon = True
             t.start()
 
-        # TODO read books from CSV file
-        books_to_search = None
-
-        # TODO: grab all books from the database
-
-        # TODO: remove any books that have been already added OR mark them as to be updated
-
-        if books_to_search != None:
-            task_num = 1
-            for d in books_to_search:
-                if DEBUG > 1:
-                    with print_lock:
-                        print(f'[Main Thread] Adding Book {task_num}/{len(books_to_search)} to queue:', d[0], d[1])
-                task_num += 1
-                book_queue.put(d)
+        task_num = 1
+        for d in books_to_search:
+            if DEBUG > 1:
+                with print_lock:
+                    print(f'[Main Thread] Adding Book {task_num}/{len(books_to_search)} to queue:', d[0], d[1])
+            task_num += 1
+            book_queue.put(d)
 
         with print_lock:
             print(f'[Main Thread] Waiting for all {task_num-1} tasks to be marked complete')
