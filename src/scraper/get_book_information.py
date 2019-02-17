@@ -3,6 +3,7 @@ import urllib
 import re
 from bs4 import BeautifulSoup
 from selenium import webdriver
+import base64
 
 # 'https://www.amazon.ca/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords=REPLACE'
 AMAZON_SEARCH_URL = 'https://www.amazon.ca/s/ref=nb_sb_noss'
@@ -260,3 +261,42 @@ def fetch_new_book_info(thread_id, book_url):
     except Exception as error:
         print(f'[Thread {thread_id}] An Error occurred while trying to read from', book_url, error)
         return None
+
+
+def get_amazon_book_cover(thread_id, book_url, filename, folder):
+    try:
+        soup, r = grab_url_request(book_url, return_soup=True)
+
+        if r.status_code != 200:
+            print(f'[Thread {thread_id}] Non 200 Return Code', book_url, r)
+            return None
+
+        book_cover_url = soup.select('#imageBlock img')
+
+        if len(book_cover_url) == 1:
+            data = book_cover_url[0]['src'].strip()
+            if data.startswith('data:'):
+                data = data.split(':', 1)[1]
+                ext = data.split(';', 1)
+                data = ext[1]
+                ext = ext[0].split('/', 1)[1]
+
+                encoding = data.split(',', 1)
+                data = encoding[1]
+                encoding = encoding[0]
+
+                if encoding != 'base64':
+                    return f'Unknown Encoding {encoding}; with extension {ext}'
+                
+                img_filename = folder + '/' + str(filename) +'.' + ext
+                with open(img_filename, 'wb') as f:
+                    f.write(base64.b64decode(data))
+            else:
+                return 'Dealing with a src that is not embedded!'
+        else:
+            return 'Could Not find any book cover!'
+
+        return ''
+    except Exception as error:
+        return f'[Thread {thread_id}] An Error occurred while trying to read from: {book_url} with error: {error}'
+
