@@ -16,5 +16,5 @@ src/scraper/chromedriver.exe
 
 
 # Ignore all book_covers but keep the directory
-src/web/public/images/book_covers/*
-!src/web/public/images/book_covers/.gitkeep 
+#src/web/public/images/book_covers/*
+#!src/web/public/images/book_covers/.gitkeep 
