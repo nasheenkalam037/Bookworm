@@ -7,8 +7,9 @@ import unidecode
 import threading
 import csv
 import time
-from datetime import datetime
 import sys
+import os
+from datetime import datetime
 from queue import Queue
 from psycopg2.pool import ThreadedConnectionPool
 # Local Files
@@ -39,6 +40,7 @@ def worker_thread(thread_id):
     while True:
         book = book_queue.get()
         if book is None:
+            book_queue.task_done()
             break
         with print_lock:
             print(f'[Thread {thread_id}] Working on task {book["book_id"]} by {book["amazon_link"]}')
@@ -57,6 +59,22 @@ def worker_thread(thread_id):
 
     with print_lock:
         print(f'[Thread {thread_id}] Thread Ended')
+
+
+def grab_saved_book_covers():
+    files = set()
+    for f in os.listdir(IMAGE_FOLDER):
+        f = os.path.basename(f)
+        f = os.path.splitext(f)[0]
+
+        if f != '':
+            try:
+                i = int(f)
+                files.add(i)
+            except:
+                pass
+
+    return files
 
 
 def setup_db():
@@ -81,8 +99,14 @@ def grab_book_covers():
         if data == None:
             raise Exception('Unable to grab books from database!')
         
+        book_cover_ids = grab_saved_book_covers()
+
         task_num = 1
+        skip_count = 0
         for d in data:
+            if d[0] in book_cover_ids:
+                skip_count += 1
+                continue
             if DEBUG > 1:
                 with print_lock:
                     print(f'[Main Thread] Adding Book {task_num}/{len(books_to_search)} to queue:', d[0], d[1])
@@ -90,6 +114,8 @@ def grab_book_covers():
             book_queue.put({'book_id':d[0], 'amazon_link':d[1]})
         for i in range(NUM_THREADS):
             book_queue.put(None)
+
+        print(f'[Main Thread] Added {(task_num-1)} book links to search, and skipped {skip_count} book covers')
 
         # print(books_to_search)
 

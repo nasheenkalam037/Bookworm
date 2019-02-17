@@ -29,24 +29,34 @@ DEFAULT_HEADERS = {
 }
 
 session = None
-
-
-def grab_url_request(url, headers=DEFAULT_HEADERS, params=None, return_soup=False):
-    global session
-    if not session:
-        session = requests.Session()
-    if params:
-        r = session.get(url, params=params, headers=headers)
-    else:
-        r = session.get(url, headers=headers)
-
-    if return_soup:
-        soup = BeautifulSoup(r.text, 'html.parser')
-        return (soup, r)
-    return r
-
-
 driver = None
+
+
+def grab_url_request(url, headers=DEFAULT_HEADERS, params=None, return_soup=False, webdriver=False):
+    global session
+    global driver
+
+    if webdriver:
+        if not driver:
+            options = webdriver.ChromeOptions()
+            # options.add_argument("headless")  # remove this line if you want to see the browser popup
+            driver = webdriver.Chrome(chrome_options=options)
+        driver.get(url)
+
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        return soup
+    else:
+        if not session:
+            session = requests.Session()
+        if params:
+            r = session.get(url, params=params, headers=headers)
+        else:
+            r = session.get(url, headers=headers)
+
+        if return_soup:
+            soup = BeautifulSoup(r.text, 'html.parser')
+            return (soup, r)
+        return r
 
 
 def close():
@@ -63,10 +73,6 @@ def search_amazon_for_book(thread_id, book_title, book_author):
     '''
     global driver
     try:
-        if not driver:
-            options = webdriver.ChromeOptions()
-            # options.add_argument("headless")  # remove this line if you want to see the browser popup
-            driver = webdriver.Chrome(chrome_options=options)
 
         url = AMAZON_SEARCH_URL + '?' + urllib.parse.urlencode({
             'url': 'search-alias=stripbooks',
@@ -74,8 +80,7 @@ def search_amazon_for_book(thread_id, book_title, book_author):
         })
         # print(url)
 
-        driver.get(url)
-        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        soup, r = grab_url_request(url, return_soup=True, webdriver=True)
 
         p = re.compile(r"/[a-zA-Z\-]+/dp/[0-9]+/")
 
@@ -98,39 +103,6 @@ def search_amazon_for_book(thread_id, book_title, book_author):
               f'when searching {len(all_links)} links, and processing {count_links} links')
         # print(soup.prettify())
         return None
-
-    except Exception as error:
-        print(f'[Thread {thread_id}] An Error occurred while trying to search for', book_title, error)
-        return None
-
-
-def search_amazon_for_book_old(thread_id, book_title, book_author):
-    '''
-    DID NOT WORK: AMAZON WAS FORCING JAVASCRIPT CHECKS
-
-    Search amazon for the book by that author, grab the first link and return that url or None
-
-    Returns string | None
-    '''
-    try:
-        soup, r = grab_url_request(
-            AMAZON_SEARCH_URL,
-            params={
-                'url': 'search-alias=stripbooks',
-                'field-keywords': book_title + ' by ' + book_author
-            },
-            return_soup=True)
-
-        if r.status_code != 200:
-            print(f'[Thread {thread_id}] Non 200 Return Code', book_title, r)
-            return None
-
-        a_link = soup.select('#result_0 a.s-access-detail-page')
-        if len(a_link) == 1:
-            return a_link[0]['href']
-        else:
-            print(f'[Thread {thread_id}] Could not find any results for {book_title} by {book_author}', r)
-            return None
 
     except Exception as error:
         print(f'[Thread {thread_id}] An Error occurred while trying to search for', book_title, error)
@@ -273,6 +245,13 @@ def get_amazon_book_cover(thread_id, book_url, filename, folder):
 
         book_cover_url = soup.select('#imageBlock img')
 
+        if len(book_cover_url) != 1:
+            print(f'[Thread {thread_id}] Switching to Chrome because of captcha', book_url)
+            soup = grab_url_request(book_url, webdriver=True)
+
+
+        book_cover_url = soup.select('#imageBlock img')
+
         if len(book_cover_url) == 1:
             data = book_cover_url[0]['src'].strip()
             if data.startswith('data:'):
@@ -300,3 +279,6 @@ def get_amazon_book_cover(thread_id, book_url, filename, folder):
     except Exception as error:
         return f'[Thread {thread_id}] An Error occurred while trying to read from: {book_url} with error: {error}'
 
+
+if __name__ == "__main__":
+    get_amazon_book_cover(1, 'https://www.amazon.ca/Clariel-Lost-Abhorsen-Garth-Nix/dp/0061561576/ref', 'test', '')
