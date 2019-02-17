@@ -12,3 +12,4 @@ src/ml/movie-recommendation/recs.tsv
 .vscode/settings.json
 src/scraper/__pycache__/
 *.pyc
+src/scraper/chromedriver.exe
