@@ -1,1 +1,47 @@
-<h1>I am the Signup Page</h1>
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="/stylesheets/signup_login.css">
+</head>
+<body>
+
+<header>
+<span class="title">TheBookWorm</div>
+</header>
+
+<div class="grandParentContaniner">
+<div class="parentContainer">
+
+<form action="/action_page.php">
+  <div class="imgcontainer">
+    <img src="/images/img_avatar2.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <label for="fullname"><b>Full Name</b></label>
+    <input id="fullname" type="text" placeholder="Enter Full Name" name="fullname" required>
+    
+    <label for="email"><b>Email Address</b></label>
+    <input id="email" type="text" placeholder="Enter Email Address" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input id="psw" type="password" placeholder="Enter Password" name="psw" required>
+	
+	<label for="con_psw"><b>Confirm Password</b></label>
+    <input id="con_psw" type="password" placeholder="Enter Password Again" name="con_psw" required>
+      
+	 <div class="buttons">   
+		<button id="signup" type="submit">Sign Up</button>
+		<div class="signin">
+			<span>Already Registered ? <a id="signin" href="#">Sign In</a></span>
+		</div>
+	</div>
+ </div>
+
+</form>
+</div>
+</div>
+
+</body>
+</html>
