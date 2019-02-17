@@ -1,8 +1,11 @@
 import requests
+import urllib
 import re
 from bs4 import BeautifulSoup
+from selenium import webdriver
 
-AMAZON_SEARCH_URL = 'https://www.amazon.ca/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords=REPLACE'
+# 'https://www.amazon.ca/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords=REPLACE'
+AMAZON_SEARCH_URL = 'https://www.amazon.ca/s/ref=nb_sb_noss'
 DEFAULT_HEADERS = {
     "Authority":
     "www.amazon.ca",
@@ -24,27 +27,115 @@ DEFAULT_HEADERS = {
     "en-CA,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
 }
 
+session = None
 
-def grab_url_request(url, headers=DEFAULT_HEADERS, return_soup=False):
-    with requests.Session() as s:
-        r = s.get(url, headers=headers)
+
+def grab_url_request(url, headers=DEFAULT_HEADERS, params=None, return_soup=False):
+    global session
+    if not session:
+        session = requests.Session()
+    if params:
+        r = session.get(url, params=params, headers=headers)
+    else:
+        r = session.get(url, headers=headers)
 
     if return_soup:
-        return BeautifulSoup(r.text, 'html.parser'), r
+        soup = BeautifulSoup(r.text, 'html.parser')
+        return (soup, r)
     return r
 
 
-# TODO complete search_amazon_for_book()
+driver = None
+
+
+def close():
+    global driver
+    if driver:
+        driver.quit()
+
+
 def search_amazon_for_book(thread_id, book_title, book_author):
     '''
     Search amazon for the book by that author, grab the first link and return that url or None
 
     Returns string | None
     '''
-    pass
+    global driver
+    try:
+        if not driver:
+            options = webdriver.ChromeOptions()
+            # options.add_argument("headless")  # remove this line if you want to see the browser popup
+            driver = webdriver.Chrome(chrome_options=options)
+
+        url = AMAZON_SEARCH_URL + '?' + urllib.parse.urlencode({
+            'url': 'search-alias=stripbooks',
+            'field-keywords': book_title + ' by ' + book_author
+        })
+        # print(url)
+
+        driver.get(url)
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+        p = re.compile(r"/[a-zA-Z\-]+/dp/[0-9]+/")
+
+        all_links = soup.select('a')
+        count_links = 0
+        print(f'Number of links found via soup: {len(all_links)}')
+        for a in all_links:
+            if not a.has_attr('href'):
+                continue
+            
+            # print(a['href'])
+            count_links += 1
+            m = p.search(a['href'])
+            if m:
+                if a['href'].startswith('/'):
+                    return 'https://www.amazon.ca' + a['href']
+                return a['href']
+
+        print(f'[Thread {thread_id}] ERROR: Could not find any results for {book_title} by {book_author} ' +
+              f'when searching {len(all_links)} links, and processing {count_links} links')
+        # print(soup.prettify())
+        return None
+
+    except Exception as error:
+        print(f'[Thread {thread_id}] An Error occurred while trying to search for', book_title, error)
+        return None
 
 
-# TODO complete fetch_new_book_info()
+def search_amazon_for_book_old(thread_id, book_title, book_author):
+    '''
+    DID NOT WORK: AMAZON WAS FORCING JAVASCRIPT CHECKS
+
+    Search amazon for the book by that author, grab the first link and return that url or None
+
+    Returns string | None
+    '''
+    try:
+        soup, r = grab_url_request(
+            AMAZON_SEARCH_URL,
+            params={
+                'url': 'search-alias=stripbooks',
+                'field-keywords': book_title + ' by ' + book_author
+            },
+            return_soup=True)
+
+        if r.status_code != 200:
+            print(f'[Thread {thread_id}] Non 200 Return Code', book_title, r)
+            return None
+
+        a_link = soup.select('#result_0 a.s-access-detail-page')
+        if len(a_link) == 1:
+            return a_link[0]['href']
+        else:
+            print(f'[Thread {thread_id}] Could not find any results for {book_title} by {book_author}', r)
+            return None
+
+    except Exception as error:
+        print(f'[Thread {thread_id}] An Error occurred while trying to search for', book_title, error)
+        return None
+
+
 def fetch_new_book_info(thread_id, book_url):
     '''
     Returns {
@@ -95,7 +186,7 @@ def fetch_new_book_info(thread_id, book_url):
         price = None
         price_node = soup.select('.offer-price')
         if len(price_node) > 0:
-            if 'out' in price_node[0].text:
+            if '$' in price_node[0].text:
                 price = float(price_node[0].text.split(' ')[1])
 
         synopsis = None
@@ -110,6 +201,7 @@ def fetch_new_book_info(thread_id, book_url):
         isbn13 = None
         publisher = None
         orig_published_date = None
+        num_reviews = None
 
         details_node = soup.select('.content')
         if len(details_node) == 1:
@@ -136,6 +228,9 @@ def fetch_new_book_info(thread_id, book_url):
             m = p.search(text)
             if m:
                 isbn10 = m.group(1)
+                if len(isbn10) > 10:
+                    print('[Thread {thread_id}] Incorrect ISBN10 number:', isbn10)
+                    isbn10 = None
             # ISBN13
             p = re.compile(r'ISBN-13:\s*([0-9\-]+)')
             m = p.search(text)

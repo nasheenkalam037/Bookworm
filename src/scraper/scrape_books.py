@@ -14,6 +14,7 @@ from psycopg2.pool import ThreadedConnectionPool
 # Local Files
 from config import config
 import get_book_information as getInfo
+from save_book import save_book
 
 # Mutex for printing to the console
 print_lock = threading.Lock()
@@ -23,11 +24,10 @@ count = 0
 
 book_queue = Queue()
 tcp = None
-SLEEP_TIME = 2
-NUM_THREADS = 10
+SLEEP_TIME = 5
+NUM_THREADS = 1
 
 DEBUG = 0
-
 
 def worker_thread(thread_id):
     global count
@@ -50,16 +50,20 @@ def worker_thread(thread_id):
 
         status = False
         if search_result:
-            status = getInfo.fetch_new_book_info(thread_id, search_result)
+            book_info = getInfo.fetch_new_book_info(thread_id, search_result)
 
-            # If the status is good, increase the number of books added
-            if status:
+            # If the book_info is good, increase the number of books added
+            if book_info:
+                conn = tcp.getconn()
+                save_book(conn, book_info)
+                tcp.putconn(conn)
+
                 with shared_mutex:
                     count += 1
 
         book_queue.task_done()
         with print_lock:
-            print(f'[Thread {thread_id}] Task Completed: {book["title"]}; Status: {status}')
+            print(f'[Thread {thread_id}] Task Completed: {book["title"]}')
         time.sleep(SLEEP_TIME)
 
     with print_lock:
@@ -86,14 +90,22 @@ def remove_already_found_books(books_to_search):
     data = cur.fetchall()
     tcp.putconn(conn)
 
+    orig_size = len(books_to_search)
+
     if data != None:
+        books_to_remove=[]
         for title in data:
-            books_to_remove=[]
             for book in books_to_search:
-                if book['title'] == 'title':
+                if book['title'] == title[0]:
                     books_to_remove.append(book)
-            for b in books_to_remove:
+                    break
+        for b in books_to_remove:
+            try:
                 books_to_search.remove(b)
+            except:
+                pass
+
+    print(f'Adding books {len(books_to_search)} / {orig_size} (Removed {(orig_size - len(books_to_search))} books)')
 
     return books_to_search
 

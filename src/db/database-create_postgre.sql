@@ -24,8 +24,8 @@ CREATE TABLE  "public"."Books" (
   "pages" INT NULL,
   "publisher" VARCHAR(200) NULL,
   "orig_published_date" DATE NULL,
-  "ISBN10" VARCHAR(10) NULL,
-  "ISBN13" VARCHAR(15) NULL,
+  "isbn10" VARCHAR(10) NULL,
+  "isbn13" VARCHAR(15) NULL,
   "synopsis" TEXT NULL,
   PRIMARY KEY ("book_id"));
 
@@ -81,9 +81,9 @@ CREATE TABLE  "public"."Reviews" (
 
 
 -- -----------------------------------------------------
--- Table "public"."Book_Category"
+-- Table "public"."BookCategory"
 -- -----------------------------------------------------
-CREATE TABLE  "public"."Book_Category" (
+CREATE TABLE  "public"."BookCategories" (
   "book_id" INT NOT NULL,
   "category_id" INT NOT NULL,
   PRIMARY KEY ("book_id", "category_id"),
@@ -107,6 +107,7 @@ CREATE TABLE  "public"."AmazonDetails" (
   "book_id" INT NOT NULL,
   "book_link" TEXT NOT NULL,
   "rating" DECIMAL NULL,
+  "num_reviews" INT NULL,
   "synopsis" TEXT NULL,
   "price" DECIMAL NULL,
   PRIMARY KEY ("book_id"),
@@ -122,8 +123,7 @@ CREATE TABLE  "public"."AmazonDetails" (
 -- -----------------------------------------------------
 CREATE TABLE  "public"."Author" (
   "author_id" INT NOT NULL ,
-  "last_name" VARCHAR(100) NOT NULL,
-  "first_name" VARCHAR(100) NOT NULL,
+  "name" VARCHAR(200) NOT NULL,
   PRIMARY KEY ("author_id"));
 
 
@@ -183,4 +183,8 @@ CREATE SEQUENCE  "public"."BookOfTheDay_idBookOfTheDay_sequence";
 ALTER TABLE "public"."BookOfTheDay" ALTER COLUMN "idBookOfTheDay" SET DEFAULT NEXTVAL('"public"."BookOfTheDay_idBookOfTheDay_sequence"');
 
 
+ALTER TABLE public."Books" ADD CONSTRAINT unique_isbn10 UNIQUE ("ISBN10");
+ALTER TABLE public."Books" ADD CONSTRAINT unique_isbn13 UNIQUE ("ISBN13");
 ALTER TABLE public."Users" ADD CONSTRAINT unique_email UNIQUE (email);
+ALTER TABLE public."Categories" ADD CONSTRAINT unique_name UNIQUE ("name");
+ALTER TABLE public."Author" ADD CONSTRAINT unique_name UNIQUE ("name");
