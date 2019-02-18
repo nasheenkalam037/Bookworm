@@ -226,17 +226,17 @@ section:after {
 }
 
 /*******************************************************************************************
-       RIGHT SIDE
+       Signin and Signup Pages
 *******************************************************************************************/
 
-.grandParentContaniner {
+.signin {
   display: table;
   height: 100%;
   width: 45%;
   margin: 0 auto;
 }
 
-.parentContainer {
+.signin_inner {
   display: table-cell;
   height: 100%;
   width: 100%;
@@ -247,8 +247,7 @@ form {
   border: 3px solid #f1f1f1;
 }
 
-input[type="text"],
-input[type="password"] {
+.signin input {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0px;
@@ -257,7 +256,7 @@ input[type="password"] {
   box-sizing: border-box;
 }
 
-button {
+.signin button {
   background-color: #4caf50;
   color: white;
   padding: 14px 20px;
@@ -267,15 +266,15 @@ button {
   width: 50%;
 }
 
-.buttons {
+.signin .buttons {
   text-align: center;
 }
 
-button:hover {
+.signin button:hover {
   opacity: 0.8;
 }
 
-.cancelbtn {
+.signin .cancelbtn {
   background-color: #f44336;
   color: white;
   padding: 14px 20px;
@@ -285,21 +284,24 @@ button:hover {
   width: 50%;
 }
 
-.imgcontainer {
+.signin .imgcontainer {
   text-align: center;
   margin: 24px 0 12px 0;
 }
 
-img.avatar {
+.signin img.avatar {
   width: 25%;
   border-radius: 70%;
 }
 
-.container {
+.signin .container {
   padding: 16px;
 }
 
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+/* 
+Responsive layout - makes the two columns/boxes stack on top of each other
+instead of next to each other, on small screens 
+*/
 @media (max-width: 600px) {
   nav,
   article {
