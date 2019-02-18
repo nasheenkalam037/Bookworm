@@ -250,7 +250,7 @@ form {
 .signin input {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0px;
+  margin: 0px 0px 15px 0px;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -260,7 +260,7 @@ form {
   background-color: #4caf50;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 15px 0px 0px 0px;
   border: none;
   cursor: pointer;
   width: 50%;
