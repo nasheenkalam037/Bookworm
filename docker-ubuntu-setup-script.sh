@@ -3,7 +3,7 @@
 echo =================================================
 echo Running the Docker Ubuntu Setup Script for ECE651
 echo =================================================
-
+cat /etc/os-release
 echo 
 echo 
 echo ==============================================
@@ -24,7 +24,9 @@ export RELEASE=$(cat /etc/os-release  | grep VERSION_CODENAME  | cut -d= -f2)
 echo "deb http://apt.postgresql.org/pub/repos/apt/ ${RELEASE}"-pgdg main 11 | tee  /etc/apt/sources.list.d/pgdg.list
 cat /etc/apt/sources.list.d/pgdg.list
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-apt update && apt search postgresql-11
+apt update
+apt search postgresql-11
+apt search postgresql
 echo exit 0 > /usr/sbin/policy-rc.d
 apt update && apt install -qq -y postgresql-11 postgresql-server-dev-11 libpq-dev
 echo 
