@@ -28,7 +28,7 @@ apt update
 sleep 2
 apt search postgresql-11
 echo exit 0 > /usr/sbin/policy-rc.d
-apt update && apt install -qq -y postgresql-11 postgresql-server-dev-11 libpq-dev
+apt update && apt install -y postgresql-10 postgresql-server-dev-10 libpq-dev
 echo 
 echo 
 echo ==============================================
@@ -63,7 +63,6 @@ sleep 2
 /etc/init.d/postgresql status
 su postgres
 whoami
-echo "CREATE USER $POSTGRES_USER WITH SUPERUSER PASSWORD '${POSTGRES_PASSWORD}';"
 psql --command "CREATE USER $POSTGRES_USER WITH SUPERUSER PASSWORD '$POSTGRES_PASSWORD';"
 createdb -O $POSTGRES_USER $POSTGRES_DB
 exit
