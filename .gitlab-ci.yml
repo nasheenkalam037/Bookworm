@@ -10,17 +10,26 @@ variables:
   PG_WEB_USER: ece651_web
   PG_WEB_PASS: dm2fBdodbrHPtJVvlSKF
 
-setup db:
-  services: 
-    - postgres
+setup image:
   image: ubuntu
   only:
     - tags
     - triggers
   stage: build
   script:
+    # Install postgres, nodejs, and python3
+    - apt-get update
+    - apt install curl
+    - curl -sL https://deb.nodesource.com/setup_10.x | bash -
+    - apt-get install -qq -y postgresql postgresql-client postgresql-libs gcc musl-dev postgresql-dev libpq-dev python3 nodejs
+    #
+    #
+    # Check versions of software
+    - node --version
+    - python3 --version
+    - psql --version
+    #
     # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
-    - apt-get install -y postgresql postgresql-client libpq-dev
     - export PGPASSWORD=$POSTGRES_PASSWORD
     - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/create-users_postgre.sql
     #- psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/database-create_postgre.sql
@@ -38,9 +47,7 @@ node version:
     - tags
     - triggers
   stage: test
-  image: alpine:3.7
-  services:
-    - node
+  image: ubuntu
   script:
     - node --version
     - cd src/web
@@ -51,13 +58,9 @@ python tests:
     - tags
     - triggers
   stage: test
-  image: alpine:3.7
-  services:
-    - python:3.6-alpine
+  image: ubuntu
   before_script:
     - cd src/scraper
-    - apk add --no-cache postgresql-libs
-    - apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev
     - pip install -r requirements.txt
   script:
     - export PGPASSWORD=$PG_SCRAPER_PASS
