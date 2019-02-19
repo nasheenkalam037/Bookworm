@@ -18,8 +18,13 @@ setup image:
   stage: build
   script:
     # Install postgres, nodejs, and python3
-    - apt update && apt install -y curl gnupg2
-    - apt install -qq -y gnupg2 postgresql postgresql-client postgresql-libs gcc musl-dev postgresql-dev libpq-dev python3
+    - apt update && apt install -y curl wget gnupg2
+    - deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
+    - wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+    - RELEASE=$(lsb_release -cs)
+    - echo "deb http://apt.postgresql.org/pub/repos/apt/ ${RELEASE}"-pgdg main | sudo tee  /etc/apt/sources.list.d/pgdg.list
+    - sudo apt-get update
+    - apt install -qq -y gcc musl-dev python3 postgresql-11 postgresql-server-dev-11 libpq-dev
     - curl -sL https://deb.nodesource.com/setup_10.x | bash -
     - apt install -qq -y nodejs
     #
