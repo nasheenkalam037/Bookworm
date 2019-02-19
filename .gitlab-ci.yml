@@ -18,10 +18,10 @@ setup image:
   stage: build
   script:
     # Install postgres, nodejs, and python3
-    - apt update
-    - apt install -y curl
+    - apt update && apt install -y curl gnupg2
+    - apt install -qq -y gnupg2 postgresql postgresql-client postgresql-libs gcc musl-dev postgresql-dev libpq-dev python3
     - curl -sL https://deb.nodesource.com/setup_10.x | bash -
-    - apt install -qq -y gnupg postgresql postgresql-client postgresql-libs gcc musl-dev postgresql-dev libpq-dev python3 nodejs
+    - apt install -qq -y nodejs
     #
     #
     # Check versions of software
