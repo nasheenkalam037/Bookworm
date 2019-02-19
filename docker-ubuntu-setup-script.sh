@@ -25,8 +25,8 @@ echo "deb http://apt.postgresql.org/pub/repos/apt/ ${RELEASE}"-pgdg main 11 | te
 cat /etc/apt/sources.list.d/pgdg.list
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 apt update
+sleep 2
 apt search postgresql-11
-apt search postgresql
 echo exit 0 > /usr/sbin/policy-rc.d
 apt update && apt install -qq -y postgresql-11 postgresql-server-dev-11 libpq-dev
 echo 
@@ -56,8 +56,14 @@ echo ==============================================
 echo Setting up Database User and new Database
 echo ==============================================
 # SWITCH TO postgres USER AND SETUP USER TO CONNECT
-su postgres
+echo Starting the Postgresql server if needed
 /etc/init.d/postgresql start
+/etc/init.d/postgresql status
+sleep 2
+/etc/init.d/postgresql status
+su postgres
+whoami
+echo "CREATE USER $POSTGRES_USER WITH SUPERUSER PASSWORD '${POSTGRES_PASSWORD}';"
 psql --command "CREATE USER $POSTGRES_USER WITH SUPERUSER PASSWORD '$POSTGRES_PASSWORD';"
 createdb -O $POSTGRES_USER $POSTGRES_DB
 exit
