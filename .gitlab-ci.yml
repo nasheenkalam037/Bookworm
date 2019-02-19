@@ -1,8 +1,3 @@
-services:
-  - postgres
-  - node
-  - python:3.6-alpine
-
 variables:
   # Configure postgres service (https://hub.docker.com/_/postgres/)
   POSTGRES_DB: ece651
@@ -16,7 +11,9 @@ variables:
   PG_WEB_PASS: dm2fBdodbrHPtJVvlSKF
 
 setup db:
-  image: postgres
+  services: 
+    - postgres
+  image: alpine:3.7
   only:
     - tags
     - triggers
@@ -26,7 +23,7 @@ setup db:
     - export PGPASSWORD=$POSTGRES_PASSWORD
     - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/create-users_postgre.sql
     #- psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/database-create_postgre.sql
-    - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/create_tables_load_content.sql
+    - psql -q -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/create_tables_load_content.sql
     - export PGPASSWORD=$PG_SCRAPER_PASS
     - psql -h "postgres" -U "$PG_SCRAPER_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookOfTheDay" LIMIT 10;'
     - export PGPASSWORD=$PG_ML_PASS
@@ -40,7 +37,9 @@ node version:
     - tags
     - triggers
   stage: test
-  image: node
+  image: alpine:3.7
+  services:
+    - node
   script:
     - node --version
     - cd src/web
@@ -51,7 +50,9 @@ python tests:
     - tags
     - triggers
   stage: test
-  image: python:3.6-alpine
+  image: alpine:3.7
+  services:
+    - python:3.6-alpine
   before_script:
     - cd src/scraper
     - apk add --no-cache postgresql-libs

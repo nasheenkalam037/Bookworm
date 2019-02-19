@@ -6376,7 +6376,6 @@ CREATE OR REPLACE VIEW public."BookDetails" AS
    FROM public."Books"
      JOIN public."AmazonDetails" a ON public."Books".book_id = a.book_id;
 
-GRANT ALL ON TABLE public."BookDetails" TO postgres;
 GRANT ALL ON TABLE public."BookDetails" TO ece651_ml;
 GRANT ALL ON TABLE public."BookDetails" TO ece651_web;
 GRANT ALL ON TABLE public."BookDetails" TO ece651_scraper;
