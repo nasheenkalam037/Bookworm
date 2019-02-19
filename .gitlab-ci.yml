@@ -20,7 +20,7 @@ setup image:
     # Install python3 and requirements for below (MUST BE FIRST!)
     - apt update && apt install -y curl wget gnupg2 gcc musl-dev python3
     # INSTALL POSTGRES
-    - RELEASE=$(lsb_release -cs)
+    - RELEASE=$(cat /etc/os-release  | grep VERSION_CODENAME  | cut -d= -f2)
     - echo "deb http://apt.postgresql.org/pub/repos/apt/ ${RELEASE}"-pgdg main | sudo tee  /etc/apt/sources.list.d/pgdg.list
     - wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
     - sudo apt-get update
