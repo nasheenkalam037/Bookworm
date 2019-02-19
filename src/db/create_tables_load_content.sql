@@ -6257,7 +6257,7 @@ ALTER TABLE ONLY public."Users"
 --
 
 ALTER TABLE ONLY public."Categories"
-    ADD CONSTRAINT name_uq UNIQUE (name);
+    ADD CONSTRAINT unique_cat_name UNIQUE (name);
 
 
 --
@@ -6293,7 +6293,7 @@ ALTER TABLE ONLY public."Books"
 --
 
 ALTER TABLE ONLY public."Author"
-    ADD CONSTRAINT unique_name UNIQUE (name);
+    ADD CONSTRAINT unique_author_name UNIQUE (name);
 
 
 --

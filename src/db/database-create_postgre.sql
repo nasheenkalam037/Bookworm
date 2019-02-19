@@ -183,8 +183,78 @@ CREATE SEQUENCE  "public"."BookOfTheDay_idBookOfTheDay_sequence";
 ALTER TABLE "public"."BookOfTheDay" ALTER COLUMN "idBookOfTheDay" SET DEFAULT NEXTVAL('"public"."BookOfTheDay_idBookOfTheDay_sequence"');
 
 
-ALTER TABLE public."Books" ADD CONSTRAINT unique_isbn10 UNIQUE ("ISBN10");
-ALTER TABLE public."Books" ADD CONSTRAINT unique_isbn13 UNIQUE ("ISBN13");
+ALTER TABLE public."Books" ADD CONSTRAINT unique_isbn10 UNIQUE ("isbn10");
+ALTER TABLE public."Books" ADD CONSTRAINT unique_isbn13 UNIQUE ("isbn13");
 ALTER TABLE public."Users" ADD CONSTRAINT unique_email UNIQUE (email);
-ALTER TABLE public."Categories" ADD CONSTRAINT unique_name UNIQUE ("name");
-ALTER TABLE public."Author" ADD CONSTRAINT unique_name UNIQUE ("name");
+ALTER TABLE public."Categories" ADD CONSTRAINT unique_cat_name UNIQUE ("name");
+ALTER TABLE public."Author" ADD CONSTRAINT unique_author_name UNIQUE ("name");
+
+
+
+GRANT USAGE ON SCHEMA public TO ece651_scraper;
+GRANT USAGE ON SCHEMA public TO ece651_ml;
+GRANT USAGE ON SCHEMA public TO ece651_web;
+
+GRANT ALL ON TABLE public."AmazonDetails" TO ece651_ml;
+GRANT ALL ON TABLE public."AmazonDetails" TO ece651_web;
+GRANT ALL ON TABLE public."AmazonDetails" TO ece651_scraper;
+
+GRANT ALL ON SEQUENCE public."Author_author_id_sequence" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."Author_author_id_sequence" TO ece651_ml;
+GRANT ALL ON SEQUENCE public."Author_author_id_sequence" TO ece651_web;
+
+GRANT ALL ON TABLE public."Author" TO ece651_ml;
+GRANT ALL ON TABLE public."Author" TO ece651_web;
+GRANT ALL ON TABLE public."Author" TO ece651_scraper;
+
+GRANT ALL ON TABLE public."AuthorBooks" TO ece651_ml;
+GRANT ALL ON TABLE public."AuthorBooks" TO ece651_web;
+GRANT ALL ON TABLE public."AuthorBooks" TO ece651_scraper;
+
+GRANT ALL ON TABLE public."BookCategories" TO ece651_ml;
+GRANT ALL ON TABLE public."BookCategories" TO ece651_web;
+GRANT ALL ON TABLE public."BookCategories" TO ece651_scraper;
+
+GRANT ALL ON SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence" TO ece651_ml;
+GRANT ALL ON SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence" TO ece651_web;
+
+GRANT ALL ON TABLE public."BookOfTheDay" TO ece651_ml;
+GRANT ALL ON TABLE public."BookOfTheDay" TO ece651_web;
+GRANT ALL ON TABLE public."BookOfTheDay" TO ece651_scraper;
+
+GRANT ALL ON SEQUENCE public."Books_book_id_sequence" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."Books_book_id_sequence" TO ece651_ml;
+GRANT ALL ON SEQUENCE public."Books_book_id_sequence" TO ece651_web;
+
+GRANT ALL ON TABLE public."Books" TO ece651_ml;
+GRANT ALL ON TABLE public."Books" TO ece651_web;
+GRANT ALL ON TABLE public."Books" TO ece651_scraper;
+
+GRANT ALL ON SEQUENCE public."Categories_categories_id_sequence" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."Categories_categories_id_sequence" TO ece651_ml;
+GRANT ALL ON SEQUENCE public."Categories_categories_id_sequence" TO ece651_web;
+
+GRANT ALL ON TABLE public."Categories" TO ece651_ml;
+GRANT ALL ON TABLE public."Categories" TO ece651_web;
+GRANT ALL ON TABLE public."Categories" TO ece651_scraper;
+
+GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_ml;
+GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_web;
+
+GRANT ALL ON TABLE public."Reviews" TO ece651_ml;
+GRANT ALL ON TABLE public."Reviews" TO ece651_web;
+GRANT ALL ON TABLE public."Reviews" TO ece651_scraper;
+
+GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_ml;
+GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_web;
+
+GRANT ALL ON TABLE public."Users" TO ece651_ml;
+GRANT ALL ON TABLE public."Users" TO ece651_web;
+GRANT ALL ON TABLE public."Users" TO ece651_scraper;
+
+GRANT ALL ON TABLE public."BookDetails" TO ece651_ml;
+GRANT ALL ON TABLE public."BookDetails" TO ece651_web;
+GRANT ALL ON TABLE public."BookDetails" TO ece651_scraper;

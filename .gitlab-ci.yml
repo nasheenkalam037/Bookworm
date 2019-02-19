@@ -24,8 +24,8 @@ setup db:
   script:
     # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
     - export PGPASSWORD=$POSTGRES_PASSWORD
-    - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/database-create_postgre.sql
     - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/create-users_postgre.sql
+    - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/database-create_postgre.sql
     - export PGPASSWORD=$PG_SCRAPER_PASS
     - psql -h "postgres" -U "$PG_SCRAPER_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookOfTheDay";'
     - export PGPASSWORD=$PG_ML_PASS
