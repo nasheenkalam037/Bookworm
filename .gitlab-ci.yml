@@ -21,7 +21,7 @@ setup image:
     - apt update
     - apt install -y curl
     - curl -sL https://deb.nodesource.com/setup_10.x | bash -
-    - apt install -qq -y postgresql postgresql-client postgresql-libs gcc musl-dev postgresql-dev libpq-dev python3 nodejs
+    - apt install -qq -y gnupg postgresql postgresql-client postgresql-libs gcc musl-dev postgresql-dev libpq-dev python3 nodejs
     #
     #
     # Check versions of software
