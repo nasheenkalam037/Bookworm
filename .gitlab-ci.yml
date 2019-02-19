@@ -18,6 +18,7 @@ setup image:
   stage: build
   script:
     - whoami
+    - chmod +x ./docker-ubuntu-setup-script.sh
     - ./docker-ubuntu-setup-script.sh
     # 
     # 

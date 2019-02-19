@@ -1,3 +1,10 @@
+#!/bin/bash
+
+echo =================================================
+echo Running the Docker Ubuntu Setup Script for ECE651
+echo =================================================
+
+
 # set noninteractive installation
 export DEBIAN_FRONTEND=noninteractive
 #install tzdata package
