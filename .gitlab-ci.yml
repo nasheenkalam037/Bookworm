@@ -13,14 +13,14 @@ variables:
 setup db:
   services: 
     - postgres
-  image: alpine:3.7
+  image: ubuntu
   only:
     - tags
     - triggers
   stage: build
   script:
     # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
-    - sudo apt-get install -y postgresql postgresql-client libpq-dev
+    - apt-get install -y postgresql postgresql-client libpq-dev
     - export PGPASSWORD=$POSTGRES_PASSWORD
     - psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/create-users_postgre.sql
     #- psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/database-create_postgre.sql
