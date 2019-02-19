@@ -6358,29 +6358,28 @@ GRANT ALL ON TABLE public."Users" TO ece651_scraper;
 
 
 CREATE OR REPLACE VIEW public."BookDetails" AS
- SELECT "Books".book_id,
-    "Books".title,
-    "Books".series,
-    "Books".series_position,
-    "Books".pages,
-    "Books".publisher,
-    "Books".orig_published_date,
-    "Books".isbn10,
-    "Books".isbn13,
-    "Books".synopsis,
+ SELECT public."Books".book_id,
+    public."Books".title,
+    public."Books".series,
+    public."Books".series_position,
+    public."Books".pages,
+    public."Books".publisher,
+    public."Books".orig_published_date,
+    public."Books".isbn10,
+    public."Books".isbn13,
+    public."Books".synopsis,
     a.book_link as "amazon_link",
     a.rating as "amazon_rating",
     a.synopsis AS amazon_synopsis,
     a.price as "amazon_price",
     a.num_reviews as amazon_num_reviews
-   FROM "Books"
-     JOIN "AmazonDetails" a ON "Books".book_id = a.book_id;
-
-ALTER TABLE public."BookDetails"
-    OWNER TO postgres;
+   FROM public."Books"
+     JOIN public."AmazonDetails" a ON public."Books".book_id = a.book_id;
 
 GRANT ALL ON TABLE public."BookDetails" TO postgres;
-GRANT INSERT, SELECT, UPDATE ON TABLE public."BookDetails" TO ece651_scraper;
+GRANT ALL ON TABLE public."BookDetails" TO ece651_ml;
+GRANT ALL ON TABLE public."BookDetails" TO ece651_web;
+GRANT ALL ON TABLE public."BookDetails" TO ece651_scraper;
 
 
 -- Completed on 2019-02-17 15:08:03
