@@ -1,6 +1,4 @@
---
 -- PostgreSQL database dump
---
 
 -- Dumped from database version 11.1
 -- Dumped by pg_dump version 11.1
@@ -17,24 +15,17 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
 -- TOC entry 7 (class 2615 OID 25049)
 -- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
---
 
-CREATE SCHEMA public;
-
-
-ALTER SCHEMA public OWNER TO postgres;
+CREATE SCHEMA IF NOT EXISTS  "public"  ;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
---
 -- TOC entry 201 (class 1259 OID 25107)
 -- Name: AmazonDetails; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public."AmazonDetails" (
     book_id integer NOT NULL,
@@ -45,13 +36,8 @@ CREATE TABLE public."AmazonDetails" (
     num_reviews numeric
 );
 
-
-ALTER TABLE public."AmazonDetails" OWNER TO postgres;
-
---
 -- TOC entry 209 (class 1259 OID 25162)
 -- Name: Author_author_id_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
---
 
 CREATE SEQUENCE public."Author_author_id_sequence"
     START WITH 1
@@ -60,52 +46,32 @@ CREATE SEQUENCE public."Author_author_id_sequence"
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public."Author_author_id_sequence" OWNER TO postgres;
-
---
 -- TOC entry 202 (class 1259 OID 25120)
 -- Name: Author; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public."Author" (
     author_id integer DEFAULT nextval('public."Author_author_id_sequence"'::regclass) NOT NULL,
     name character varying(200) NOT NULL
 );
 
-
-ALTER TABLE public."Author" OWNER TO postgres;
-
---
 -- TOC entry 203 (class 1259 OID 25125)
 -- Name: AuthorBooks; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public."AuthorBooks" (
     author_id integer NOT NULL,
     book_id integer NOT NULL
 );
 
-
-ALTER TABLE public."AuthorBooks" OWNER TO postgres;
-
---
 -- TOC entry 200 (class 1259 OID 25092)
 -- Name: BookCategories; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public."BookCategories" (
     book_id integer NOT NULL,
     category_id integer NOT NULL
 );
 
-
-ALTER TABLE public."BookCategories" OWNER TO postgres;
-
---
 -- TOC entry 210 (class 1259 OID 25165)
 -- Name: BookOfTheDay_idBookOfTheDay_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
---
 
 CREATE SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence"
     START WITH 1
@@ -114,13 +80,8 @@ CREATE SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence"
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public."BookOfTheDay_idBookOfTheDay_sequence" OWNER TO postgres;
-
---
 -- TOC entry 204 (class 1259 OID 25140)
 -- Name: BookOfTheDay; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public."BookOfTheDay" (
     "idBookOfTheDay" integer DEFAULT nextval('public."BookOfTheDay_idBookOfTheDay_sequence"'::regclass) NOT NULL,
@@ -128,13 +89,8 @@ CREATE TABLE public."BookOfTheDay" (
     date date NOT NULL
 );
 
-
-ALTER TABLE public."BookOfTheDay" OWNER TO postgres;
-
---
 -- TOC entry 205 (class 1259 OID 25150)
 -- Name: Books_book_id_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
---
 
 CREATE SEQUENCE public."Books_book_id_sequence"
     START WITH 1
@@ -143,13 +99,8 @@ CREATE SEQUENCE public."Books_book_id_sequence"
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public."Books_book_id_sequence" OWNER TO postgres;
-
---
 -- TOC entry 196 (class 1259 OID 25050)
 -- Name: Books; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public."Books" (
     book_id integer DEFAULT nextval('public."Books_book_id_sequence"'::regclass) NOT NULL,
@@ -164,13 +115,8 @@ CREATE TABLE public."Books" (
     synopsis text
 );
 
-
-ALTER TABLE public."Books" OWNER TO postgres;
-
---
 -- TOC entry 207 (class 1259 OID 25156)
 -- Name: Categories_categories_id_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
---
 
 CREATE SEQUENCE public."Categories_categories_id_sequence"
     START WITH 1
@@ -179,26 +125,16 @@ CREATE SEQUENCE public."Categories_categories_id_sequence"
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public."Categories_categories_id_sequence" OWNER TO postgres;
-
---
 -- TOC entry 198 (class 1259 OID 25069)
 -- Name: Categories; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public."Categories" (
     categories_id integer DEFAULT nextval('public."Categories_categories_id_sequence"'::regclass) NOT NULL,
     name character varying(100) NOT NULL
 );
 
-
-ALTER TABLE public."Categories" OWNER TO postgres;
-
---
 -- TOC entry 208 (class 1259 OID 25159)
 -- Name: Reviews_review_id_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
---
 
 CREATE SEQUENCE public."Reviews_review_id_sequence"
     START WITH 1
@@ -207,13 +143,8 @@ CREATE SEQUENCE public."Reviews_review_id_sequence"
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public."Reviews_review_id_sequence" OWNER TO postgres;
-
---
 -- TOC entry 199 (class 1259 OID 25074)
 -- Name: Reviews; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public."Reviews" (
     review_id integer DEFAULT nextval('public."Reviews_review_id_sequence"'::regclass) NOT NULL,
@@ -223,13 +154,8 @@ CREATE TABLE public."Reviews" (
     review text
 );
 
-
-ALTER TABLE public."Reviews" OWNER TO postgres;
-
---
 -- TOC entry 206 (class 1259 OID 25153)
 -- Name: Users_user_id_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
---
 
 CREATE SEQUENCE public."Users_user_id_sequence"
     START WITH 1
@@ -238,13 +164,8 @@ CREATE SEQUENCE public."Users_user_id_sequence"
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE public."Users_user_id_sequence" OWNER TO postgres;
-
---
 -- TOC entry 197 (class 1259 OID 25058)
 -- Name: Users; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public."Users" (
     user_id integer DEFAULT nextval('public."Users_user_id_sequence"'::regclass) NOT NULL,
@@ -258,14 +179,9 @@ CREATE TABLE public."Users" (
     login_allowed integer DEFAULT 0 NOT NULL
 );
 
-
-ALTER TABLE public."Users" OWNER TO postgres;
-
---
 -- TOC entry 2903 (class 0 OID 25107)
 -- Dependencies: 201
 -- Data for Name: AmazonDetails; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price, num_reviews) VALUES (79, 'https://www.amazon.ca/Constants-Nature-Omega-Numbers-Universe/dp/0375422218/ref=sr_1_1?s=books&ie=UTF8&qid=1550429509&sr=1-1&keywords=The+Constants+of+Nature%3A+From+Alpha+to+Omega--The+Numbers+That+Encode+the+Deepest+Secrets+of+the+Universe+by+John+D.+Barrow', 4.0, NULL, 135.87, NULL);
 INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price, num_reviews) VALUES (23, 'https://www.amazon.ca/Macbeth-William-Shakespeare/dp/1904271413/ref=sr_1_1?keywords=Macbeth+by+William+Shakespeare&qid=1550375787&s=books&sr=1-1', 5.0, ' Macbeth is one of Shakespeare''s most performed and studied tragedies. This major new Arden edition offers students detailed on-page commentary notes highlighting meaning and theatrical ideas and themes, as well as an illustrated, lengthy introduction setting the play in its historical, theatrical and critical context and outlining the recent debates about Middleton''s possible co-authorship of some scenes.A comprehensive and informative edition ideal for students and teachers seeking to explore the play in depth, whether in the classroom or on the stage.', 17.92, NULL);
@@ -819,11 +735,9 @@ INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price,
 INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price, num_reviews) VALUES (840, 'https://www.amazon.ca/Shades-Children-Garth-Nix/dp/0060273240/ref=sr_1_1_twi_har_4?s=books&ie=UTF8&qid=1550432442&sr=1-1&keywords=Shade%27s+Children+by+Garth+Nix', 4.5, ' From renowned fantasy author of the Old Kingdom series, Garth Nix, comes a dystopian fantasy perfect for fans of Hunger Games and Divergent.Imagine a world where your fourteenth birthday is your last and where even your protector may not be trusted….In a futuristic urban wasteland, evil Overlords have decreed that no human shall live a day past their fourteenth birthday. On that Sad Birthday, the children of the Dorms are taken to the Meat Factory, where they will be made into creatures whose sole purpose is to kill.The mysterious Shade—once a man, but now more like the machines he fights—recruits the few teenagers who escape into a secret resistance force. With luck, cunning, and skill, four of Shade''s children come closer than any to discovering the source of the Overlords'' power—and the key to their downfall. But the closer they get, the more ruthless Shade seems to become.', 12.19, 65);
 
 
---
 -- TOC entry 2904 (class 0 OID 25120)
 -- Dependencies: 202
 -- Data for Name: Author; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public."Author" (author_id, name) VALUES (70, 'Thomas G. West');
 INSERT INTO public."Author" (author_id, name) VALUES (99, 'John Galt');
@@ -1146,11 +1060,9 @@ INSERT INTO public."Author" (author_id, name) VALUES (1036, 'Sean Williams');
 INSERT INTO public."Author" (author_id, name) VALUES (1043, 'Brian Jacques');
 
 
---
 -- TOC entry 2905 (class 0 OID 25125)
 -- Dependencies: 203
 -- Data for Name: AuthorBooks; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (19, 21);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (20, 21);
@@ -1860,11 +1772,9 @@ INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (406, 839);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (406, 840);
 
 
---
 -- TOC entry 2902 (class 0 OID 25092)
 -- Dependencies: 200
 -- Data for Name: BookCategories; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public."BookCategories" (book_id, category_id) VALUES (21, 142);
 INSERT INTO public."BookCategories" (book_id, category_id) VALUES (21, 143);
@@ -5185,19 +5095,15 @@ INSERT INTO public."BookCategories" (book_id, category_id) VALUES (840, 152);
 INSERT INTO public."BookCategories" (book_id, category_id) VALUES (840, 142);
 
 
---
 -- TOC entry 2906 (class 0 OID 25140)
 -- Dependencies: 204
 -- Data for Name: BookOfTheDay; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 
 
---
 -- TOC entry 2898 (class 0 OID 25050)
 -- Dependencies: 196
 -- Data for Name: Books; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public."Books" (book_id, title, series, series_position, pages, publisher, orig_published_date, isbn10, isbn13, synopsis) VALUES (828, 'Mossflower', NULL, NULL, 432, NULL, NULL, '1862301395', '978-1862301399', ' Second thrilling REDWALL adventure This is the story of Martin the Warrior, the legendary founder of Redwall Abbey. When Verduaga Greeneyes, king of the wildcats, becomes tyrant truler over the creatures of Mossflower, the woodlanders begin a life of serfdom and cruelty. But then, one winter afternoon, a young mouse called Martin chances by the woods -bringing with him an indomitable spirit of adventure and will for freedom. . . . .');
 INSERT INTO public."Books" (book_id, title, series, series_position, pages, publisher, orig_published_date, isbn10, isbn13, synopsis) VALUES (81, 'Anna Karenina', NULL, NULL, 1008, NULL, NULL, '0553213466', '978-0553213461', ' A magnificent drama of vengeance, infidelity, and retribution, Anna Karenina portrays the moving story of people whose emotions conflict with the dominant social mores of their time.  Sensual, rebellious Anna falls deeply and passionately in love with the handsome Count Vronsky. When she refuses to conduct the discreet affair that her cold, ambitious husband (and Russian high society) would condone, she is doomed. Set against the tragic love of Anna and Vronsky, the plight of the melancholy nobleman Konstantine Levin unfolds.  In doubt about the meaning of life, haunted by thoughts of suicide, Levin’s struggles echo Tolstoy’s own spiritual crisis.  But Anna''s inner turmoil mirrors the own emotional imprisonment and mental disintegration of a woman who dares to transgress the strictures of a patriarchal world.  In Anna Karenina, Leo Tolstoy brought to perfection the novel of social realism and created a masterpiece that bared the Russian soul.');
@@ -5751,11 +5657,9 @@ INSERT INTO public."Books" (book_id, title, series, series_position, pages, publ
 INSERT INTO public."Books" (book_id, title, series, series_position, pages, publisher, orig_published_date, isbn10, isbn13, synopsis) VALUES (840, 'Shade''s Children', NULL, NULL, 320, NULL, NULL, '0060273240', '978-0060273248', ' From renowned fantasy author of the Old Kingdom series, Garth Nix, comes a dystopian fantasy perfect for fans of Hunger Games and Divergent.Imagine a world where your fourteenth birthday is your last and where even your protector may not be trusted….In a futuristic urban wasteland, evil Overlords have decreed that no human shall live a day past their fourteenth birthday. On that Sad Birthday, the children of the Dorms are taken to the Meat Factory, where they will be made into creatures whose sole purpose is to kill.The mysterious Shade—once a man, but now more like the machines he fights—recruits the few teenagers who escape into a secret resistance force. With luck, cunning, and skill, four of Shade''s children come closer than any to discovering the source of the Overlords'' power—and the key to their downfall. But the closer they get, the more ruthless Shade seems to become.');
 
 
---
 -- TOC entry 2900 (class 0 OID 25069)
 -- Dependencies: 198
 -- Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 INSERT INTO public."Categories" (categories_id, name) VALUES (250, 'Children''s & Teens');
 INSERT INTO public."Categories" (categories_id, name) VALUES (725, 'Atomic & Nuclear Physics');
@@ -6100,444 +6004,352 @@ INSERT INTO public."Categories" (categories_id, name) VALUES (3034, 'Men''s Adve
 INSERT INTO public."Categories" (categories_id, name) VALUES (3087, 'Murder');
 
 
---
 -- TOC entry 2901 (class 0 OID 25074)
 -- Dependencies: 199
 -- Data for Name: Reviews; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 
 
---
 -- TOC entry 2899 (class 0 OID 25058)
 -- Dependencies: 197
 -- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: postgres
---
 
 
 
---
 -- TOC entry 2934 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: Author_author_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
 
 SELECT pg_catalog.setval('public."Author_author_id_sequence"', 1066, true);
 
 
---
 -- TOC entry 2935 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: BookOfTheDay_idBookOfTheDay_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
 
 SELECT pg_catalog.setval('public."BookOfTheDay_idBookOfTheDay_sequence"', 1, false);
 
 
---
 -- TOC entry 2936 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: Books_book_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
 
 SELECT pg_catalog.setval('public."Books_book_id_sequence"', 840, true);
 
 
---
 -- TOC entry 2937 (class 0 OID 0)
 -- Dependencies: 207
 -- Name: Categories_categories_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
 
 SELECT pg_catalog.setval('public."Categories_categories_id_sequence"', 5226, true);
 
 
---
 -- TOC entry 2938 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: Reviews_review_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
 
 SELECT pg_catalog.setval('public."Reviews_review_id_sequence"', 1, false);
 
 
---
 -- TOC entry 2939 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: Users_user_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
 
 SELECT pg_catalog.setval('public."Users_user_id_sequence"', 1, false);
 
 
---
 -- TOC entry 2760 (class 2606 OID 25114)
 -- Name: AmazonDetails AmazonDetails_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."AmazonDetails"
     ADD CONSTRAINT "AmazonDetails_pkey" PRIMARY KEY (book_id);
 
 
---
 -- TOC entry 2766 (class 2606 OID 25129)
 -- Name: AuthorBooks AuthorBooks_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."AuthorBooks"
     ADD CONSTRAINT "AuthorBooks_pkey" PRIMARY KEY (author_id, book_id);
 
 
---
 -- TOC entry 2762 (class 2606 OID 25124)
 -- Name: Author Author_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."Author"
     ADD CONSTRAINT "Author_pkey" PRIMARY KEY (author_id);
 
 
---
 -- TOC entry 2768 (class 2606 OID 25144)
 -- Name: BookOfTheDay BookOfTheDay_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."BookOfTheDay"
     ADD CONSTRAINT "BookOfTheDay_pkey" PRIMARY KEY ("idBookOfTheDay");
 
 
---
 -- TOC entry 2758 (class 2606 OID 25096)
 -- Name: BookCategories Book_Category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."BookCategories"
     ADD CONSTRAINT "Book_Category_pkey" PRIMARY KEY (book_id, category_id);
 
 
---
 -- TOC entry 2742 (class 2606 OID 25057)
 -- Name: Books Books_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."Books"
     ADD CONSTRAINT "Books_pkey" PRIMARY KEY (book_id);
 
 
---
 -- TOC entry 2752 (class 2606 OID 25073)
 -- Name: Categories Categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."Categories"
     ADD CONSTRAINT "Categories_pkey" PRIMARY KEY (categories_id);
 
 
---
 -- TOC entry 2756 (class 2606 OID 25081)
 -- Name: Reviews Reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."Reviews"
     ADD CONSTRAINT "Reviews_pkey" PRIMARY KEY (review_id);
 
 
---
 -- TOC entry 2748 (class 2606 OID 25068)
 -- Name: Users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."Users"
     ADD CONSTRAINT "Users_pkey" PRIMARY KEY (user_id);
 
 
---
 -- TOC entry 2754 (class 2606 OID 25176)
 -- Name: Categories name_uq; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."Categories"
     ADD CONSTRAINT unique_cat_name UNIQUE (name);
 
 
---
 -- TOC entry 2750 (class 2606 OID 25169)
 -- Name: Users unique_email; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."Users"
     ADD CONSTRAINT unique_email UNIQUE (email);
 
 
---
 -- TOC entry 2744 (class 2606 OID 25206)
 -- Name: Books unique_isbn10; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."Books"
     ADD CONSTRAINT unique_isbn10 UNIQUE (isbn10);
 
 
---
 -- TOC entry 2746 (class 2606 OID 25208)
 -- Name: Books unique_isbn13; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."Books"
     ADD CONSTRAINT unique_isbn13 UNIQUE (isbn13);
 
 
---
 -- TOC entry 2764 (class 2606 OID 25184)
 -- Name: Author unique_name; Type: CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."Author"
     ADD CONSTRAINT unique_author_name UNIQUE (name);
 
 
---
 -- TOC entry 2774 (class 2606 OID 25130)
 -- Name: AuthorBooks author_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."AuthorBooks"
     ADD CONSTRAINT author_id_fk FOREIGN KEY (author_id) REFERENCES public."Author"(author_id);
 
 
---
 -- TOC entry 2769 (class 2606 OID 25082)
 -- Name: Reviews book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."Reviews"
     ADD CONSTRAINT book_id_fk FOREIGN KEY (book_id) REFERENCES public."Books"(book_id);
 
 
---
 -- TOC entry 2771 (class 2606 OID 25097)
 -- Name: BookCategories book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."BookCategories"
     ADD CONSTRAINT book_id_fk FOREIGN KEY (book_id) REFERENCES public."Books"(book_id);
 
 
---
 -- TOC entry 2773 (class 2606 OID 25115)
 -- Name: AmazonDetails book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."AmazonDetails"
     ADD CONSTRAINT book_id_fk FOREIGN KEY (book_id) REFERENCES public."Books"(book_id);
 
 
---
 -- TOC entry 2775 (class 2606 OID 25135)
 -- Name: AuthorBooks book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."AuthorBooks"
     ADD CONSTRAINT book_id_fk FOREIGN KEY (book_id) REFERENCES public."Books"(book_id);
 
 
---
 -- TOC entry 2776 (class 2606 OID 25145)
 -- Name: BookOfTheDay book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."BookOfTheDay"
     ADD CONSTRAINT book_id_fk FOREIGN KEY (book_id) REFERENCES public."Books"(book_id);
 
 
---
 -- TOC entry 2772 (class 2606 OID 25102)
 -- Name: BookCategories category_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."BookCategories"
     ADD CONSTRAINT category_id_fk FOREIGN KEY (category_id) REFERENCES public."Categories"(categories_id);
 
 
---
 -- TOC entry 2770 (class 2606 OID 25087)
 -- Name: Reviews user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
 
 ALTER TABLE ONLY public."Reviews"
     ADD CONSTRAINT user_id_fk FOREIGN KEY (user_id) REFERENCES public."Users"(user_id);
 
 
---
 -- TOC entry 2918 (class 0 OID 0)
 -- Dependencies: 7
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
---
 
 GRANT USAGE ON SCHEMA public TO ece651_scraper;
 GRANT USAGE ON SCHEMA public TO ece651_ml;
 GRANT USAGE ON SCHEMA public TO ece651_web;
 
 
---
 -- TOC entry 2919 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: TABLE "AmazonDetails"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON TABLE public."AmazonDetails" TO ece651_ml;
 GRANT ALL ON TABLE public."AmazonDetails" TO ece651_web;
 GRANT ALL ON TABLE public."AmazonDetails" TO ece651_scraper;
 
 
---
 -- TOC entry 2920 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: SEQUENCE "Author_author_id_sequence"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON SEQUENCE public."Author_author_id_sequence" TO ece651_scraper;
 GRANT ALL ON SEQUENCE public."Author_author_id_sequence" TO ece651_ml;
 GRANT ALL ON SEQUENCE public."Author_author_id_sequence" TO ece651_web;
 
 
---
 -- TOC entry 2921 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: TABLE "Author"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON TABLE public."Author" TO ece651_ml;
 GRANT ALL ON TABLE public."Author" TO ece651_web;
 GRANT ALL ON TABLE public."Author" TO ece651_scraper;
 
 
---
 -- TOC entry 2922 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: TABLE "AuthorBooks"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON TABLE public."AuthorBooks" TO ece651_ml;
 GRANT ALL ON TABLE public."AuthorBooks" TO ece651_web;
 GRANT ALL ON TABLE public."AuthorBooks" TO ece651_scraper;
 
 
---
 -- TOC entry 2923 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: TABLE "BookCategories"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON TABLE public."BookCategories" TO ece651_ml;
 GRANT ALL ON TABLE public."BookCategories" TO ece651_web;
 GRANT ALL ON TABLE public."BookCategories" TO ece651_scraper;
 
 
---
 -- TOC entry 2924 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: SEQUENCE "BookOfTheDay_idBookOfTheDay_sequence"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence" TO ece651_scraper;
 GRANT ALL ON SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence" TO ece651_ml;
 GRANT ALL ON SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence" TO ece651_web;
 
 
---
 -- TOC entry 2925 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: TABLE "BookOfTheDay"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON TABLE public."BookOfTheDay" TO ece651_ml;
 GRANT ALL ON TABLE public."BookOfTheDay" TO ece651_web;
 GRANT ALL ON TABLE public."BookOfTheDay" TO ece651_scraper;
 
 
---
 -- TOC entry 2926 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: SEQUENCE "Books_book_id_sequence"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON SEQUENCE public."Books_book_id_sequence" TO ece651_scraper;
 GRANT ALL ON SEQUENCE public."Books_book_id_sequence" TO ece651_ml;
 GRANT ALL ON SEQUENCE public."Books_book_id_sequence" TO ece651_web;
 
 
---
 -- TOC entry 2927 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: TABLE "Books"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON TABLE public."Books" TO ece651_ml;
 GRANT ALL ON TABLE public."Books" TO ece651_web;
 GRANT ALL ON TABLE public."Books" TO ece651_scraper;
 
 
---
 -- TOC entry 2928 (class 0 OID 0)
 -- Dependencies: 207
 -- Name: SEQUENCE "Categories_categories_id_sequence"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON SEQUENCE public."Categories_categories_id_sequence" TO ece651_scraper;
 GRANT ALL ON SEQUENCE public."Categories_categories_id_sequence" TO ece651_ml;
 GRANT ALL ON SEQUENCE public."Categories_categories_id_sequence" TO ece651_web;
 
 
---
 -- TOC entry 2929 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: TABLE "Categories"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON TABLE public."Categories" TO ece651_ml;
 GRANT ALL ON TABLE public."Categories" TO ece651_web;
 GRANT ALL ON TABLE public."Categories" TO ece651_scraper;
 
 
---
 -- TOC entry 2930 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: SEQUENCE "Reviews_review_id_sequence"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_scraper;
 GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_ml;
 GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_web;
 
 
---
 -- TOC entry 2931 (class 0 OID 0)
 -- Dependencies: 199
 -- Name: TABLE "Reviews"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON TABLE public."Reviews" TO ece651_ml;
 GRANT ALL ON TABLE public."Reviews" TO ece651_web;
 GRANT ALL ON TABLE public."Reviews" TO ece651_scraper;
 
 
---
 -- TOC entry 2932 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: SEQUENCE "Users_user_id_sequence"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_scraper;
 GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_ml;
 GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_web;
 
 
---
 -- TOC entry 2933 (class 0 OID 0)
 -- Dependencies: 197
 -- Name: TABLE "Users"; Type: ACL; Schema: public; Owner: postgres
---
 
 GRANT ALL ON TABLE public."Users" TO ece651_ml;
 GRANT ALL ON TABLE public."Users" TO ece651_web;
@@ -6573,7 +6385,5 @@ GRANT INSERT, SELECT, UPDATE ON TABLE public."BookDetails" TO ece651_scraper;
 
 -- Completed on 2019-02-17 15:08:03
 
---
 -- PostgreSQL database dump complete
---
 
