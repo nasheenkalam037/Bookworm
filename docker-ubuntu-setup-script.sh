@@ -12,8 +12,7 @@ echo ==============================================
 # set noninteractive installation
 export DEBIAN_FRONTEND=noninteractive
 #install tzdata package
-apt-get update && apt-get install -y tzdata
-apt-get update && apt-get install -y curl wget gnupg2
+apt-get update && apt-get install -yq tzdata software-properties-common curl wget gnupg2
 echo 
 echo 
 if [[ -z "${POSTGRES_11}" ]]; then
@@ -22,7 +21,7 @@ if [[ -z "${POSTGRES_11}" ]]; then
     echo ==============================================
     echo exit 0 > /usr/sbin/policy-rc.d
     apt-cache show postgresql-10
-    apt-get update && apt-get install -y postgresql-10 postgresql-server-dev-10 libpq-dev
+    apt-get update && apt-get install -yq postgresql-10 postgresql-server-dev-10 libpq-dev
     service postgresql start
 else
     echo ==============================================
@@ -37,7 +36,7 @@ else
     apt-get update
     apt-cache show postgresql-11
     echo exit 0 > /usr/sbin/policy-rc.d
-    apt-get update && apt-get install -y postgresql-11 postgresql-server-dev-11 libpq-dev
+    apt-get update && apt-get install -yq postgresql-11 postgresql-server-dev-11 libpq-dev
 fi
 
 echo 
@@ -45,7 +44,7 @@ echo
 echo ==============================================
 echo Installing Python3 and Pip3
 echo ==============================================
-apt-get install -y python3-pip python3
+apt-get install -yq python3-pip python3
 #
 #
 echo 
@@ -54,7 +53,7 @@ echo ==============================================
 echo Installing Nodejs
 echo ==============================================
 curl -sL https://deb.nodesource.com/setup_10.x | bash -
-apt-get update && apt-get install -y nodejs
+apt-get update && apt-get install -yq nodejs
 #
 #
 echo 
@@ -64,19 +63,18 @@ echo Installing WebDriver and Chromium
 echo ==============================================
 # Taken from https://www.blazemeter.com/blog/how-to-run-selenium-tests-in-docker
 # Use above when creating the docker image
+add-apt-repository ppa:mozillateam/ppa
 apt-get update && apt-get install -yq \
-    firefox-esr=52.6.0esr-1~deb9u1 \
-    chromium=62.0.3202.89-1~deb9u1 \
-    xvfb=2:1.19.2-1+deb9u2 \
-    xsel=1.2.0-2+b1 \
-    unzip=6.0-21 \
-    python-pytest=3.0.6-1 \
-    libgconf2-4=3.2.6-4+b1 \
-    libncurses5=6.0+20161126-1+deb9u2 \
-    libxml2-dev=2.9.4+dfsg1-2.2+deb9u2 \
+    chromium-browser \
+    xvfb \
+    xsel \
+    unzip \
+    libgconf2-4 \
+    libncurses5 \
+    libxml2-dev \
     libxslt-dev \
     libz-dev \
-    xclip=0.12+svn84-4+b1
+    xclip
 # GeckoDriver v0.19.1
 wget -q "https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz" -O /tmp/geckodriver.tgz \
     && tar zxf /tmp/geckodriver.tgz -C /usr/bin/ \
