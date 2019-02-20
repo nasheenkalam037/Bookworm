@@ -23,6 +23,7 @@ if [[ -z "${POSTGRES_11}" ]]; then
     echo exit 0 > /usr/sbin/policy-rc.d
     apt-cache show postgresql-10
     apt-get update && apt-get install -y postgresql-10 postgresql-server-dev-10 libpq-dev
+    service postgresql start
 else
     echo ==============================================
     echo Installing Postgres 11
@@ -67,12 +68,9 @@ echo Setting up Database User and new Database
 echo ==============================================
 # SWITCH TO postgres USER AND SETUP USER TO CONNECT
 echo Starting the Postgresql server if needed
-/etc/init.d/postgresql start
-/etc/init.d/postgresql status
-sleep 2
-/etc/init.d/postgresql status
-su postgres
-whoami
-psql --command "CREATE USER $POSTGRES_USER WITH SUPERUSER PASSWORD '$POSTGRES_PASSWORD';"
-createdb -O $POSTGRES_USER $POSTGRES_DB
-exit
+service postgresql status
+service postgresql start
+service postgresql status
+su - postgres -c "whoami"
+su - postgres -c "psql --command \"CREATE USER $POSTGRES_USER WITH SUPERUSER PASSWORD '$POSTGRES_PASSWORD';\""
+su - postgres -c "createdb -O $POSTGRES_USER $POSTGRES_DB"
