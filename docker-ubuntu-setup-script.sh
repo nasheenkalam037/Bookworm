@@ -12,7 +12,9 @@ echo ==============================================
 # set noninteractive installation
 export DEBIAN_FRONTEND=noninteractive
 #install tzdata package
-apt-get update && apt-get install -yq tzdata software-properties-common curl wget gnupg2
+apt-get update && apt-get install -yq tzdata software-properties-common \
+    curl wget gnupg2 apt-transport-https \
+    ca-certificates
 echo 
 echo 
 if [[ -z "${POSTGRES_11}" ]]; then
@@ -63,36 +65,25 @@ echo Installing WebDriver and Chromium
 echo ==============================================
 # Taken from https://www.blazemeter.com/blog/how-to-run-selenium-tests-in-docker
 # Use above when creating the docker image
-add-apt-repository ppa:mozillateam/ppa
-apt-get update && apt-get install -yq \
-    chromium-browser \
-    xvfb \
-    xsel \
-    unzip \
-    libgconf2-4 \
-    libncurses5 \
-    libxml2-dev \
-    libxslt-dev \
-    libz-dev \
-    xclip
-# GeckoDriver v0.19.1
-wget -q "https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz" -O /tmp/geckodriver.tgz \
-    && tar zxf /tmp/geckodriver.tgz -C /usr/bin/ \
-    && rm /tmp/geckodriver.tgz
+curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+apt-get update
+apt-get install -yq \
+	google-chrome-stable \
+	fontconfig \
+	fonts-ipafont-gothic \
+	fonts-wqy-zenhei \
+	fonts-thai-tlwg \
+	fonts-kacst \
+	fonts-symbola \
+	fonts-noto \
+	--no-install-recommends
 
 # chromeDriver v2.35
 wget -q "https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip" -O /tmp/chromedriver.zip \
     && unzip /tmp/chromedriver.zip -d /usr/bin/ \
-    && rm /tmp/chromedriver.zip
-
-# xvfb - X server display
-ln -s /usr/bin/xvfb-chromium /usr/bin/google-chrome \
-    && chmod 777 /usr/bin/xvfb-chromium
-
-# create symlinks to chromedriver and geckodriver (to the PATH)
-ln -s /usr/bin/geckodriver /usr/bin/chromium-browser \
-    && chmod 777 /usr/bin/geckodriver \
-    && chmod 777 /usr/bin/chromium-browser
+    && rm /tmp/chromedriver.zip \
+    && chmod +x /usr/bin/chromedriver
 #
 #
 echo 
