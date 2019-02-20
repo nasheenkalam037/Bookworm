@@ -7,7 +7,7 @@ cat /etc/os-release
 echo 
 echo 
 echo ==============================================
-echo Installing Python 3 and Misc/Required Packages
+echo Installing Required Packages
 echo ==============================================
 # set noninteractive installation
 export DEBIAN_FRONTEND=noninteractive
@@ -43,6 +43,15 @@ fi
 echo 
 echo 
 echo ==============================================
+echo Installing Python3 and Pip3
+echo ==============================================
+# INSTALL NODEJS
+apt-get install -y python3-pip python3
+#
+#
+echo 
+echo 
+echo ==============================================
 echo Installing Nodejs
 echo ==============================================
 # INSTALL NODEJS
@@ -58,6 +67,7 @@ echo ==============================================
 # Check versions of software
 node --version
 python3 --version
+pip3 --version
 psql --version
 # 
 # 
