@@ -1,8 +1,3 @@
-stages:
-  - build
-  - test
-  - deploy
-
 variables:
   # Configure postgres service (https://hub.docker.com/_/postgres/)
   POSTGRES_DB: ece651
@@ -17,9 +12,10 @@ variables:
 
 setup image:
   image: ubuntu
-  stage: build
   only:
-    - web
+    - tags
+    - triggers
+  stage: build
   script:
     - whoami
     - chmod +x ./docker-ubuntu-setup-script.sh
@@ -42,7 +38,8 @@ setup image:
 
 node version:
   only:
-    - web
+    - tags
+    - triggers
   stage: test
   image: ubuntu
   script:
@@ -52,13 +49,14 @@ node version:
 
 python tests:
   only:
-    - web
+    - tags
+    - triggers
   stage: test
   image: ubuntu
   script:
     - cd src/scraper
     - pip install -r requirements.txt
     - export PGPASSWORD=$PG_SCRAPER_PASS
-    - psql -h "postgres" -U "$PG_SCRAPER_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookOfTheDay";'
+    - psql -h "localhost" -U "$PG_SCRAPER_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookOfTheDay";'
     - export TESTENV=true
     - python -m unittest discover
