@@ -36,10 +36,9 @@ setup image:
     - export PGPASSWORD=$PG_WEB_PASS
     - psql -h "localhost" -U "$PG_WEB_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."Users" LIMIT 10;'
     - node --version
-    - cd /builds/jmshahen/ece651-project
-    - cd src/web
+    - cd /builds/jmshahen/ece651-project/src/web
     - npm install
-    - cd src/scraper
+    - cd /builds/jmshahen/ece651-project/src/scraper
     - pip install -r requirements.txt
     - export PGPASSWORD=$PG_SCRAPER_PASS
     - psql -h "localhost" -U "$PG_SCRAPER_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookOfTheDay";'
