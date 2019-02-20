@@ -13,7 +13,7 @@ variables:
 setup image:
   image: ubuntu
   only:
-    - build_branch
+    - build
   stage: build
   script:
     - whoami
@@ -37,7 +37,7 @@ setup image:
 
 node version:
   only:
-    - build_branch
+    - build
   stage: test
   image: ubuntu
   script:
@@ -47,7 +47,7 @@ node version:
 
 python tests:
   only:
-    - build_branch
+    - build
   stage: test
   image: ubuntu
   script:
