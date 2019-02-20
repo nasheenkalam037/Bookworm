@@ -1,3 +1,8 @@
+stages:
+  - build
+  - test
+  - deploy
+
 variables:
   # Configure postgres service (https://hub.docker.com/_/postgres/)
   POSTGRES_DB: ece651
@@ -12,9 +17,9 @@ variables:
 
 setup image:
   image: ubuntu
-  only:
-    - build
   stage: build
+  only:
+    - web
   script:
     - whoami
     - chmod +x ./docker-ubuntu-setup-script.sh
@@ -37,7 +42,7 @@ setup image:
 
 node version:
   only:
-    - build
+    - web
   stage: test
   image: ubuntu
   script:
@@ -47,7 +52,7 @@ node version:
 
 python tests:
   only:
-    - build
+    - web
   stage: test
   image: ubuntu
   script:
