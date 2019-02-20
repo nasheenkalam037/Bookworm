@@ -24,8 +24,8 @@ CREATE TABLE  "public"."Books" (
   "pages" INT NULL,
   "publisher" VARCHAR(200) NULL,
   "orig_published_date" DATE NULL,
-  "ISBN10" VARCHAR(10) NULL,
-  "ISBN13" VARCHAR(15) NULL,
+  "isbn10" VARCHAR(10) NULL,
+  "isbn13" VARCHAR(15) NULL,
   "synopsis" TEXT NULL,
   PRIMARY KEY ("book_id"));
 
@@ -81,9 +81,9 @@ CREATE TABLE  "public"."Reviews" (
 
 
 -- -----------------------------------------------------
--- Table "public"."Book_Category"
+-- Table "public"."BookCategory"
 -- -----------------------------------------------------
-CREATE TABLE  "public"."Book_Category" (
+CREATE TABLE  "public"."BookCategories" (
   "book_id" INT NOT NULL,
   "category_id" INT NOT NULL,
   PRIMARY KEY ("book_id", "category_id"),
@@ -107,6 +107,7 @@ CREATE TABLE  "public"."AmazonDetails" (
   "book_id" INT NOT NULL,
   "book_link" TEXT NOT NULL,
   "rating" DECIMAL NULL,
+  "num_reviews" INT NULL,
   "synopsis" TEXT NULL,
   "price" DECIMAL NULL,
   PRIMARY KEY ("book_id"),
@@ -122,8 +123,7 @@ CREATE TABLE  "public"."AmazonDetails" (
 -- -----------------------------------------------------
 CREATE TABLE  "public"."Author" (
   "author_id" INT NOT NULL ,
-  "last_name" VARCHAR(100) NOT NULL,
-  "first_name" VARCHAR(100) NOT NULL,
+  "name" VARCHAR(200) NOT NULL,
   PRIMARY KEY ("author_id"));
 
 
@@ -183,4 +183,78 @@ CREATE SEQUENCE  "public"."BookOfTheDay_idBookOfTheDay_sequence";
 ALTER TABLE "public"."BookOfTheDay" ALTER COLUMN "idBookOfTheDay" SET DEFAULT NEXTVAL('"public"."BookOfTheDay_idBookOfTheDay_sequence"');
 
 
+ALTER TABLE public."Books" ADD CONSTRAINT unique_isbn10 UNIQUE ("isbn10");
+ALTER TABLE public."Books" ADD CONSTRAINT unique_isbn13 UNIQUE ("isbn13");
 ALTER TABLE public."Users" ADD CONSTRAINT unique_email UNIQUE (email);
+ALTER TABLE public."Categories" ADD CONSTRAINT unique_cat_name UNIQUE ("name");
+ALTER TABLE public."Author" ADD CONSTRAINT unique_author_name UNIQUE ("name");
+
+
+
+GRANT USAGE ON SCHEMA public TO ece651_scraper;
+GRANT USAGE ON SCHEMA public TO ece651_ml;
+GRANT USAGE ON SCHEMA public TO ece651_web;
+
+GRANT ALL ON TABLE public."AmazonDetails" TO ece651_ml;
+GRANT ALL ON TABLE public."AmazonDetails" TO ece651_web;
+GRANT ALL ON TABLE public."AmazonDetails" TO ece651_scraper;
+
+GRANT ALL ON SEQUENCE public."Author_author_id_sequence" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."Author_author_id_sequence" TO ece651_ml;
+GRANT ALL ON SEQUENCE public."Author_author_id_sequence" TO ece651_web;
+
+GRANT ALL ON TABLE public."Author" TO ece651_ml;
+GRANT ALL ON TABLE public."Author" TO ece651_web;
+GRANT ALL ON TABLE public."Author" TO ece651_scraper;
+
+GRANT ALL ON TABLE public."AuthorBooks" TO ece651_ml;
+GRANT ALL ON TABLE public."AuthorBooks" TO ece651_web;
+GRANT ALL ON TABLE public."AuthorBooks" TO ece651_scraper;
+
+GRANT ALL ON TABLE public."BookCategories" TO ece651_ml;
+GRANT ALL ON TABLE public."BookCategories" TO ece651_web;
+GRANT ALL ON TABLE public."BookCategories" TO ece651_scraper;
+
+GRANT ALL ON SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence" TO ece651_ml;
+GRANT ALL ON SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence" TO ece651_web;
+
+GRANT ALL ON TABLE public."BookOfTheDay" TO ece651_ml;
+GRANT ALL ON TABLE public."BookOfTheDay" TO ece651_web;
+GRANT ALL ON TABLE public."BookOfTheDay" TO ece651_scraper;
+
+GRANT ALL ON SEQUENCE public."Books_book_id_sequence" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."Books_book_id_sequence" TO ece651_ml;
+GRANT ALL ON SEQUENCE public."Books_book_id_sequence" TO ece651_web;
+
+GRANT ALL ON TABLE public."Books" TO ece651_ml;
+GRANT ALL ON TABLE public."Books" TO ece651_web;
+GRANT ALL ON TABLE public."Books" TO ece651_scraper;
+
+GRANT ALL ON SEQUENCE public."Categories_categories_id_sequence" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."Categories_categories_id_sequence" TO ece651_ml;
+GRANT ALL ON SEQUENCE public."Categories_categories_id_sequence" TO ece651_web;
+
+GRANT ALL ON TABLE public."Categories" TO ece651_ml;
+GRANT ALL ON TABLE public."Categories" TO ece651_web;
+GRANT ALL ON TABLE public."Categories" TO ece651_scraper;
+
+GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_ml;
+GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_web;
+
+GRANT ALL ON TABLE public."Reviews" TO ece651_ml;
+GRANT ALL ON TABLE public."Reviews" TO ece651_web;
+GRANT ALL ON TABLE public."Reviews" TO ece651_scraper;
+
+GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_ml;
+GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_web;
+
+GRANT ALL ON TABLE public."Users" TO ece651_ml;
+GRANT ALL ON TABLE public."Users" TO ece651_web;
+GRANT ALL ON TABLE public."Users" TO ece651_scraper;
+
+GRANT ALL ON TABLE public."BookDetails" TO ece651_ml;
+GRANT ALL ON TABLE public."BookDetails" TO ece651_web;
+GRANT ALL ON TABLE public."BookDetails" TO ece651_scraper;

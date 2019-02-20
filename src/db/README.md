@@ -16,61 +16,17 @@ Installing Postgres
 1. Done.
 
 
-Setting up the Users
---------------------
-1. `ece651_scraper` user:
-    ```sql
-    CREATE USER ece651_scraper WITH
-    PASSWORD 'wxJcTdJYUU3mMAsAa5YD'
-    LOGIN
-    NOSUPERUSER
-    NOINHERIT
-    NOCREATEDB
-    NOCREATEROLE
-    NOREPLICATION;
-    ```
-1. `ece651_ml` user:
-    ```sql
-    CREATE USER ece651_ml WITH
-    PASSWORD 'TVL3MV0mguz0DOhLbbm2'
-    LOGIN
-    NOSUPERUSER
-    NOINHERIT
-    NOCREATEDB
-    NOCREATEROLE
-    NOREPLICATION;
-    ```
-1. `ece651_web` user:
-    ```sql
-    CREATE USER ece651_web WITH
-    PASSWORD 'dm2fBdodbrHPtJVvlSKF'
-    LOGIN
-    NOSUPERUSER
-    NOINHERIT
-    NOCREATEDB
-    NOCREATEROLE
-    NOREPLICATION;
-    ```
+Setting up the Users and Database
+---------------------------------
+Run the script `create-users_postgres.sql`
 
-
-Setting up the Database
------------------------
-1. As the `root user` (told you, you needed to memorize that password during setup): create the database `ece651`
-    ```sql
-    CREATE DATABASE ece651
-    WITH 
-    OWNER = ece651_scraper
-    ENCODING = 'SQL_ASCII'
-    LC_COLLATE = 'C'
-    LC_CTYPE = 'C'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1;
-    ```
-    * You *might* need to change **SQL_ASCII** to **UTF8**
-
-Setting up the Tables
+Setting up the Tables (NO CONTENT)
 ---------------------
-1. Login as either the `root user` or `ece651_scraper` and run the script `./database-create_postgres.sql`
+1. Login as either the `root user (postgres)` or `ece651_scraper` and run the script `./database-create_postgres.sql`
+
+Setting up the Tables (WITH CONTENT)
+---------------------
+1. Login as either the `root user (postgres)` or `ece651_scraper` and run the script `./create_tables_load_content.sql`
 
 
 Testing your Connection
@@ -90,7 +46,7 @@ Testing your Connection
 
 Updating the Database
 =====================
-1. Leave it to Jon
+**Leave it to Jon**
 
 If you are Jon, here are the steps:
 1. Edit the WorkBench File
