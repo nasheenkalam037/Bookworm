@@ -18,36 +18,8 @@ setup image:
   stage: build
   script:
     - whoami
-    # - chmod +x ./docker-ubuntu-setup-script.sh
-    # - ./docker-ubuntu-setup-script.sh
-    - echo =================================================
-    - echo Running the Docker Ubuntu Setup Script for ECE651
-    - echo =================================================
-    - cat /etc/os-release
-    - echo 
-    - echo 
-    - echo ==============================================
-    - echo Installing Python 3 and Misc/Required Packages
-    - echo ==============================================
-    # set noninteractive installation
-    - export DEBIAN_FRONTEND=noninteractive
-    #install tzdata package
-    - apt-get update && apt-get install -y tzdata
-    - apt-get update && apt-get install -y curl wget gnupg2
-    - echo 
-    - echo 
-    - echo ==============================================
-    - echo Installing Postgres 11
-    - echo ==============================================
-    # INSTALL POSTGRES
-    # export RELEASE=$(cat /etc/os-release  | grep VERSION_CODENAME  | cut -d= -f2)
-    # echo "deb http://apt.postgresql.org/pub/repos/apt/ ${RELEASE}"-pgdg 11 | tee  /etc/apt/sources.list.d/pgdg.list
-    # wget --quiet https://www.postgresql.org/media/keys/ACCC4CF8.asc
-    # apt-key add ACCC4CF8.asc
-    # apt-get update && apt-cache show . | grep postgresql
-    - echo exit 0 > /usr/sbin/policy-rc.d
-    # apt-get update && apt-get install -y postgresql-11 postgresql-server-dev-11 libpq-dev
-    - apt-get update && apt-get install -y postgresql-10 postgresql-server-dev-10 libpq-dev
+    - chmod +x ./docker-ubuntu-setup-script.sh
+    - ./docker-ubuntu-setup-script.sh
     # 
     # 
     # SETUP THE DATABASE
