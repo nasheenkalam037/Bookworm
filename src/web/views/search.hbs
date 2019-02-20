@@ -12,8 +12,6 @@
         </div>
     </div>
 
-    <div class="heading font-xlarge">The Highest Rated Books of 2018</div>
-
     <div class="vert-spacing-15"></div>
 
     {{#each books}}
@@ -48,46 +46,3 @@
 
     {{/each}}
 </article>
-
-<nav>
-    <div class="heading">Book of the Day</div>
-
-    <div class="bookoftheday">
-        <div class="book">
-            <img class="book-cover"
-                 src="{{bookoftheday.book_cover}}" />
-            <span class="book-details">
-                <a href="#"
-                   class="book-title font-large">{{bookoftheday.title}}</a>
-                <span class="book-authors font-normal">By
-                    {{#each bookoftheday.authors}}
-                        <a href="/author/{{this}}">{{this}}</a>
-                    {{/each}}
-                </span>
-                <span class="book-description font-normal">{{bookoftheday.synopsis}}</span>
-            </span>
-        </div>
-    </div>
-
-    <div class="vert-spacing-15"></div>
-
-    <div class="heading font-large">Recommendations</div>
-    <div class="recommendationlist">
-        {{#each recommendations}}
-            <div class="book">
-                <img class="book-cover"
-                     src="{{book_cover}}" />
-                <span class="book-details">
-                    <a href="#"
-                       class="book-title font-large">{{title}}</a>
-                    <span class="book-authors font-normal">By
-                        {{#each authors}}
-                            <a href="/author/{{this}}">{{this}}</a>
-                        {{/each}}
-                    </span>
-                    <span class="book-description font-normal">{{synopsis}}</span>
-                </span>
-            </div>
-        {{/each}}
-    </div>
-</nav>
