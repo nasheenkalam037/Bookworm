@@ -1,0 +1,146 @@
+<article>
+    <div class="vert-container">
+        <div class="hori-container">
+            <img class="book-cover-lg" src="{{bookoftheday.book_cover}}"/>
+            
+            <div class="book-details">
+                <h1>The Perks of Being A Wallflower</h1>
+                <p class="book-authors font-normal">by Stephen Chbosky</p>
+
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+
+                <p class="book-description font-normal">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting 
+                    industry. Lorem Ipsum has been the industry's standard dummy text
+                    ever since the 1500s, when an unknown printer took a galley of 
+                    type and scrambled it to make a type specimen book. It has 
+                    survived not only five centuries, but also the leap into 
+                    electronic typesetting, remaining essentially unchanged. It was 
+                    popularised in the 1960s with the release of Letraset sheets 
+                    containing Lorem Ipsum passages, and more recently with desktop 
+                    publishing software like Aldus PageMaker including versions of 
+                    Lorem Ipsum.
+                </p>
+            </div>
+        </div>
+        
+        <div>
+            <h4>Product Description</h4>
+            <p class="book-description font-normal">
+                Lorem Ipsum is simply dummy text of the printing and typesetting 
+                industry. Lorem Ipsum has been the industry's standard dummy text
+                ever since the 1500s, when an unknown printer took a galley of 
+                type and scrambled it to make a type specimen book. It has 
+                survived not only five centuries, but also the leap into 
+                electronic typesetting, remaining essentially unchanged. It was 
+                popularised in the 1960s with the release of Letraset sheets 
+                containing Lorem Ipsum passages, and more recently with desktop 
+                publishing software like Aldus PageMaker including versions of 
+                Lorem Ipsum.
+            </p>
+        </div>
+
+        <div class="product-detail">
+            <h4>Product Details</h4>
+            <ul class="font-normal">
+                <li>
+                    <b>Format:</b>
+                    Kindle Edition
+                </li>
+                <li>
+                    <b>File Size:</b>
+                    10771 KB
+                </li>
+                <li>
+                    <b>Print Length:</b>
+                    100 Pages
+                </li>
+                <li>
+                    <b>Publisher:</b>
+                    Paze Publishing; 1 edition (March 8 2012)
+                </li>
+                <li>
+                    <b>Language:</b>
+                    English
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Customer Review</h4>
+            <ul style="list-style-type: none" class="font-normal">
+                <li class="review">
+                    <div class="hori-container">
+                        <img src="/images/headshot_placeholder.png"/>
+                        <p class="reviewer">Mike</p>
+                    </div>
+
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+
+                    <p>June 19 2018</p>
+
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting 
+                        industry. Lorem Ipsum has been the industry's standard dummy text
+                        ever since the 1500s, when an unknown printer took a galley of 
+                        type and scrambled it to make a type specimen book. It has 
+                        survived not only five centuries, but also the leap into 
+                        electronic typesetting, remaining essentially unchanged. It was 
+                        popularised in the 1960s with the release of Letraset sheets 
+                        containing Lorem Ipsum passages, and more recently with desktop 
+                        publishing software like Aldus PageMaker including versions of 
+                        Lorem Ipsum.
+                    </p>
+                </li>
+                <li class="review">
+                    <div class="hori-container">
+                        <img src="/images/headshot_placeholder.png"/>
+                        
+                        <div class="reviewer">
+                            <p>Nike</p>
+                        </div>
+                    </div>
+
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+
+                    <p>June 19 2018</p>
+                    
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting 
+                        industry. Lorem Ipsum has been the industry's standard dummy text
+                        ever since the 1500s, when an unknown printer took a galley of 
+                        type and scrambled it to make a type specimen book. It has 
+                        survived not only five centuries, but also the leap into 
+                        electronic typesetting, remaining essentially unchanged. It was 
+                        popularised in the 1960s with the release of Letraset sheets 
+                        containing Lorem Ipsum passages, and more recently with desktop 
+                        publishing software like Aldus PageMaker including versions of 
+                        Lorem Ipsum.
+                    </p>
+                </li>
+                {{#if user}}
+                    <li>
+                        <form action="#" method="post"> 
+                            <textarea class="review-comment" placeholder="Comments" name="comments"></textarea> 
+                            <div> 
+                                <input class="review-btn" type="submit" value="Submit">
+                            </div> 
+                        </form>
+                    </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</article>

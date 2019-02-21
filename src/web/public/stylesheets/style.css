@@ -8,6 +8,7 @@ body {
   font-weight: 400;
   margin: 0px 4px 0px 4px;
 }
+
 a {
   color: #00b7ff;
 }
@@ -26,7 +27,7 @@ a {
 .center {
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
+  text-align: left;
 }
 
 section {
@@ -60,6 +61,11 @@ footer {
 .vert-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.hori-container {
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
 /*******************************************************************************************
@@ -194,6 +200,54 @@ header div.loginbox img {
 }
 .book-deal li i {
   font-size: 26px;
+}
+.book-cover-lg {
+  position: relative;
+  top:0px;
+  left:0px;
+  max-width: 200px;
+  max-height: 266.154px;
+}
+.checked {
+  color: orange;
+}
+/*******************************************************************************************
+       REVIEW
+*******************************************************************************************/
+.product-detail {
+  margin-right: auto;
+}
+.product-detail ul {
+  list-style-type: none;
+}
+.review img { 
+  float: left;
+  width: 38px;
+  height: 38px;
+  margin-top: -8px;
+}
+.reviewer{
+  padding-left: 10px;
+}
+.review-comment{
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+.review-btn{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 /*******************************************************************************************
        RIGHT SIDE

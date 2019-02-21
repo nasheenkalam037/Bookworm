@@ -39,4 +39,9 @@ router.get("/", function(req, res, next) {
   res.render("index", dummy_data);
 });
 
+/* GET book details page. */
+router.get("/details", function(req, res, next) {
+  res.render("details", dummy_data);
+});
+
 module.exports = router;
