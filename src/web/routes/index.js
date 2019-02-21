@@ -38,6 +38,18 @@ dummy_data = {
 router.get("/", function(req, res, next) {
   res.render("index", dummy_data);
 });
+/* GET Sign Up page. */
+router.get("/signup", function(req, res, next) {
+  res.render("signup", {
+    title: 'The Bookworm Signup Page'
+  });
+});
+/* GET Sign In page. */
+router.get("/signin", function(req, res, next) {
+  res.render("signin", {
+    title: 'The Bookworm Signin Page'
+  });
+});
 
 /* GET book details page. */
 router.get("/details", function(req, res, next) {
