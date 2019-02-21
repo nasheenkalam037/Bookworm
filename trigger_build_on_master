@@ -1,0 +1,1 @@
+curl --request POST --form token=4dc010256c33bc616ad9498b3f9ecc --form ref=master https://git.uwaterloo.ca/api/v3/projects/17029/trigger/builds

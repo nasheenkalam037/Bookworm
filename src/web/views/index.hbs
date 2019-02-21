@@ -2,6 +2,7 @@
     <div class="searchbox">
         <div class="input-container">
             <i class="fa fa-search icon"></i>
+<<<<<<< HEAD
             <form action="https://git.uwaterloo.ca/jmshahen/ece651-project/blob/master/src/web/views/search.hbs" method="get">
             <input class="input-field"
                    type="text"
@@ -9,6 +10,9 @@
                    name="s">
             <input type="submit" style="display:none">
             </form>
+=======
+            <input class="input-field" type="text" placeholder="Search using Book Name, Author, or Keyword" name="s">
+>>>>>>> 637185dd0070fdfea667d7b1756eaafe56723738
         </div>
     </div>
 
@@ -18,11 +22,9 @@
 
     {{#each books}}
         <div class="book-long">
-            <img class="book-cover"
-                 src="{{book_cover}}" />
+            <img class="book-cover" src="{{book_cover}}" />
             <span class="book-details">
-                <a href="#"
-                   class="book-title font-large">{{title}}</a>
+                <a href="#" class="book-title font-large">{{title}}</a>
                 <span class="book-authors font-normal">By
                     {{#each authors}}
                         <a href="/author/{{this}}">{{this}}</a>
@@ -36,8 +38,7 @@
                         <ul>
                             <li class="center"><i class="{{image_class}}"></i></li>
                             <li>Rating: {{rating}}</li>
-                            <li><a href="{{link_to_buy}}"
-                                   class="font-small deal-amazon">Click here to Buy</a></li>
+                            <li><a href="{{link_to_buy}}" class="font-small deal-amazon">Click here to Buy</a></li>
                         </ul>
                     </span>
                 {{/each}}
@@ -54,11 +55,9 @@
 
     <div class="bookoftheday">
         <div class="book">
-            <img class="book-cover"
-                 src="{{bookoftheday.book_cover}}" />
+            <img class="book-cover" src="{{bookoftheday.book_cover}}" />
             <span class="book-details">
-                <a href="#"
-                   class="book-title font-large">{{bookoftheday.title}}</a>
+                <a href="#" class="book-title font-large">{{bookoftheday.title}}</a>
                 <span class="book-authors font-normal">By
                     {{#each bookoftheday.authors}}
                         <a href="/author/{{this}}">{{this}}</a>
@@ -75,11 +74,9 @@
     <div class="recommendationlist">
         {{#each recommendations}}
             <div class="book">
-                <img class="book-cover"
-                     src="{{book_cover}}" />
+                <img class="book-cover" src="{{book_cover}}" />
                 <span class="book-details">
-                    <a href="#"
-                       class="book-title font-large">{{title}}</a>
+                    <a href="#" class="book-title font-large">{{title}}</a>
                     <span class="book-authors font-normal">By
                         {{#each authors}}
                             <a href="/author/{{this}}">{{this}}</a>

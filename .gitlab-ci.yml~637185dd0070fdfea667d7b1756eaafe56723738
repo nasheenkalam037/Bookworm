@@ -1,0 +1,46 @@
+variables:
+  # Configure postgres service (https://hub.docker.com/_/postgres/)
+  POSTGRES_DB: ece651
+  POSTGRES_USER: ece651_admin
+  POSTGRES_PASSWORD: YbRvAizCTnbQ5W6JI69h
+  PG_SCRAPER_USER: ece651_scraper
+  PG_SCRAPER_PASS: wxJcTdJYUU3mMAsAa5YD
+  PG_ML_USER: ece651_ml
+  PG_ML_PASS: TVL3MV0mguz0DOhLbbm2
+  PG_WEB_USER: ece651_web
+  PG_WEB_PASS: dm2fBdodbrHPtJVvlSKF
+
+setup image:
+  image: ubuntu
+  only:
+    - tags
+    - triggers
+  stage: build
+  script:
+    - whoami
+    - chmod +x ./docker-ubuntu-setup-script.sh
+    - ./docker-ubuntu-setup-script.sh
+    # 
+    # 
+    # SETUP THE DATABASE
+    # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
+    - export PGPASSWORD=$POSTGRES_PASSWORD
+    - psql -h "localhost" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/create-users_postgre.sql
+    #- psql -h "postgres" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/database-create_postgre.sql
+    - psql -q -h "localhost" -U "$POSTGRES_USER" -d "$POSTGRES_DB" -f src/db/create_tables_load_content.sql
+    - export PGPASSWORD=$PG_SCRAPER_PASS
+    - psql -h "localhost" -U "$PG_SCRAPER_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookOfTheDay" LIMIT 10;'
+    - export PGPASSWORD=$PG_ML_PASS
+    - psql -h "localhost" -U "$PG_ML_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."Books" LIMIT 10;'
+    - psql -h "localhost" -U "$PG_ML_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookDetails" LIMIT 10;'
+    - export PGPASSWORD=$PG_WEB_PASS
+    - psql -h "localhost" -U "$PG_WEB_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."Users" LIMIT 10;'
+    # Node Tests
+    - node --version
+    - cd /builds/jmshahen/ece651-project/src/web
+    - npm install
+    # Python Tests
+    - cd /builds/jmshahen/ece651-project/src/scraper
+    - pip3 install -r requirements.txt
+    - export TESTENV=true
+    - python3 -m unittest discover
