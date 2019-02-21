@@ -190,6 +190,29 @@ ALTER TABLE public."Categories" ADD CONSTRAINT unique_cat_name UNIQUE ("name");
 ALTER TABLE public."Author" ADD CONSTRAINT unique_author_name UNIQUE ("name");
 
 
+CREATE OR REPLACE VIEW public."BookDetails" AS
+ SELECT "Books".book_id,
+    "Books".title,
+	abb.author_id,
+	abb.author_name,
+    "Books".series,
+    "Books".series_position,
+    "Books".pages,
+    "Books".publisher,
+    "Books".orig_published_date,
+    "Books".isbn10,
+    "Books".isbn13,
+    "Books".synopsis,
+    ad.book_link AS amazon_link,
+    ad.rating AS amazon_rating,
+    ad.synopsis AS amazon_synopsis,
+    ad.price AS amazon_price,
+    ad.num_reviews AS amazon_num_reviews
+   FROM "Books"
+     INNER JOIN "AmazonDetails" ad ON "Books".book_id = ad.book_id
+	 Left JOIN (SELECT distinct on (ab.book_id) a.author_id, ab.book_id, a."name" as author_name from "Author" as a
+inner join "AuthorBooks" ab on a.author_id = ab.author_id) abb ON "Books".book_id = abb.book_id;
+
 
 GRANT USAGE ON SCHEMA public TO ece651_scraper;
 GRANT USAGE ON SCHEMA public TO ece651_ml;

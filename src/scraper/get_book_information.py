@@ -186,7 +186,7 @@ def fetch_new_book_info(thread_id, book_url):
             if m:
                 pages = int(m.group(1))
             # Number of Reviews
-            p = re.compile(r'([0-9]+)\s*customer reviews')
+            p = re.compile(r'([0-9]+)\s*customer review')
             m = p.search(text)
             if m:
                 num_reviews = int(m.group(1))
