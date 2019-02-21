@@ -2,16 +2,13 @@ import os
 from configparser import ConfigParser
 
  
-def config(filename='database.ini', test_filename='database_test.ini', section='postgresql'):
+def config(filename='database.ini', section='postgresql'):
     # create a parser
     parser = ConfigParser()
     # read config file
     cwd = os.getcwd()
     os.chdir(os.path.dirname(__file__))
-    if 'TESTENV' in os.environ:
-        parser.read(test_filename)
-    else:
-        parser.read(filename)
+    parser.read(filename)
     os.chdir(cwd)
  
     # get section, default to postgresql
