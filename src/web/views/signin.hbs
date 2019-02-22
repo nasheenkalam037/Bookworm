@@ -1,0 +1,36 @@
+<div class="signin">
+  <div class="signin_inner">
+    <form action="/account/signin" method="POST">
+      <div class="imgcontainer">
+        <img src="/images/img_avatar2.png" alt="Avatar" class="avatar">
+      </div>
+
+      <div class="container">
+        {{#if error}}
+          <div class="error">
+            An error occurred when trying to setup an account<br />
+            <b>Error Message:</b> {{error}}
+          </div>
+        {{/if}}
+        <label for="email" style="display: block"><b>Email Address</b></label>
+        <input id="email" type="text" placeholder="Enter Email Address" name="email" required="true">
+
+        <label for="password" style="display: block"><b>Password</b></label>
+        <input id="password" type="password" placeholder="Enter Password" name="password" required="true">
+
+        <div class="buttons">
+          <button id="login" type="submit">Login</button>
+          <button id="cancel" type="button" class="cancelbtn">Cancel</button>
+        </div>
+        <!--<label>
+      <input id="remember" type="checkbox" checked="checked" name="remember"> Remember me
+    </label>-->
+      </div>
+
+      <div class="container" style="background-color:#f1f1f1">
+
+        <!---span class="password">Forgot <a href="#">password?</a></span--->
+      </div>
+    </form>
+  </div>
+</div>

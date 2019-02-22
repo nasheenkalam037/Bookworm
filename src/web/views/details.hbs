@@ -1,0 +1,145 @@
+<article id="book_details_page">
+    <div class="vert-container">
+        <div class="hori-container">
+            <img class="book-cover-lg" src="{{book.book_cover}}"/>
+            
+            <div class="book-details">
+                <h1 class="no-bottom-pm">{{book.title}}</h1>
+                <p class="font-normal no-top-pm no-bottom-pm">by {{book.authors}}</p>
+
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+
+                <p class="font-normal">{{book.synopsis}}</p>
+            </div>
+        </div>
+        
+        <div>
+            <h4>Book Description</h4>
+            <p class="font-normal no-top-pm">{{book.synopsis}}</p>
+        </div>
+
+        <div class="product-detail">
+            <h4>Book Details</h4>
+            <ul class="font-normal no-top-pm">
+                <li>
+                    <b>Print Length:</b>
+                    100 Pages
+                </li>
+                <li>
+                    <b>Publisher:</b>
+                    Paze Publishing; 1 edition (March 8 2012)
+                </li>
+                <li>
+                    <b>Genre:</b>
+                    Classic
+                </li>
+                <li>
+                    <b>Series:</b>
+                    2
+                </li>
+                <li>
+                    <b>ISBN-13:</b>
+                    978-0521728768
+                </li>
+                <li>
+                    <b>ISBN-10:</b>
+                     0521728762
+                </li>
+            </ul>
+        </div>
+            
+        <div class="flex-container">
+            <div class="review">
+                <h4 class="no-bottom-pm">10 Customer Reviews</h4>
+                <p class="no-top-pm">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="font-normal">3.0 out of 5</span>
+                </p>
+                {{#if user}}
+                    <form action="#" method="post">
+                        <p><b>Rate this Book:</b>
+                            <select name="rating">
+                                <option value="1">1 (Hated it)</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5 (Loved it)</option>
+                            </select>
+                        </p>
+                        <textarea class="review-comment" placeholder="Tell us what you thought of the book!" name="comments"></textarea>              
+                        <div> 
+                            <input class="review-btn" type="submit" value="Submit">
+                        </div> 
+                    </form>
+                {{else}}
+                    <a href="/account/signin">Please login to write a review for this book</a>
+                {{/if}}
+            </div>
+            <div class="review">
+                <ul class="font-normal">
+                    <li>
+                        <div class="hori-container">
+                            <img src="/images/headshot_placeholder.png"/>
+                            <p>Mike</p>
+                        </div>
+
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+
+                        <p>June 19 2018</p>
+
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting 
+                            industry. Lorem Ipsum has been the industry's standard dummy text
+                            ever since the 1500s, when an unknown printer took a galley of 
+                            type and scrambled it to make a type specimen book. It has 
+                            survived not only five centuries, but also the leap into 
+                            electronic typesetting, remaining essentially unchanged. It was 
+                            popularised in the 1960s with the release of Letraset sheets 
+                            containing Lorem Ipsum passages, and more recently with desktop 
+                            publishing software like Aldus PageMaker including versions of 
+                            Lorem Ipsum.
+                        </p>
+                    </li>
+                    <li>
+                        <div class="hori-container">
+                            <img src="/images/headshot_placeholder.png"/>
+                            <p>Nike</p>
+                        </div>
+
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+
+                        <p>June 19 2018</p>
+
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting 
+                            industry. Lorem Ipsum has been the industry's standard dummy text
+                            ever since the 1500s, when an unknown printer took a galley of 
+                            type and scrambled it to make a type specimen book. It has 
+                            survived not only five centuries, but also the leap into 
+                            electronic typesetting, remaining essentially unchanged. It was 
+                            popularised in the 1960s with the release of Letraset sheets 
+                            containing Lorem Ipsum passages, and more recently with desktop 
+                            publishing software like Aldus PageMaker including versions of 
+                            Lorem Ipsum.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</article>
