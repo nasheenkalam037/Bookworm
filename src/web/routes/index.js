@@ -50,7 +50,6 @@ router.get("/signin", function(req, res, next) {
     title: 'The Bookworm Signin Page'
   });
 });
-
 /* GET book details page. */
 router.get("/details", function(req, res, next) {
   res.render("details", dummy_data);

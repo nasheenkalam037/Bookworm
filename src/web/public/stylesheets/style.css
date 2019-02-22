@@ -61,12 +61,16 @@ footer {
 .vert-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }
 .hori-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start
+}
+.flex-container {
+  display: flex;
+  align-items: stretch;
 }
 /*******************************************************************************************
        HEADER
@@ -205,8 +209,8 @@ header div.loginbox img {
   position: relative;
   top:0px;
   left:0px;
-  max-width: 200px;
-  max-height: 266.154px;
+  max-width: 175px;
+  max-height: 200px;
 }
 .checked {
   color: orange;
@@ -219,6 +223,14 @@ header div.loginbox img {
 }
 .product-detail ul {
   list-style-type: none;
+}
+.review select {
+  position:relative;
+  width:170px;
+  height:30px;
+}
+.review {
+  flex-grow: 1
 }
 .review ul {
   list-style-type: none
@@ -233,24 +245,17 @@ header div.loginbox img {
   padding-left: 10px;
 }
 .review-comment{
-  width: 100%;
+  width: 300px;
   height: 150px;
   padding: 12px 20px;
   box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f8f8;
   font-size: 16px;
-  resize: none;
 }
 .review-btn{
   background-color: #4CAF50;
-  border: none;
   color: white;
-  padding: 16px 32px;
-  text-decoration: none;
+  padding: 8px 16px;
   margin: 4px 2px;
-  cursor: pointer;
 }
 /*******************************************************************************************
        RIGHT SIDE

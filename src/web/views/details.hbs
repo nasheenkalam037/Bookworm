@@ -4,8 +4,8 @@
             <img class="book-cover-lg" src="{{bookoftheday.book_cover}}"/>
             
             <div class="book-details">
-                <h1>The Perks of Being A Wallflower</h1>
-                <p class="font-normal">by Stephen Chbosky</p>
+                <h1>{{bookoftheday.title}}</h1>
+                <p class="font-normal">by {{bookoftheday.authors}}</p>
 
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
@@ -13,48 +13,18 @@
                 <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
 
-                <p class="font-normal">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting 
-                    industry. Lorem Ipsum has been the industry's standard dummy text
-                    ever since the 1500s, when an unknown printer took a galley of 
-                    type and scrambled it to make a type specimen book. It has 
-                    survived not only five centuries, but also the leap into 
-                    electronic typesetting, remaining essentially unchanged. It was 
-                    popularised in the 1960s with the release of Letraset sheets 
-                    containing Lorem Ipsum passages, and more recently with desktop 
-                    publishing software like Aldus PageMaker including versions of 
-                    Lorem Ipsum.
-                </p>
+                <p class="font-normal">{{bookoftheday.synopsis}}</p>
             </div>
         </div>
         
         <div>
-            <h4>Product Description</h4>
-            <p class="font-normal">
-                Lorem Ipsum is simply dummy text of the printing and typesetting 
-                industry. Lorem Ipsum has been the industry's standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of 
-                type and scrambled it to make a type specimen book. It has 
-                survived not only five centuries, but also the leap into 
-                electronic typesetting, remaining essentially unchanged. It was 
-                popularised in the 1960s with the release of Letraset sheets 
-                containing Lorem Ipsum passages, and more recently with desktop 
-                publishing software like Aldus PageMaker including versions of 
-                Lorem Ipsum.
-            </p>
+            <h4>Book Description</h4>
+            <p class="font-normal">{{bookoftheday.synopsis}}</p>
         </div>
 
         <div class="product-detail">
-            <h4>Product Details</h4>
+            <h4>Book Details</h4>
             <ul class="font-normal">
-                <li>
-                    <b>Format:</b>
-                    Kindle Edition
-                </li>
-                <li>
-                    <b>File Size:</b>
-                    10771 KB
-                </li>
                 <li>
                     <b>Print Length:</b>
                     100 Pages
@@ -64,80 +34,113 @@
                     Paze Publishing; 1 edition (March 8 2012)
                 </li>
                 <li>
-                    <b>Language:</b>
-                    English
+                    <b>Genre:</b>
+                    Classic
+                </li>
+                <li>
+                    <b>Series:</b>
+                    2
+                </li>
+                <li>
+                    <b>ISBN-13:</b>
+                    978-0521728768
+                </li>
+                <li>
+                    <b>ISBN-10:</b>
+                     0521728762
                 </li>
             </ul>
         </div>
+            
+        <div class="flex-container">
+            <div class="review">
+                <h4>Customer Review</h4>
 
-        <div class="review">
-            <h4>Customer Review</h4>
-            <ul class="font-normal">
-                <li>
-                    <div class="hori-container">
-                        <img src="/images/headshot_placeholder.png"/>
-                        <p>Mike</p>
-                    </div>
-
+                <p>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star"></span>
                     <span class="fa fa-star"></span>
 
-                    <p>June 19 2018</p>
+                    <p>3.0 out of 5</p>
+                </p>
 
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting 
-                        industry. Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a galley of 
-                        type and scrambled it to make a type specimen book. It has 
-                        survived not only five centuries, but also the leap into 
-                        electronic typesetting, remaining essentially unchanged. It was 
-                        popularised in the 1960s with the release of Letraset sheets 
-                        containing Lorem Ipsum passages, and more recently with desktop 
-                        publishing software like Aldus PageMaker including versions of 
-                        Lorem Ipsum.
-                    </p>
-                </li>
-                <li>
-                    <div class="hori-container">
-                        <img src="/images/headshot_placeholder.png"/>
-                        <p>Nike</p>
-                    </div>
-
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-
-                    <p>June 19 2018</p>
-
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting 
-                        industry. Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s, when an unknown printer took a galley of 
-                        type and scrambled it to make a type specimen book. It has 
-                        survived not only five centuries, but also the leap into 
-                        electronic typesetting, remaining essentially unchanged. It was 
-                        popularised in the 1960s with the release of Letraset sheets 
-                        containing Lorem Ipsum passages, and more recently with desktop 
-                        publishing software like Aldus PageMaker including versions of 
-                        Lorem Ipsum.
-                    </p>
-                </li>
+               <p><b>Rate this Book:</b>
+                <select>
+                    <option value="1">1 (Hated it)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (Loved it)</option>
+                </select>
+               </p>
                 {{#if user}}
-                    <li>
-                        <form action="#" method="post"> 
-                            <textarea class="review-comment" placeholder="Comments" name="comments"></textarea> 
-                            <div> 
-                                <input class="review-btn" type="submit" value="Submit">
-                            </div> 
-                        </form>
-                    </li>
+                    <form action="#" method="post"> 
+                        <textarea class="review-comment" placeholder="Tell us what you thought of the book!" name="comments"></textarea> 
+                        <div> 
+                            <input class="review-btn" type="submit" value="Submit">
+                        </div> 
+                    </form>
                 {{/if}}
-            </ul>
+            </div>
+            <div class="review">
+                <ul class="font-normal">
+                    <li>
+                        <div class="hori-container">
+                            <img src="/images/headshot_placeholder.png"/>
+                            <p>Mike</p>
+                        </div>
+
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+
+                        <p>June 19 2018</p>
+
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting 
+                            industry. Lorem Ipsum has been the industry's standard dummy text
+                            ever since the 1500s, when an unknown printer took a galley of 
+                            type and scrambled it to make a type specimen book. It has 
+                            survived not only five centuries, but also the leap into 
+                            electronic typesetting, remaining essentially unchanged. It was 
+                            popularised in the 1960s with the release of Letraset sheets 
+                            containing Lorem Ipsum passages, and more recently with desktop 
+                            publishing software like Aldus PageMaker including versions of 
+                            Lorem Ipsum.
+                        </p>
+                    </li>
+                    <li>
+                        <div class="hori-container">
+                            <img src="/images/headshot_placeholder.png"/>
+                            <p>Nike</p>
+                        </div>
+
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+
+                        <p>June 19 2018</p>
+
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting 
+                            industry. Lorem Ipsum has been the industry's standard dummy text
+                            ever since the 1500s, when an unknown printer took a galley of 
+                            type and scrambled it to make a type specimen book. It has 
+                            survived not only five centuries, but also the leap into 
+                            electronic typesetting, remaining essentially unchanged. It was 
+                            popularised in the 1960s with the release of Letraset sheets 
+                            containing Lorem Ipsum passages, and more recently with desktop 
+                            publishing software like Aldus PageMaker including versions of 
+                            Lorem Ipsum.
+                        </p>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
 </article>
