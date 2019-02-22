@@ -10,19 +10,27 @@
 
 <body>
   <header>
-    <span class="title">TheBookworm</span>
+    <span class="title"><a href='/'>TheBookworm</a></span>
     <div class="loginbox">
       {{#if user}}
-        <img src="{{user.image}}" />
+        {{#if user.image}}
+          <img src="{{user.image}}" />
+        {{else}}
+          <img src="/images/headshot_placeholder.png" />
+        {{/if}}
         <div class="vert-container">
-          <div style="overflow: hidden;">Hello {{user.name}}</div>
-          <div><a href="/account/{{user.id}}">My Account</a></div>
+          <div style="overflow: hidden;">Hello {{user.display_name}}</div>
+          <div>
+            <a href="/account/me">My Account</a>
+            /
+            <a href="/account/signout">Sign out</a>
+          </div>
         </div>
       {{else}}
         <img src="/images/headshot_placeholder.png" />
         <div class="vert-container">
           <div style="overflow: hidden;">Hello Anonymous,</div>
-          <div><a href="/signin">Sign in</a></div>
+          <div><a href="/account/signin">Sign in</a> or <a href="/account/signup">Sign up</a></div>
         </div>
       {{/if}}
     </div>

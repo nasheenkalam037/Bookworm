@@ -1,11 +1,17 @@
 <div class="signin">
   <div class="signin_inner">
-    <form action="/action_page.php">
+    <form action="/account/signup" method="POST">
       <div class="imgcontainer">
         <img src="/images/img_avatar2.png" alt="Avatar" class="avatar">
       </div>
 
       <div class="container">
+        {{#if error}}
+          <div class="error">
+            An error occurred when trying to setup an account<br />
+            <b>Error Message:</b> {{error}}
+          </div>
+        {{/if}}
         <label for="fullname"><b>Full Name</b></label>
         <input id="fullname" type="text" placeholder="Enter Full Name" name="fullname" required="true">
 
@@ -24,7 +30,7 @@
           <div class="signin">
             <span>
               Already Registered?
-              <a id="signin" href="#">Sign In</a>
+              <a id="signin" href="/account/signin">Sign In</a>
             </span>
           </div>
         </div>
