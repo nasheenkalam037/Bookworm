@@ -6373,10 +6373,10 @@ CREATE OR REPLACE VIEW public."BookDetails" AS
     ad.synopsis AS amazon_synopsis,
     ad.price AS amazon_price,
     ad.num_reviews AS amazon_num_reviews
-   FROM "Books"
-     INNER JOIN "AmazonDetails" ad ON "Books".book_id = ad.book_id
-	 Left JOIN (SELECT distinct on (ab.book_id) a.author_id, ab.book_id, a."name" as author_name from "Author" as a
-inner join "AuthorBooks" ab on a.author_id = ab.author_id) abb ON "Books".book_id = abb.book_id;
+   FROM public."Books"
+     INNER JOIN public."AmazonDetails" ad ON public."Books".book_id = ad.book_id
+	 Left JOIN (SELECT distinct on (ab.book_id) a.author_id, ab.book_id, a."name" as author_name from public."Author" as a
+inner join public."AuthorBooks" ab on a.author_id = ab.author_id) abb ON public."Books".book_id = abb.book_id;
 
 GRANT ALL ON TABLE public."BookDetails" TO ece651_ml;
 GRANT ALL ON TABLE public."BookDetails" TO ece651_web;
