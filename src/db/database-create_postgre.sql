@@ -38,7 +38,6 @@ CREATE TABLE  "public"."Users" (
   "display_name" VARCHAR(100) NOT NULL,
   "email" VARCHAR(200) NOT NULL,
   "password_hash" VARCHAR(65) NOT NULL,
-  "password_salt" VARCHAR(50) NOT NULL,
   "creation_time" TIMESTAMP NOT NULL DEFAULT now(),
   "preferences_json" TEXT NOT NULL DEFAULT '{}',
   "created_from" TEXT NOT NULL,

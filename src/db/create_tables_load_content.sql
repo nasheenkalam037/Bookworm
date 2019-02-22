@@ -172,7 +172,6 @@ CREATE TABLE public."Users" (
     display_name character varying(100) NOT NULL,
     email character varying(200) NOT NULL,
     password_hash character varying(65) NOT NULL,
-    password_salt character varying(50) NOT NULL,
     creation_time timestamp without time zone DEFAULT now() NOT NULL,
     preferences_json text DEFAULT '{}'::text NOT NULL,
     created_from text NOT NULL,
