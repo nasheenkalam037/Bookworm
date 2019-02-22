@@ -47,9 +47,14 @@ router.get("/", async function(req, res, next) {
     recommendations: [my_book, my_book, my_book, my_book]
   });
 });
+
 /* GET book details page. */
-router.get("/details", function(req, res, next) {
-  res.render("details", dummy_data);
+router.get("/book/:bookId(\\d+)/:bookTitle", function(req, res, next) {
+  res.render("details", {
+    title: "The Bookworm",
+    user: (req.session.user)? req.session.user : null,
+    book: my_book
+  });
 });
 
 
