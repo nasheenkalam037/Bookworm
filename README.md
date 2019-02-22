@@ -91,4 +91,9 @@ Testing Methodology
 * Each module will have unit testing to ensure code coverage.
 
 The sample test case can be found here:
-* [Sample Test Case](https://git.uwaterloo.ca/jmshahen/ece651-project/blob/c22ef0b4d6d3ed69de5c67f6f23e8aa293fe6327/src/web/sample_test_case/sample_tc_01.xls)
+* [Sample Test Case]
+
+Pipelines
+build status
+
+coverage report
