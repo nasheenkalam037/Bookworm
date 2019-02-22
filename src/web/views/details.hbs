@@ -54,7 +54,7 @@
             
         <div class="flex-container">
             <div class="review">
-                <h4>Customer Review</h4>
+                <h4>10 Customer Reviews</h4>
 
                 <p>
                     <span class="fa fa-star checked"></span>
@@ -65,23 +65,26 @@
 
                     <p>3.0 out of 5</p>
                 </p>
-
-               <p><b>Rate this Book:</b>
-                <select>
-                    <option value="1">1 (Hated it)</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5 (Loved it)</option>
-                </select>
-               </p>
                 {{#if user}}
-                    <form action="#" method="post"> 
+                    <form action="#" method="post">
+                        <p><b>Rate this Book:</b>
+                            <select name="rating">
+                                <option value="1">1 (Hated it)</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5 (Loved it)</option>
+                            </select>
+                        </p>
+
                         <textarea class="review-comment" placeholder="Tell us what you thought of the book!" name="comments"></textarea> 
+                        
                         <div> 
                             <input class="review-btn" type="submit" value="Submit">
                         </div> 
                     </form>
+                {{else}}
+                    <a href="/account/signin">Please login to write a review for this book</a>
                 {{/if}}
             </div>
             <div class="review">
