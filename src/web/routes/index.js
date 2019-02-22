@@ -33,10 +33,22 @@ dummy_data = {
   recommendations: [my_book, my_book, my_book, my_book]
 };
 
+sql_top_books_landing = 'SELECT * FROM "BookDetails" ORDER BY amazon_rating DESC NULLS LAST LIMIT 15';
 
 /* GET home page. */
-router.get("/", function(req, res, next) {
-  res.render("index", dummy_data);
+router.get("/", async function(req, res, next) {
+  // Variable has to be named 'rows'
+  var {rows} = await db.query(sql_top_books_landing);
+
+  console.log(rows);
+
+  res.render("index", {
+    title: "The Bookworm",
+    user: my_user,
+    bookoftheday: my_book,
+    books: rows,
+    recommendations: [my_book, my_book, my_book, my_book]
+  });
 });
 /* GET Sign Up page. */
 router.get("/signup", function(req, res, next) {
