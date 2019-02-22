@@ -70,7 +70,6 @@ footer {
 }
 .flex-container {
   display: flex;
-  align-items: stretch;
 }
 /*******************************************************************************************
        HEADER
@@ -230,7 +229,7 @@ header div.loginbox img {
   height:30px;
 }
 .review {
-  flex-grow: 1
+  flex-grow: 1;
 }
 .review ul {
   list-style-type: none
