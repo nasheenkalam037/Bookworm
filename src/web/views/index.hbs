@@ -2,39 +2,33 @@
     <div class="searchbox">
         <div class="input-container">
             <i class="fa fa-search icon"></i>
-            <form action="https://git.uwaterloo.ca/jmshahen/ece651-project/blob/master/src/web/views/search.hbs" method="get">
             <input class="input-field" type="text" placeholder="Search using Book Name, Author, or Keyword" name="s">
-            <input type="submit" style="display:none">
-            </form>
         </div>
     </div>
 
-    <div class="heading font-xlarge">The Highest Rated Books of 2018</div>
+    <div class="heading font-xlarge">Top 15 Rated Books of All Time</div>
 
     <div class="vert-spacing-15"></div>
 
     {{#each books}}
         <div class="book-long">
-            <img class="book-cover" src="{{book_cover}}" />
+            <img class="book-cover" src="/images/book_covers/{{book_id}}.jpeg" />
             <span class="book-details">
-                <a href="#" class="book-title font-large">{{title}}</a>
+                <a href="/book/{{book_id}}/{{title}}" class="book-title font-large">{{title}}</a>
                 <span class="book-authors font-normal">By
-                    {{#each authors}}
-                        <a href="/author/{{this}}">{{this}}</a>
-                    {{/each}}
+                        <a href="/author/{{author_id}}/{{author_name}}">{{author_name}}</a>
                 </span>
                 <span class="book-description font-normal">{{synopsis}}</span>
             </span>
             <span class="book-deals">
-                {{#each this.deals}}
-                    <span class="book-deal">
-                        <ul>
-                            <li class="center"><i class="{{image_class}}"></i></li>
-                            <li>Rating: {{rating}}</li>
-                            <li><a href="{{link_to_buy}}" class="font-small deal-amazon">Click here to Buy</a></li>
-                        </ul>
-                    </span>
-                {{/each}}
+                <span class="book-deal">
+                    <ul>
+                        <li class="center"><i class="fab fa-amazon"></i></li>
+                        <li class="font-normal">Rating: {{amazon_rating}}</li>
+                        <li class="font-normal"># Reviews: {{amazon_num_reviews}}</li>
+                        <li><a href="{{amazon_link}}" class="font-small deal-amazon">Click here to Buy</a></li>
+                    </ul>
+                </span>
             </span>
         </div>
 

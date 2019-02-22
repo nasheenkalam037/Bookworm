@@ -35,12 +35,12 @@ setup image:
     - psql -h "localhost" -U "$PG_ML_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookDetails" LIMIT 10;'
     - export PGPASSWORD=$PG_WEB_PASS
     - psql -h "localhost" -U "$PG_WEB_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."Users" LIMIT 10;'
+    # Node Tests
     - node --version
     - cd /builds/jmshahen/ece651-project/src/web
     - npm install
+    # Python Tests
     - cd /builds/jmshahen/ece651-project/src/scraper
-    - pip install -r requirements.txt
-    - export PGPASSWORD=$PG_SCRAPER_PASS
-    - psql -h "localhost" -U "$PG_SCRAPER_USER" -d "$POSTGRES_DB" -c 'SELECT * FROM public."BookOfTheDay";'
+    - pip3 install -r requirements.txt
     - export TESTENV=true
-    - python -m unittest discover
+    - python3 -m unittest discover

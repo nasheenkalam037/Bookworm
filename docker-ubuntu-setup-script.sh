@@ -7,13 +7,14 @@ cat /etc/os-release
 echo 
 echo 
 echo ==============================================
-echo Installing Python 3 and Misc/Required Packages
+echo Installing Required Packages
 echo ==============================================
 # set noninteractive installation
 export DEBIAN_FRONTEND=noninteractive
 #install tzdata package
-apt-get update && apt-get install -y tzdata
-apt-get update && apt-get install -y curl wget gnupg2
+apt-get update && apt-get install -yq tzdata software-properties-common \
+    curl wget gnupg2 apt-transport-https \
+    ca-certificates
 echo 
 echo 
 if [[ -z "${POSTGRES_11}" ]]; then
@@ -22,7 +23,7 @@ if [[ -z "${POSTGRES_11}" ]]; then
     echo ==============================================
     echo exit 0 > /usr/sbin/policy-rc.d
     apt-cache show postgresql-10
-    apt-get update && apt-get install -y postgresql-10 postgresql-server-dev-10 libpq-dev
+    apt-get update && apt-get install -yq postgresql-10 postgresql-server-dev-10 libpq-dev
     service postgresql start
 else
     echo ==============================================
@@ -37,17 +38,52 @@ else
     apt-get update
     apt-cache show postgresql-11
     echo exit 0 > /usr/sbin/policy-rc.d
-    apt-get update && apt-get install -y postgresql-11 postgresql-server-dev-11 libpq-dev
+    apt-get update && apt-get install -yq postgresql-11 postgresql-server-dev-11 libpq-dev
 fi
 
 echo 
 echo 
 echo ==============================================
+echo Installing Python3 and Pip3
+echo ==============================================
+apt-get install -yq python3-pip python3
+#
+#
+echo 
+echo 
+echo ==============================================
 echo Installing Nodejs
 echo ==============================================
-# INSTALL NODEJS
 curl -sL https://deb.nodesource.com/setup_10.x | bash -
-apt-get update && apt-get install -y nodejs
+apt-get update && apt-get install -yq nodejs
+#
+#
+echo 
+echo 
+echo ==============================================
+echo Installing WebDriver and Chromium
+echo ==============================================
+# Taken from https://www.blazemeter.com/blog/how-to-run-selenium-tests-in-docker
+# Use above when creating the docker image
+curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+apt-get update
+apt-get install -yq \
+	google-chrome-stable \
+	fontconfig \
+	fonts-ipafont-gothic \
+	fonts-wqy-zenhei \
+	fonts-thai-tlwg \
+	fonts-kacst \
+	fonts-symbola \
+	fonts-noto \
+	--no-install-recommends
+
+# chromeDriver v2.35
+wget -q "https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip" -O /tmp/chromedriver.zip \
+    && unzip /tmp/chromedriver.zip -d /usr/bin/ \
+    && rm /tmp/chromedriver.zip \
+    && chmod +x /usr/bin/chromedriver
 #
 #
 echo 
@@ -55,9 +91,9 @@ echo
 echo ==============================================
 echo Testing Installed Versions of Software
 echo ==============================================
-# Check versions of software
 node --version
 python3 --version
+pip3 --version
 psql --version
 # 
 # 
