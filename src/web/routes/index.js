@@ -48,5 +48,14 @@ router.get("/", async function(req, res, next) {
   });
 });
 
+/* GET book details page. */
+router.get("/book/:bookId(\\d+)/:bookTitle", function(req, res, next) {
+  res.render("details", {
+    title: "The Bookworm",
+    user: (req.session.user)? req.session.user : null,
+    book: my_book
+  });
+});
+
 
 module.exports = router;

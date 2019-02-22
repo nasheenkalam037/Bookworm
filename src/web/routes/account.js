@@ -32,7 +32,7 @@ router.get("/signout", function(req, res, next) {
 });
 
 // Public account
-router.get("/:userId(\d+)", function(req, res, next) {
+router.get("/:userId(\\d+)", function(req, res, next) {
   res.render("public_account", {
     title: "The Bookworm Signin Page",
     user: (req.session.user)? req.session.user : null

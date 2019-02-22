@@ -8,6 +8,7 @@ body {
   font-weight: 400;
   margin: 0px 4px 0px 4px;
 }
+
 a {
   color: #00b7ff;
 }
@@ -94,12 +95,31 @@ footer {
   background-image: url("/images/validation.png");
 }
 /*******************************************************************************************
+       Padding/Margins
+*******************************************************************************************/
+.no-bottom-pm {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+.no-top-pm {
+  padding-top: 0px;
+  margin-top: 0px;
+}
+/*******************************************************************************************
        CONTAINERS
 *******************************************************************************************/
 .vert-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+}
+.hori-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start
+}
+.flex-container {
+  display: flex;
 }
 /*******************************************************************************************
        HEADER
@@ -242,6 +262,66 @@ header div.loginbox img {
 }
 .book-deal li i {
   font-size: 26px;
+}
+.book-cover-lg {
+  position: relative;
+  top:0px;
+  left:0px;
+  max-width: 175px;
+  max-height: 200px;
+}
+.checked {
+  color: orange;
+}
+/*******************************************************************************************
+       Book Details Page
+*******************************************************************************************/
+#book_details_page h4 {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+/*******************************************************************************************
+       REVIEW
+*******************************************************************************************/
+.product-detail {
+  margin-right: auto;
+}
+.product-detail ul {
+  list-style-type: none;
+}
+.review select {
+  position:relative;
+  width:165px;
+  height:30px;
+}
+.review {
+  flex-grow: 1;
+  min-width: 306px;
+}
+.review ul {
+  list-style-type: none;
+}
+.review ul li div img { 
+  float: left;
+  width: 38px;
+  height: 38px;
+  margin-top: -8px;
+}
+.review ul li div p{
+  padding-left: 10px;
+}
+.review-comment{
+  width: 300px;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.review-btn{
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  margin: 4px 2px;
 }
 /*******************************************************************************************
        RIGHT SIDE
