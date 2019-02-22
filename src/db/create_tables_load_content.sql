@@ -897,7 +897,6 @@ INSERT INTO public."Author" (author_id, name) VALUES (432, 'Anthony Ludovici');
 INSERT INTO public."Author" (author_id, name) VALUES (578, 'Charles Vess');
 INSERT INTO public."Author" (author_id, name) VALUES (444, 'Thomas Hobbes');
 INSERT INTO public."Author" (author_id, name) VALUES (447, 'Nicolo Machiavelli');
-INSERT INTO public."Author" (author_id, name) VALUES (441, 'John Stuart Mill');
 INSERT INTO public."Author" (author_id, name) VALUES (446, 'Leslie Stephen');
 INSERT INTO public."Author" (author_id, name) VALUES (450, 'Ludwig Wittgenstein');
 INSERT INTO public."Author" (author_id, name) VALUES (445, 'Bertrand Russell');
@@ -1325,8 +1324,8 @@ INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (437, 323);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (20, 324);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (20, 325);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (440, 326);
-INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (441, 327);
-INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (441, 328);
+INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (440, 327);
+INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (440, 328);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (443, 329);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (444, 330);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (445, 331);
@@ -1335,7 +1334,7 @@ INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (447, 333);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (443, 334);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (445, 335);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (450, 336);
-INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (441, 337);
+INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (440, 337);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (452, 338);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (453, 339);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (452, 340);
@@ -6373,10 +6372,10 @@ CREATE OR REPLACE VIEW public."BookDetails" AS
     ad.synopsis AS amazon_synopsis,
     ad.price AS amazon_price,
     ad.num_reviews AS amazon_num_reviews
-   FROM "Books"
-     INNER JOIN "AmazonDetails" ad ON "Books".book_id = ad.book_id
-	 Left JOIN (SELECT distinct on (ab.book_id) a.author_id, ab.book_id, a."name" as author_name from "Author" as a
-inner join "AuthorBooks" ab on a.author_id = ab.author_id) abb ON "Books".book_id = abb.book_id;
+   FROM public."Books"
+     INNER JOIN public."AmazonDetails" ad ON public."Books".book_id = ad.book_id
+	 Left JOIN (SELECT distinct on (ab.book_id) a.author_id, ab.book_id, a."name" as author_name from public."Author" as a
+inner join public."AuthorBooks" ab on a.author_id = ab.author_id) abb ON public."Books".book_id = abb.book_id;
 
 GRANT ALL ON TABLE public."BookDetails" TO ece651_ml;
 GRANT ALL ON TABLE public."BookDetails" TO ece651_web;
