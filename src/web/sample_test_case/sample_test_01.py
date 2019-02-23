@@ -4,7 +4,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 keyword = "agile testing lisa crispin"
-driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
+driver = webdriver.Chrome()
+# driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
 driver.implicitly_wait(500)
 driver.get("https://www.chapters.indigo.ca/en-ca/")
 #assert "Indigo" in driver.title
@@ -20,13 +21,13 @@ elem = driver.find_element_by_class_name("quick-search__submit")
 elem.click()
 driver.implicitly_wait(500)
 
-elem = driver.find_element_by_xpath('//*[@title="Agile Testing: A Practical Guide for Testers and Agile Teams"]');
-elem.click();
+elem = driver.find_element_by_xpath('//*[@title="Agile Testing: A Practical Guide for Testers and Agile Teams"]')
+elem.click()
 driver.implicitly_wait(500)
 
 
 if (driver.find_element_by_xpath(("//*[contains(text(), 'December 30, 2008')]"))):
-    print "Test Passed"
+    print ("Test Passed")
 else:
-    print "Test Failed"
+    print ("Test Failed")
 driver.close()
