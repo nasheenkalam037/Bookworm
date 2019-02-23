@@ -5,7 +5,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 keyword = "agile testing lisa crispin"
 driver = webdriver.Chrome()
-# driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
+#driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
 driver.implicitly_wait(500)
 driver.get("https://www.chapters.indigo.ca/en-ca/")
 #assert "Indigo" in driver.title
@@ -30,4 +30,4 @@ if (driver.find_element_by_xpath(("//*[contains(text(), 'December 30, 2008')]"))
     print ("Test Passed")
 else:
     print ("Test Failed")
-driver.close()
+driver.quit()

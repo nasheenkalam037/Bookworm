@@ -83,8 +83,6 @@ Below are a list of Customer level User Stories that we will use to help us crea
 
 Testing Methodology
 -------------------
-
-<<<<<<< HEAD
 * We will be conducting unit testing, integration testing, system testing for each sprint.
 * As the requirements are planned and deployed by team, we are skipping Accpetance testing by users instead we will be assigning one of our team members to verify the requirements.
 * We are following Selenium Webdriver for test automation which will be used for integration and system testing.
@@ -92,7 +90,6 @@ Testing Methodology
 * Each module will have unit testing to ensure code coverage.
 
 The sample test case can be found here:
-<<<<<<< HEAD
 * [Sample Test Case]
 
 Pipelines
@@ -101,9 +98,3 @@ Pipelines
 [![build status](https://git.uwaterloo.ca/jmshahen/ece651-project/badges/master/build.svg)](https://git.uwaterloo.ca/jmshahen/ece651-project/commits/master)
 
 [![coverage report](https://git.uwaterloo.ca/jmshahen/ece651-project/badges/master/coverage.svg)](https://git.uwaterloo.ca/jmshahen/ece651-project/commits/master)
-<<<<<<< HEAD
->>>>>>> master
-=======
-
-coverage report
->>>>>>> 14f6be55e5e0e4b953ae85840b2109acd3dd4e02
