@@ -32,4 +32,4 @@ else:
     print ("Test Failed")
 
 driver.implicitly_wait(200)
-driver.close()
+driver.quit()

@@ -31,4 +31,4 @@ if (driver.find_element_by_xpath(("//*[contains(text(), 'Hello Automation User')
 else:
     print ("Test Failed")
 driver.implicitly_wait(200)
-driver.close()
+driver.quit()
