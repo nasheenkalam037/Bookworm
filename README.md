@@ -92,8 +92,8 @@ Testing Methodology
 * Each module will have unit testing to ensure code coverage.
 
 The sample test case can be found here:
-* [Sample Test Case](https://git.uwaterloo.ca/jmshahen/ece651-project/blob/c22ef0b4d6d3ed69de5c67f6f23e8aa293fe6327/src/web/sample_test_case/sample_tc_01.xls)
-=======
+<<<<<<< HEAD
+* [Sample Test Case]
 
 Pipelines
 ---------
@@ -101,4 +101,9 @@ Pipelines
 [![build status](https://git.uwaterloo.ca/jmshahen/ece651-project/badges/master/build.svg)](https://git.uwaterloo.ca/jmshahen/ece651-project/commits/master)
 
 [![coverage report](https://git.uwaterloo.ca/jmshahen/ece651-project/badges/master/coverage.svg)](https://git.uwaterloo.ca/jmshahen/ece651-project/commits/master)
+<<<<<<< HEAD
 >>>>>>> master
+=======
+
+coverage report
+>>>>>>> 14f6be55e5e0e4b953ae85840b2109acd3dd4e02
