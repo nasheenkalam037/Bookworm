@@ -57,5 +57,13 @@ router.get("/book/:bookId(\\d+)/:bookTitle", function(req, res, next) {
   });
 });
 
+/* GET Search page. */
+router.get("/search", function(req, res, next) {
+  res.render("search", {
+    title: "The Bookworm Search Page",
+    user: (req.session.user)? req.session.user : null
+  });
+});
+
 
 module.exports = router;
