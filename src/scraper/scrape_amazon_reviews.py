@@ -22,7 +22,7 @@ print_lock = threading.Lock()
 shared_mutex = threading.Lock()
 count = 0
 
-review_queue = Queue()
+book_queue = Queue()
 tcp = None
 SLEEP_TIME = 5
 NUM_THREADS = 1
@@ -36,46 +36,34 @@ def worker_thread(thread_id):
         print(f'[Thread {thread_id}] Starting Thread')
     while True:
         with print_lock:
-            print(f'[Thread {thread_id}] Waiting for next Task (Queue size { review_queue.qsize()})')
+            print(f'[Thread {thread_id}] Waiting for next Task (Queue size { book_queue.qsize()})')
 
-        review = review_queue.get()
+        book = book_queue.get()
         # print(review)
-        if review is None:
+        if book is None:
             break
 
-        # with print_lock:
-        #     print(f'[Thread {thread_id}] Working on task {book["title"]} by {book["author"]}')
-        # search_result = getInfo.search_amazon_for_review(thread_id, book['title'], book['author'])
-        # read books url from CSV file
-        books_to_search = []
-        with open('book_link.csv', newline='') as f:
-            reader = csv.reader(f)
-            skip_first_row = True
-            for row in reader:
-                # Skip heading
-                if skip_first_row:
-                    skip_first_row = False
-                    continue
-                
-                # Add new book review
-                books_to_search.append({'book_id':row[0], 'book_link':row[1]})
-
-        status = False
-        if books_to_search:
-            review_info = getInfo.fetch_new_review_info(thread_id, books_to_search)
+        with print_lock:
+            print(f'[Thread {thread_id}] Working on task {book["title"]} by {book["author"]}')
+       
+        search_result = getInfo.search_amazon_for_review(thread_id, book['title'], book['author'])
+        
+        # status = False
+        if search_result:
+            review_info = getInfo.fetch_new_review_info(thread_id, search_result)
 
             # If the review_info is good, increase the number of reviews added
             if review_info:
                 conn = tcp.getconn()
-                csv.writer('review_output.csv', review_info)
+                save_review(conn, review_info)
                 tcp.putconn(conn)
 
                 with shared_mutex:
                     count += 1
 
-        review_queue.task_done()
+        book_queue.task_done()
         with print_lock:
-            print(f'[Thread {thread_id}] Task Completed: {books_to_search["book_id"]}')
+            print(f'[Thread {thread_id}] Task Completed: {book["title"]}')
         time.sleep(SLEEP_TIME)
 
     with print_lock:
@@ -97,7 +85,7 @@ def scrap_review():
 
         # read books url from CSV file
         books_to_search = []
-        with open('book_link.csv', newline='') as f:
+        with open('books.csv', newline='') as f:
             reader = csv.reader(f)
             skip_first_row = True
             for row in reader:
@@ -106,8 +94,8 @@ def scrap_review():
                     skip_first_row = False
                     continue
                 
-                # Add new book review
-                books_to_search.append({'book_id':row[0], 'book_link':row[1]})
+                # Add new book link
+                books_to_search.append({'title':row[1], 'author':row[0]})
 
         # print(books_to_search)
         # grab all books from the database
@@ -127,17 +115,17 @@ def scrap_review():
                 with print_lock:
                     print(f'[Main Thread] Adding Book {task_num}/{len(books_to_search)} to queue:', d[0], d[1])
             task_num += 1
-            review_queue.put(d)
+            book_queue.put(d)
 
         with print_lock:
             print(f'[Main Thread] Waiting for all {task_num-1} tasks to be marked complete')
-        review_queue.join()
+        book_queue.join()
         print(threading.enumerate())
 
         # Kill all of the threads
         for i in range(NUM_THREADS):
-            review_queue.put(None)
-        review_queue.join()
+            book_queue.put(None)
+        book_queue.join()
 
     except (Exception, psycopg2.DatabaseError) as error:
         with print_lock:
@@ -150,7 +138,7 @@ def scrap_review():
             with print_lock:
                 print('Database connection closed.')
         with print_lock:
-            print("Added {} books".format(count))
+            print("Added {} reviews".format(count))
             print("Execution time = {0:.5f}s".format(time.time() - start))
             print("Execution date = {}".format(datetime.now()))
 
