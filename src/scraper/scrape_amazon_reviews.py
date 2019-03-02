@@ -1,20 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import psycopg2
-import requests
-import xmltodict
-import unidecode
-import threading
-import csv
+import re
 import time
 from datetime import datetime
-import sys
+import threading
 from queue import Queue
 from psycopg2.pool import ThreadedConnectionPool
 # Local Files
 from config import config
 import get_amazon_review_info as getInfo
-from save_review import save_review
+import save_review as setInfo
 
 # Mutex for printing to the console
 print_lock = threading.Lock()
@@ -39,36 +35,29 @@ def worker_thread(thread_id):
             print(f'[Thread {thread_id}] Waiting for next Task (Queue size { book_queue.qsize()})')
 
         book = book_queue.get()
-        # print(review)
+
         if book is None:
             break
 
         with print_lock:
-            print(f'[Thread {thread_id}] Working on task {book["title"]} by {book["author"]}')
-       
-        search_result = getInfo.search_amazon_for_review(thread_id, book['title'], book['author'])
-        
-        # status = False
-        if search_result:
-            review_info = getInfo.fetch_new_review_info(thread_id, search_result)
+            print(f'[Thread {thread_id}] Working on task')
 
-            # If the review_info is good, increase the number of reviews added
-            if review_info:
-                conn = tcp.getconn()
-                save_review(conn, review_info)
-                tcp.putconn(conn)
+        review_info = getInfo.fetch_review_data(thread_id, book)
+        if review_info:
+            conn = tcp.getconn()
+            setInfo.save_user(conn, review_info)
+            tcp.putconn(conn)
 
-                with shared_mutex:
-                    count += 1
+            with shared_mutex:
+                count += 1
 
         book_queue.task_done()
         with print_lock:
-            print(f'[Thread {thread_id}] Task Completed: {book["title"]}')
+            print(f'[Thread {thread_id}] Task Completed')
         time.sleep(SLEEP_TIME)
 
     with print_lock:
         print(f'[Thread {thread_id}] Thread Ended')
-
 
 def setup_db():
     global tcp
@@ -77,43 +66,27 @@ def setup_db():
 
     print('[SETUP] TCP returned:', tcp)
 
-def scrap_review():
+def scrap_amazon_reviews():
     global tcp, count
     start = time.time()
-    try:
+    try:  
         setup_db()
 
-        # read books url from CSV file
-        books_to_search = []
-        with open('books.csv', newline='') as f:
-            reader = csv.reader(f)
-            skip_first_row = True
-            for row in reader:
-                # Skip heading
-                if skip_first_row:
-                    skip_first_row = False
-                    continue
-                
-                # Add new book link
-                books_to_search.append({'title':row[1], 'author':row[0]})
-
-        # print(books_to_search)
-        # grab all books from the database
-        # remove any books that have been already added OR mark them as to be updated
-        # books_to_search = remove_already_found_books(books_to_search)
-
-        # print(books_to_search)
+        # Fetch book_id and book_url from AmazonDetails tabel
+        conn = tcp.getconn()
+        cur = conn.cursor()
+        cur.execute('SELECT book_id, book_link FROM "public"."AmazonDetails"')
+        data = cur.fetchall()
 
         for i in range(NUM_THREADS):
             t = threading.Thread(target=worker_thread, args=(i, ))
-            # t.daemon = True
             t.start()
 
         task_num = 1
-        for d in books_to_search:
+        for d in data:
             if DEBUG > 1:
                 with print_lock:
-                    print(f'[Main Thread] Adding Book {task_num}/{len(books_to_search)} to queue:', d[0], d[1])
+                    print(f'[Main Thread] Adding Reviews {task_num}/{len(data)} to queue:', d[0], d[1])
             task_num += 1
             book_queue.put(d)
 
@@ -127,6 +100,9 @@ def scrap_review():
             book_queue.put(None)
         book_queue.join()
 
+        conn.commit()
+        tcp.putconn(conn)
+    
     except (Exception, psycopg2.DatabaseError) as error:
         with print_lock:
             print('[scrap_books] ERROR:', error)
@@ -138,10 +114,10 @@ def scrap_review():
             with print_lock:
                 print('Database connection closed.')
         with print_lock:
-            print("Added {} reviews".format(count))
+            print("Added {} books".format(count))
             print("Execution time = {0:.5f}s".format(time.time() - start))
             print("Execution date = {}".format(datetime.now()))
 
 
-if __name__ == '__main__':
-    scrap_review()
+if __name__ == "__main__":
+    scrap_amazon_reviews()
