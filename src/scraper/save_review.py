@@ -5,12 +5,12 @@ from config import config
 
 search_user_sql = '''
 SELECT user_id FROM public."Users" 
-	WHERE display_name = %(name)s  
+	WHERE email = CONCAT(%(user_id)s, '@gmail.com')  
 '''
 
 insert_user_sql = '''
 INSERT INTO public."Users"(display_name, email, password_hash, created_from)
-	VALUES (%(name)s, CONCAT(%(name)s, '@gmail.com'), ' ', 'Amazon')
+	VALUES (%(name)s, CONCAT(%(user_id)s, '@gmail.com'), ' ', 'Amazon')
     ON CONFLICT DO NOTHING
     RETURNING user_id
 '''
@@ -21,7 +21,7 @@ def save_user(conn, review_info):
         cur = conn.cursor()
         for r in review_info:
             cur.execute(search_user_sql, r)
-            
+
             if cur.statusmessage[7] != '0':
                 user_id = cur.fetchone()[0]
             else:
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     params = config()
     tcp = ThreadedConnectionPool(1, 10, **params)
     conn = tcp.getconn()
-    review_info = [{'book_id': 24, 'user_id': 'AG3HZ5KORQIXZHUBLNMZNU35SCEA', 'name': 'fdddg', 'rating': 4.0, 'review': "This"}]
+    review_info = [{'book_id': 24, 'user_id': 'AG3HZ5KORQIXZHUBLNMZNU35SCEA', 'name': '123', 'rating': 4.0, 'review': "This"}]
 
     save_user(conn, review_info)
     tcp.putconn(conn)
