@@ -1,11 +1,9 @@
---
 -- PostgreSQL database dump
---
 
 -- Dumped from database version 11.1
 -- Dumped by pg_dump version 11.1
 
--- Started on 2019-03-02 17:35:22 EST
+-- Started on 2019-02-17 15:08:02
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,27 +15,10 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- TOC entry 3274 (class 1262 OID 19272)
--- Name: ece651; Type: DATABASE; Schema: -; Owner: s.n.azim
---
+-- TOC entry 7 (class 2615 OID 25049)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
 
-CREATE DATABASE ece651 WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
-
-
-ALTER DATABASE ece651 OWNER TO "s.n.azim";
-
-\connect ece651
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
+CREATE SCHEMA IF NOT EXISTS  "public"  ;
 
 SET default_tablespace = '';
 
@@ -45,7 +26,7 @@ SET default_with_oids = false;
 
 --
 -- TOC entry 196 (class 1259 OID 19273)
--- Name: AmazonDetails; Type: TABLE; Schema: public; Owner: s.n.azim
+-- Name: AmazonDetails; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public."AmazonDetails" (
@@ -58,11 +39,9 @@ CREATE TABLE public."AmazonDetails" (
 );
 
 
-ALTER TABLE public."AmazonDetails" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 197 (class 1259 OID 19279)
--- Name: Author_author_id_sequence; Type: SEQUENCE; Schema: public; Owner: s.n.azim
+-- Name: Author_author_id_sequence; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public."Author_author_id_sequence"
@@ -73,11 +52,9 @@ CREATE SEQUENCE public."Author_author_id_sequence"
     CACHE 1;
 
 
-ALTER TABLE public."Author_author_id_sequence" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 198 (class 1259 OID 19281)
--- Name: Author; Type: TABLE; Schema: public; Owner: s.n.azim
+-- Name: Author; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public."Author" (
@@ -86,11 +63,9 @@ CREATE TABLE public."Author" (
 );
 
 
-ALTER TABLE public."Author" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 199 (class 1259 OID 19285)
--- Name: AuthorBooks; Type: TABLE; Schema: public; Owner: s.n.azim
+-- Name: AuthorBooks; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public."AuthorBooks" (
@@ -99,11 +74,9 @@ CREATE TABLE public."AuthorBooks" (
 );
 
 
-ALTER TABLE public."AuthorBooks" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 200 (class 1259 OID 19288)
--- Name: BookCategories; Type: TABLE; Schema: public; Owner: s.n.azim
+-- Name: BookCategories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public."BookCategories" (
@@ -112,11 +85,9 @@ CREATE TABLE public."BookCategories" (
 );
 
 
-ALTER TABLE public."BookCategories" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 203 (class 1259 OID 19297)
--- Name: Books_book_id_sequence; Type: SEQUENCE; Schema: public; Owner: s.n.azim
+-- Name: Books_book_id_sequence; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public."Books_book_id_sequence"
@@ -127,11 +98,9 @@ CREATE SEQUENCE public."Books_book_id_sequence"
     CACHE 1;
 
 
-ALTER TABLE public."Books_book_id_sequence" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 204 (class 1259 OID 19299)
--- Name: Books; Type: TABLE; Schema: public; Owner: s.n.azim
+-- Name: Books; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public."Books" (
@@ -148,11 +117,9 @@ CREATE TABLE public."Books" (
 );
 
 
-ALTER TABLE public."Books" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 211 (class 1259 OID 19466)
--- Name: BookDetails; Type: VIEW; Schema: public; Owner: s.n.azim
+-- Name: BookDetails; Type: VIEW; Schema: public; Owner: -
 --
 
 CREATE VIEW public."BookDetails" AS
@@ -182,11 +149,9 @@ CREATE VIEW public."BookDetails" AS
              JOIN public."AuthorBooks" ab ON ((a.author_id = ab.author_id)))) abb ON (("Books".book_id = abb.book_id)));
 
 
-ALTER TABLE public."BookDetails" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 201 (class 1259 OID 19291)
--- Name: BookOfTheDay_idBookOfTheDay_sequence; Type: SEQUENCE; Schema: public; Owner: s.n.azim
+-- Name: BookOfTheDay_idBookOfTheDay_sequence; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence"
@@ -197,11 +162,9 @@ CREATE SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence"
     CACHE 1;
 
 
-ALTER TABLE public."BookOfTheDay_idBookOfTheDay_sequence" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 202 (class 1259 OID 19293)
--- Name: BookOfTheDay; Type: TABLE; Schema: public; Owner: s.n.azim
+-- Name: BookOfTheDay; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public."BookOfTheDay" (
@@ -211,11 +174,9 @@ CREATE TABLE public."BookOfTheDay" (
 );
 
 
-ALTER TABLE public."BookOfTheDay" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 205 (class 1259 OID 19306)
--- Name: Categories_categories_id_sequence; Type: SEQUENCE; Schema: public; Owner: s.n.azim
+-- Name: Categories_categories_id_sequence; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public."Categories_categories_id_sequence"
@@ -226,11 +187,9 @@ CREATE SEQUENCE public."Categories_categories_id_sequence"
     CACHE 1;
 
 
-ALTER TABLE public."Categories_categories_id_sequence" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 206 (class 1259 OID 19308)
--- Name: Categories; Type: TABLE; Schema: public; Owner: s.n.azim
+-- Name: Categories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public."Categories" (
@@ -239,11 +198,9 @@ CREATE TABLE public."Categories" (
 );
 
 
-ALTER TABLE public."Categories" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 207 (class 1259 OID 19312)
--- Name: Reviews_review_id_sequence; Type: SEQUENCE; Schema: public; Owner: s.n.azim
+-- Name: Reviews_review_id_sequence; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public."Reviews_review_id_sequence"
@@ -254,11 +211,9 @@ CREATE SEQUENCE public."Reviews_review_id_sequence"
     CACHE 1;
 
 
-ALTER TABLE public."Reviews_review_id_sequence" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 208 (class 1259 OID 19314)
--- Name: Reviews; Type: TABLE; Schema: public; Owner: s.n.azim
+-- Name: Reviews; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public."Reviews" (
@@ -270,11 +225,9 @@ CREATE TABLE public."Reviews" (
 );
 
 
-ALTER TABLE public."Reviews" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 209 (class 1259 OID 19321)
--- Name: Users_user_id_sequence; Type: SEQUENCE; Schema: public; Owner: s.n.azim
+-- Name: Users_user_id_sequence; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public."Users_user_id_sequence"
@@ -285,11 +238,9 @@ CREATE SEQUENCE public."Users_user_id_sequence"
     CACHE 1;
 
 
-ALTER TABLE public."Users_user_id_sequence" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 210 (class 1259 OID 19323)
--- Name: Users; Type: TABLE; Schema: public; Owner: s.n.azim
+-- Name: Users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public."Users" (
@@ -304,12 +255,10 @@ CREATE TABLE public."Users" (
 );
 
 
-ALTER TABLE public."Users" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 3254 (class 0 OID 19273)
 -- Dependencies: 196
--- Data for Name: AmazonDetails; Type: TABLE DATA; Schema: public; Owner: s.n.azim
+-- Data for Name: AmazonDetails; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price, num_reviews) VALUES (77, 'https://www.amazon.ca/Provost-John-Galt/dp/0368291812/', NULL, ' This edition of The Provost by John Galt is given by Ashed Phoenix - Million Book Edition', 23.71, NULL);
@@ -867,7 +816,7 @@ INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price,
 --
 -- TOC entry 3256 (class 0 OID 19281)
 -- Dependencies: 198
--- Data for Name: Author; Type: TABLE DATA; Schema: public; Owner: s.n.azim
+-- Data for Name: Author; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public."Author" (author_id, name) VALUES (70, 'Thomas G. West');
@@ -1192,7 +1141,7 @@ INSERT INTO public."Author" (author_id, name) VALUES (1043, 'Brian Jacques');
 --
 -- TOC entry 3257 (class 0 OID 19285)
 -- Dependencies: 199
--- Data for Name: AuthorBooks; Type: TABLE DATA; Schema: public; Owner: s.n.azim
+-- Data for Name: AuthorBooks; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (19, 21);
@@ -1906,7 +1855,7 @@ INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (406, 840);
 --
 -- TOC entry 3258 (class 0 OID 19288)
 -- Dependencies: 200
--- Data for Name: BookCategories; Type: TABLE DATA; Schema: public; Owner: s.n.azim
+-- Data for Name: BookCategories; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public."BookCategories" (book_id, category_id) VALUES (21, 142);
@@ -5231,7 +5180,7 @@ INSERT INTO public."BookCategories" (book_id, category_id) VALUES (840, 142);
 --
 -- TOC entry 3260 (class 0 OID 19293)
 -- Dependencies: 202
--- Data for Name: BookOfTheDay; Type: TABLE DATA; Schema: public; Owner: s.n.azim
+-- Data for Name: BookOfTheDay; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 
@@ -5239,7 +5188,7 @@ INSERT INTO public."BookCategories" (book_id, category_id) VALUES (840, 142);
 --
 -- TOC entry 3262 (class 0 OID 19299)
 -- Dependencies: 204
--- Data for Name: Books; Type: TABLE DATA; Schema: public; Owner: s.n.azim
+-- Data for Name: Books; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public."Books" (book_id, title, series, series_position, pages, publisher, orig_published_date, isbn10, isbn13, synopsis) VALUES (828, 'Mossflower', NULL, NULL, 432, NULL, NULL, '1862301395', '978-1862301399', ' Second thrilling REDWALL adventure This is the story of Martin the Warrior, the legendary founder of Redwall Abbey. When Verduaga Greeneyes, king of the wildcats, becomes tyrant truler over the creatures of Mossflower, the woodlanders begin a life of serfdom and cruelty. But then, one winter afternoon, a young mouse called Martin chances by the woods -bringing with him an indomitable spirit of adventure and will for freedom. . . . .');
@@ -5797,7 +5746,7 @@ INSERT INTO public."Books" (book_id, title, series, series_position, pages, publ
 --
 -- TOC entry 3264 (class 0 OID 19308)
 -- Dependencies: 206
--- Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: s.n.azim
+-- Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public."Categories" (categories_id, name) VALUES (250, 'Children''s & Teens');
@@ -6146,7 +6095,7 @@ INSERT INTO public."Categories" (categories_id, name) VALUES (3087, 'Murder');
 --
 -- TOC entry 3266 (class 0 OID 19314)
 -- Dependencies: 208
--- Data for Name: Reviews; Type: TABLE DATA; Schema: public; Owner: s.n.azim
+-- Data for Name: Reviews; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public."Reviews" (review_id, user_id, book_id, rating, review) VALUES (2408, 1790, 24, 4, 'This is a wonderful edition and the notes are truly excellent.  My one suggestion is that the print should be bigger to make it easier to read. Instead they''ve left an inch and a half of unnecessary white space at the bottom of each page.');
@@ -6648,7 +6597,7 @@ INSERT INTO public."Reviews" (review_id, user_id, book_id, rating, review) VALUE
 --
 -- TOC entry 3268 (class 0 OID 19323)
 -- Dependencies: 210
--- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: s.n.azim
+-- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public."Users" (user_id, display_name, email, password_hash, creation_time, preferences_json, created_from, login_allowed) VALUES (1, 'fdg', 'snjazim@uwaterloo.ca', '$2b$10$PrIcTEdu1DjTDuXj1gu6fOekEpRoiXBMliQZZdgRpyRDhEy5Ug5E.', '2019-02-25 10:30:08.14022', '{}', 'Website Signin Page', 1);
@@ -7107,7 +7056,7 @@ INSERT INTO public."Users" (user_id, display_name, email, password_hash, creatio
 --
 -- TOC entry 3292 (class 0 OID 0)
 -- Dependencies: 197
--- Name: Author_author_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: s.n.azim
+-- Name: Author_author_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public."Author_author_id_sequence"', 1066, true);
@@ -7116,7 +7065,7 @@ SELECT pg_catalog.setval('public."Author_author_id_sequence"', 1066, true);
 --
 -- TOC entry 3293 (class 0 OID 0)
 -- Dependencies: 201
--- Name: BookOfTheDay_idBookOfTheDay_sequence; Type: SEQUENCE SET; Schema: public; Owner: s.n.azim
+-- Name: BookOfTheDay_idBookOfTheDay_sequence; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public."BookOfTheDay_idBookOfTheDay_sequence"', 1, false);
@@ -7125,7 +7074,7 @@ SELECT pg_catalog.setval('public."BookOfTheDay_idBookOfTheDay_sequence"', 1, fal
 --
 -- TOC entry 3294 (class 0 OID 0)
 -- Dependencies: 203
--- Name: Books_book_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: s.n.azim
+-- Name: Books_book_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public."Books_book_id_sequence"', 840, true);
@@ -7134,7 +7083,7 @@ SELECT pg_catalog.setval('public."Books_book_id_sequence"', 840, true);
 --
 -- TOC entry 3295 (class 0 OID 0)
 -- Dependencies: 205
--- Name: Categories_categories_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: s.n.azim
+-- Name: Categories_categories_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public."Categories_categories_id_sequence"', 5226, true);
@@ -7143,7 +7092,7 @@ SELECT pg_catalog.setval('public."Categories_categories_id_sequence"', 5226, tru
 --
 -- TOC entry 3296 (class 0 OID 0)
 -- Dependencies: 207
--- Name: Reviews_review_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: s.n.azim
+-- Name: Reviews_review_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public."Reviews_review_id_sequence"', 2901, true);
@@ -7152,7 +7101,7 @@ SELECT pg_catalog.setval('public."Reviews_review_id_sequence"', 2901, true);
 --
 -- TOC entry 3297 (class 0 OID 0)
 -- Dependencies: 209
--- Name: Users_user_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: s.n.azim
+-- Name: Users_user_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public."Users_user_id_sequence"', 2238, true);
@@ -7160,7 +7109,7 @@ SELECT pg_catalog.setval('public."Users_user_id_sequence"', 2238, true);
 
 --
 -- TOC entry 3097 (class 2606 OID 19399)
--- Name: AmazonDetails AmazonDetails_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: AmazonDetails AmazonDetails_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."AmazonDetails"
@@ -7169,7 +7118,7 @@ ALTER TABLE ONLY public."AmazonDetails"
 
 --
 -- TOC entry 3103 (class 2606 OID 19401)
--- Name: AuthorBooks AuthorBooks_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: AuthorBooks AuthorBooks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."AuthorBooks"
@@ -7178,7 +7127,7 @@ ALTER TABLE ONLY public."AuthorBooks"
 
 --
 -- TOC entry 3099 (class 2606 OID 19403)
--- Name: Author Author_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: Author Author_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."Author"
@@ -7187,7 +7136,7 @@ ALTER TABLE ONLY public."Author"
 
 --
 -- TOC entry 3107 (class 2606 OID 19405)
--- Name: BookOfTheDay BookOfTheDay_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: BookOfTheDay BookOfTheDay_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."BookOfTheDay"
@@ -7196,7 +7145,7 @@ ALTER TABLE ONLY public."BookOfTheDay"
 
 --
 -- TOC entry 3105 (class 2606 OID 19407)
--- Name: BookCategories Book_Category_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: BookCategories Book_Category_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."BookCategories"
@@ -7205,7 +7154,7 @@ ALTER TABLE ONLY public."BookCategories"
 
 --
 -- TOC entry 3109 (class 2606 OID 19409)
--- Name: Books Books_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: Books Books_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."Books"
@@ -7214,7 +7163,7 @@ ALTER TABLE ONLY public."Books"
 
 --
 -- TOC entry 3115 (class 2606 OID 19411)
--- Name: Categories Categories_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: Categories Categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."Categories"
@@ -7223,7 +7172,7 @@ ALTER TABLE ONLY public."Categories"
 
 --
 -- TOC entry 3119 (class 2606 OID 19413)
--- Name: Reviews Reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: Reviews Reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."Reviews"
@@ -7232,7 +7181,7 @@ ALTER TABLE ONLY public."Reviews"
 
 --
 -- TOC entry 3121 (class 2606 OID 19415)
--- Name: Users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: Users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."Users"
@@ -7241,7 +7190,7 @@ ALTER TABLE ONLY public."Users"
 
 --
 -- TOC entry 3101 (class 2606 OID 19425)
--- Name: Author unique_author_name; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: Author unique_author_name; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."Author"
@@ -7250,7 +7199,7 @@ ALTER TABLE ONLY public."Author"
 
 --
 -- TOC entry 3117 (class 2606 OID 19417)
--- Name: Categories unique_cat_name; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: Categories unique_cat_name; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."Categories"
@@ -7259,7 +7208,7 @@ ALTER TABLE ONLY public."Categories"
 
 --
 -- TOC entry 3123 (class 2606 OID 19419)
--- Name: Users unique_email; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: Users unique_email; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."Users"
@@ -7268,7 +7217,7 @@ ALTER TABLE ONLY public."Users"
 
 --
 -- TOC entry 3111 (class 2606 OID 19421)
--- Name: Books unique_isbn10; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: Books unique_isbn10; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."Books"
@@ -7277,7 +7226,7 @@ ALTER TABLE ONLY public."Books"
 
 --
 -- TOC entry 3113 (class 2606 OID 19423)
--- Name: Books unique_isbn13; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: Books unique_isbn13; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."Books"
@@ -7286,7 +7235,7 @@ ALTER TABLE ONLY public."Books"
 
 --
 -- TOC entry 3125 (class 2606 OID 19426)
--- Name: AuthorBooks author_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: AuthorBooks author_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."AuthorBooks"
@@ -7295,7 +7244,7 @@ ALTER TABLE ONLY public."AuthorBooks"
 
 --
 -- TOC entry 3130 (class 2606 OID 19431)
--- Name: Reviews book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: Reviews book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."Reviews"
@@ -7304,7 +7253,7 @@ ALTER TABLE ONLY public."Reviews"
 
 --
 -- TOC entry 3127 (class 2606 OID 19436)
--- Name: BookCategories book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: BookCategories book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."BookCategories"
@@ -7313,7 +7262,7 @@ ALTER TABLE ONLY public."BookCategories"
 
 --
 -- TOC entry 3124 (class 2606 OID 19441)
--- Name: AmazonDetails book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: AmazonDetails book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."AmazonDetails"
@@ -7322,7 +7271,7 @@ ALTER TABLE ONLY public."AmazonDetails"
 
 --
 -- TOC entry 3126 (class 2606 OID 19446)
--- Name: AuthorBooks book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: AuthorBooks book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."AuthorBooks"
@@ -7331,7 +7280,7 @@ ALTER TABLE ONLY public."AuthorBooks"
 
 --
 -- TOC entry 3129 (class 2606 OID 19451)
--- Name: BookOfTheDay book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: BookOfTheDay book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."BookOfTheDay"
@@ -7340,7 +7289,7 @@ ALTER TABLE ONLY public."BookOfTheDay"
 
 --
 -- TOC entry 3128 (class 2606 OID 19456)
--- Name: BookCategories category_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: BookCategories category_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."BookCategories"
@@ -7349,7 +7298,7 @@ ALTER TABLE ONLY public."BookCategories"
 
 --
 -- TOC entry 3131 (class 2606 OID 19461)
--- Name: Reviews user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
+-- Name: Reviews user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."Reviews"
@@ -7359,7 +7308,7 @@ ALTER TABLE ONLY public."Reviews"
 --
 -- TOC entry 3275 (class 0 OID 0)
 -- Dependencies: 3
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: s.n.azim
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: -
 --
 
 GRANT USAGE ON SCHEMA public TO ece651_scraper;
@@ -7370,7 +7319,7 @@ GRANT USAGE ON SCHEMA public TO ece651_web;
 --
 -- TOC entry 3276 (class 0 OID 0)
 -- Dependencies: 196
--- Name: TABLE "AmazonDetails"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: TABLE "AmazonDetails"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON TABLE public."AmazonDetails" TO ece651_ml;
@@ -7381,7 +7330,7 @@ GRANT ALL ON TABLE public."AmazonDetails" TO ece651_scraper;
 --
 -- TOC entry 3277 (class 0 OID 0)
 -- Dependencies: 197
--- Name: SEQUENCE "Author_author_id_sequence"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: SEQUENCE "Author_author_id_sequence"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON SEQUENCE public."Author_author_id_sequence" TO ece651_scraper;
@@ -7392,7 +7341,7 @@ GRANT ALL ON SEQUENCE public."Author_author_id_sequence" TO ece651_web;
 --
 -- TOC entry 3278 (class 0 OID 0)
 -- Dependencies: 198
--- Name: TABLE "Author"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: TABLE "Author"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON TABLE public."Author" TO ece651_ml;
@@ -7403,7 +7352,7 @@ GRANT ALL ON TABLE public."Author" TO ece651_scraper;
 --
 -- TOC entry 3279 (class 0 OID 0)
 -- Dependencies: 199
--- Name: TABLE "AuthorBooks"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: TABLE "AuthorBooks"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON TABLE public."AuthorBooks" TO ece651_ml;
@@ -7414,7 +7363,7 @@ GRANT ALL ON TABLE public."AuthorBooks" TO ece651_scraper;
 --
 -- TOC entry 3280 (class 0 OID 0)
 -- Dependencies: 200
--- Name: TABLE "BookCategories"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: TABLE "BookCategories"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON TABLE public."BookCategories" TO ece651_ml;
@@ -7425,7 +7374,7 @@ GRANT ALL ON TABLE public."BookCategories" TO ece651_scraper;
 --
 -- TOC entry 3281 (class 0 OID 0)
 -- Dependencies: 203
--- Name: SEQUENCE "Books_book_id_sequence"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: SEQUENCE "Books_book_id_sequence"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON SEQUENCE public."Books_book_id_sequence" TO ece651_scraper;
@@ -7436,7 +7385,7 @@ GRANT ALL ON SEQUENCE public."Books_book_id_sequence" TO ece651_web;
 --
 -- TOC entry 3282 (class 0 OID 0)
 -- Dependencies: 204
--- Name: TABLE "Books"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: TABLE "Books"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON TABLE public."Books" TO ece651_ml;
@@ -7447,7 +7396,7 @@ GRANT ALL ON TABLE public."Books" TO ece651_scraper;
 --
 -- TOC entry 3283 (class 0 OID 0)
 -- Dependencies: 211
--- Name: TABLE "BookDetails"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: TABLE "BookDetails"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON TABLE public."BookDetails" TO ece651_ml;
@@ -7458,7 +7407,7 @@ GRANT ALL ON TABLE public."BookDetails" TO ece651_scraper;
 --
 -- TOC entry 3284 (class 0 OID 0)
 -- Dependencies: 201
--- Name: SEQUENCE "BookOfTheDay_idBookOfTheDay_sequence"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: SEQUENCE "BookOfTheDay_idBookOfTheDay_sequence"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence" TO ece651_scraper;
@@ -7469,7 +7418,7 @@ GRANT ALL ON SEQUENCE public."BookOfTheDay_idBookOfTheDay_sequence" TO ece651_we
 --
 -- TOC entry 3285 (class 0 OID 0)
 -- Dependencies: 202
--- Name: TABLE "BookOfTheDay"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: TABLE "BookOfTheDay"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON TABLE public."BookOfTheDay" TO ece651_ml;
@@ -7480,7 +7429,7 @@ GRANT ALL ON TABLE public."BookOfTheDay" TO ece651_scraper;
 --
 -- TOC entry 3286 (class 0 OID 0)
 -- Dependencies: 205
--- Name: SEQUENCE "Categories_categories_id_sequence"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: SEQUENCE "Categories_categories_id_sequence"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON SEQUENCE public."Categories_categories_id_sequence" TO ece651_scraper;
@@ -7491,7 +7440,7 @@ GRANT ALL ON SEQUENCE public."Categories_categories_id_sequence" TO ece651_web;
 --
 -- TOC entry 3287 (class 0 OID 0)
 -- Dependencies: 206
--- Name: TABLE "Categories"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: TABLE "Categories"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON TABLE public."Categories" TO ece651_ml;
@@ -7502,7 +7451,7 @@ GRANT ALL ON TABLE public."Categories" TO ece651_scraper;
 --
 -- TOC entry 3288 (class 0 OID 0)
 -- Dependencies: 207
--- Name: SEQUENCE "Reviews_review_id_sequence"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: SEQUENCE "Reviews_review_id_sequence"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_scraper;
@@ -7513,7 +7462,7 @@ GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_web;
 --
 -- TOC entry 3289 (class 0 OID 0)
 -- Dependencies: 208
--- Name: TABLE "Reviews"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: TABLE "Reviews"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON TABLE public."Reviews" TO ece651_ml;
@@ -7524,7 +7473,7 @@ GRANT ALL ON TABLE public."Reviews" TO ece651_scraper;
 --
 -- TOC entry 3290 (class 0 OID 0)
 -- Dependencies: 209
--- Name: SEQUENCE "Users_user_id_sequence"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: SEQUENCE "Users_user_id_sequence"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_scraper;
@@ -7535,7 +7484,7 @@ GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_web;
 --
 -- TOC entry 3291 (class 0 OID 0)
 -- Dependencies: 210
--- Name: TABLE "Users"; Type: ACL; Schema: public; Owner: s.n.azim
+-- Name: TABLE "Users"; Type: ACL; Schema: public; Owner: -
 --
 
 GRANT ALL ON TABLE public."Users" TO ece651_ml;
@@ -7543,7 +7492,7 @@ GRANT ALL ON TABLE public."Users" TO ece651_web;
 GRANT ALL ON TABLE public."Users" TO ece651_scraper;
 
 
--- Completed on 2019-03-02 17:35:23 EST
+-- Completed on 2019-03-03 10:20:25 EST
 
 --
 -- PostgreSQL database dump complete
