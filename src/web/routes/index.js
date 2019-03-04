@@ -5,6 +5,7 @@ const db = require("../db");
 
 
 my_book = {
+  book_id: 21,
   title: "The perks of Being A Wallflower",
   book_cover: '/images/book_cover_placeholder.png',
   authors: ["Stephen Chbosky"],
@@ -36,9 +37,7 @@ sql_top_books_landing = 'SELECT * FROM "BookDetails" ORDER BY amazon_rating DESC
 router.get("/", async function(req, res, next) {
   // Variable has to be named 'rows'
   var {rows} = await db.query(sql_top_books_landing);
-
   console.log(rows);
-
   res.render("index", {
     title: "The Bookworm",
     user: (req.session.user)? req.session.user : null,
@@ -57,5 +56,18 @@ router.get("/book/:bookId(\\d+)/:bookTitle", function(req, res, next) {
   });
 });
 
+/* GET Search page. */
+
+sql_search = 'SELECT * FROM public."Books" where title like Moss%';
+/* GET Search page. */
+router.get("/search", async function(req, res, next) {
+ var { rows } = await db.query(sql_search);
+ console.log(rows);
+   res.render("search", {
+    title: "The Bookworm Search Page",
+    user: (req.session.user)? req.session.user : null,
+    books:  rows
+  });
+});
 
 module.exports = router;
