@@ -6,7 +6,8 @@ from selenium.webdriver.common.keys import Keys
 
 driver = webdriver.Chrome()
 #driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
-driver.implicitly_wait(500)
+#driver.implicitly_wait(500)
+# READ ME: DO NOT USE driver.implicitly_wait with CHROME, see https://stackoverflow.com/questions/17462884/is-selenium-slow-or-is-my-code-wrong
 driver.get("http://127.0.0.1:3000/account/signup")
 
 
@@ -25,31 +26,54 @@ elem.send_keys("usertest09")
 signup = driver.find_element_by_id("signup")
 signup.click()
 
+elem = None
+try:
+    elem = driver.find_element_by_id('error_msg')
+except:
+    pass
 
-if len(driver.find_elements_by_xpath ("//*[contains(., 'do not match')]"))>0:
-    print ("Test Passed - Invalid Input")
-    elem = driver.find_element_by_id("fullname")
-    elem.send_keys("Test User06")
+if elem:
+    if 'do not match' in elem.text:
+        print ("Test Passed - Invalid Input")
+        elem = driver.find_element_by_id("fullname")
+        elem.send_keys("Test User06")
 
-    elem = driver.find_element_by_id("email")
-    elem.send_keys("testuser6@gmail.com")
+        elem = driver.find_element_by_id("email")
+        elem.send_keys("testuser6@gmail.com")
 
-    elem = driver.find_element_by_id("password")
-    elem.send_keys("usertest04")
+        elem = driver.find_element_by_id("password")
+        elem.send_keys("usertest04")
 
-    elem = driver.find_element_by_id("confirmation_password")
-    elem.send_keys("usertest04")
+        elem = driver.find_element_by_id("confirmation_password")
+        elem.send_keys("usertest04")
 
-    signup = driver.find_element_by_id("signup")
-    signup.click()
+        signup = driver.find_element_by_id("signup")
+        signup.click()
 
-    if len(driver.find_elements_by_xpath("//*[contains(text(), 'Test User06')]")) > 0:
-        print ("Test Passed: User created")
+        elem_error = None
+        elem_welcome = None
 
-    elif len(driver.find_elements_by_xpath("//*[contains(.,'did you forget')]")) > 0:
-        print("Test Passed: Error - User Already Exists")
+        try:
+            elem_error = driver.find_element_by_id('error_msg')
+        except:
+            pass
+        
+        try:
+            elem_welcome = driver.find_element_by_id('error_msg')
+        except:
+            pass
 
-elif len(driver.find_elements_by_xpath ("//*[contains(., 'Duplicate Email found in table')]"))>0:
+        if elem_error:
+            if 'did you forget' in elem_error.text:
+                print("Test Passed: Error - User Already Exists")
+        elif elem_welcome:
+            if 'Test User06' in elem_welcome.text:
+                print ("Test Passed: User created")
+            else:
+                print('Test Failed: Wrong Username Displayed')
+
+
+elif 'Duplicate Email found in table' in elem.text:
     print("Test Passed - User Already Exists")
 
 else:
