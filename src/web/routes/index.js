@@ -72,10 +72,10 @@ router.get('/book/:bookId(\\d+)/:bookTitle', async function(req, res, next) {
       book: book
     });
   } else {
-    res.render('details_error', {
-      title: 'The Bookworm',
-      user: req.session.user ? req.session.user : null,
-      book: my_book
+    // render the error page
+    res.status(404);
+    res.render('error', {
+      message: 'We are sorry, the book you are searching for could not be found.',
     });
   }
 });
