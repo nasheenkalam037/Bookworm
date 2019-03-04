@@ -2,10 +2,14 @@
 This file will automatically run every test
 '''
 import os
+import time
 import run_all_unit_tests
 import run_all_system_tests
 
 def run_all():
+    print('PLEASE ENSURE THAT THE WEBSERVER IS RUNNING ON 127.0.0.1:3000')
+    time.sleep(2)    
+
     print('*'*50)
     print('* UNIT TESTS')
     print('*'*50)
