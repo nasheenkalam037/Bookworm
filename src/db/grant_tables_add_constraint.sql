@@ -1,3 +1,6 @@
+-- TODO: add all CREATE SEQUENCE statements here
+
+
 --- Books
 
 ALTER TABLE ONLY public."Books"
