@@ -5,6 +5,7 @@ const db = require("../db");
 
 
 my_book = {
+  book_id: 21,
   title: "The perks of Being A Wallflower",
   book_cover: '/images/book_cover_placeholder.png',
   authors: ["Stephen Chbosky"],
@@ -54,6 +55,15 @@ router.get("/book/:bookId(\\d+)/:bookTitle", function(req, res, next) {
     title: "The Bookworm",
     user: (req.session.user)? req.session.user : null,
     book: my_book
+  });
+});
+
+/* GET Search page. */
+router.get("/search", function(req, res, next) {
+  res.render("search", {
+    title: "The Bookworm Search Page",
+    user: (req.session.user)? req.session.user : null,
+    books:  [my_book, my_book]
   });
 });
 
