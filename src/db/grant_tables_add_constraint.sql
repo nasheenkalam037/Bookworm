@@ -1,3 +1,8 @@
+--- public schema
+
+GRANT USAGE ON SCHEMA public TO ece651_scraper;
+GRANT USAGE ON SCHEMA public TO ece651_ml;
+GRANT USAGE ON SCHEMA public TO ece651_web;
 
 --- Books
 
