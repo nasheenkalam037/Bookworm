@@ -1,38 +1,36 @@
-<div style="width:100%">
+<div style="width:100%;padding: 20px;">
     <div class="searchbox">
-        <div class="input-container">
+        <form class="input-container" action="/search" method="get">
             <i class="fa fa-search icon"></i>
-            <form action="/search" method="get">
-            <input class="input-field" type="text" placeholder="Search using Book Name, Author, or Keyword" name="s" style="width:1250px">
-            </form>
-        </div>
+            <input class="input-field" type="text" placeholder="Search using Book Name, Author, or Keyword" name="s">
+        </form>
     </div>
 
     <div class="vert-spacing-15"></div>
 
     {{#each books}}
-        <div class="book-long">
-            <img class="book-cover" src="/images/book_covers/{{book_id}}.jpeg" />
-            <span class="book-details">
-                <a href="/book/{{book_id}}/{{title}}" class="book-title font-large">{{title}}</a>
-                <span class="book-authors font-normal">By
-                        <a href="/author/{{author_id}}/{{authors}}">{{authors}}</a>
-                </span>
-                <span class="book-description font-normal">{{synopsis}}</span>
+    <div class="book-long">
+        <img class="book-cover" src="/images/book_covers/{{book_id}}.jpeg" />
+        <span class="book-details">
+            <a href="/book/{{book_id}}/{{title}}" class="book-title font-large">{{title}}</a>
+            <span class="book-authors font-normal">By
+                <a href="/author/{{author_id}}/{{authors}}">{{authors}}</a>
             </span>
-            <span class="book-deals">
-                <span class="book-deal">
-                    <ul>
-                        <li class="center"><i class="fab fa-amazon"></i></li>
-                        <li class="font-normal">Rating: {{amazon_rating}}</li>
-                        <li class="font-normal"># Reviews: {{amazon_num_reviews}}</li>
-                        <li><a href="{{amazon_link}}" class="font-small deal-amazon">Click here to Buy</a></li>
-                    </ul>
-                </span>
+            <span class="book-description font-normal">{{synopsis}}</span>
+        </span>
+        <span class="book-deals">
+            <span class="book-deal">
+                <ul>
+                    <li class="center"><i class="fab fa-amazon"></i></li>
+                    <li class="font-normal">Rating: {{amazon_rating}}</li>
+                    <li class="font-normal"># Reviews: {{amazon_num_reviews}}</li>
+                    <li><a href="{{amazon_link}}" class="font-small deal-amazon">Click here to Buy</a></li>
+                </ul>
             </span>
-        </div>
+        </span>
+    </div>
 
-        <div class="divider"></div>
+    <div class="divider"></div>
 
     {{/each}}
 </div>
