@@ -8,14 +8,14 @@ from selenium.webdriver.common.keys import Keys
 # keyword = "agile testing lisa crispin"
 driver = webdriver.Chrome()
 #driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
-driver.implicitly_wait(500)
+#driver.implicitly_wait(500)
 driver.get("http://127.0.0.1:3000/")
 
 
 elem = driver.find_element_by_xpath("/html/body/header/div/div/div[2]/a[1]")
 elem.click()
 
-driver.implicitly_wait(100)
+#driver.implicitly_wait(100)
 
 elem = driver.find_element_by_id("email")
 elem.send_keys("automation_test23@gmail.com")
