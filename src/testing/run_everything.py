@@ -8,8 +8,12 @@ import run_all_system_tests
 
 def run_all():
     print('PLEASE ENSURE THAT THE WEBSERVER IS RUNNING ON 127.0.0.1:3000')
-    time.sleep(2)    
+    count = 5
+    for c in range(count, 0, -1):
+        print(c)
+        time.sleep(1)
 
+    print('')
     print('*'*50)
     print('* UNIT TESTS')
     print('*'*50)
