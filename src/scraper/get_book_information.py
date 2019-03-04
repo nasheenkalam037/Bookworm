@@ -1,9 +1,12 @@
 import requests
 import urllib
 import re
+import sys
+import traceback
+import base64
 from bs4 import BeautifulSoup
 from selenium import webdriver
-import base64
+from selenium.webdriver.chrome.options import Options
 
 # 'https://www.amazon.ca/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords=REPLACE'
 AMAZON_SEARCH_URL = 'https://www.amazon.ca/s/ref=nb_sb_noss'
@@ -32,15 +35,16 @@ session = None
 driver = None
 
 
-def grab_url_request(url, headers=DEFAULT_HEADERS, params=None, return_soup=False, webdriver=False):
+def grab_url_request(url, headers=DEFAULT_HEADERS, params=None, return_soup=False, use_webdriver=False):
     global session
     global driver
 
-    if webdriver:
+    if use_webdriver:
         if not driver:
-            options = webdriver.ChromeOptions()
+            chrome_options = Options()
+            chrome_options.add_argument("--log-level=3")
             # options.add_argument("headless")  # remove this line if you want to see the browser popup
-            driver = webdriver.Chrome(chrome_options=options)
+            driver = webdriver.Chrome(options=chrome_options)
         driver.get(url)
 
         soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -71,7 +75,6 @@ def search_amazon_for_book(thread_id, book_title, book_author):
 
     Returns string | None
     '''
-    global driver
     try:
 
         url = AMAZON_SEARCH_URL + '?' + urllib.parse.urlencode({
@@ -80,7 +83,7 @@ def search_amazon_for_book(thread_id, book_title, book_author):
         })
         # print(url)
 
-        soup, r = grab_url_request(url, return_soup=True, webdriver=True)
+        soup = grab_url_request(url, return_soup=True, use_webdriver=True)
 
         p = re.compile(r"/[a-zA-Z\-]+/dp/[0-9]+/")
 
@@ -106,6 +109,7 @@ def search_amazon_for_book(thread_id, book_title, book_author):
 
     except Exception as error:
         print(f'[Thread {thread_id}] An Error occurred while trying to search for', book_title, error)
+        traceback.print_exc(limit=2, file=sys.stdout)
         return None
 
 
@@ -247,7 +251,7 @@ def get_amazon_book_cover(thread_id, book_url, filename, folder):
 
         if len(book_cover_url) != 1:
             print(f'[Thread {thread_id}] Switching to Chrome because of captcha', book_url)
-            soup = grab_url_request(book_url, webdriver=True)
+            soup = grab_url_request(book_url, use_webdriver=True)
 
 
         book_cover_url = soup.select('#imageBlock img')
