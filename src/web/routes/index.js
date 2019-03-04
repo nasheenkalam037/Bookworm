@@ -49,7 +49,7 @@ router.get('/', async function(req, res, next) {
   });
 });
 
-sql_book_details = 'SELECT * FROM "BookDetails" WHERE book_id = $1 LIMIT 1';
+sql_book_details = 'SELECT * FROM "Books" WHERE book_id = $1 LIMIT 1';
 sql_book_authors =
   'SELECT * FROM "Author" as a INNER JOIN "AuthorBooks" ab on ' +
   'a.author_id = ab.author_id WHERE ab.book_id = $1';
