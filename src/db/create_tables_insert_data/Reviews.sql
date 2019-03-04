@@ -17,28 +17,6 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- TOC entry 3210 (class 1262 OID 19272)
--- Name: ece651; Type: DATABASE; Schema: -; Owner: s.n.azim
---
-
-CREATE DATABASE ece651 WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
-
-
-ALTER DATABASE ece651 OWNER TO "s.n.azim";
-
-\connect ece651
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -55,9 +33,6 @@ CREATE TABLE public."Reviews" (
     rating integer NOT NULL,
     review text
 );
-
-
-ALTER TABLE public."Reviews" OWNER TO "s.n.azim";
 
 --
 -- TOC entry 3204 (class 0 OID 19314)
@@ -559,49 +534,3 @@ INSERT INTO public."Reviews" (review_id, user_id, book_id, rating, review) VALUE
 INSERT INTO public."Reviews" (review_id, user_id, book_id, rating, review) VALUES (2899, 2236, 833, 5, 'I hate to give out fives, cause five means perfect, but this is. It is a book that you can''t put down. Not only does it contain a great, exciting adventure, but also it unlocks a new place in the World of Redwall that holds a key spot. I recommend it to anybody who likes to read between the ages of Ten and Fifty. You might think that a book about animals running around would be childish, but it isn''t. Young kids have trouble comprehending the older kid/adult-directed words, and the story is great. Believe me. Try a book from this series, no matter who you are. This is a great book to start with, because it has such a great stroy and such a thrilling adventure.');
 INSERT INTO public."Reviews" (review_id, user_id, book_id, rating, review) VALUES (2900, 2237, 833, 5, 'I got this book for my birthday and when I read the first page, I knew that this book was going to be one of my favorites. It''s so fun,exciting,and has non-stop action!!! It''s about a badgermaid called Mara and she''s tired of being cooped up in Salamandastron(Salamandastron is a mountain). She was adopted by Lord Urthstripe,the badger who rules Salamandastron. Mara and her hare friend, Pikkle Ffolger runs away from the mountain. Then, an evil weasel assasin named Ferahgo attacks the mountain because (of course) he wants it and the badger treasure he heard of. He''s so EVIL!! This is a book you''ll just HAVE to read!! You''ll really love it! It''s just perfect!');
 INSERT INTO public."Reviews" (review_id, user_id, book_id, rating, review) VALUES (2901, 2238, 833, 5, 'I loved this book!  It was the greatest one in the series.  The characters are fun, the plot is great (the treasure idea was good, and the villain was very villainous).  For some reason, Jacques latter works are not as good as  his earlier ones; they are still good, don''t get me wrong.  Its just that  he spends less time on the characters and details than he used to.  Anyway,  this is the best, and then there''s Martin the Warrior, which is WONDERFUL.  Read both of them.  Then read the WHOLE SERIES!');
-
-
---
--- TOC entry 3079 (class 2606 OID 19413)
--- Name: Reviews Reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."Reviews"
-    ADD CONSTRAINT "Reviews_pkey" PRIMARY KEY (review_id);
-
-
---
--- TOC entry 3080 (class 2606 OID 19431)
--- Name: Reviews book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."Reviews"
-    ADD CONSTRAINT book_id_fk FOREIGN KEY (book_id) REFERENCES public."Books"(book_id);
-
-
---
--- TOC entry 3081 (class 2606 OID 19461)
--- Name: Reviews user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."Reviews"
-    ADD CONSTRAINT user_id_fk FOREIGN KEY (user_id) REFERENCES public."Users"(user_id);
-
-
---
--- TOC entry 3211 (class 0 OID 0)
--- Dependencies: 208
--- Name: TABLE "Reviews"; Type: ACL; Schema: public; Owner: s.n.azim
---
-
-GRANT ALL ON TABLE public."Reviews" TO ece651_ml;
-GRANT ALL ON TABLE public."Reviews" TO ece651_web;
-GRANT ALL ON TABLE public."Reviews" TO ece651_scraper;
-
-
--- Completed on 2019-03-03 10:26:56 EST
-
---
--- PostgreSQL database dump complete
---
-

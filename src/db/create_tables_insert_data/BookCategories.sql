@@ -17,28 +17,6 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- TOC entry 3209 (class 1262 OID 19272)
--- Name: ece651; Type: DATABASE; Schema: -; Owner: s.n.azim
---
-
-CREATE DATABASE ece651 WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
-
-
-ALTER DATABASE ece651 OWNER TO "s.n.azim";
-
-\connect ece651
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -52,9 +30,6 @@ CREATE TABLE public."BookCategories" (
     book_id integer NOT NULL,
     category_id integer NOT NULL
 );
-
-
-ALTER TABLE public."BookCategories" OWNER TO "s.n.azim";
 
 --
 -- TOC entry 3203 (class 0 OID 19288)
@@ -3379,49 +3354,3 @@ INSERT INTO public."BookCategories" (book_id, category_id) VALUES (840, 563);
 INSERT INTO public."BookCategories" (book_id, category_id) VALUES (840, 253);
 INSERT INTO public."BookCategories" (book_id, category_id) VALUES (840, 152);
 INSERT INTO public."BookCategories" (book_id, category_id) VALUES (840, 142);
-
-
---
--- TOC entry 3078 (class 2606 OID 19407)
--- Name: BookCategories Book_Category_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."BookCategories"
-    ADD CONSTRAINT "Book_Category_pkey" PRIMARY KEY (book_id, category_id);
-
-
---
--- TOC entry 3079 (class 2606 OID 19436)
--- Name: BookCategories book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."BookCategories"
-    ADD CONSTRAINT book_id_fk FOREIGN KEY (book_id) REFERENCES public."Books"(book_id);
-
-
---
--- TOC entry 3080 (class 2606 OID 19456)
--- Name: BookCategories category_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."BookCategories"
-    ADD CONSTRAINT category_id_fk FOREIGN KEY (category_id) REFERENCES public."Categories"(categories_id);
-
-
---
--- TOC entry 3210 (class 0 OID 0)
--- Dependencies: 200
--- Name: TABLE "BookCategories"; Type: ACL; Schema: public; Owner: s.n.azim
---
-
-GRANT ALL ON TABLE public."BookCategories" TO ece651_ml;
-GRANT ALL ON TABLE public."BookCategories" TO ece651_web;
-GRANT ALL ON TABLE public."BookCategories" TO ece651_scraper;
-
-
--- Completed on 2019-03-03 10:25:29 EST
-
---
--- PostgreSQL database dump complete
---
-

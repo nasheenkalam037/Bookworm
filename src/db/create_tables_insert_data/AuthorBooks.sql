@@ -17,28 +17,6 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- TOC entry 3209 (class 1262 OID 19272)
--- Name: ece651; Type: DATABASE; Schema: -; Owner: s.n.azim
---
-
-CREATE DATABASE ece651 WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
-
-
-ALTER DATABASE ece651 OWNER TO "s.n.azim";
-
-\connect ece651
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -52,9 +30,6 @@ CREATE TABLE public."AuthorBooks" (
     author_id integer NOT NULL,
     book_id integer NOT NULL
 );
-
-
-ALTER TABLE public."AuthorBooks" OWNER TO "s.n.azim";
 
 --
 -- TOC entry 3203 (class 0 OID 19285)
@@ -768,49 +743,3 @@ INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (1043, 837);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (406, 838);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (406, 839);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (406, 840);
-
-
---
--- TOC entry 3078 (class 2606 OID 19401)
--- Name: AuthorBooks AuthorBooks_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."AuthorBooks"
-    ADD CONSTRAINT "AuthorBooks_pkey" PRIMARY KEY (author_id, book_id);
-
-
---
--- TOC entry 3079 (class 2606 OID 19426)
--- Name: AuthorBooks author_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."AuthorBooks"
-    ADD CONSTRAINT author_id_fk FOREIGN KEY (author_id) REFERENCES public."Author"(author_id);
-
-
---
--- TOC entry 3080 (class 2606 OID 19446)
--- Name: AuthorBooks book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."AuthorBooks"
-    ADD CONSTRAINT book_id_fk FOREIGN KEY (book_id) REFERENCES public."Books"(book_id);
-
-
---
--- TOC entry 3210 (class 0 OID 0)
--- Dependencies: 199
--- Name: TABLE "AuthorBooks"; Type: ACL; Schema: public; Owner: s.n.azim
---
-
-GRANT ALL ON TABLE public."AuthorBooks" TO ece651_ml;
-GRANT ALL ON TABLE public."AuthorBooks" TO ece651_web;
-GRANT ALL ON TABLE public."AuthorBooks" TO ece651_scraper;
-
-
--- Completed on 2019-03-03 10:25:08 EST
-
---
--- PostgreSQL database dump complete
---
-

@@ -17,28 +17,6 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- TOC entry 3208 (class 1262 OID 19272)
--- Name: ece651; Type: DATABASE; Schema: -; Owner: s.n.azim
---
-
-CREATE DATABASE ece651 WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
-
-
-ALTER DATABASE ece651 OWNER TO "s.n.azim";
-
-\connect ece651
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -56,9 +34,6 @@ CREATE TABLE public."AmazonDetails" (
     price numeric,
     num_reviews numeric
 );
-
-
-ALTER TABLE public."AmazonDetails" OWNER TO "s.n.azim";
 
 --
 -- TOC entry 3202 (class 0 OID 19273)
@@ -616,40 +591,3 @@ INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price,
 INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price, num_reviews) VALUES (839, 'https://www.amazon.ca/Frogkisser-Garth-Nix/dp/1338052098/', 5.0, ' The last thing she needs is a prince. The first thing she needs is some magic.Poor Princess Anya. Forced to live with her evil stepmother''s new husband, her evil stepstepfather.Plagued with an unfortunate ability to break curses with a magic-assisted kiss. And forced to go on the run when her stepstepfather decides to make the kingdom entirely his own. Aided by a loyal talking dog, a boy thief trapped in the body of a newt, and some extraordinarily mischievous wizards, Anya sets off on a Quest that, if she plays it right, will ultimately free her land!  With Frogkisser!, acclaimed bestselling author Garth Nix has conjured a fantastical tale for all ages, full of laughs and danger, surprises and delights, and an immense population of frogs. It''s 50% fairy tale, 50% fantasy, and 100% pure enjoyment from start to finish.', 13.99, NULL);
 INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price, num_reviews) VALUES (840, 'https://www.amazon.ca/Shades-Children-Garth-Nix/dp/0060273240/', 4.5, ' From renowned fantasy author of the Old Kingdom series, Garth Nix, comes a dystopian fantasy perfect for fans of Hunger Games and Divergent.Imagine a world where your fourteenth birthday is your last and where even your protector may not be trusted….In a futuristic urban wasteland, evil Overlords have decreed that no human shall live a day past their fourteenth birthday. On that Sad Birthday, the children of the Dorms are taken to the Meat Factory, where they will be made into creatures whose sole purpose is to kill.The mysterious Shade—once a man, but now more like the machines he fights—recruits the few teenagers who escape into a secret resistance force. With luck, cunning, and skill, four of Shade''s children come closer than any to discovering the source of the Overlords'' power—and the key to their downfall. But the closer they get, the more ruthless Shade seems to become.', 12.19, 65);
 INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price, num_reviews) VALUES (23, 'https://www.amazon.ca/Macbeth-William-Shakespeare/dp/0486278026/ref=sr_1_2?keywords=Macbeth&qid=1551114583&s=books&sr=1-2', 4.4, ' Macbeth is one of Shakespeare''s most performed and studied tragedies. This major new Arden edition offers students detailed on-page commentary notes highlighting meaning and theatrical ideas and themes, as well as an illustrated, lengthy introduction setting the play in its historical, theatrical and critical context and outlining the recent debates about Middleton''s possible co-authorship of some scenes.A comprehensive and informative edition ideal for students and teachers seeking to explore the play in depth, whether in the classroom or on the stage.', 17.92, 854);
-
-
---
--- TOC entry 3078 (class 2606 OID 19399)
--- Name: AmazonDetails AmazonDetails_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."AmazonDetails"
-    ADD CONSTRAINT "AmazonDetails_pkey" PRIMARY KEY (book_id);
-
-
---
--- TOC entry 3079 (class 2606 OID 19441)
--- Name: AmazonDetails book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."AmazonDetails"
-    ADD CONSTRAINT book_id_fk FOREIGN KEY (book_id) REFERENCES public."Books"(book_id);
-
-
---
--- TOC entry 3209 (class 0 OID 0)
--- Dependencies: 196
--- Name: TABLE "AmazonDetails"; Type: ACL; Schema: public; Owner: s.n.azim
---
-
-GRANT ALL ON TABLE public."AmazonDetails" TO ece651_ml;
-GRANT ALL ON TABLE public."AmazonDetails" TO ece651_web;
-GRANT ALL ON TABLE public."AmazonDetails" TO ece651_scraper;
-
-
--- Completed on 2019-03-03 10:23:34 EST
-
---
--- PostgreSQL database dump complete
---
-

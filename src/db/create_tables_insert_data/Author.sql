@@ -17,28 +17,6 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- TOC entry 3210 (class 1262 OID 19272)
--- Name: ece651; Type: DATABASE; Schema: -; Owner: s.n.azim
---
-
-CREATE DATABASE ece651 WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
-
-
-ALTER DATABASE ece651 OWNER TO "s.n.azim";
-
-\connect ece651
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -52,9 +30,6 @@ CREATE TABLE public."Author" (
     author_id integer DEFAULT nextval('public."Author_author_id_sequence"'::regclass) NOT NULL,
     name character varying(200) NOT NULL
 );
-
-
-ALTER TABLE public."Author" OWNER TO "s.n.azim";
 
 --
 -- TOC entry 3204 (class 0 OID 19281)
@@ -379,40 +354,3 @@ INSERT INTO public."Author" (author_id, name) VALUES (1017, 'Jay Allan');
 INSERT INTO public."Author" (author_id, name) VALUES (1020, 'Robert Galbraith');
 INSERT INTO public."Author" (author_id, name) VALUES (1036, 'Sean Williams');
 INSERT INTO public."Author" (author_id, name) VALUES (1043, 'Brian Jacques');
-
-
---
--- TOC entry 3079 (class 2606 OID 19403)
--- Name: Author Author_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."Author"
-    ADD CONSTRAINT "Author_pkey" PRIMARY KEY (author_id);
-
-
---
--- TOC entry 3081 (class 2606 OID 19425)
--- Name: Author unique_author_name; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."Author"
-    ADD CONSTRAINT unique_author_name UNIQUE (name);
-
-
---
--- TOC entry 3211 (class 0 OID 0)
--- Dependencies: 198
--- Name: TABLE "Author"; Type: ACL; Schema: public; Owner: s.n.azim
---
-
-GRANT ALL ON TABLE public."Author" TO ece651_ml;
-GRANT ALL ON TABLE public."Author" TO ece651_web;
-GRANT ALL ON TABLE public."Author" TO ece651_scraper;
-
-
--- Completed on 2019-03-03 10:24:46 EST
-
---
--- PostgreSQL database dump complete
---
-

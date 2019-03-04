@@ -17,28 +17,6 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- TOC entry 3212 (class 1262 OID 19272)
--- Name: ece651; Type: DATABASE; Schema: -; Owner: s.n.azim
---
-
-CREATE DATABASE ece651 WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
-
-
-ALTER DATABASE ece651 OWNER TO "s.n.azim";
-
-\connect ece651
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -60,9 +38,6 @@ CREATE TABLE public."Books" (
     isbn13 character varying(15),
     synopsis text
 );
-
-
-ALTER TABLE public."Books" OWNER TO "s.n.azim";
 
 --
 -- TOC entry 3206 (class 0 OID 19299)
@@ -620,49 +595,3 @@ INSERT INTO public."Books" (book_id, title, series, series_position, pages, publ
 INSERT INTO public."Books" (book_id, title, series, series_position, pages, publisher, orig_published_date, isbn10, isbn13, synopsis) VALUES (838, 'Goldenhand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, ' The long-awaited fifth installment in Garth Nix’s New York Times bestselling Old Kingdom series, for readers who enjoy series by Rae Carson, Kristin Cashore, Scott Westerfeld, and Cassandra Clare.Goldenhand takes place six months after the events of Abhorsen and follows the novella Nicholas Sayre and the Creature in the Case, which is featured in Across the Wall.Lirael lost one of her hands in the binding of Orannis, but now she has a new hand, one of gilded steel and Charter Magic.On a dangerous journey, Lirael returns to her childhood home, the Clayr’s Glacier, where she was once a Second Assistant Librarian. There, a young woman from the distant North brings her a message from her long-dead mother, Arielle.It is a warning about the Witch with No Face. But who is the Witch, and what is she planning? Lirael must use her new powers to save the Old Kingdom from this great danger—and it must be forestalled not only in the living world but also in the cold, remorseless river of Death.');
 INSERT INTO public."Books" (book_id, title, series, series_position, pages, publisher, orig_published_date, isbn10, isbn13, synopsis) VALUES (839, 'Frogkisser!', NULL, NULL, NULL, NULL, NULL, NULL, NULL, ' The last thing she needs is a prince. The first thing she needs is some magic.Poor Princess Anya. Forced to live with her evil stepmother''s new husband, her evil stepstepfather.Plagued with an unfortunate ability to break curses with a magic-assisted kiss. And forced to go on the run when her stepstepfather decides to make the kingdom entirely his own. Aided by a loyal talking dog, a boy thief trapped in the body of a newt, and some extraordinarily mischievous wizards, Anya sets off on a Quest that, if she plays it right, will ultimately free her land!  With Frogkisser!, acclaimed bestselling author Garth Nix has conjured a fantastical tale for all ages, full of laughs and danger, surprises and delights, and an immense population of frogs. It''s 50% fairy tale, 50% fantasy, and 100% pure enjoyment from start to finish.');
 INSERT INTO public."Books" (book_id, title, series, series_position, pages, publisher, orig_published_date, isbn10, isbn13, synopsis) VALUES (840, 'Shade''s Children', NULL, NULL, 320, NULL, NULL, '0060273240', '978-0060273248', ' From renowned fantasy author of the Old Kingdom series, Garth Nix, comes a dystopian fantasy perfect for fans of Hunger Games and Divergent.Imagine a world where your fourteenth birthday is your last and where even your protector may not be trusted….In a futuristic urban wasteland, evil Overlords have decreed that no human shall live a day past their fourteenth birthday. On that Sad Birthday, the children of the Dorms are taken to the Meat Factory, where they will be made into creatures whose sole purpose is to kill.The mysterious Shade—once a man, but now more like the machines he fights—recruits the few teenagers who escape into a secret resistance force. With luck, cunning, and skill, four of Shade''s children come closer than any to discovering the source of the Overlords'' power—and the key to their downfall. But the closer they get, the more ruthless Shade seems to become.');
-
-
---
--- TOC entry 3079 (class 2606 OID 19409)
--- Name: Books Books_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."Books"
-    ADD CONSTRAINT "Books_pkey" PRIMARY KEY (book_id);
-
-
---
--- TOC entry 3081 (class 2606 OID 19421)
--- Name: Books unique_isbn10; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."Books"
-    ADD CONSTRAINT unique_isbn10 UNIQUE (isbn10);
-
-
---
--- TOC entry 3083 (class 2606 OID 19423)
--- Name: Books unique_isbn13; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."Books"
-    ADD CONSTRAINT unique_isbn13 UNIQUE (isbn13);
-
-
---
--- TOC entry 3213 (class 0 OID 0)
--- Dependencies: 204
--- Name: TABLE "Books"; Type: ACL; Schema: public; Owner: s.n.azim
---
-
-GRANT ALL ON TABLE public."Books" TO ece651_ml;
-GRANT ALL ON TABLE public."Books" TO ece651_web;
-GRANT ALL ON TABLE public."Books" TO ece651_scraper;
-
-
--- Completed on 2019-03-03 10:26:15 EST
-
---
--- PostgreSQL database dump complete
---
-

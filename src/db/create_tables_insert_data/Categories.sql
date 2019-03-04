@@ -31,9 +31,6 @@ CREATE TABLE public."Categories" (
     name character varying(100) NOT NULL
 );
 
-
-ALTER TABLE public."Categories" OWNER TO "s.n.azim";
-
 --
 -- TOC entry 3204 (class 0 OID 19308)
 -- Dependencies: 206
@@ -383,40 +380,3 @@ COPY public."Categories" (categories_id, name) FROM stdin;
 3034	Men's Adventure
 3087	Murder
 \.
-
-
---
--- TOC entry 3079 (class 2606 OID 19411)
--- Name: Categories Categories_pkey; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."Categories"
-    ADD CONSTRAINT "Categories_pkey" PRIMARY KEY (categories_id);
-
-
---
--- TOC entry 3081 (class 2606 OID 19417)
--- Name: Categories unique_cat_name; Type: CONSTRAINT; Schema: public; Owner: s.n.azim
---
-
-ALTER TABLE ONLY public."Categories"
-    ADD CONSTRAINT unique_cat_name UNIQUE (name);
-
-
---
--- TOC entry 3210 (class 0 OID 0)
--- Dependencies: 206
--- Name: TABLE "Categories"; Type: ACL; Schema: public; Owner: s.n.azim
---
-
-GRANT ALL ON TABLE public."Categories" TO ece651_ml;
-GRANT ALL ON TABLE public."Categories" TO ece651_web;
-GRANT ALL ON TABLE public."Categories" TO ece651_scraper;
-
-
--- Completed on 2019-03-03 10:26:33 EST
-
---
--- PostgreSQL database dump complete
---
-
