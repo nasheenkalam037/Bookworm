@@ -26,8 +26,8 @@ elem.send_keys("bookworm123")
 login=driver.find_element_by_id("login")
 login.click()
 
-if len(driver.find_elements_by_class_name('error')) >0:
-    print ("Test Failed: Username and Password combination mismatch")
+if len(driver.find_elements_by_class_name('error')) > 0:
+    print ("Test Passed: Error - Username and Password combination mismatch")
 
     elem = driver.find_element_by_id("email")
     elem.send_keys("automation_test@gmail.com")
@@ -40,15 +40,18 @@ if len(driver.find_elements_by_class_name('error')) >0:
 
     if len(driver.find_elements_by_xpath("//*[contains(text(), 'Hello Automation User')]")) > 0:
         #driver.implicitly_wait(200)
-        print ("Test Passed")
+        print ("Test Passed : signin completed")
     else:
-        print("User not found")
+        print("Test Failed: User not found")
 
 
 # elif len(driver.find_elements_by_xpath("//*[contains(text(), 'An error occurred when trying to setup an account')]")) >0:
 #      print ("Test Failed: Username and Password combination mismatch")
 
 else:
-    print ("Test Failed")
+    if len(driver.find_elements_by_xpath("//*[contains(text(), 'Hello Automation User')]")) > 0:
+        print ("Test Passed: signin completed")
+    else:
+        print ("Test Failed: Something went wrong")
 
 driver.quit()

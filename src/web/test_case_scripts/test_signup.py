@@ -27,7 +27,7 @@ signup.click()
 
 
 if len(driver.find_elements_by_xpath ("//*[contains(., 'do not match')]"))>0:
-    print ("Invalid Input")
+    print ("Test Passed - Invalid Input")
     elem = driver.find_element_by_id("fullname")
     elem.send_keys("Test User06")
 
@@ -47,10 +47,10 @@ if len(driver.find_elements_by_xpath ("//*[contains(., 'do not match')]"))>0:
         print ("Test Passed: User created")
 
     elif len(driver.find_elements_by_xpath("//*[contains(.,'did you forget')]")) > 0:
-        print("User Already Exists")
+        print("Test Passed: Error - User Already Exists")
 
 elif len(driver.find_elements_by_xpath ("//*[contains(., 'Duplicate Email found in table')]"))>0:
-    print("User Already Exists")
+    print("Test Passed - User Already Exists")
 
 else:
     print ("Test Failed")
