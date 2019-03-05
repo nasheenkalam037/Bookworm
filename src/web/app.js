@@ -54,6 +54,8 @@ app.use(function(err, req, res, next) {
 
   if (req.originalUrl.startsWith('/images/book_covers/')) {
     res.redirect('/images/book_cover_placeholder.png');
+  } else if (req.originalUrl.startsWith('/images/authors/')) {
+    res.redirect('/images/author_placeholder.png');
   } else {
     // render the error page
     res.status(err.status || 500);

@@ -75,7 +75,56 @@ router.get('/book/:bookId(\\d+)/:bookTitle', async function(req, res, next) {
     // render the error page
     res.status(404);
     res.render('error', {
-      message: 'We are sorry, the book you are searching for could not be found.',
+      message:
+        'We are sorry, the book you are searching for could not be found.'
+    });
+  }
+});
+
+
+sql_author_details = 'SELECT * FROM "Author" WHERE author_id = $1';
+sql_author_books =
+  'SELECT * FROM "BookDetails" ' +
+  'WHERE book_id in ( '+
+  'SELECT book_id FROM "AuthorBooks" WHERE author_id = $1 ' +
+  ') ORDER BY book_id ASC';
+sql_coauthors =
+  'SELECT distinct a.* FROM "Author" as a ' +
+  'INNER JOIN "AuthorBooks" ab on a.author_id = ab.author_id ' +
+  'WHERE ab.book_id in ( ' +
+  'SELECT book_id FROM "AuthorBooks" WHERE author_id = $1 ' +
+  ') AND ab.author_id != $1';
+/* GET book details page. */
+router.get('/author/:authorId(\\d+)/:authorName', async function(
+  req,
+  res,
+  next
+) {
+  var { rows } = await db.query(sql_author_details, [req.params['authorId']]);
+  if (rows.length > 0) {
+    author_name = rows[0]['name'];
+    author_id = rows[0]['author_id'];
+    
+    var { rows } = await db.query(sql_author_books, [req.params['authorId']]);
+    books = rows;
+
+    var { rows } = await db.query(sql_coauthors, [req.params['authorId']]);
+    coauthors = rows;
+
+    res.render('author', {
+      title: 'The Bookworm',
+      user: req.session.user ? req.session.user : null,
+      author_id: author_id,
+      author_name: author_name,
+      coauthors: coauthors,
+      books: books
+    });
+  } else {
+    // render the error page
+    res.status(404);
+    res.render('error', {
+      message:
+        'We are sorry, the book you are searching for could not be found.'
     });
   }
 });

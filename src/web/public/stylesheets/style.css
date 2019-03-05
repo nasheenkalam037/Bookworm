@@ -379,6 +379,11 @@ nav ul {
 }
 
 article {
+  padding: 20px;
+  width: 100%;
+  /* background-color: #f1f1f1; */
+}
+article#landing_page {
   float: left;
   padding: 20px;
   width: 75%;
