@@ -58,10 +58,10 @@ router.get("/book/:bookId(\\d+)/:bookTitle", function(req, res, next) {
 
 /* GET Search page. */
 
-sql_search = 'SELECT * FROM public."Books" where title like Moss%';
+sql_search = 'SELECT * FROM public."Books" where title like $1';
 /* GET Search page. */
 router.get("/search", async function(req, res, next) {
- var { rows } = await db.query(sql_search);
+ var { rows } = await db.query(sql_search, ['Moss%']);
  console.log(rows);
    res.render("search", {
     title: "The Bookworm Search Page",
