@@ -11,9 +11,10 @@ class TestPostGresConnection(unittest.TestCase):
     def test_webdriver(self):
         options = webdriver.ChromeOptions()
         # options.add_argument("headless")  # remove this line if you want to see the browser popup
-        driver = webdriver.Chrome(chrome_options=options)
+        driver = webdriver.Chrome(options=options)
         url = 'https://www.amazon.ca/Clariel-Lost-Abhorsen-Garth-Nix/dp/0061561576/ref'
         driver.get(url)
+        driver.quit()
 
 
 if __name__ == '__main__':

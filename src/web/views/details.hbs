@@ -1,11 +1,17 @@
 <article id="book_details_page">
     <div class="vert-container">
         <div class="hori-container">
-            <img class="book-cover-lg" src="{{book.book_cover}}"/>
+            <img class="book-cover-lg" src="/images/book_covers/{{book.book_id}}.jpeg"/>
             
             <div class="book-details">
                 <h1 class="no-bottom-pm">{{book.title}}</h1>
-                <p class="font-normal no-top-pm no-bottom-pm">by {{book.authors}}</p>
+                <div class="font-normal no-top-pm no-bottom-pm">by
+                    <ul class="authors">
+                    {{#each book.authors}}
+                        <li><a href="/author/{{this.author_id}}/{{this.name}}">{{this.name}}</a></li>
+                    {{/each}}
+                    </ul>
+                </div>
 
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
@@ -17,38 +23,54 @@
             </div>
         </div>
         
-        <div>
+        {{!-- <div>
             <h4>Book Description</h4>
             <p class="font-normal no-top-pm">{{book.synopsis}}</p>
-        </div>
+        </div> --}}
 
         <div class="product-detail">
             <h4>Book Details</h4>
             <ul class="font-normal no-top-pm">
+                {{#if book.pages}}
                 <li>
                     <b>Print Length:</b>
-                    100 Pages
+                    {{book.pages}} Pages
                 </li>
+                {{/if}}
+                {{#if book.publisher}}
                 <li>
                     <b>Publisher:</b>
-                    Paze Publishing; 1 edition (March 8 2012)
+                    {{book.publisher}}
                 </li>
-                <li>
-                    <b>Genre:</b>
-                    Classic
-                </li>
+                {{/if}}
+                {{#if book.series}}
                 <li>
                     <b>Series:</b>
-                    2
+                    {{book.series}}
                 </li>
+                {{/if}}
+                {{#if book.isbn13}}
                 <li>
                     <b>ISBN-13:</b>
-                    978-0521728768
+                    {{book.isbn13}}
                 </li>
+                {{/if}}
+                {{#if book.isbn10}}
                 <li>
                     <b>ISBN-10:</b>
-                     0521728762
+                    {{book.isbn10}}
                 </li>
+                {{/if}}
+                {{#if book.categories}}
+                <li>
+                    <b>Genres:</b>
+                    <ul class="book_categories">
+                    {{#each book.categories}}
+                        <li><a href="/category/{{this.category_id}}/{{this.name}}">{{this.name}}</a></li>
+                    {{/each}}
+                    </ul>
+                </li>
+                {{/if}}
             </ul>
         </div>
             
