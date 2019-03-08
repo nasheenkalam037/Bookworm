@@ -12,6 +12,11 @@ class TestAmazonRequests(unittest.TestCase):
         if sys.version_info[0] < 3:
             raise Exception("Must be using Python 3")
         self.pp = pprint.PrettyPrinter(indent=4)
+
+    def tearDown(self):
+        getInfo.close()
+        return super().tearDown()
+    
     def test_simple_search(self):
         r = getInfo.grab_url_request(getInfo.AMAZON_SEARCH_URL, return_soup=False)
 
@@ -34,7 +39,7 @@ class TestAmazonRequests(unittest.TestCase):
         # self.pp.pprint(book_info)
 
 
-    def test_search_1984(self):
+    def test_search_Macbeth(self):
         book_url = getInfo.search_amazon_for_book(1,'Macbeth','William Shakespeare')
         getInfo.close()
         self.assertIsNotNone(book_url)
