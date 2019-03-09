@@ -133,16 +133,6 @@ CREATE TABLE public."Categories" (
     name character varying(100) NOT NULL
 );
 
--- TOC entry 208 (class 1259 OID 25159)
--- Name: Reviews_review_id_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
-
-CREATE SEQUENCE public."Reviews_review_id_sequence"
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
 -- TOC entry 199 (class 1259 OID 25074)
 -- Name: Reviews; Type: TABLE; Schema: public; Owner: postgres
 
@@ -6040,12 +6030,6 @@ SELECT pg_catalog.setval('public."Books_book_id_sequence"', 840, true);
 SELECT pg_catalog.setval('public."Categories_categories_id_sequence"', 5226, true);
 
 
--- TOC entry 2938 (class 0 OID 0)
--- Dependencies: 208
--- Name: Reviews_review_id_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
-
-SELECT pg_catalog.setval('public."Reviews_review_id_sequence"', 1, false);
-
 
 -- TOC entry 2939 (class 0 OID 0)
 -- Dependencies: 206
@@ -6107,7 +6091,7 @@ ALTER TABLE ONLY public."Categories"
 -- Name: Reviews Reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 
 ALTER TABLE ONLY public."Reviews"
-    ADD CONSTRAINT "Reviews_pkey" PRIMARY KEY (review_id);
+    ADD CONSTRAINT "Reviews_pkey" PRIMARY KEY (user_id,book_id);
 
 
 -- TOC entry 2748 (class 2606 OID 25068)
@@ -6315,14 +6299,6 @@ GRANT ALL ON TABLE public."Categories" TO ece651_ml;
 GRANT ALL ON TABLE public."Categories" TO ece651_web;
 GRANT ALL ON TABLE public."Categories" TO ece651_scraper;
 
-
--- TOC entry 2930 (class 0 OID 0)
--- Dependencies: 208
--- Name: SEQUENCE "Reviews_review_id_sequence"; Type: ACL; Schema: public; Owner: postgres
-
-GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_scraper;
-GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_ml;
-GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_web;
 
 
 -- TOC entry 2931 (class 0 OID 0)
