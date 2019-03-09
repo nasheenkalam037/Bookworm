@@ -72,27 +72,27 @@ footer {
 .info {
   color: #00529b;
   background-color: #bde5f8;
-  background-image: url("/images/info.png");
+  background-image: url('/images/info.png');
 }
 .success {
   color: #4f8a10;
   background-color: #dff2bf;
-  background-image: url("/images/success.png");
+  background-image: url('/images/success.png');
 }
 .warning {
   color: #9f6000;
   background-color: #feefb3;
-  background-image: url("/images/warning.png");
+  background-image: url('/images/warning.png');
 }
 .error {
   color: #d8000c;
   background-color: #ffbaba;
-  background-image: url("/images/error.png");
+  background-image: url('/images/error.png');
 }
 .validation {
   color: #d63301;
   background-color: #ffccba;
-  background-image: url("/images/validation.png");
+  background-image: url('/images/validation.png');
 }
 /*******************************************************************************************
        Padding/Margins
@@ -292,10 +292,10 @@ ul.authors li {
 }
 
 ul.authors li:after {
-  content: ", ";
+  content: ', ';
 }
 ul.authors li:last-child:after {
-  content: "";
+  content: '';
 }
 
 ul.book_categories {
@@ -309,15 +309,15 @@ ul.book_categories li {
 }
 
 ul.book_categories li:after {
-  font-family: "Font Awesome 5 Free";
-  content: "\f061";
+  font-family: 'Font Awesome 5 Free';
+  content: '\f061';
   display: inline-block;
   padding-left: 3px;
   vertical-align: middle;
   font-weight: 900;
 }
 ul.book_categories li:last-child:after {
-  content: "";
+  content: '';
 }
 /*******************************************************************************************
        REVIEW
@@ -327,11 +327,6 @@ ul.book_categories li:last-child:after {
 }
 .product-detail ul {
   list-style-type: none;
-}
-.review select {
-  position: relative;
-  width: 165px;
-  height: 30px;
 }
 .review {
   flex-grow: 1;
@@ -350,7 +345,7 @@ ul.book_categories li:last-child:after {
   padding-left: 10px;
 }
 .review-comment {
-  width: 300px;
+  width: 100%;
   height: 150px;
   padding: 12px 20px;
   box-sizing: border-box;
@@ -361,6 +356,13 @@ ul.book_categories li:last-child:after {
   color: white;
   padding: 8px 16px;
   margin: 4px 2px;
+}
+.enter-user-review {
+  padding: 10px;
+}
+.enter-user-review .enter-rating {
+  height: 30px;
+  width: 100%;
 }
 /*******************************************************************************************
        RIGHT SIDE
@@ -392,7 +394,7 @@ article#landing_page {
 
 /* Clear floats after the columns */
 section:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }

@@ -1,7 +1,7 @@
 var express = require('express');
-var session = require('express-session');
 var router = express.Router();
 const db = require('../db');
+const user = require('../helpers/user');
 
 my_book = {
   book_id: 21,
@@ -42,7 +42,7 @@ router.get('/', async function(req, res, next) {
 
   res.render('index', {
     title: 'The Bookworm',
-    user: req.session.user ? req.session.user : null,
+    user: user.getUser(req.session),
     bookoftheday: my_book,
     books: rows,
     recommendations: [my_book, my_book, my_book, my_book]
@@ -68,7 +68,7 @@ router.get('/book/:bookId(\\d+)/:bookTitle', async function(req, res, next) {
 
     res.render('details', {
       title: 'The Bookworm',
-      user: req.session.user ? req.session.user : null,
+      user:  user.getUser(req.session),
       book: book
     });
   } else {
@@ -133,7 +133,7 @@ router.get('/author/:authorId(\\d+)/:authorName', async function(
 router.get('/search', function(req, res, next) {
   res.render('search', {
     title: 'The Bookworm Search Page',
-    user: req.session.user ? req.session.user : null,
+    user: user.getUser(req.session),
     books: [my_book, my_book]
   });
 });

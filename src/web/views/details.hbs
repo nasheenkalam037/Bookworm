@@ -78,24 +78,21 @@
             <div class="review">
                 <h4 class="no-bottom-pm">10 Customer Reviews</h4>
                 <p class="no-top-pm">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
+                    {{{getStarHTML 3}}}
                     <span class="font-normal">3.0 out of 5</span>
                 </p>
                 {{#if user}}
-                    <form action="#" method="post">
-                        <p><b>Rate this Book:</b>
-                            <select name="rating">
+                    <form class="enter-user-review" action="#" method="post">
+                        <div>
+                        <b>Rate this Book:</b>
+                            <select class="enter-rating" name="rating">
                                 <option value="1">1 (Hated it)</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5 (Loved it)</option>
                             </select>
-                        </p>
+                        </div>
                         <textarea class="review-comment" placeholder="Tell us what you thought of the book!" name="comments"></textarea>              
                         <div> 
                             <input class="review-btn" type="submit" value="Submit">
@@ -113,11 +110,7 @@
                             <p>Mike</p>
                         </div>
 
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
+                        {{{getStarHTML 2}}}
 
                         <p>June 19 2018</p>
 
@@ -140,11 +133,7 @@
                             <p>Nike</p>
                         </div>
 
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
+                        {{{getStarHTML 4}}}
 
                         <p>June 19 2018</p>
 
