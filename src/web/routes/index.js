@@ -130,11 +130,17 @@ router.get('/author/:authorId(\\d+)/:authorName', async function(
 });
 
 /* GET Search page. */
+sql_search = 'SELECT * FROM public."BookDetails" WHERE title LIKE $1';
 router.get('/search', function(req, res, next) {
+
+  var books = [];
+
+  
+
   res.render('search', {
     title: 'The Bookworm Search Page',
     user: req.session.user ? req.session.user : null,
-    books: [my_book, my_book]
+    books: books
   });
 });
 
