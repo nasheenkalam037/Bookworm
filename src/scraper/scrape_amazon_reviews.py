@@ -11,6 +11,7 @@ from psycopg2.pool import ThreadedConnectionPool
 from config import config
 import get_amazon_review_info as getInfo
 import save_review as setInfo
+import pandas as pd
 
 # Mutex for printing to the console
 print_lock = threading.Lock()
@@ -25,7 +26,45 @@ NUM_THREADS = 1
 
 DEBUG = 0
 
-def worker_thread(thread_id):
+def get_users_books(thread_id, user_books, review_info):
+    for r in review_info:
+        book_id = r['book_id']
+        user_id = r['user_id']                
+        if user_id in user_books:
+            user_books[user_id].append(book_id)
+        else:
+            user_books[user_id] = [book_id]
+
+    for user in user_books: #Find more Books by the Users we already have
+        review = getInfo.fetch_review_from_user_acc(thread_id, user)
+
+        review_info.append(review)
+        
+        if review:
+            for r in review:
+                user_books[user].append(r['book_id'])
+
+    good_users = {}
+    for user in user_books: # Remove all Users with only 1 Book
+        if len(user_books[user]) > 1:
+            good_users[user] = user_books[user]
+    
+    book_users = {}
+    for user in good_users:
+        for book in good_users[user]:
+            if book in book_users:
+                book_users[book].append(user)
+            else:  
+                book_users[book] = [user]
+    
+    good_books = {}
+    for book in book_users: # Remove all Books with only 1 User
+        if len(book_users[book]) > 1:
+            good_books[book] = book_users[book]
+
+    return good_users, good_books, review_info
+
+def worker_thread(thread_id, user_books, good_users, good_books):
     global count
 
     with print_lock:
@@ -43,13 +82,26 @@ def worker_thread(thread_id):
             print(f'[Thread {thread_id}] Working on task')
 
         review_info = getInfo.fetch_review_data(thread_id, book)
+        
         if review_info:
-            conn = tcp.getconn()
-            setInfo.save_user(conn, review_info)
-            tcp.putconn(conn)
+            users, books, review_info = get_users_books(thread_id, user_books, review_info)
+            
+            for user in users:
+                good_users[user] = users[user]
 
-            with shared_mutex:
-                count += 1
+            for book in books:
+                good_books[book] = books[book]
+
+        print("Users reviewed at least 2 Books :", len(good_users))
+        print("Books reviewed by at least 2 Users :", len(good_books))
+        print("All Review info :", len(review_info))
+        # if review_info:
+        #     conn = tcp.getconn()
+        #     setInfo.save_user(conn, review_info)
+        #     tcp.putconn(conn)
+
+        #     with shared_mutex:
+        #         count += 1
 
         book_queue.task_done()
         with print_lock:
@@ -57,6 +109,13 @@ def worker_thread(thread_id):
         time.sleep(SLEEP_TIME)
 
     with print_lock:
+        df = pd.DataFrame(good_books)
+        df.to_csv('output.csv')
+        for book in good_books:
+            print("Book_id: ", book)
+            for user in book:
+                print("User_id: ", user)
+            print("------------------------------")    
         print(f'[Thread {thread_id}] Thread Ended')
 
 def setup_db():
@@ -78,8 +137,11 @@ def scrap_amazon_reviews():
         cur.execute('SELECT book_id, book_link FROM "public"."AmazonDetails"')
         data = cur.fetchall()
 
+        user_books = {}
+        good_users = {}
+        good_books = {}
         for i in range(NUM_THREADS):
-            t = threading.Thread(target=worker_thread, args=(i, ))
+            t = threading.Thread(target=worker_thread, args=(i, user_books, good_users, good_books))
             t.start()
 
         task_num = 1

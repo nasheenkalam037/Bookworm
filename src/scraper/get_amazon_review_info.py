@@ -3,7 +3,11 @@ import urllib
 import re
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 import base64
+
+import scrape_amazon_reviews as scrape
+import pandas as pd
 
 DEFAULT_HEADERS = {
     "Authority":
@@ -29,15 +33,16 @@ DEFAULT_HEADERS = {
 session = None
 driver = None
 
-def grab_url_request(url, headers=DEFAULT_HEADERS, params=None, return_soup=False, webdriver=False):
+def grab_url_request(url, headers=DEFAULT_HEADERS, params=None, return_soup=False, use_webdriver=False):
     global session
     global driver
 
-    if webdriver:
+    if use_webdriver:
         if not driver:
-            options = webdriver.ChromeOptions()
-            # options.add_argument("headless")  # remove this line if you want to see the browser popup
-            driver = webdriver.Chrome(chrome_options=options)
+            chrome_options = Options()
+            chrome_options.add_argument("--log-level=3")
+            chrome_options.add_argument("headless")  # remove this line if you want to see the browser popup
+            driver = webdriver.Chrome(options=chrome_options)
         driver.get(url)
 
         soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -57,12 +62,14 @@ def grab_url_request(url, headers=DEFAULT_HEADERS, params=None, return_soup=Fals
 
 
 def fetch_review_data(thread_id, info):
+    url = "https://www.amazon.com/product-reviews" + info[1].strip().split('dp')[1]
+    
     try:
-        soup, r = grab_url_request(info[1], return_soup=True)
+        soup = grab_url_request(url, return_soup=True, use_webdriver=True)
 
-        if r.status_code != 200:
-            print(f'[Thread {thread_id}] Non 200 Return Code', info, r)
-            return None
+        # if soup.status_code != 200:
+        #     print(f'[Thread {thread_id}] Non 200 Return Code', info, r)
+        #     return None
 
         data = []
         name = None
@@ -70,7 +77,9 @@ def fetch_review_data(thread_id, info):
         review = None
     
         review_node = soup.select('.review')
-        print("book_url: ", info[1])
+        print("book_url: ", url)
+        print('review_node: ', len(review_node))
+        # print(soup.prettify())
 
         if len(review_node) > 0:
             for r in review_node:
@@ -87,9 +96,80 @@ def fetch_review_data(thread_id, info):
 
         return data
     except Exception as error:
-        print(f'[Thread {thread_id}] An Error occurred while trying to read from', info[1], error)
+        print(f'[Thread {thread_id}] An Error occurred while trying to read from', url, error)
         return None
 
+def fetch_review_from_user_acc(thread_id, user_id):
+    url = "https://www.amazon.com/gp/profile/amzn1.account." + user_id
+    
+    try:
+        soup = grab_url_request(url, return_soup=True, use_webdriver=True)
+
+        review_node = soup.select('.desktop')
+        print(user_id, ' desk: ', len(review_node))
+        data = []
+
+        if len(review_node) > 0:
+            for r in review_node:
+                prod_link = r.select('.profile-at-content div .profile-at-product-box-link')
+                
+                if len(prod_link) > 0:
+                    prod_id = prod_link[0]['href'].strip().split('dp/')[1].split('?')[0]
+                    # print("prod_link: ", prod_link[0]['href'])
+                    p = re.compile(r'[0-9]+')
+                    
+                    name = None
+                    rating = None
+                    review = None
+
+                    if p.match(prod_id) != None:
+                        print("book_id: ", prod_link[0]['href'])
+                        name = r.select('.a-profile-name')[0].text
+                        rating = float(r.select('.profile-at-review-stars span')[0].text.split(' ')[0])
+                        review = r.select('.profile-at-review-text-desktop')[0].text
+                        
+                        data.append({"book_id": prod_link[0]['href'],
+                                    "user_id": user_id,
+                                    "name":  name,
+                                    "rating": rating,
+                                    "review": review})
+                        
+        return data
+
+    except Exception as error:
+        print(f'[Thread {thread_id}] An Error occurred while trying to read from', url, error)
+        return None 
+
+
 if __name__ == "__main__":
-    book_url = "https://www.amazon.ca/Constants-Nature-Omega-Numbers-Universe/dp/0375422218/"
-    print(fetch_review_data(1, [1, book_url]))
+    book_url = ["https://www.amazon.com/Rise-Fall-D-D-Novel-ebook/dp/B01M0HPHR6?ref=pf_vv_at_pdctrvw_dp",
+                "https://www.amazon.com/Harry-Potter-Paperback-Box-Books/dp/0545162076/ref=sr_1_1?crid=1NN10PFINJXBU&keywords=harry+potter+books&qid=1552116615&s=gateway&sprefix=Harry%2Caps%2C195&sr=8-1"
+                ]
+    # print(fetch_review_data(1, [1, book_url]))
+    user_books = {}
+    global good_users
+    global good_books
+
+    good_users = []
+    good_books = []
+    i = 10
+    for url in book_url:
+        review_info = fetch_review_data(1, [i, url])
+        print("review_info: ", review_info)
+        i = i + 1
+        if review_info:
+            users, books, review_info = scrape.get_users_books(1, user_books, review_info)
+            good_users.append(users)
+            good_books.append(books)
+
+        print("user_book: ", user_books)
+        print("------------------------------")
+        print("good_users: ", users)
+        print("------------------------------")
+        print("good_books: ", books)
+        print("------------------------------")
+    
+    print("user_book: ", user_books)
+    df = pd.DataFrame(good_books)
+    df.to_csv('output.csv')
+    # print(fetch_review_from_user_acc(1, 'AGCA245YOLVH3P3U2GK6LYAFFKUA'))
