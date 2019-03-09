@@ -10,6 +10,9 @@ module.exports = {
     bar: function(){
       return "BAR!";
     },
+    escapeQuotes: function(variable){
+      return variable.replace(/(['"])/g, '\\$1');;
+    },
     formatDate: function(date) {
       return dateFormat(date, "ddd, mmm dS, yyyy, h:MM:ss TT");
     },
