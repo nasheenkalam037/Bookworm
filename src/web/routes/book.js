@@ -24,6 +24,18 @@ async function getBook(bookId) {
     book['authors'] = authors.rows;
     book['categories'] = categories.rows;
     book['reviews'] = reviews.rows;
+    book['num_reviews'] = book['reviews'].length;
+
+    if (book['num_reviews'] > 0) {
+      var avg = 0.0;
+      for (r in book['reviews']) {
+        // console.log(r, book['reviews'][r], book['reviews'][r]['rating']);
+        avg = avg + parseFloat(book['reviews'][r]['rating']);
+      }
+      book['avg_rating'] = avg / book['num_reviews'];
+    } else {
+      book['avg_rating'] = 0;
+    }
   } else {
     book = null;
   }
@@ -93,6 +105,10 @@ router.post('/:bookId(\\d+)/:bookTitle', async function(req, res, next) {
     if (myuser && 'book_id' in p && 'review_comment' in p && 'rating' in p) {
       if (p.book_id == req.params['bookId']) {
         success = await saveReview(req.params['bookId'], myuser.user_id, p.rating, p.review_comment);
+        if (success) {
+          // Get updated book details + reviews
+          book = await getBook(req.params['bookId']);
+        }
       } else {
         console.error('The hidden book id does not match the requested book id', p, req.params);
       }

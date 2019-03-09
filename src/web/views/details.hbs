@@ -4,7 +4,7 @@
             <img class="book-cover-lg" src="/images/book_covers/{{book.book_id}}.jpeg" />
 
             <div class="book-details">
-                <h1 class="no-bottom-pm">{{book.title}}</h1>
+                <h1 class="no-bottom-pm  no-top-pm">{{book.title}}</h1>
                 <div class="font-normal no-top-pm no-bottom-pm">by
                     <ul class="authors">
                         {{#each book.authors}}
@@ -12,12 +12,6 @@
                         {{/each}}
                     </ul>
                 </div>
-
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
 
                 <p class="font-normal">{{book.synopsis}}</p>
             </div>
@@ -76,10 +70,10 @@
 
         <div class="flex-container">
             <div class="submit-review">
-                <h4 class="no-bottom-pm">10 Customer Reviews</h4>
+                <h4 class="no-bottom-pm">{{book.num_reviews}} Customer Reviews</h4>
                 <p class="no-top-pm">
-                    {{{getStarHTML 3}}}
-                    <span class="font-normal">3.0 out of 5</span>
+                    {{{getStarHTML book.avg_rating}}}
+                    <span class="font-normal">{{book.avg_rating}} out of 5</span>
                 </p>
                 {{#if user}}
                     <form class="enter-user-review" action="#" method="post">
@@ -119,18 +113,18 @@
                     <ul class="font-normal">
                         {{#each book.reviews}}
                             <li>
-                                <div class="hori-container">
+                                <div class="flex-center-align">
                                     <img src="/images/user_avatars/{{this.user_id}}.png" />
-                                    <p>{{this.display_name}}</p>
+                                    <span>{{this.display_name}}</span>
                                 </div>
 
                                 {{{getStarHTML this.rating}}}
 
-                                <p>{{formatDate this.date_created}}</p>
+                                <div class="font-small">{{formatDate this.date_created}}</div>
 
-                                <p>
+                                <div class="user-review-text">
                                     {{this.review}}
-                                </p>
+                                </div>
                             </li>
                         {{/each}}
                     </ul>

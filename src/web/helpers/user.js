@@ -9,7 +9,8 @@ debug_user = {
   login_allowed: 0
 };
 
-always_logged_in = true;
+// Set this to true, if you want to always be logged in as a debug user
+always_logged_in = false;
 
 
 
