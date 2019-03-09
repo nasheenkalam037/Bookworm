@@ -30,6 +30,10 @@ a {
   text-align: center;
 }
 
+.full-width {
+  width: 100%;
+}
+
 section {
   display: flex;
 }
@@ -120,6 +124,10 @@ footer {
 }
 .flex-container {
   display: flex;
+}
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
 }
 /*******************************************************************************************
        HEADER
@@ -328,20 +336,25 @@ ul.book_categories li:last-child:after {
 .product-detail ul {
   list-style-type: none;
 }
-.review {
+.submit-review {
   flex-grow: 1;
   min-width: 306px;
 }
-.review ul {
+.reviews {
+  flex-grow: 1;
+  min-width: 500px;
+  width: 100%;
+}
+.reviews ul {
   list-style-type: none;
 }
-.review ul li div img {
+.reviews ul li div img {
   float: left;
   width: 38px;
   height: 38px;
   margin-top: -8px;
 }
-.review ul li div p {
+.reviews ul li div p {
   padding-left: 10px;
 }
 .review-comment {
@@ -363,6 +376,13 @@ ul.book_categories li:last-child:after {
 .enter-user-review .enter-rating {
   height: 30px;
   width: 100%;
+}
+.rate-this-book {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 /*******************************************************************************************
        RIGHT SIDE

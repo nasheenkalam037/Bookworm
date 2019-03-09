@@ -146,13 +146,12 @@ CREATE SEQUENCE public."Reviews_review_id_sequence"
 -- TOC entry 199 (class 1259 OID 25074)
 -- Name: Reviews; Type: TABLE; Schema: public; Owner: postgres
 
-CREATE TABLE public."Reviews" (
-    review_id integer DEFAULT nextval('public."Reviews_review_id_sequence"'::regclass) NOT NULL,
-    user_id integer NOT NULL,
-    book_id integer NOT NULL,
-    rating integer NOT NULL,
-    review text
-);
+CREATE TABLE  "public"."Reviews" (
+  "user_id" INT NOT NULL,
+  "book_id" INT NOT NULL,
+  "date_created" timestamp with time zone DEFAULT now(),
+  "rating" INT NOT NULL,
+  "review" TEXT NULL;
 
 -- TOC entry 206 (class 1259 OID 25153)
 -- Name: Users_user_id_sequence; Type: SEQUENCE; Schema: public; Owner: postgres

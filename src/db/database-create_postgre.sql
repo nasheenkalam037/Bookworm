@@ -59,12 +59,12 @@ CREATE TABLE  "public"."Categories" (
 -- Table "public"."Reviews"
 -- -----------------------------------------------------
 CREATE TABLE  "public"."Reviews" (
-  "review_id" INT NOT NULL ,
   "user_id" INT NOT NULL,
   "book_id" INT NOT NULL,
+  "date_created" TIMESTAMP NOT NULL DEFAULT NOW(),
   "rating" INT NOT NULL,
   "review" TEXT NULL,
-  PRIMARY KEY ("review_id"),
+  PRIMARY KEY ("user_id", "book_id"),
   CONSTRAINT "book_id_fk"
     FOREIGN KEY ("book_id")
     REFERENCES "public"."Books" ("book_id")

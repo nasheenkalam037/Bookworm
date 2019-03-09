@@ -11,17 +11,17 @@ debug_user = {
 
 always_logged_in = true;
 
-function getUser(session) {
-  if (always_logged_in === true) {
-    return debug_user;
-  }
-  if (session.user) {
-    return session.user;
-  } else {
-    return null;
-  }
-}
+
 
 module.exports = {
-  getUser: getUser
+  getUser: (session) => {
+    if (always_logged_in === true) {
+      return debug_user;
+    }
+    if (session.user) {
+      return session.user;
+    } else {
+      return null;
+    }
+  }
 };

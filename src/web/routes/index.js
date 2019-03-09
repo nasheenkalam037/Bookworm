@@ -49,38 +49,6 @@ router.get('/', async function(req, res, next) {
   });
 });
 
-sql_book_details = 'SELECT * FROM "Books" WHERE book_id = $1 LIMIT 1';
-sql_book_authors =
-  'SELECT * FROM "Author" as a INNER JOIN "AuthorBooks" ab on ' +
-  'a.author_id = ab.author_id WHERE ab.book_id = $1';
-sql_book_categories =
-  'SELECT * FROM "Categories" as c INNER JOIN "BookCategories" bc on ' +
-  'c.categories_id = bc.category_id WHERE bc.book_id = $1 ORDER BY category_id ASC';
-/* GET book details page. */
-router.get('/book/:bookId(\\d+)/:bookTitle', async function(req, res, next) {
-  var { rows } = await db.query(sql_book_details, [req.params['bookId']]);
-  if (rows.length == 1) {
-    book = rows[0];
-    var { rows } = await db.query(sql_book_authors, [req.params['bookId']]);
-    book['authors'] = rows;
-    var { rows } = await db.query(sql_book_categories, [req.params['bookId']]);
-    book['categories'] = rows;
-
-    res.render('details', {
-      title: 'The Bookworm',
-      user:  user.getUser(req.session),
-      book: book
-    });
-  } else {
-    // render the error page
-    res.status(404);
-    res.render('error', {
-      message:
-        'We are sorry, the book you are searching for could not be found.'
-    });
-  }
-});
-
 
 sql_author_details = 'SELECT * FROM "Author" WHERE author_id = $1';
 sql_author_books =
