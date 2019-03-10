@@ -98,11 +98,24 @@ router.get('/author/:authorId(\\d+)/:authorName', async function(
 });
 
 /* GET Search page. */
-router.get('/search', function(req, res, next) {
+sql_search_title = 'SELECT * FROM public."BookDetails" WHERE title ILIKE $1';
+router.get('/search', async function(req, res, next) {
+
+  var books = [];
+  if('s' in req.query) {
+    var searchTerm = '%' + req.query.s + '%';
+    var { rows } = await db.query(sql_search_title, [searchTerm]);
+
+    books = rows;
+  }
+
+
   res.render('search', {
     title: 'The Bookworm Search Page',
     user: user.getUser(req.session),
-    books: [my_book, my_book]
+    books: books,
+    num_books: books.length,
+    search_term: ('s' in req.query)? req.query.s : null
   });
 });
 
