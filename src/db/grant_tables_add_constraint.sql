@@ -172,17 +172,15 @@ CREATE SEQUENCE public."Reviews_review_id_sequence"
     NO MAXVALUE
     CACHE 1;
 
-ALTER TABLE ONLY public."Reviews"
-    ADD CONSTRAINT "Reviews_pkey" PRIMARY KEY (review_id);
 
+ALTER TABLE ONLY public."Reviews"
+    ADD CONSTRAINT "Reviews_pkey" PRIMARY KEY (user_id, book_id);
 
 ALTER TABLE ONLY public."Reviews"
     ADD CONSTRAINT book_id_fk FOREIGN KEY (book_id) REFERENCES public."Books"(book_id);
 
-
 ALTER TABLE ONLY public."Reviews"
     ADD CONSTRAINT user_id_fk FOREIGN KEY (user_id) REFERENCES public."Users"(user_id);
-
 
 GRANT ALL ON TABLE public."Reviews" TO ece651_ml;
 GRANT ALL ON TABLE public."Reviews" TO ece651_web;
