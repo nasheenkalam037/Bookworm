@@ -26,18 +26,7 @@ Setting up the Tables (NO CONTENT)
 
 Setting up the Tables (WITH CONTENT)
 ---------------------
-1. Login as either the `root user (postgres)` or `ece651_scraper` and run scripts 
-`./create_tables_insert_data/AmazonDetails.sql`
-`./create_tables_insert_data/Author.sql`
-`./create_tables_insert_data/AuthorBooks.sql`
-`./create_tables_insert_data/BookCategories.sql`
-`./create_tables_insert_data/BookOfTheDay.sql`
-`./create_tables_insert_data/Books.sql`
-`./create_tables_insert_data/Categories.sql`
-`./create_tables_insert_data/Reviews.sql`
-`./create_tables_insert_data/Users.sql`
-`./create_tables_insert_data/Views`
-`./grant_tables_add_constraint.sql`
+1. Login as either the `root user (postgres)` or `ece651_scraper` and run scripts `./create_tables_insert_data/AmazonDetails.sql ./create_tables_insert_data/Author.sql ./create_tables_insert_data/AuthorBooks.sql ./create_tables_insert_data/BookCategories.sql ./create_tables_insert_data/BookOfTheDay.sql ./create_tables_insert_data/Books.sql ./create_tables_insert_data/Categories.sql ./create_tables_insert_data/Reviews.sql ./create_tables_insert_data/Users.sql ./create_tables_insert_data/Views ./grant_tables_add_constraint.sql`
 
 Testing your Connection
 -----------------------
