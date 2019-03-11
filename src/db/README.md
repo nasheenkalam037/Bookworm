@@ -26,7 +26,24 @@ Setting up the Tables (NO CONTENT)
 
 Setting up the Tables (WITH CONTENT)
 ---------------------
-1. Login as either the `root user (postgres)` or `ece651_scraper` and run scripts `./create_tables_insert_data/AmazonDetails.sql ./create_tables_insert_data/Author.sql ./create_tables_insert_data/AuthorBooks.sql ./create_tables_insert_data/BookCategories.sql ./create_tables_insert_data/BookOfTheDay.sql ./create_tables_insert_data/Books.sql ./create_tables_insert_data/Categories.sql ./create_tables_insert_data/Reviews.sql ./create_tables_insert_data/Users.sql ./create_tables_insert_data/Views ./grant_tables_add_constraint.sql`
+1. Set up the following variables:
+    ```
+    set PGDATABASE=ece651
+    set PGUSER=ece651_scraper
+    set PGPASSWORD=wxJcTdJYUU3mMAsAa5YD
+    ```
+1. Run the following scripts:
+    1. `psql -a -f ./create_tables_insert_data/AmazonDetails.sql`
+    1. `psql -a -f ./create_tables_insert_data/Author.sql`
+    1. `psql -a -f ./create_tables_insert_data/AuthorBooks.sql`
+    1. `psql -a -f ./create_tables_insert_data/BookCategories.sql`
+    1. `psql -a -f ./create_tables_insert_data/BookOfTheDay.sql`
+    1. `psql -a -f ./create_tables_insert_data/Books.sq`
+    1. `psql -a -f  ./create_tables_insert_data/Categories.sql`
+    1. `psql -a -f ./create_tables_insert_data/Reviews.sql`
+    1. `psql -a -f ./create_tables_insert_data/Users.sq`
+    1. `psql -a -f  ./create_tables_insert_data/Views`
+    1. `psql -a -f ./grant_tables_add_constraint.sql`
 
 Testing your Connection
 -----------------------
