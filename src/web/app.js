@@ -8,6 +8,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var accountRouter = require('./routes/account');
+var bookRouter = require('./routes/book');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use(
 );
 
 app.use('/', indexRouter);
+app.use('/book', bookRouter);
 app.use('/account', accountRouter);
 
 // catch 404 and forward to error handler
@@ -56,6 +58,8 @@ app.use(function(err, req, res, next) {
     res.redirect('/images/book_cover_placeholder.png');
   } else if (req.originalUrl.startsWith('/images/authors/')) {
     res.redirect('/images/author_placeholder.png');
+  } else if (req.originalUrl.startsWith('/images/user_avatars/')) {
+    res.redirect('/images/headshot_placeholder.png');
   } else {
     // render the error page
     res.status(err.status || 500);
