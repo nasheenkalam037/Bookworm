@@ -1,28 +1,22 @@
 <article id="book_details_page">
     <div class="vert-container">
         <div class="hori-container">
-            <img class="book-cover-lg" src="/images/book_covers/{{book.book_id}}.jpeg"/>
-            
+            <img class="book-cover-lg" src="/images/book_covers/{{book.book_id}}.jpeg" />
+
             <div class="book-details">
-                <h1 class="no-bottom-pm">{{book.title}}</h1>
+                <h1 class="no-bottom-pm  no-top-pm">{{book.title}}</h1>
                 <div class="font-normal no-top-pm no-bottom-pm">by
                     <ul class="authors">
-                    {{#each book.authors}}
-                        <li><a href="/author/{{this.author_id}}/{{this.name}}">{{this.name}}</a></li>
-                    {{/each}}
+                        {{#each book.authors}}
+                            <li><a href="/author/{{this.author_id}}/{{this.name}}">{{this.name}}</a></li>
+                        {{/each}}
                     </ul>
                 </div>
-
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
 
                 <p class="font-normal">{{book.synopsis}}</p>
             </div>
         </div>
-        
+
         {{!-- <div>
             <h4>Book Description</h4>
             <p class="font-normal no-top-pm">{{book.synopsis}}</p>
@@ -32,136 +26,111 @@
             <h4>Book Details</h4>
             <ul class="font-normal no-top-pm">
                 {{#if book.pages}}
-                <li>
-                    <b>Print Length:</b>
-                    {{book.pages}} Pages
-                </li>
+                    <li>
+                        <b>Print Length:</b>
+                        {{book.pages}} Pages
+                    </li>
                 {{/if}}
                 {{#if book.publisher}}
-                <li>
-                    <b>Publisher:</b>
-                    {{book.publisher}}
-                </li>
+                    <li>
+                        <b>Publisher:</b>
+                        {{book.publisher}}
+                    </li>
                 {{/if}}
                 {{#if book.series}}
-                <li>
-                    <b>Series:</b>
-                    {{book.series}}
-                </li>
+                    <li>
+                        <b>Series:</b>
+                        {{book.series}}
+                    </li>
                 {{/if}}
                 {{#if book.isbn13}}
-                <li>
-                    <b>ISBN-13:</b>
-                    {{book.isbn13}}
-                </li>
+                    <li>
+                        <b>ISBN-13:</b>
+                        {{book.isbn13}}
+                    </li>
                 {{/if}}
                 {{#if book.isbn10}}
-                <li>
-                    <b>ISBN-10:</b>
-                    {{book.isbn10}}
-                </li>
+                    <li>
+                        <b>ISBN-10:</b>
+                        {{book.isbn10}}
+                    </li>
                 {{/if}}
                 {{#if book.categories}}
-                <li>
-                    <b>Genres:</b>
-                    <ul class="book_categories">
-                    {{#each book.categories}}
-                        <li><a href="/category/{{this.category_id}}/{{this.name}}">{{this.name}}</a></li>
-                    {{/each}}
-                    </ul>
-                </li>
+                    <li>
+                        <b>Genres:</b>
+                        <ul class="book_categories">
+                            {{#each book.categories}}
+                                <li><a href="/category/{{this.category_id}}/{{this.name}}">{{this.name}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </li>
                 {{/if}}
             </ul>
         </div>
-            
+
         <div class="flex-container">
-            <div class="review">
-                <h4 class="no-bottom-pm">10 Customer Reviews</h4>
+            <div class="submit-review">
+                <h4 class="no-bottom-pm">{{book.num_reviews}} Customer Reviews</h4>
                 <p class="no-top-pm">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="font-normal">3.0 out of 5</span>
+                    {{{getStarHTML book.avg_rating}}}
+                    <span class="font-normal">{{book.avg_rating}} out of 5</span>
                 </p>
                 {{#if user}}
-                    <form action="#" method="post">
-                        <p><b>Rate this Book:</b>
-                            <select name="rating">
-                                <option value="1">1 (Hated it)</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
+                    <form class="enter-user-review" action="#" method="post">
+                        <input type="hidden" name="book_id" value="{{book.book_id}}" />
+                        <div class="rate-this-book">
+                            <b class="full-width">Rate this Book:</b>
+                            <select class="enter-rating" name="rating">
                                 <option value="5">5 (Loved it)</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1 (Hated it)</option>
                             </select>
-                        </p>
-                        <textarea class="review-comment" placeholder="Tell us what you thought of the book!" name="comments"></textarea>              
-                        <div> 
+                        </div>
+                        <textarea class="review-comment" placeholder="(Optional) Tell us what you thought of the book!"
+                            name="review_comment"></textarea>
+                        <div class="flex-space-between">
+                            <span></span>
                             <input class="review-btn" type="submit" value="Submit">
-                        </div> 
+                        </div>
+                        {{#if submitted_review}}
+                            {{#if success}}
+                                <div class="success font-normal">Successfully added your review. Thanks</div>
+                            {{else}}
+                                <div class="error font-normal">
+                                    An error occurred when trying to add your review. Sorry.
+                                </div>
+                            {{/if}}
+                        {{/if}}
                     </form>
                 {{else}}
                     <a href="/account/signin">Please login to write a review for this book</a>
                 {{/if}}
             </div>
-            <div class="review">
-                <ul class="font-normal">
-                    <li>
-                        <div class="hori-container">
-                            <img src="/images/headshot_placeholder.png"/>
-                            <p>Mike</p>
-                        </div>
+            <div class="reviews">
+                {{#if book.reviews}}
+                    <ul class="font-normal">
+                        {{#each book.reviews}}
+                            <li>
+                                <div class="flex-center-align">
+                                    <img src="/images/user_avatars/{{this.user_id}}.png" />
+                                    <span>{{this.display_name}}</span>
+                                </div>
 
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
+                                {{{getStarHTML this.rating}}}
 
-                        <p>June 19 2018</p>
+                                <div class="font-small">{{formatDate this.date_created}}</div>
 
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting 
-                            industry. Lorem Ipsum has been the industry's standard dummy text
-                            ever since the 1500s, when an unknown printer took a galley of 
-                            type and scrambled it to make a type specimen book. It has 
-                            survived not only five centuries, but also the leap into 
-                            electronic typesetting, remaining essentially unchanged. It was 
-                            popularised in the 1960s with the release of Letraset sheets 
-                            containing Lorem Ipsum passages, and more recently with desktop 
-                            publishing software like Aldus PageMaker including versions of 
-                            Lorem Ipsum.
-                        </p>
-                    </li>
-                    <li>
-                        <div class="hori-container">
-                            <img src="/images/headshot_placeholder.png"/>
-                            <p>Nike</p>
-                        </div>
-
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-
-                        <p>June 19 2018</p>
-
-                        <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting 
-                            industry. Lorem Ipsum has been the industry's standard dummy text
-                            ever since the 1500s, when an unknown printer took a galley of 
-                            type and scrambled it to make a type specimen book. It has 
-                            survived not only five centuries, but also the leap into 
-                            electronic typesetting, remaining essentially unchanged. It was 
-                            popularised in the 1960s with the release of Letraset sheets 
-                            containing Lorem Ipsum passages, and more recently with desktop 
-                            publishing software like Aldus PageMaker including versions of 
-                            Lorem Ipsum.
-                        </p>
-                    </li>
-                </ul>
+                                <div class="user-review-text">
+                                    {{this.review}}
+                                </div>
+                            </li>
+                        {{/each}}
+                    </ul>
+                {{else}}
+                    <div class="info">There are no reviews at the moment, why don't you fix that problem.</div>
+                {{/if}}
             </div>
         </div>
 </article>

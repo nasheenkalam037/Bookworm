@@ -13,11 +13,7 @@
     <span class="title"><a href='/'>TheBookworm</a></span>
     <div class="loginbox">
       {{#if user}}
-        {{#if user.image}}
-          <img src="{{user.image}}" />
-        {{else}}
-          <img src="/images/headshot_placeholder.png" />
-        {{/if}}
+        <img src="/images/user_avatars/{{user.user_id}}.png" />
         <div class="vert-container">
           <div style="overflow: hidden;" id="user_welcome">Hello {{user.display_name}}</div>
           <div>

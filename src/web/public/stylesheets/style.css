@@ -30,6 +30,10 @@ a {
   text-align: center;
 }
 
+.full-width {
+  width: 100%;
+}
+
 section {
   display: flex;
 }
@@ -72,27 +76,27 @@ footer {
 .info {
   color: #00529b;
   background-color: #bde5f8;
-  background-image: url("/images/info.png");
+  background-image: url('/images/info.png');
 }
 .success {
   color: #4f8a10;
   background-color: #dff2bf;
-  background-image: url("/images/success.png");
+  background-image: url('/images/success.png');
 }
 .warning {
   color: #9f6000;
   background-color: #feefb3;
-  background-image: url("/images/warning.png");
+  background-image: url('/images/warning.png');
 }
 .error {
   color: #d8000c;
   background-color: #ffbaba;
-  background-image: url("/images/error.png");
+  background-image: url('/images/error.png');
 }
 .validation {
   color: #d63301;
   background-color: #ffccba;
-  background-image: url("/images/validation.png");
+  background-image: url('/images/validation.png');
 }
 /*******************************************************************************************
        Padding/Margins
@@ -120,6 +124,15 @@ footer {
 }
 .flex-container {
   display: flex;
+}
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-center-align {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 /*******************************************************************************************
        HEADER
@@ -298,10 +311,10 @@ ul.authors li {
 }
 
 ul.authors li:after {
-  content: ", ";
+  content: ', ';
 }
 ul.authors li:last-child:after {
-  content: "";
+  content: '';
 }
 
 ul.book_categories {
@@ -315,15 +328,15 @@ ul.book_categories li {
 }
 
 ul.book_categories li:after {
-  font-family: "Font Awesome 5 Free";
-  content: "\f061";
+  font-family: 'Font Awesome 5 Free';
+  content: '\f061';
   display: inline-block;
   padding-left: 3px;
   vertical-align: middle;
   font-weight: 900;
 }
 ul.book_categories li:last-child:after {
-  content: "";
+  content: '';
 }
 /*******************************************************************************************
        REVIEW
@@ -334,29 +347,34 @@ ul.book_categories li:last-child:after {
 .product-detail ul {
   list-style-type: none;
 }
-.review select {
-  position: relative;
-  width: 165px;
-  height: 30px;
-}
-.review {
+.submit-review {
   flex-grow: 1;
   min-width: 306px;
 }
-.review ul {
+.reviews {
+  flex-grow: 1;
+  min-width: 500px;
+  width: 100%;
+}
+.reviews ul {
   list-style-type: none;
 }
-.review ul li div img {
+.reviews ul li div img {
   float: left;
   width: 38px;
   height: 38px;
-  margin-top: -8px;
+  /* margin-top: -8px; */
 }
-.review ul li div p {
+.reviews ul li div p {
   padding-left: 10px;
 }
+
+.reviews .user-review-text {
+  margin-bottom: 15px;
+}
+
 .review-comment {
-  width: 300px;
+  width: 100%;
   height: 150px;
   padding: 12px 20px;
   box-sizing: border-box;
@@ -367,6 +385,20 @@ ul.book_categories li:last-child:after {
   color: white;
   padding: 8px 16px;
   margin: 4px 2px;
+}
+.enter-user-review {
+  padding: 10px;
+}
+.enter-user-review .enter-rating {
+  height: 30px;
+  width: 100%;
+}
+.rate-this-book {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 /*******************************************************************************************
        RIGHT SIDE
@@ -398,7 +430,7 @@ article#landing_page {
 
 /* Clear floats after the columns */
 section:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
