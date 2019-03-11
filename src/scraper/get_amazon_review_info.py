@@ -6,8 +6,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import base64
 
-import scrape_amazon_reviews as scrape
-import pandas as pd
 
 DEFAULT_HEADERS = {
     "Authority":
@@ -78,8 +76,7 @@ def fetch_review_data(thread_id, info):
     
         review_node = soup.select('.review')
         print("book_url: ", url)
-        print('review_node: ', len(review_node))
-        # print(soup.prettify())
+        print('review_node from book_url: ', len(review_node))
 
         if len(review_node) > 0:
             for r in review_node:
@@ -99,36 +96,44 @@ def fetch_review_data(thread_id, info):
         print(f'[Thread {thread_id}] An Error occurred while trying to read from', url, error)
         return None
 
-def fetch_review_from_user_acc(thread_id, user_id):
+def fetch_review_from_user_acc(thread_id, book, user_id):
     url = "https://www.amazon.com/gp/profile/amzn1.account." + user_id
     
     try:
         soup = grab_url_request(url, return_soup=True, use_webdriver=True)
-
-        review_node = soup.select('.desktop')
+        review_node = soup.select('.main #customer-profile-timeline #profile-at-card-container')[0]
+        # review_node = soup.select('.main .a-section .a-section')[0]
+        # review_node = soup.select('.desktop')
         print(user_id, ' desk: ', len(review_node))
         data = []
 
-        if len(review_node) > 0:
+        if review_node:
             for r in review_node:
-                prod_link = r.select('.profile-at-content div .profile-at-product-box-link')
+                prod_link = r.select('div')[1].select('.profile-at-content div .profile-at-product-box-link')
                 
-                if len(prod_link) > 0:
+                if prod_link:
                     prod_id = prod_link[0]['href'].strip().split('dp/')[1].split('?')[0]
                     # print("prod_link: ", prod_link[0]['href'])
                     p = re.compile(r'[0-9]+')
                     
+                    book_id_link = None
                     name = None
                     rating = None
                     review = None
 
                     if p.match(prod_id) != None:
-                        print("book_id: ", prod_link[0]['href'])
+                        print("book_link: ", prod_link[0]['href'])
+                        old_book_url = book[1].strip().split('https://www.amazon.ca')[1]
+                        if old_book_url in prod_link[0]['href']:
+                            book_id_link = book[0]
+                        else:
+                            book_id_link = "https://www.amazon.ca" + prod_link[0]['href']
+
                         name = r.select('.a-profile-name')[0].text
                         rating = float(r.select('.profile-at-review-stars span')[0].text.split(' ')[0])
                         review = r.select('.profile-at-review-text-desktop')[0].text
                         
-                        data.append({"book_id": prod_link[0]['href'],
+                        data.append({"book_id_link": book_id_link,
                                     "user_id": user_id,
                                     "name":  name,
                                     "rating": rating,
@@ -142,34 +147,5 @@ def fetch_review_from_user_acc(thread_id, user_id):
 
 
 if __name__ == "__main__":
-    book_url = ["https://www.amazon.com/Rise-Fall-D-D-Novel-ebook/dp/B01M0HPHR6?ref=pf_vv_at_pdctrvw_dp",
-                "https://www.amazon.com/Harry-Potter-Paperback-Box-Books/dp/0545162076/ref=sr_1_1?crid=1NN10PFINJXBU&keywords=harry+potter+books&qid=1552116615&s=gateway&sprefix=Harry%2Caps%2C195&sr=8-1"
-                ]
-    # print(fetch_review_data(1, [1, book_url]))
-    user_books = {}
-    global good_users
-    global good_books
-
-    good_users = []
-    good_books = []
-    i = 10
-    for url in book_url:
-        review_info = fetch_review_data(1, [i, url])
-        print("review_info: ", review_info)
-        i = i + 1
-        if review_info:
-            users, books, review_info = scrape.get_users_books(1, user_books, review_info)
-            good_users.append(users)
-            good_books.append(books)
-
-        print("user_book: ", user_books)
-        print("------------------------------")
-        print("good_users: ", users)
-        print("------------------------------")
-        print("good_books: ", books)
-        print("------------------------------")
-    
-    print("user_book: ", user_books)
-    df = pd.DataFrame(good_books)
-    df.to_csv('output.csv')
-    # print(fetch_review_from_user_acc(1, 'AGCA245YOLVH3P3U2GK6LYAFFKUA'))
+    book_url = "https://www.amazon.com/Harry-Potter-Paperback-Box-Books/dp/0545162076/ref=sr_1_1?crid=1NN10PFINJXBU&keywords=harry+potter+books&qid=1552116615&s=gateway&sprefix=Harry%2Caps%2C195&sr=8-1"
+    print(fetch_review_data(1, [1, book_url]))

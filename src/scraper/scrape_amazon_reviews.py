@@ -9,10 +9,10 @@ from queue import Queue
 from psycopg2.pool import ThreadedConnectionPool
 # Local Files
 from config import config
-import get_amazon_review_info as getInfo
-import save_review as setInfo
-import pandas as pd
-
+import get_amazon_review_info as getReviewInfo
+import get_book_information as getBookInfo
+from save_review import save_user
+from save_book import save_book
 # Mutex for printing to the console
 print_lock = threading.Lock()
 # Mutex for updating the count variable
@@ -26,7 +26,7 @@ NUM_THREADS = 1
 
 DEBUG = 0
 
-def get_users_books(thread_id, user_books, review_info):
+def get_users_books(thread_id, book, user_books, review_info):
     for r in review_info:
         book_id = r['book_id']
         user_id = r['user_id']                
@@ -36,13 +36,24 @@ def get_users_books(thread_id, user_books, review_info):
             user_books[user_id] = [book_id]
 
     for user in user_books: #Find more Books by the Users we already have
-        review = getInfo.fetch_review_from_user_acc(thread_id, user)
+        search_result = getReviewInfo.fetch_review_from_user_acc(thread_id, book, user)
 
-        review_info.append(review)
-        
-        if review:
-            for r in review:
-                user_books[user].append(r['book_id'])
+        if search_result:
+            for result in search_result:
+                if result['book_id_link'] is not int:
+                    book_info = getBookInfo.fetch_new_book_info(thread_id, result['book_id_link'])
+
+                    # If the book_info is good, increase the number of books added
+                    if book_info:
+                        conn = tcp.getconn()
+                        book_id = save_book(conn, book_info)
+                        tcp.putconn(conn)
+                        
+                        print("book_id: ", book_id)
+                        
+                        result['book_id_link'] = book_id
+                        user_books[user].append(result['book_id_link'])
+                        review_info.append(result)
 
     good_users = {}
     for user in user_books: # Remove all Users with only 1 Book
@@ -62,7 +73,15 @@ def get_users_books(thread_id, user_books, review_info):
         if len(book_users[book]) > 1:
             good_books[book] = book_users[book]
 
-    return good_users, good_books, review_info
+    good_reviews = []
+    for review in review_info:
+        if review['user_id'] in good_users:# Remove Reviews of Users with only 1 book review 
+            good_reviews.append(review)
+        else:
+            if review['book_id'] in good_books:# Remove Reviews on Books with only 1 user review
+                good_reviews.append(review)
+
+    return good_reviews
 
 def worker_thread(thread_id, user_books, good_users, good_books):
     global count
@@ -81,41 +100,25 @@ def worker_thread(thread_id, user_books, good_users, good_books):
         with print_lock:
             print(f'[Thread {thread_id}] Working on task')
 
-        review_info = getInfo.fetch_review_data(thread_id, book)
+        review_info = getReviewInfo.fetch_review_data(thread_id, book)
         
         if review_info:
-            users, books, review_info = get_users_books(thread_id, user_books, review_info)
+            good_reviews = get_users_books(thread_id, book, user_books, review_info)
             
-            for user in users:
-                good_users[user] = users[user]
+            print("Good-Review: ", good_reviews)
+            conn = tcp.getconn()
+            save_user(conn, good_reviews)
+            tcp.putconn(conn)
 
-            for book in books:
-                good_books[book] = books[book]
-
-        print("Users reviewed at least 2 Books :", len(good_users))
-        print("Books reviewed by at least 2 Users :", len(good_books))
-        print("All Review info :", len(review_info))
-        # if review_info:
-        #     conn = tcp.getconn()
-        #     setInfo.save_user(conn, review_info)
-        #     tcp.putconn(conn)
-
-        #     with shared_mutex:
-        #         count += 1
+            with shared_mutex:
+                count += 1
 
         book_queue.task_done()
         with print_lock:
             print(f'[Thread {thread_id}] Task Completed')
         time.sleep(SLEEP_TIME)
 
-    with print_lock:
-        df = pd.DataFrame(good_books)
-        df.to_csv('output.csv')
-        for book in good_books:
-            print("Book_id: ", book)
-            for user in book:
-                print("User_id: ", user)
-            print("------------------------------")    
+    with print_lock:  
         print(f'[Thread {thread_id}] Thread Ended')
 
 def setup_db():

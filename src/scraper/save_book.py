@@ -20,6 +20,8 @@ def save_book(conn, book):
         save_categories(conn, book_id, book)
         save_authors(conn, book_id, book)
         save_amazon_details(conn, book_id, book)
+
+        return book_id
     except Exception as err:
         print('Error Saving book:', err, book)
 

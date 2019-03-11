@@ -43,7 +43,7 @@ def grab_url_request(url, headers=DEFAULT_HEADERS, params=None, return_soup=Fals
         if not driver:
             chrome_options = Options()
             chrome_options.add_argument("--log-level=3")
-            # options.add_argument("headless")  # remove this line if you want to see the browser popup
+            chrome_options.add_argument("headless")  # remove this line if you want to see the browser popup
             driver = webdriver.Chrome(options=chrome_options)
         driver.get(url)
 
@@ -137,11 +137,11 @@ def fetch_new_book_info(thread_id, book_url):
     '''
 
     try:
-        soup, r = grab_url_request(book_url, return_soup=True)
+        soup = grab_url_request(book_url, return_soup=True, use_webdriver=True)
 
-        if r.status_code != 200:
-            print(f'[Thread {thread_id}] Non 200 Return Code', book_url, r)
-            return None
+        # if r.status_code != 200:
+        #     print(f'[Thread {thread_id}] Non 200 Return Code', book_url, r)
+        #     return None
 
         title = soup.select('#productTitle')[0].text
 
@@ -164,7 +164,8 @@ def fetch_new_book_info(thread_id, book_url):
         price_node = soup.select('.offer-price')
         if len(price_node) > 0:
             if '$' in price_node[0].text:
-                price = float(price_node[0].text.split(' ')[1])
+                # price = float(price_node[0].text.split(' ')[1])
+                price = float(price_node[0].text.split('$')[1])
 
         synopsis = None
         synopsis_node = soup.select('noscript div')
