@@ -1,7 +1,7 @@
 var express = require('express');
-var session = require('express-session');
 var router = express.Router();
 const db = require('../db');
+const user = require('../helpers/user');
 
 my_book = {
   book_id: 21,
@@ -42,43 +42,11 @@ router.get('/', async function(req, res, next) {
 
   res.render('index', {
     title: 'The Bookworm',
-    user: req.session.user ? req.session.user : null,
+    user: user.getUser(req.session),
     bookoftheday: my_book,
     books: rows,
     recommendations: [my_book, my_book, my_book, my_book]
   });
-});
-
-sql_book_details = 'SELECT * FROM "Books" WHERE book_id = $1 LIMIT 1';
-sql_book_authors =
-  'SELECT * FROM "Author" as a INNER JOIN "AuthorBooks" ab on ' +
-  'a.author_id = ab.author_id WHERE ab.book_id = $1';
-sql_book_categories =
-  'SELECT * FROM "Categories" as c INNER JOIN "BookCategories" bc on ' +
-  'c.categories_id = bc.category_id WHERE bc.book_id = $1 ORDER BY category_id ASC';
-/* GET book details page. */
-router.get('/book/:bookId(\\d+)/:bookTitle', async function(req, res, next) {
-  var { rows } = await db.query(sql_book_details, [req.params['bookId']]);
-  if (rows.length == 1) {
-    book = rows[0];
-    var { rows } = await db.query(sql_book_authors, [req.params['bookId']]);
-    book['authors'] = rows;
-    var { rows } = await db.query(sql_book_categories, [req.params['bookId']]);
-    book['categories'] = rows;
-
-    res.render('details', {
-      title: 'The Bookworm',
-      user: req.session.user ? req.session.user : null,
-      book: book
-    });
-  } else {
-    // render the error page
-    res.status(404);
-    res.render('error', {
-      message:
-        'We are sorry, the book you are searching for could not be found.'
-    });
-  }
 });
 
 
@@ -144,7 +112,7 @@ router.get('/search', async function(req, res, next) {
 
   res.render('search', {
     title: 'The Bookworm Search Page',
-    user: req.session.user ? req.session.user : null,
+    user: user.getUser(req.session),
     books: books,
     num_books: books.length,
     search_term: ('s' in req.query)? req.query.s : null

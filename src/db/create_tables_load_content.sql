@@ -197,7 +197,6 @@ CREATE TABLE public."Categories" (
     name character varying(100) NOT NULL
 );
 
-
 --
 -- TOC entry 207 (class 1259 OID 19312)
 -- Name: Reviews_review_id_sequence; Type: SEQUENCE; Schema: public; Owner: -
@@ -216,13 +215,12 @@ CREATE SEQUENCE public."Reviews_review_id_sequence"
 -- Name: Reviews; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public."Reviews" (
-    review_id integer DEFAULT nextval('public."Reviews_review_id_sequence"'::regclass) NOT NULL,
-    user_id integer NOT NULL,
-    book_id integer NOT NULL,
-    rating integer NOT NULL,
-    review text
-);
+CREATE TABLE  "public"."Reviews" (
+  "user_id" INT NOT NULL,
+  "book_id" INT NOT NULL,
+  "date_created" timestamp with time zone DEFAULT now(),
+  "rating" INT NOT NULL,
+  "review" TEXT NULL;
 
 
 --
@@ -7088,7 +7086,6 @@ SELECT pg_catalog.setval('public."Books_book_id_sequence"', 840, true);
 
 SELECT pg_catalog.setval('public."Categories_categories_id_sequence"', 5226, true);
 
-
 --
 -- TOC entry 3296 (class 0 OID 0)
 -- Dependencies: 207
@@ -7176,7 +7173,7 @@ ALTER TABLE ONLY public."Categories"
 --
 
 ALTER TABLE ONLY public."Reviews"
-    ADD CONSTRAINT "Reviews_pkey" PRIMARY KEY (review_id);
+    ADD CONSTRAINT "Reviews_pkey" PRIMARY KEY (user_id,book_id);
 
 
 --
@@ -7447,7 +7444,6 @@ GRANT ALL ON TABLE public."Categories" TO ece651_ml;
 GRANT ALL ON TABLE public."Categories" TO ece651_web;
 GRANT ALL ON TABLE public."Categories" TO ece651_scraper;
 
-
 --
 -- TOC entry 3288 (class 0 OID 0)
 -- Dependencies: 207
@@ -7457,7 +7453,6 @@ GRANT ALL ON TABLE public."Categories" TO ece651_scraper;
 GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_scraper;
 GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_ml;
 GRANT ALL ON SEQUENCE public."Reviews_review_id_sequence" TO ece651_web;
-
 
 --
 -- TOC entry 3289 (class 0 OID 0)
