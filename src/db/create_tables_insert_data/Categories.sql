@@ -2,381 +2,750 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.1
--- Dumped by pg_dump version 11.1
-
--- Started on 2019-03-03 10:26:33 EST
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
-
---
--- TOC entry 206 (class 1259 OID 19308)
--- Name: Categories; Type: TABLE; Schema: public; Owner: s.n.azim
---
-
 CREATE TABLE public."Categories" (
     categories_id integer DEFAULT nextval('public."Categories_categories_id_sequence"'::regclass) NOT NULL,
     name character varying(100) NOT NULL
 );
 
---
--- TOC entry 3204 (class 0 OID 19308)
--- Dependencies: 206
--- Data for Name: Categories; Type: TABLE DATA; Schema: public; Owner: s.n.azim
---
-
-COPY public."Categories" (categories_id, name) FROM stdin;
-250	Children's & Teens
-725	Atomic & Nuclear Physics
-508	Waves & Wave Mechanics
-778	Genetic Engineering
-245	Dictionaries & Thesauruses
-242	Education & Reference
-860	Assembly Language Programming
-783	Dystopian
-698	Short Stories & Anthologies
-490	Military
-534	Pure Mathematics
-149	Textbooks
-652	Fantasy & Magic
-1581	Space Marine
-455	Mystery, Thriller & Suspense
-160	Movies
-510	Particle Physics
-460	Thrillers & Suspense
-514	Nuclear Physics
-517	Biographical
-584	Asian
-531	Russian
-949	Networking & Cloud Computing
-1576	Space Opera
-760	Girls & Women
-961	Legal
-975	Historical Fiction
-399	Ethics & Morality
-972	History & Historical Fiction
-454	Thrillers
-549	Study & Teaching
-759	Growing Up & Facts of Life
-969	Crime
-551	Encyclopedias
-621	Adventure & Thrillers
-921	Suspense
-944	Cryptography
-143	Politics & Social Sciences
-843	Real-Time Data Processing
-839	Graphic Design
-171	Classics
-354	Greek
-802	Genetic
-353	Ancient & Medieval Literature
-4860	Ancient Civilizations
-566	Tolkien's Middle Earth
-248	Christian Books & Bibles
-548	Reference
-486	Differential Equations
-146	World Literature
-711	Gay & Lesbian
-682	War & Military
-513	Professional & Technical
-4242	African
-875	German
-367	History & Surveys
-396	Europe
-251	Series
-476	Science
-567	Fluid Mechanics
-608	Teens
-766	Values
-249	C. S. Lewis
-244	Computer Dictionaries
-145	Good & Evil
-570	Dynamics
-750	Relativity
-574	Mechanical
-501	Victorian
-167	Literary
-734	Humour
-857	Computer Science & Information Systems
-144	Philosophy
-571	Fluid Dynamics
-246	Slang & Idioms
-489	Physics
-147	Humanities
-504	Romance
-497	War
-712	Lesbian
-816	Mechanics
-644	Gothic
-485	Mathematics
-360	Greek & Roman
-563	Fantasy
-359	Ancient
-469	Post-Apocalyptic
-150	Drama & Plays
-240	Computers & Technology
-253	Science Fiction
-370	Ancient & Classical
-561	Epic
-842	Desktop Publishing
-163	Humour & Entertainment
-446	Occult
-840	Graphics & Multimedia
-929	India
-966	Education
-239	Programming
-971	Military & Wars
-164	Surrealism
-395	History
-933	Asia
-161	Screenplays
-159	Movements & Periods
-895	Comedy
-758	Friendship, Social Skills & School Life
-247	Computer
-798	Theory of Computing
-708	Fiction
-702	Anthologies
-521	United States
-695	Short Stories
-458	Historical
-717	Criticism & Theory
-767	Family Life
-855	Programming Languages
-483	Applied
-801	Artificial Life
-946	Network Security
-148	Shakespeare
-806	Algorithms
-442	Horror
-615	Sea Adventures
-515	Professional Science
-481	Sciences
-948	Software
-477	Science & Math
-800	Artificial Intelligence
-4236	Mythology
-153	British & Irish
-532	Algebra & Trigonometry
-4238	Norse
-154	European
-575	Engineering
-619	Sea Stories
-151	Literature
-478	Statistics
-743	Electrodynamics
-797	Family Saga
-4239	Egyptian
-810	Canadian
-241	Introductory & Beginning
-426	Genre Fiction
-535	Calculus
-387	Greece
-748	Computer Science
-2352	IDW Publishing
-2220	Parenting & Relationships
-2613	Spies & Politics
-996	Spanish & Portuguese
-2206	Intermediate Readers
-2179	Movements
-1010	Computer Mathematics
-1014	Mathematical & Statistical
-2366	Gothic & Romantic
-1255	Astrophysics & Space Science
-747	Circuitry
-2027	Nursery Rhymes
-2370	Genres & Styles
-1062	Mathematical Analysis
-2032	Poetry
-2307	Social Issues
-2638	Themes & Styles
-2226	Health
-1801	Abuse
-1803	Dysfunctional Relationships
-1806	Difficult Discussions
-2227	Personal Hygiene
-1103	Magic & Wizards
-2499	Fantasy Graphic Novels
-2063	Research
-1132	Modernism
-2064	Rhetoric
-2069	Writing, Research & Publishing Guides
-1121	Cultural Heritage
-2070	Words, Language & Grammar
-2071	Writing Skills
-1832	Algebra
-1021	Australian & Oceania
-1180	20th Century
-2376	Manga
-2073	Probability & Statistics
-2153	Biographies & Memoirs
-2699	Dark Humour
-1205	Geography & Cultures
-1206	Explore the World
-2655	Hard Science Fiction
-1214	Caribbean & Latin American
-2114	First Contact
-1079	Political
-1087	Cats, Dogs & Animals
-1208	Orphans & Foster Homes
-1085	Satire
-430	TV, Movie & Video Game Adaptations
-1051	French
-2218	Psychology
-2597	Thriller & Suspense
-2648	Technothrillers
-2893	Cyberpunk
-2701	Humour & Satire
-2138	Modern
-2136	Religion & Spirituality
-2743	Mythology & Folk Tales
-1027	Traditional Detectives
-2857	Media Tie-In
-1286	Mechanical Engineering
-1305	Science for Kids
-1054	Astronomy
-2269	Internal Medicine
-2270	Neurology
-1320	Dragons
-2808	Halloween
-1353	Optics
-1356	Electrical & Electronics
-2161	Political History
-1362	Optoelectronics
-2163	History, 17th & 18th Century
-530	Regional & Cultural
-157	History & Criticism
-2272	Medicine
-4283	Russia
-2170	Epistemology
-2275	Neuroscience
-1228	Small Town & Rural
-1352	Creative Writing & Composition
-2826	Exploration
-2276	Medical Books
-2176	Alternative Medicine
-2274	By Topic
-1118	Alternate History
-2177	Pragmatism
-2277	Intelligence
-2162	Political Science
-2922	Parodies & Satires
-2279	Cognitive
-2180	Logic & Language
-2097	Time Travel
-2800	Women's Fiction
-2187	Experiments & Projects
-2143	Germany
-2197	Chapter Books & Readers
-856	Languages & Tools
-156	English Literature
-2326	Short Story Collections
-1058	Solar System
-2146	Social Philosophy
-2422	Criticism
-2801	Domestic Life
-4984	Keys to the Kingdom
-2154	Reference & Collections
-2402	Women's Adventure
-2150	Philosophers
-2932	Theology
-2810	Activity Books
-1325	Science, Nature & How It Works
-1015	Mysteries & Detectives
-2805	Hoodies & Sweatshirts
-2806	Holidays & Celebrations
-2811	Activities, Crafts & Games
-2812	Clothing & Accessories
-2813	Men
-4284	Travel
-2149	Professionals & Academics
-981	Romantic
-2202	Boys & Men
-2306	Friendship
-2289	Contemporary
-1322	Zoology
-2663	Heist
-2678	Spine-Chilling Horror
-4971	Private Investigators
-2834	Space Fleet
-2645	Alien Invasion
-2501	Adaptations
-2928	Theism
-978	Erotica
-1097	Discworld
-1059	Cosmology
-2796	DC
-1020	Comics & Graphic Novels
-2173	Health, Fitness & Dieting
-2157	Social Sciences
-2348	Graphic Novels
-2926	Philosophy of Religion
-988	Mystery
-2856	Lawyers & Criminals
-2350	Publishers
-2723	Galactic Empire
-474	Science Fiction & Fantasy
-1323	Fairy Tales, Folk Tales & Myths
-2409	Colonization
-2698	Siblings
-2978	Developmental Psychology
-2983	Gender
-2985	Jungian
-2992	Organized Crime
-3010	Zombies
-3015	Zombies, Vampires & Werewolves
-3016	Vampires
-3018	Political Theory
-3023	Comparative Government
-3024	Leadership
-3025	Politics
-3038	Medical
-4622	Financial
-4634	Kidnapping
-3155	Sexuality
-3156	Sex
-3158	Sex Instruction
-3161	Human
-3163	Alternative
-3094	Serial Killers
-3327	Psychological Thrillers
-3486	Military Science
-3487	Weapons & Warfare
-3489	Strategy
-3491	Superheroes
-3078	Hard-Boiled
-831	Ghosts
-3736	Mysteries
-3209	Essays
-3211	Memoirs
-1300	Science Studies
-3973	Ages 9-12
-3335	Supernatural
-2155	Leaders & Notable People
-5201	Animals
-494	Action & Adventure
-606	Children's Books
-2221	Psychology & Counseling
-152	Literature & Fiction
-4074	Musical Genres
-4075	Songwriting
-4077	Rock
-4078	Punk
-4079	Theory, Composition & Performance
-4080	Music
-142	Books
-3034	Men's Adventure
-3087	Murder
-\.
+INSERT INTO public."Categories" (categories_id, name) VALUES (250, 'Children''s & Teens');
+INSERT INTO public."Categories" (categories_id, name) VALUES (725, 'Atomic & Nuclear Physics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (508, 'Waves & Wave Mechanics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (778, 'Genetic Engineering');
+INSERT INTO public."Categories" (categories_id, name) VALUES (860, 'Assembly Language Programming');
+INSERT INTO public."Categories" (categories_id, name) VALUES (510, 'Particle Physics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (514, 'Nuclear Physics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (517, 'Biographical');
+INSERT INTO public."Categories" (categories_id, name) VALUES (961, 'Legal');
+INSERT INTO public."Categories" (categories_id, name) VALUES (399, 'Ethics & Morality');
+INSERT INTO public."Categories" (categories_id, name) VALUES (549, 'Study & Teaching');
+INSERT INTO public."Categories" (categories_id, name) VALUES (551, 'Encyclopedias');
+INSERT INTO public."Categories" (categories_id, name) VALUES (944, 'Cryptography');
+INSERT INTO public."Categories" (categories_id, name) VALUES (843, 'Real-Time Data Processing');
+INSERT INTO public."Categories" (categories_id, name) VALUES (354, 'Greek');
+INSERT INTO public."Categories" (categories_id, name) VALUES (353, 'Ancient & Medieval Literature');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4860, 'Ancient Civilizations');
+INSERT INTO public."Categories" (categories_id, name) VALUES (566, 'Tolkien''s Middle Earth');
+INSERT INTO public."Categories" (categories_id, name) VALUES (486, 'Differential Equations');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4242, 'African');
+INSERT INTO public."Categories" (categories_id, name) VALUES (875, 'German');
+INSERT INTO public."Categories" (categories_id, name) VALUES (476, 'Science');
+INSERT INTO public."Categories" (categories_id, name) VALUES (567, 'Fluid Mechanics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (766, 'Values');
+INSERT INTO public."Categories" (categories_id, name) VALUES (249, 'C. S. Lewis');
+INSERT INTO public."Categories" (categories_id, name) VALUES (244, 'Computer Dictionaries');
+INSERT INTO public."Categories" (categories_id, name) VALUES (570, 'Dynamics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (750, 'Relativity');
+INSERT INTO public."Categories" (categories_id, name) VALUES (501, 'Victorian');
+INSERT INTO public."Categories" (categories_id, name) VALUES (571, 'Fluid Dynamics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (246, 'Slang & Idioms');
+INSERT INTO public."Categories" (categories_id, name) VALUES (816, 'Mechanics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (644, 'Gothic');
+INSERT INTO public."Categories" (categories_id, name) VALUES (360, 'Greek & Roman');
+INSERT INTO public."Categories" (categories_id, name) VALUES (370, 'Ancient & Classical');
+INSERT INTO public."Categories" (categories_id, name) VALUES (842, 'Desktop Publishing');
+INSERT INTO public."Categories" (categories_id, name) VALUES (840, 'Graphics & Multimedia');
+INSERT INTO public."Categories" (categories_id, name) VALUES (971, 'Military & Wars');
+INSERT INTO public."Categories" (categories_id, name) VALUES (164, 'Surrealism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (247, 'Computer');
+INSERT INTO public."Categories" (categories_id, name) VALUES (946, 'Network Security');
+INSERT INTO public."Categories" (categories_id, name) VALUES (148, 'Shakespeare');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4236, 'Mythology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (532, 'Algebra & Trigonometry');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4238, 'Norse');
+INSERT INTO public."Categories" (categories_id, name) VALUES (743, 'Electrodynamics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4239, 'Egyptian');
+INSERT INTO public."Categories" (categories_id, name) VALUES (535, 'Calculus');
+INSERT INTO public."Categories" (categories_id, name) VALUES (387, 'Greece');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2352, 'IDW Publishing');
+INSERT INTO public."Categories" (categories_id, name) VALUES (996, 'Spanish & Portuguese');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2206, 'Intermediate Readers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2179, 'Movements');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1010, 'Computer Mathematics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1014, 'Mathematical & Statistical');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2027, 'Nursery Rhymes');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1062, 'Mathematical Analysis');
+INSERT INTO public."Categories" (categories_id, name) VALUES (153, 'British & Irish');
+INSERT INTO public."Categories" (categories_id, name) VALUES (574, 'Mechanical');
+INSERT INTO public."Categories" (categories_id, name) VALUES (801, 'Artificial Life');
+INSERT INTO public."Categories" (categories_id, name) VALUES (855, 'Programming Languages');
+INSERT INTO public."Categories" (categories_id, name) VALUES (975, 'Historical Fiction');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1255, 'Astrophysics & Space Science');
+INSERT INTO public."Categories" (categories_id, name) VALUES (760, 'Girls & Women');
+INSERT INTO public."Categories" (categories_id, name) VALUES (497, 'War');
+INSERT INTO public."Categories" (categories_id, name) VALUES (797, 'Family Saga');
+INSERT INTO public."Categories" (categories_id, name) VALUES (534, 'Pure Mathematics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (145, 'Good & Evil');
+INSERT INTO public."Categories" (categories_id, name) VALUES (531, 'Russian');
+INSERT INTO public."Categories" (categories_id, name) VALUES (504, 'Romance');
+INSERT INTO public."Categories" (categories_id, name) VALUES (481, 'Sciences');
+INSERT INTO public."Categories" (categories_id, name) VALUES (490, 'Military');
+INSERT INTO public."Categories" (categories_id, name) VALUES (253, 'Science Fiction');
+INSERT INTO public."Categories" (categories_id, name) VALUES (160, 'Movies');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2370, 'Genres & Styles');
+INSERT INTO public."Categories" (categories_id, name) VALUES (695, 'Short Stories');
+INSERT INTO public."Categories" (categories_id, name) VALUES (652, 'Fantasy & Magic');
+INSERT INTO public."Categories" (categories_id, name) VALUES (426, 'Genre Fiction');
+INSERT INTO public."Categories" (categories_id, name) VALUES (747, 'Circuitry');
+INSERT INTO public."Categories" (categories_id, name) VALUES (513, 'Professional & Technical');
+INSERT INTO public."Categories" (categories_id, name) VALUES (143, 'Politics & Social Sciences');
+INSERT INTO public."Categories" (categories_id, name) VALUES (711, 'Gay & Lesbian');
+INSERT INTO public."Categories" (categories_id, name) VALUES (359, 'Ancient');
+INSERT INTO public."Categories" (categories_id, name) VALUES (167, 'Literary');
+INSERT INTO public."Categories" (categories_id, name) VALUES (810, 'Canadian');
+INSERT INTO public."Categories" (categories_id, name) VALUES (248, 'Christian Books & Bibles');
+INSERT INTO public."Categories" (categories_id, name) VALUES (839, 'Graphic Design');
+INSERT INTO public."Categories" (categories_id, name) VALUES (800, 'Artificial Intelligence');
+INSERT INTO public."Categories" (categories_id, name) VALUES (159, 'Movements & Periods');
+INSERT INTO public."Categories" (categories_id, name) VALUES (682, 'War & Military');
+INSERT INTO public."Categories" (categories_id, name) VALUES (150, 'Drama & Plays');
+INSERT INTO public."Categories" (categories_id, name) VALUES (767, 'Family Life');
+INSERT INTO public."Categories" (categories_id, name) VALUES (548, 'Reference');
+INSERT INTO public."Categories" (categories_id, name) VALUES (239, 'Programming');
+INSERT INTO public."Categories" (categories_id, name) VALUES (242, 'Education & Reference');
+INSERT INTO public."Categories" (categories_id, name) VALUES (161, 'Screenplays');
+INSERT INTO public."Categories" (categories_id, name) VALUES (584, 'Asian');
+INSERT INTO public."Categories" (categories_id, name) VALUES (857, 'Computer Science & Information Systems');
+INSERT INTO public."Categories" (categories_id, name) VALUES (446, 'Occult');
+INSERT INTO public."Categories" (categories_id, name) VALUES (171, 'Classics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (563, 'Fantasy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (575, 'Engineering');
+INSERT INTO public."Categories" (categories_id, name) VALUES (241, 'Introductory & Beginning');
+INSERT INTO public."Categories" (categories_id, name) VALUES (949, 'Networking & Cloud Computing');
+INSERT INTO public."Categories" (categories_id, name) VALUES (608, 'Teens');
+INSERT INTO public."Categories" (categories_id, name) VALUES (163, 'Humour & Entertainment');
+INSERT INTO public."Categories" (categories_id, name) VALUES (702, 'Anthologies');
+INSERT INTO public."Categories" (categories_id, name) VALUES (895, 'Comedy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (708, 'Fiction');
+INSERT INTO public."Categories" (categories_id, name) VALUES (712, 'Lesbian');
+INSERT INTO public."Categories" (categories_id, name) VALUES (734, 'Humour');
+INSERT INTO public."Categories" (categories_id, name) VALUES (948, 'Software');
+INSERT INTO public."Categories" (categories_id, name) VALUES (972, 'History & Historical Fiction');
+INSERT INTO public."Categories" (categories_id, name) VALUES (245, 'Dictionaries & Thesauruses');
+INSERT INTO public."Categories" (categories_id, name) VALUES (151, 'Literature');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1581, 'Space Marine');
+INSERT INTO public."Categories" (categories_id, name) VALUES (615, 'Sea Adventures');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2220, 'Parenting & Relationships');
+INSERT INTO public."Categories" (categories_id, name) VALUES (251, 'Series');
+INSERT INTO public."Categories" (categories_id, name) VALUES (146, 'World Literature');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1576, 'Space Opera');
+INSERT INTO public."Categories" (categories_id, name) VALUES (454, 'Thrillers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (515, 'Professional Science');
+INSERT INTO public."Categories" (categories_id, name) VALUES (442, 'Horror');
+INSERT INTO public."Categories" (categories_id, name) VALUES (966, 'Education');
+INSERT INTO public."Categories" (categories_id, name) VALUES (783, 'Dystopian');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2366, 'Gothic & Romantic');
+INSERT INTO public."Categories" (categories_id, name) VALUES (806, 'Algorithms');
+INSERT INTO public."Categories" (categories_id, name) VALUES (367, 'History & Surveys');
+INSERT INTO public."Categories" (categories_id, name) VALUES (619, 'Sea Stories');
+INSERT INTO public."Categories" (categories_id, name) VALUES (561, 'Epic');
+INSERT INTO public."Categories" (categories_id, name) VALUES (489, 'Physics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (969, 'Crime');
+INSERT INTO public."Categories" (categories_id, name) VALUES (469, 'Post-Apocalyptic');
+INSERT INTO public."Categories" (categories_id, name) VALUES (455, 'Mystery, Thriller & Suspense');
+INSERT INTO public."Categories" (categories_id, name) VALUES (717, 'Criticism & Theory');
+INSERT INTO public."Categories" (categories_id, name) VALUES (483, 'Applied');
+INSERT INTO public."Categories" (categories_id, name) VALUES (460, 'Thrillers & Suspense');
+INSERT INTO public."Categories" (categories_id, name) VALUES (758, 'Friendship, Social Skills & School Life');
+INSERT INTO public."Categories" (categories_id, name) VALUES (477, 'Science & Math');
+INSERT INTO public."Categories" (categories_id, name) VALUES (621, 'Adventure & Thrillers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (798, 'Theory of Computing');
+INSERT INTO public."Categories" (categories_id, name) VALUES (921, 'Suspense');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2613, 'Spies & Politics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (478, 'Statistics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (144, 'Philosophy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2227, 'Personal Hygiene');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2499, 'Fantasy Graphic Novels');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1132, 'Modernism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2064, 'Rhetoric');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2071, 'Writing Skills');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1832, 'Algebra');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1021, 'Australian & Oceania');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1087, 'Cats, Dogs & Animals');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2218, 'Psychology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1286, 'Mechanical Engineering');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1305, 'Science for Kids');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2269, 'Internal Medicine');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2270, 'Neurology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2808, 'Halloween');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1353, 'Optics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2161, 'Political History');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1362, 'Optoelectronics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2163, 'History, 17th & 18th Century');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2275, 'Neuroscience');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1228, 'Small Town & Rural');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1352, 'Creative Writing & Composition');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2176, 'Alternative Medicine');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2274, 'By Topic');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2177, 'Pragmatism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2277, 'Intelligence');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2187, 'Experiments & Projects');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2197, 'Chapter Books & Readers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2326, 'Short Story Collections');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1058, 'Solar System');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2146, 'Social Philosophy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2801, 'Domestic Life');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2154, 'Reference & Collections');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2402, 'Women''s Adventure');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2150, 'Philosophers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2810, 'Activity Books');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1325, 'Science, Nature & How It Works');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1015, 'Mysteries & Detectives');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2805, 'Hoodies & Sweatshirts');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2806, 'Holidays & Celebrations');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2811, 'Activities, Crafts & Games');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2812, 'Clothing & Accessories');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2813, 'Men');
+INSERT INTO public."Categories" (categories_id, name) VALUES (981, 'Romantic');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2663, 'Heist');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2678, 'Spine-Chilling Horror');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2501, 'Adaptations');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2928, 'Theism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (978, 'Erotica');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1097, 'Discworld');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2926, 'Philosophy of Religion');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2856, 'Lawyers & Criminals');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2978, 'Developmental Psychology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2983, 'Gender');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2985, 'Jungian');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2992, 'Organized Crime');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3010, 'Zombies');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3015, 'Zombies, Vampires & Werewolves');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3016, 'Vampires');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3023, 'Comparative Government');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3025, 'Politics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3038, 'Medical');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4622, 'Financial');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3155, 'Sexuality');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3156, 'Sex');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3158, 'Sex Instruction');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3161, 'Human');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3163, 'Alternative');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3078, 'Hard-Boiled');
+INSERT INTO public."Categories" (categories_id, name) VALUES (831, 'Ghosts');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2276, 'Medical Books');
+INSERT INTO public."Categories" (categories_id, name) VALUES (156, 'English Literature');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2136, 'Religion & Spirituality');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2638, 'Themes & Styles');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2063, 'Research');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1085, 'Satire');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2069, 'Writing, Research & Publishing Guides');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1322, 'Zoology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (988, 'Mystery');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2173, 'Health, Fitness & Dieting');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1206, 'Explore the World');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1121, 'Cultural Heritage');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2138, 'Modern');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1020, 'Comics & Graphic Novels');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1214, 'Caribbean & Latin American');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2149, 'Professionals & Academics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2289, 'Contemporary');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1103, 'Magic & Wizards');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1801, 'Abuse');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2834, 'Space Fleet');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1054, 'Astronomy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1356, 'Electrical & Electronics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2073, 'Probability & Statistics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2800, 'Women''s Fiction');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3486, 'Military Science');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3327, 'Psychological Thrillers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2648, 'Technothrillers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2698, 'Siblings');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2597, 'Thriller & Suspense');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2422, 'Criticism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2655, 'Hard Science Fiction');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2180, 'Logic & Language');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2932, 'Theology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2279, 'Cognitive');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1027, 'Traditional Detectives');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4971, 'Private Investigators');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1208, 'Orphans & Foster Homes');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3024, 'Leadership');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2701, 'Humour & Satire');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4284, 'Travel');
+INSERT INTO public."Categories" (categories_id, name) VALUES (856, 'Languages & Tools');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2143, 'Germany');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2114, 'First Contact');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1118, 'Alternate History');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2070, 'Words, Language & Grammar');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4984, 'Keys to the Kingdom');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3487, 'Weapons & Warfare');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1051, 'French');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2157, 'Social Sciences');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2922, 'Parodies & Satires');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4283, 'Russia');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4634, 'Kidnapping');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2409, 'Colonization');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3094, 'Serial Killers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1323, 'Fairy Tales, Folk Tales & Myths');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2723, 'Galactic Empire');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2153, 'Biographies & Memoirs');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2350, 'Publishers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1806, 'Difficult Discussions');
+INSERT INTO public."Categories" (categories_id, name) VALUES (430, 'TV, Movie & Video Game Adaptations');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3489, 'Strategy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2376, 'Manga');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2097, 'Time Travel');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2170, 'Epistemology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1059, 'Cosmology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2032, 'Poetry');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2645, 'Alien Invasion');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3018, 'Political Theory');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1320, 'Dragons');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2307, 'Social Issues');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2306, 'Friendship');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2699, 'Dark Humour');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2893, 'Cyberpunk');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1205, 'Geography & Cultures');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2826, 'Exploration');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1803, 'Dysfunctional Relationships');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2202, 'Boys & Men');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3491, 'Superheroes');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2796, 'DC');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3209, 'Essays');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3973, 'Ages 9-12');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4075, 'Songwriting');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4078, 'Punk');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4079, 'Theory, Composition & Performance');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3034, 'Men''s Adventure');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5794, 'Games');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5579, 'Renaissance Literary History & Criticism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5620, 'Business & Investing');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5323, 'World');
+INSERT INTO public."Categories" (categories_id, name) VALUES (929, 'India');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5577, 'Gothic & Romantic Literary History & Criticism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5752, 'Spirituality');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5343, 'Pop Culture');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5318, 'Performing Arts');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5333, 'Jazz');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5334, 'Country & Folk');
+INSERT INTO public."Categories" (categories_id, name) VALUES (606, 'Children''s Books');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5578, 'French Literary History & Criticism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5575, 'Crime Action & Adventure');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5274, 'Schools & Teaching');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5248, 'Special Topics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5251, 'Public Health');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5268, 'Administration');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5269, 'Special Education');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5256, 'Administration & Policy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5272, 'Education Theory');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5249, 'Medicine & Health Sciences');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2272, 'Medicine');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5261, 'Basic Sciences');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5262, 'Organic');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5340, 'Publishing & Books');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5265, 'Genetics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5266, 'Evolution');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4077, 'Rock');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5759, 'Other Eastern Religions & Sacred Texts');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1300, 'Science Studies');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5893, 'Devotionals');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5346, 'Beatles');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5271, 'Reform & Policy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5349, 'Book Industry');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5595, 'Literature Textbooks');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5298, 'Humor');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5270, 'Behavioral Disorders');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5597, 'Classic Literature (Books)');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5273, 'Education & Teaching');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5309, 'Individual Philosophers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5598, 'Computer Dictionaries (Books)');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5826, 'Linguistics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5299, 'Humor & Entertainment');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5599, 'Slang & Idiom Dictionaries');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5384, 'Chess');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5760, 'Taoism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5600, 'Religion & Spirituality (Books)');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5601, 'Saints (Books)');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5395, 'Christianity');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5396, 'Science & Religion');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5602, 'Slow Cooker Recipes');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5603, 'Vegan Cookbooks (Books)');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5604, 'Quick & Easy Cooking (Books)');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5352, 'Religious');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5361, 'Christian Denominations & Sects');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5364, 'Self Help');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5353, 'Religious Studies');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5649, 'Coming of Age');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5371, 'World War I');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5616, 'Personal Finance');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5614, 'Comic Strips');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5625, 'Business & Finance');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5796, 'Role Playing & Fantasy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5892, 'Worship & Devotion');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5313, 'Theory');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5314, 'Movie Directors');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5315, 'Individual Directors');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2155, 'Leaders & Notable People');
+INSERT INTO public."Categories" (categories_id, name) VALUES (147, 'Humanities');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5654, 'Economic History');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2162, 'Political Science');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5538, 'Drama');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5289, 'Love Poems');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3335, 'Supernatural');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5799, 'Toys & Games');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2221, 'Psychology & Counseling');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5565, 'Metaphysical & Visionary');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5615, 'Parenting');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5362, 'Christian Living');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5859, 'Astrology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5608, 'Drawing');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2743, 'Mythology & Folk Tales');
+INSERT INTO public."Categories" (categories_id, name) VALUES (494, 'Action & Adventure');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5802, 'Individual Sports');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5803, 'Japan');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5368, 'Self-Help');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5800, 'Gaming');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5805, 'Martial Arts');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5806, 'Sports & Outdoors');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5365, 'Inspirational');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5785, 'Amber');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5534, 'Time Periods');
+INSERT INTO public."Categories" (categories_id, name) VALUES (157, 'History & Criticism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (698, 'Short Stories & Anthologies');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5320, 'Arts & Photography');
+INSERT INTO public."Categories" (categories_id, name) VALUES (933, 'Asia');
+INSERT INTO public."Categories" (categories_id, name) VALUES (530, 'Regional & Cultural');
+INSERT INTO public."Categories" (categories_id, name) VALUES (458, 'Historical');
+INSERT INTO public."Categories" (categories_id, name) VALUES (149, 'Textbooks');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3087, 'Murder');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5730, 'Medieval');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5363, 'Protestantism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4074, 'Musical Genres');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5861, 'New Age');
+INSERT INTO public."Categories" (categories_id, name) VALUES (395, 'History');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5868, 'Acting & Auditioning');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5337, 'Biographies');
+INSERT INTO public."Categories" (categories_id, name) VALUES (154, 'European');
+INSERT INTO public."Categories" (categories_id, name) VALUES (396, 'Europe');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1079, 'Political');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3736, 'Mysteries');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5862, 'Chinese');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5255, 'Sociology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5876, 'Stagecraft');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5612, 'Foreign Language Study & Reference');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5201, 'Animals');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5532, 'Theatre');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5689, 'Renaissance');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5638, 'Grammar');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5328, 'Americas');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5763, 'Eastern');
+INSERT INTO public."Categories" (categories_id, name) VALUES (3211, 'Memoirs');
+INSERT INTO public."Categories" (categories_id, name) VALUES (1180, '20th Century');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5639, 'Instruction');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5676, 'Literary Theory');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5764, 'Tao Te Ching');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5655, 'Accounting & Finance');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5872, 'Speech');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5626, 'Business Ethics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5628, 'Foreign Languages');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5657, 'Economics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5879, 'Direction & Production');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5312, 'Arts & Literature');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5631, 'Foreign Language Dictionaries & Thesauruses');
+INSERT INTO public."Categories" (categories_id, name) VALUES (4080, 'Music');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5725, 'Eastern European');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7216, 'Object-Oriented Software Design');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5381, 'Puzzles & Games');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6769, 'Film & Video Art');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6924, 'Hispanic American');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6751, 'Multicultural');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6069, 'Translations');
+INSERT INTO public."Categories" (categories_id, name) VALUES (152, 'Literature & Fiction');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7195, 'Information Systems');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7159, 'Drafting & Presentation');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7217, 'Game Programming');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6071, 'New International');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6074, 'Formats');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6076, 'Asian American');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6087, 'Sports');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6770, 'Photography & Video');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6016, 'U.S. Regional');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6649, 'Guatemala');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5958, 'Italy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (748, 'Computer Science');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7507, 'Rural');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6114, 'Web Development');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6124, 'Web Design');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7107, 'Urban');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7069, 'Royalty');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7110, 'African Americans');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5967, 'Being a Teen');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6658, 'New Baby');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6115, 'JavaScript');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7115, 'Discrimination & Racism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6108, 'New Adult & College');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6194, 'Suicide');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6270, 'Latin America');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6162, 'Soil Science');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6105, 'Journal Writing');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5918, 'Multigenerational');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6163, 'Technology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7208, 'Missions & Missionary Work');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7473, 'Econometrics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6165, 'Agricultural Sciences');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6112, 'Contemporary Women');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6133, 'Prentice Hall');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6122, 'Video Games & Strategy Guides');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6025, 'Hacking');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6663, 'New Experiences');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5902, 'Religious & Inspirational');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6002, 'True Accounts');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7279, 'Social Skills');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6026, 'Internet & Social Media');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7486, 'Culture');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7210, 'Charismatic');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5897, 'Board Games');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2348, 'Graphic Novels');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7456, 'Gender Studies');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7160, 'CAD');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7101, 'Regions');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6675, 'Humourous Stories');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7215, 'Evangelism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7223, 'Graphics & Visualization');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7162, '3D Graphics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6127, 'Web Graphics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7487, 'Management & Leadership');
+INSERT INTO public."Categories" (categories_id, name) VALUES (521, 'United States');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7212, 'Pentecostal');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5945, 'Behavioural Sciences');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7308, 'Batman');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6070, 'Bibles');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6411, 'Marvel Comics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5925, 'Christian');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5899, 'Colouring Books for Grown-Ups');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6134, 'Certification Central');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6003, 'Espionage');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6152, 'Chemistry');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6271, 'Canada');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7472, 'Microeconomics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7102, 'Midwest');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7488, 'Business Management');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7311, 'Media');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7070, 'Diseases');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7480, 'Processes & Infrastructure');
+INSERT INTO public."Categories" (categories_id, name) VALUES (802, 'Genetic');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7169, 'Nanotechnology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6153, 'Industrial & Technical');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7168, 'Welding');
+INSERT INTO public."Categories" (categories_id, name) VALUES (759, 'Growing Up & Facts of Life');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7060, 'Captains of Industry');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6654, 'Central America');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7196, 'Software Engineering');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5964, 'Love & Romance');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6017, 'South');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6773, 'Art');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7207, 'Python');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6004, 'Intelligence & Espionage');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7509, 'Special Groups');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7482, 'Math for Business');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5946, 'Cognitive Science');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7061, 'Economic Conditions');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6008, 'Digital Law');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5960, 'Rome');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7170, 'Materials');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5930, 'Biblical Fiction');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6369, 'Hardware');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6010, 'Systems Of Government');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6350, 'Judaism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2857, 'Media Tie-In');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6167, 'Renewable Energy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6372, 'Design & Architecture');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6351, 'Songbooks and Chorale Music');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6874, 'Dark Fantasy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6157, 'Chemical');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6917, 'Mothers & Children');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6354, 'Religious & Sacred Music');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6655, 'Mayan');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6919, 'African American');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5950, 'Social Psychology & Interactions');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6019, 'Barbecuing & Grilling');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6158, 'Process Dynamics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7062, 'International');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6135, 'Neural Networks');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6136, 'Publisher');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7511, 'Ethnic Studies');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7064, 'Biography & History');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6161, 'Chemical Engineering');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6138, 'Fuzzy Logic');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7508, 'Poverty');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6170, 'Environmental Engineering');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7484, 'Government & Business');
+INSERT INTO public."Categories" (categories_id, name) VALUES (5953, 'Cognitive Psychology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6029, 'Security');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7510, 'Current Events');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6275, 'Mexico');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7181, 'Industrial, Manufacturing & Operational Systems');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7479, 'Skills');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6011, 'History & Culture');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7485, 'Organizational Change');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7068, 'Business');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6014, 'Elections');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7492, 'Total Quality Management');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6018, 'Regional & International');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6020, 'Outdoor Cooking');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6276, 'Atlases & Maps');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6031, 'For Dummies - Programming');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11905, 'Early Civilization');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9789, 'Star Wars');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11352, 'Economic Theory');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9016, 'Popular Culture');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9822, 'Antiques & Collectibles');
+INSERT INTO public."Categories" (categories_id, name) VALUES (13839, 'Islam');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8651, 'Entomology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8642, 'Ethics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8631, 'Ornithology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8652, 'Animal Psychology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (10192, 'Television');
+INSERT INTO public."Categories" (categories_id, name) VALUES (10917, 'Concordances');
+INSERT INTO public."Categories" (categories_id, name) VALUES (10107, 'Gay');
+INSERT INTO public."Categories" (categories_id, name) VALUES (14212, 'Action & Adventure Manga');
+INSERT INTO public."Categories" (categories_id, name) VALUES (142, 'Books');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8720, 'England');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11910, 'Civilization & Culture');
+INSERT INTO public."Categories" (categories_id, name) VALUES (10127, 'Mars');
+INSERT INTO public."Categories" (categories_id, name) VALUES (10128, 'Earth Sciences');
+INSERT INTO public."Categories" (categories_id, name) VALUES (15607, 'Vegetables & Vegetarian');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12128, 'Pre-Calculus');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7855, 'Children''s Studies');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12129, 'Trigonometry');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7858, 'Teenagers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8267, 'Experiments, Instruments & Measurement');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9001, 'Microelectronic Devices');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9791, 'Comics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (13841, 'British');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7166, 'Architecture');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7561, 'Needlecrafts & Textile Crafts');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11332, 'Skiing');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8196, 'Moving');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7562, 'Quilts & Quilting');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8277, 'Anthropology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7563, 'Crafts & Hobbies');
+INSERT INTO public."Categories" (categories_id, name) VALUES (10327, 'Pathologies');
+INSERT INTO public."Categories" (categories_id, name) VALUES (13549, 'Africa');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9002, 'Digital Design');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12121, 'Java');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7907, 'Aeronautical Engineering');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8314, 'Fractals');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8588, 'Children''s Cookbooks');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7800, 'Native Literature');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8260, 'Scientists');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9679, 'Holidays');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16030, 'Reference & Tips');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7566, 'Emotions & Feelings');
+INSERT INTO public."Categories" (categories_id, name) VALUES (14706, 'Modelling & Simulation');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8289, 'History of Mathematics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8281, 'Cultural');
+INSERT INTO public."Categories" (categories_id, name) VALUES (10938, 'Playwriting');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7570, 'Sleep');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8591, 'Culinary Arts & Techniques');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7571, 'Early Learning');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7574, 'Basic Concepts');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11898, 'Witches & Wizards');
+INSERT INTO public."Categories" (categories_id, name) VALUES (10165, 'Astronomy & Astrophysics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8668, 'Alaska');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8648, 'Primatology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7904, 'Essays & Commentary');
+INSERT INTO public."Categories" (categories_id, name) VALUES (13550, 'Egypt');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8261, 'History of Science');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11901, 'Werewolves & Shifters');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8630, 'Biology & Life Sciences');
+INSERT INTO public."Categories" (categories_id, name) VALUES (10328, 'Forensic Psychology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11340, 'Strategy & Competition');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8632, 'Birds & Birdwatching');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9008, 'Automation');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12120, 'Databases');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12141, 'Internet, Groupware, & Telecommunications');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8328, 'Physical');
+INSERT INTO public."Categories" (categories_id, name) VALUES (15549, 'Saints');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8252, 'Entropy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9793, 'Dark Horse Comics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (14700, 'Finance');
+INSERT INTO public."Categories" (categories_id, name) VALUES (474, 'Science Fiction & Fantasy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12122, 'Java & Databases');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12285, 'Conceptual');
+INSERT INTO public."Categories" (categories_id, name) VALUES (485, 'Mathematics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11911, 'Historical Study');
+INSERT INTO public."Categories" (categories_id, name) VALUES (13554, 'Middle East');
+INSERT INTO public."Categories" (categories_id, name) VALUES (13433, 'Class');
+INSERT INTO public."Categories" (categories_id, name) VALUES (13855, 'Scandinavian');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8275, 'Methodology & Statistics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8801, 'Internet Games');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8805, 'Strategy Guides');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12286, 'Pop');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12288, 'Schools, Periods & Styles');
+INSERT INTO public."Categories" (categories_id, name) VALUES (13537, 'Iraq War');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12289, 'Other Media');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12290, 'Artists, A-Z');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8981, 'Ruby');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12292, 'Monographs');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9836, 'Self-Esteem & Self-Respect');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9841, 'Nature');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9810, 'World War II');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11333, 'Surfing');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7184, 'Machinery');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12298, 'Humorous');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8987, 'Software Design, Testing & Engineering');
+INSERT INTO public."Categories" (categories_id, name) VALUES (14226, 'Japanese');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16034, 'Essays & Travelogues');
+INSERT INTO public."Categories" (categories_id, name) VALUES (13834, 'Scandinavia');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8989, 'Object-Oriented Design');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8329, 'Sociobiology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (2226, 'Health');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7564, 'Crafts, Hobbies & Home');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8669, 'West');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8723, 'Scotland');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7853, 'Marriage & Family');
+INSERT INTO public."Categories" (categories_id, name) VALUES (10190, 'Guides & Reviews');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8622, 'Biological Sciences');
+INSERT INTO public."Categories" (categories_id, name) VALUES (7905, 'Robotics');
+INSERT INTO public."Categories" (categories_id, name) VALUES (15555, 'Relationships');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11343, 'Gambling');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16454, 'Hebrew Bible (Old Testament)');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16443, 'Mariology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9826, 'Conventional');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16448, 'New American');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16457, 'Old Testament');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12135, 'Popular & Elementary');
+INSERT INTO public."Categories" (categories_id, name) VALUES (12126, 'Data Structures');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8279, 'Number Theory');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8633, 'Nature & Ecology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (15580, 'Prayerbooks');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6022, 'Seasonal');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8321, 'Chaos & Systems');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8670, 'States');
+INSERT INTO public."Categories" (categories_id, name) VALUES (14720, 'Fryers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11336, 'Excursion Guides');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6023, 'Cookbooks, Food & Wine');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9827, 'Pictorials');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9828, 'Firearms & Weapons');
+INSERT INTO public."Categories" (categories_id, name) VALUES (15564, 'Composers & Musicians');
+INSERT INTO public."Categories" (categories_id, name) VALUES (15569, 'Golf');
+INSERT INTO public."Categories" (categories_id, name) VALUES (14718, 'Special Appliances');
+INSERT INTO public."Categories" (categories_id, name) VALUES (14719, 'Quick & Easy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (15605, 'Vegan');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11337, 'Outdoor Recreation');
+INSERT INTO public."Categories" (categories_id, name) VALUES (15609, 'Slow Cookers');
+INSERT INTO public."Categories" (categories_id, name) VALUES (6024, 'Special Occasions');
+INSERT INTO public."Categories" (categories_id, name) VALUES (9015, 'Video Games');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8634, 'Ecology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8658, 'Animal Behaviour & Communication');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8672, 'North America');
+INSERT INTO public."Categories" (categories_id, name) VALUES (8266, 'History & Philosophy');
+INSERT INTO public."Categories" (categories_id, name) VALUES (11338, 'Winter Sports');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16458, 'Criticism & Interpretation');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16462, 'Sacred Writings');
+INSERT INTO public."Categories" (categories_id, name) VALUES (15552, 'Catholicism');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16480, 'Negotiating');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16484, 'Systems Analysis & Design');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16490, 'Database Design');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16491, 'Database Storage & Design');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16493, 'Data Warehousing');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16494, 'Business Intelligence Tools');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16500, 'Information Management');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16506, 'Women');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16510, 'Specific Groups');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16521, 'Data Mining');
+INSERT INTO public."Categories" (categories_id, name) VALUES (240, 'Computers & Technology');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16532, 'Potatoes');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16535, 'Cooking by Ingredient');
+INSERT INTO public."Categories" (categories_id, name) VALUES (16537, 'Cheese & Dairy');
