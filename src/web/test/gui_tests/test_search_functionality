@@ -43,37 +43,47 @@ class Searchtest(unittest.TestCase):
 
         page = self.driver.current_url
         if param in page:
-            print('Test Passed: Search page for data loaded')
+            pass
+            #print('Test Passed: Search page for data loaded')
             value = self.driver.find_element_by_id("searchBox").get_attribute("value")
             if param in value:
-                print('Test Passed: Input correct')
+                pass
+                #print('Test Passed: Input correct')
             else:
-                print('Test Fail: Search parameter wrong')
+                self.fail("Test Fail: Search parameter wrong")
+                #print('Test Fail: Search parameter wrong')
         else:
-            print('Test fail: search page broken')
+            self.fail("Test fail: search page broken")
+            #print('Test fail: search page broken')
 
     def searchResultCount(self):
         try:
             searchcount = self.driver.find_element_by_xpath("//*[contains(text(), 'books matching')]")
-            print("Test passed: search result loaded")
-        except:
-            print("Test Failed: search result load error")
             pass
+            #print("Test passed: search result loaded")
+        except:
+            self.fail("Test Failed: search result load error")
+            # print("Test Failed: search result load error")
+            # pass
 
     def searchResultVerification(self):
         try:
             searchresult = self.driver.find_element_by_xpath("//*[contains(text(), 'Holt McDougal Library, High School with Connections: Individual Reader 1984')]")
-            print("Test passed: Search verified")
-        except:
-            print("Test Failed: search result incorrect")
             pass
+            #print("Test passed: Search verified")
+        except:
+            self.fail("Test Failed: search result incorrect")
+            #print("Test Failed: search result incorrect")
+            #pass
 
     def nullResultVerification(self):
         try:
             searchresult = self.driver.find_element_by_xpath("//*[contains(., 'Sorry, we could not find the book you were looking for.')]")
-            print("Test passed: Search verified - no result found")
+            pass
+            #print("Test passed: Search verified - no result found")
         except:
-            print("Test Failed: search result incorrect")
+            self.fail("Test Failed: search result incorrect")
+            #print("Test Failed: search result incorrect")
             pass
 
 
