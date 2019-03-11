@@ -116,7 +116,7 @@ footer {
 .hori-container {
   display: flex;
   flex-direction: row;
-  align-items: flex-start
+  align-items: flex-start;
 }
 .flex-container {
   display: flex;
@@ -161,6 +161,9 @@ header div.loginbox img {
 /*******************************************************************************************
        SEARCH BOX
 *******************************************************************************************/
+.searchbox { 
+  margin-bottom: 15px;
+}
 .input-field {
   width: 100%;
   padding: 7px;
@@ -175,7 +178,6 @@ header div.loginbox img {
   display: -ms-flexbox; /* IE10 */
   display: flex;
   width: 100%;
-  margin-bottom: 15px;
 }
 
 .icon {
@@ -184,6 +186,10 @@ header div.loginbox img {
   color: white;
   min-width: 40px;
   text-align: center;
+}
+
+.search-term {
+  color: #c45500!important
 }
 
 /*******************************************************************************************
@@ -231,7 +237,7 @@ header div.loginbox img {
 }
 
 .book-details {
-  width:100%;
+  width: 100%;
   padding-left: 10px;
 }
 
@@ -265,8 +271,8 @@ header div.loginbox img {
 }
 .book-cover-lg {
   position: relative;
-  top:0px;
-  left:0px;
+  top: 0px;
+  left: 0px;
   max-width: 175px;
   max-height: 200px;
 }
@@ -280,6 +286,45 @@ header div.loginbox img {
   padding-bottom: 0px;
   margin-bottom: 0px;
 }
+
+ul.authors {
+  display: inline;
+  list-style: none;
+  padding-left: 0px;
+}
+
+ul.authors li {
+  display: inline;
+}
+
+ul.authors li:after {
+  content: ", ";
+}
+ul.authors li:last-child:after {
+  content: "";
+}
+
+ul.book_categories {
+  display: inline;
+  list-style: none;
+  padding-left: 0px;
+}
+
+ul.book_categories li {
+  display: inline;
+}
+
+ul.book_categories li:after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f061";
+  display: inline-block;
+  padding-left: 3px;
+  vertical-align: middle;
+  font-weight: 900;
+}
+ul.book_categories li:last-child:after {
+  content: "";
+}
 /*******************************************************************************************
        REVIEW
 *******************************************************************************************/
@@ -290,9 +335,9 @@ header div.loginbox img {
   list-style-type: none;
 }
 .review select {
-  position:relative;
-  width:165px;
-  height:30px;
+  position: relative;
+  width: 165px;
+  height: 30px;
 }
 .review {
   flex-grow: 1;
@@ -301,24 +346,24 @@ header div.loginbox img {
 .review ul {
   list-style-type: none;
 }
-.review ul li div img { 
+.review ul li div img {
   float: left;
   width: 38px;
   height: 38px;
   margin-top: -8px;
 }
-.review ul li div p{
+.review ul li div p {
   padding-left: 10px;
 }
-.review-comment{
+.review-comment {
   width: 300px;
   height: 150px;
   padding: 12px 20px;
   box-sizing: border-box;
   font-size: 16px;
 }
-.review-btn{
-  background-color: #4CAF50;
+.review-btn {
+  background-color: #4caf50;
   color: white;
   padding: 8px 16px;
   margin: 4px 2px;
@@ -340,6 +385,11 @@ nav ul {
 }
 
 article {
+  padding: 20px;
+  width: 100%;
+  /* background-color: #f1f1f1; */
+}
+article#landing_page {
   float: left;
   padding: 20px;
   width: 75%;

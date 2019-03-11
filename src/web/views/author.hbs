@@ -1,20 +1,24 @@
-<div style="width:100%;padding: 20px;">
-    <div class="searchbox">
-        <form class="input-container" action="/search" method="get">
-            <i class="fa fa-search icon"></i>
-            <input class="input-field" id="searchBox" type="text"
-                placeholder="Search using Book Name, Author, or Keyword" name="s"
-                {{#if search_term}}value="{{escapeQuotes search_term}}"{{/if}}>
-        </form>
-        {{#if search_term}}
-            <span class="font-normal">We found {{num_books}} books matching <span
-                    class="search-term">"{{search_term}}"</span>.</span>
-        {{/if}}
-    </div>
+<article id="book_details_page">
+    <div class="vert-container">
+        <div class="hori-container">
+            <img class="book-cover-lg" src="/images/authors/{{author_id}}.jpeg" />
 
-    <div class="vert-spacing-15"></div>
+            <div class="book-details">
+                <h1 class="no-bottom-pm">{{author_name}}</h1>
+                <div class="font-normal no-top-pm no-bottom-pm">Written books with:
+                    <ul class="authors">
+                        {{#each coauthors}}
+                            <li><a href="/author/{{this.author_id}}/{{this.name}}">{{this.name}}</a></li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-    {{#if books}}
+        <div class="heading font-xlarge">Books By this Author</div>
+
+        <div class="vert-spacing-15"></div>
+
         {{#each books}}
             <div class="book-long">
                 <img class="book-cover" src="/images/book_covers/{{book_id}}.jpeg" />
@@ -38,8 +42,7 @@
             </div>
 
             <div class="divider"></div>
+
         {{/each}}
-    {{else}}
-        Sorry, we could not find the book you were looking for. Please try searching for something else.
-    {{/if}}
-</div>
+    </div>
+</article>
