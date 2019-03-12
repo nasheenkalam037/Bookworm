@@ -1,6 +1,8 @@
 --
 -- PostgreSQL database dump
 --
+\set ON_ERROR_STOP on
+SET CLIENT_ENCODING TO 'utf8';
 
 CREATE TABLE public."AuthorBooks" (
     author_id integer NOT NULL,
@@ -493,3 +495,5 @@ INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (3396, 2473);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (3397, 2474);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (3398, 2475);
 INSERT INTO public."AuthorBooks" (author_id, book_id) VALUES (3399, 2476);
+
+\unset ON_ERROR_STOP

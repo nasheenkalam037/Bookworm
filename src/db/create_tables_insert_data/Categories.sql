@@ -1,6 +1,15 @@
 --
 -- PostgreSQL database dump
 --
+\set ON_ERROR_STOP on
+SET CLIENT_ENCODING TO 'utf8';
+
+CREATE SEQUENCE public."Categories_categories_id_sequence"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 CREATE TABLE public."Categories" (
     categories_id integer DEFAULT nextval('public."Categories_categories_id_sequence"'::regclass) NOT NULL,
@@ -749,3 +758,8 @@ INSERT INTO public."Categories" (categories_id, name) VALUES (240, 'Computers & 
 INSERT INTO public."Categories" (categories_id, name) VALUES (16532, 'Potatoes');
 INSERT INTO public."Categories" (categories_id, name) VALUES (16535, 'Cooking by Ingredient');
 INSERT INTO public."Categories" (categories_id, name) VALUES (16537, 'Cheese & Dairy');
+
+
+SELECT pg_catalog.setval('public."Categories_categories_id_sequence"', (SELECT max(categories_id)+1 FROM public."Categories"), true);
+
+\unset ON_ERROR_STOP

@@ -1,6 +1,10 @@
 --
 -- PostgreSQL database dump
 --
+\set ON_ERROR_STOP on
+SET CLIENT_ENCODING TO 'utf8';
+
+
 
 CREATE TABLE public."AmazonDetails" (
     book_id integer NOT NULL,
@@ -917,3 +921,6 @@ INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price,
 INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price, num_reviews) VALUES (2474, 'https://www.amazon.ca/Infinite-Jeremy-Robinson/dp/1941539335?ref=pf_vv_at_pdctrvw_dp', 4.2, NULL, 19.93, 7);
 INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price, num_reviews) VALUES (2475, 'https://www.amazon.ca/Data-Strategy-Profit-Analytics-Internet/dp/074947985X?ref=pf_vv_at_pdctrvw_dp', 5.0, NULL, 33.11, 2);
 INSERT INTO public."AmazonDetails" (book_id, book_link, rating, synopsis, price, num_reviews) VALUES (2476, 'https://www.amazon.ca/Wisconsin-Cheese-Cookbook-Recipes-Creameries/dp/1493037919?ref=pf_vv_at_pdctrvw_dp', NULL, NULL, 31.95, NULL);
+
+
+\unset ON_ERROR_STOP

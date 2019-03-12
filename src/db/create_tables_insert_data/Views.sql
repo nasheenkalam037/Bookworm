@@ -1,4 +1,7 @@
 
+\set ON_ERROR_STOP on
+SET CLIENT_ENCODING TO 'utf8';
+
 CREATE VIEW public."BookDetails" AS
  SELECT "Books".book_id,
     "Books".title,
@@ -25,3 +28,5 @@ CREATE VIEW public."BookDetails" AS
            FROM (public."Author" a
              JOIN public."AuthorBooks" ab ON ((a.author_id = ab.author_id)))) abb ON (("Books".book_id = abb.book_id)));
 
+
+\unset ON_ERROR_STOP

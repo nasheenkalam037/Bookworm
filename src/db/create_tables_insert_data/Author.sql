@@ -1,6 +1,15 @@
+\set ON_ERROR_STOP on
+SET CLIENT_ENCODING TO 'utf8';
 --
 -- PostgreSQL database dump
 --
+
+CREATE SEQUENCE public."Author_author_id_sequence"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 CREATE TABLE public."Author" (
     author_id integer DEFAULT nextval('public."Author_author_id_sequence"'::regclass) NOT NULL,
@@ -429,3 +438,7 @@ INSERT INTO public."Author" (author_id, name) VALUES (3125, 'Ray Bradbury');
 INSERT INTO public."Author" (author_id, name) VALUES (3384, 'Anne Catherine Emmerich');
 INSERT INTO public."Author" (author_id, name) VALUES (2991, 'Aneko Yusagi');
 INSERT INTO public."Author" (author_id, name) VALUES (3227, 'Jane Chirgwin');
+
+SELECT pg_catalog.setval('public."Author_author_id_sequence"', (SELECT max(author_id)+1 from public."Author"), true);
+
+\unset ON_ERROR_STOP

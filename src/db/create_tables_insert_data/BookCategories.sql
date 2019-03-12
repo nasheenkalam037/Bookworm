@@ -1,3 +1,5 @@
+\set ON_ERROR_STOP on
+SET CLIENT_ENCODING TO 'utf8';
 --
 -- PostgreSQL database dump
 --
@@ -5539,3 +5541,5 @@ INSERT INTO public."BookCategories" (book_id, category_id) VALUES (2476, 15607);
 INSERT INTO public."BookCategories" (book_id, category_id) VALUES (2476, 16535);
 INSERT INTO public."BookCategories" (book_id, category_id) VALUES (2476, 6023);
 INSERT INTO public."BookCategories" (book_id, category_id) VALUES (2476, 16537);
+
+\unset ON_ERROR_STOP

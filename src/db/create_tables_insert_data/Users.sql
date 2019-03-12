@@ -2,6 +2,16 @@
 -- PostgreSQL database dump
 --
 
+\set ON_ERROR_STOP on
+SET CLIENT_ENCODING TO 'utf8';
+
+CREATE SEQUENCE public."Users_user_id_sequence"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
 CREATE TABLE public."Users" (
     user_id integer DEFAULT nextval('public."Users_user_id_sequence"'::regclass) NOT NULL,
     display_name character varying(100) NOT NULL,
@@ -249,6 +259,10 @@ INSERT INTO public."Users" (user_id, display_name, email, password_hash, creatio
 INSERT INTO public."Users" (user_id, display_name, email, password_hash, creation_time, preferences_json, created_from, login_allowed) VALUES (2525, 'Ed Gordon', 'AH7LXV376UJK22IJ264JZ2CWI5JQ@gmail.com', ' ', '2019-03-10 19:54:59.897172', '{}', 'Amazon', 0);
 INSERT INTO public."Users" (user_id, display_name, email, password_hash, creation_time, preferences_json, created_from, login_allowed) VALUES (2526, 'Sarah Willy/Grace Willy', 'AEMTM3ECOHOUMMBZCXG6MM6TVFBQ@gmail.com', ' ', '2019-03-10 19:54:59.897172', '{}', 'Amazon', 0);
 INSERT INTO public."Users" (user_id, display_name, email, password_hash, creation_time, preferences_json, created_from, login_allowed) VALUES (2527, 'Big Papa B', 'AE3UGEV72V23TVSFN356BIOPZDEQ@gmail.com', ' ', '2019-03-10 19:54:59.897172', '{}', 'Amazon', 0);
-INSERT INTO public."Users" (user_id, display_name, email, password_hash, creation_time, preferences_json, created_from, login_allowed) VALUES (2528, 'Emre Sevinç', 'AGKDEETACH5NAQ7RAPFNID7HN22Q@gmail.com', ' ', '2019-03-10 19:54:59.897172', '{}', 'Amazon', 0);
+INSERT INTO public."Users" (user_id, display_name, email, password_hash, creation_time, preferences_json, created_from, login_allowed) VALUES (2528, 'Emre Sevinc', 'AGKDEETACH5NAQ7RAPFNID7HN22Q@gmail.com', ' ', '2019-03-10 19:54:59.897172', '{}', 'Amazon', 0);
 INSERT INTO public."Users" (user_id, display_name, email, password_hash, creation_time, preferences_json, created_from, login_allowed) VALUES (0, 'Debug User', 'debug@thebookworm.com', '$2b$10$AMucDjhYc1I.TWtHUCudb.mcwh5AIkrUQfFyD/wKJ1JqPq6.J6RO.', '2019-02-21 18:27:36.3877', '{}', 'DEBUG', 0);
 INSERT INTO public."Users"(user_id, display_name, email, password_hash, creation_time, preferences_json, created_from, login_allowed) VALUES (1, 'Jon Shahen', 'jonathan.shahen@gmail.com', '$2b$10$AMucDjhYc1I.TWtHUCudb.mcwh5AIkrUQfFyD/wKJ1JqPq6.J6RO.', '2019-02-21 18:27:36.3877', '{}', 'Website Signin Page', 1);
+
+SELECT pg_catalog.setval('public."Users_user_id_sequence"', (SELECT max(user_id)+1 FROM public."Users"), true);
+
+\unset ON_ERROR_STOP
