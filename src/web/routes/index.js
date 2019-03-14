@@ -49,6 +49,22 @@ router.get('/', async function(req, res, next) {
   });
 });
 
+sql_top_books_all = 'SELECT * FROM "BookDetails" ORDER BY book_id DESC';
+
+/* GET home page. */
+router.get('/all', async function(req, res, next) {
+  // Variable has to be named 'rows'
+  var { rows } = await db.query(sql_top_books_all);
+
+  console.log(rows);
+
+  res.render('search', {
+    title: 'The Bookworm',
+    user: user.getUser(req.session),
+    books: rows
+  });
+});
+
 
 sql_author_details = 'SELECT * FROM "Author" WHERE author_id = $1';
 sql_author_books =
