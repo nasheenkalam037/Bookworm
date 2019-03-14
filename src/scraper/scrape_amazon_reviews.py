@@ -183,6 +183,60 @@ def scrap_amazon_reviews():
             print("Execution time = {0:.5f}s".format(time.time() - start))
             print("Execution date = {}".format(datetime.now()))
 
+def scrap_for_missing_data():
+    global tcp, count
+    start = time.time()
+    try:  
+        setup_db()
+
+        # Fetch book_id and book_url from AmazonDetails tabel
+        conn = tcp.getconn()
+        cur = conn.cursor()
+        cur.execute('SELECT book_id, amazon_link FROM "BookDetails" WHERE author_name IS NULL OR synopsis IS NULL')
+        data = cur.fetchall()
+
+        user_books = {}
+        good_users = {}
+        good_books = {}
+        for i in range(NUM_THREADS):
+            t = threading.Thread(target=worker_thread, args=(i, user_books, good_users, good_books))
+            t.start()
+
+        task_num = 1
+        for d in data:
+            if DEBUG > 1:
+                with print_lock:
+                    print(f'[Main Thread] Adding Reviews {task_num}/{len(data)} to queue:', d[0], d[1])
+            task_num += 1
+            book_queue.put(d)
+
+        with print_lock:
+            print(f'[Main Thread] Waiting for all {task_num-1} tasks to be marked complete')
+        book_queue.join()
+        print(threading.enumerate())
+
+        # Kill all of the threads
+        for i in range(NUM_THREADS):
+            book_queue.put(None)
+        book_queue.join()
+
+        conn.commit()
+        tcp.putconn(conn)
+    
+    except (Exception, psycopg2.DatabaseError) as error:
+        with print_lock:
+            print('[scrap_books] ERROR:', error)
+    finally:
+        with print_lock:
+            print('')
+        if tcp is not None:
+            tcp.closeall()
+            with print_lock:
+                print('Database connection closed.')
+        with print_lock:
+            print("Added {} books".format(count))
+            print("Execution time = {0:.5f}s".format(time.time() - start))
+            print("Execution date = {}".format(datetime.now()))
 
 if __name__ == "__main__":
     scrap_amazon_reviews()

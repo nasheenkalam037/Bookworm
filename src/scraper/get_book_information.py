@@ -239,6 +239,48 @@ def fetch_new_book_info(thread_id, book_url):
         print(f'[Thread {thread_id}] An Error occurred while trying to read from', book_url, error)
         return None
 
+def fetch_book_author(thread_id, book_url):
+    try:
+        soup = grab_url_request(book_url, return_soup=True, use_webdriver=True)
+
+        authors = []
+        for a in soup.select('.author a'):
+            print(a.text)
+            authors.append(a.text)
+        
+        return {"authors": authors}
+
+    except Exception as error:
+        print(f'[Thread {thread_id}] An Error occurred while trying to read from', book_url, error)
+        return None
+    
+def fetch_book_authors_synopsis(thread_id, book_url):
+    try:
+        soup = grab_url_request(book_url, return_soup=True, use_webdriver=True)
+
+        authors = []
+        for a in soup.select('.author a'):
+            authors.append(a.text)
+        
+        print("authors: ", authors)
+
+        synopsis = ""
+        synopsis_node = soup.select('#bookDescription_feature_div noscript')
+        # synopsis_node = soup.select('noscript div')
+        if len(synopsis_node) > 0:
+            for node in synopsis_node:
+                if not node.has_attr('class'):
+                    synopsis = node.text
+
+        print("synopsis: ", synopsis)
+
+        
+        return {"authors": authors,
+                "synopsis": synopsis}
+
+    except Exception as error:
+        print(f'[Thread {thread_id}] An Error occurred while trying to read from', book_url, error)
+        return None
 
 def get_amazon_book_cover(thread_id, book_url, filename, folder):
     try:

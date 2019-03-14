@@ -15,6 +15,9 @@ from psycopg2.pool import ThreadedConnectionPool
 from config import config
 import get_book_information as getInfo
 from save_book import save_book
+from save_book import save_authors
+from save_book import update_book
+from save_book import update_synopsis
 
 # Mutex for printing to the console
 print_lock = threading.Lock()
@@ -48,7 +51,6 @@ def worker_thread(thread_id):
 
         search_result = getInfo.search_amazon_for_book(thread_id, book['title'], book['author'])
 
-        status = False
         if search_result:
             book_info = getInfo.fetch_new_book_info(thread_id, search_result)
 
@@ -175,6 +177,149 @@ def scrap_books():
             print("Execution time = {0:.5f}s".format(time.time() - start))
             print("Execution date = {}".format(datetime.now()))
 
+def scrap_books_for_missing_author():
+    global tcp, count
+    start = time.time()
+    try:
+        setup_db()
+
+        conn = tcp.getconn()
+        cur = conn.cursor()
+        cur.execute('SELECT book_id, amazon_link FROM "BookDetails" WHERE author_name IS NULL')
+        data = cur.fetchall()
+
+        for i in range(NUM_THREADS):
+            t = threading.Thread(target=worker_thread_author, args=(i, ))
+            # t.daemon = True
+            t.start()
+
+        task_num = 1
+        for d in data:
+            if DEBUG > 1:
+                with print_lock:
+                    print(f'[Main Thread] Adding Book {task_num}/{len(data)} to queue:', d[0], d[1])
+            task_num += 1
+            book_queue.put(d)
+
+        with print_lock:
+            print(f'[Main Thread] Waiting for all {task_num-1} tasks to be marked complete')
+        book_queue.join()
+        print(threading.enumerate())
+
+        # Kill all of the threads
+        for i in range(NUM_THREADS):
+            book_queue.put(None)
+        book_queue.join()
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        with print_lock:
+            print('[scrap_books] ERROR:', error)
+    finally:
+        with print_lock:
+            print('')
+        if tcp is not None:
+            tcp.closeall()
+            with print_lock:
+                print('Database connection closed.')
+        with print_lock:
+            print("Added {} books".format(count))
+            print("Execution time = {0:.5f}s".format(time.time() - start))
+            print("Execution date = {}".format(datetime.now()))
+
+def worker_thread_author_synopsis(thread_id):
+    global count
+
+    with print_lock:
+        print(f'[Thread {thread_id}] Starting Thread')
+    while True:
+        with print_lock:
+            print(f'[Thread {thread_id}] Waiting for next Task (Queue size { book_queue.qsize()})')
+
+        book = book_queue.get()
+
+        if book is None:
+            break
+
+        author_synopsis = getInfo.fetch_book_authors_synopsis(thread_id, book[1])
+        print("book_link: ", book[0], ' ', book[1])
+        if author_synopsis:
+            conn = tcp.getconn()
+
+            if book[2] is None and book[3] is None:
+                update_book(conn, book[0], author_synopsis)
+                print("saved both")
+            else:
+                if book[2] is None:
+                    save_authors(conn, book[0], author_synopsis)
+                    print("saved author")
+                else:
+                    update_synopsis(conn, book[0], author_synopsis['synopsis'])
+                    print("saved synopsis")
+
+            tcp.putconn(conn)
+
+            with shared_mutex:
+                count += 1
+
+        book_queue.task_done()
+        with print_lock:
+            print(f'[Thread {thread_id}] Task Completed')
+        time.sleep(SLEEP_TIME)
+
+    with print_lock:
+        print(f'[Thread {thread_id}] Thread Ended')
+
+
+def scrap_books_for_missing_authors_synopsis():
+    global tcp, count
+    start = time.time()
+    try:
+        setup_db()
+
+        # Fetch book_id and amazon_link from BookDetails tabel
+        conn = tcp.getconn()
+        cur = conn.cursor()
+        cur.execute('SELECT book_id, amazon_link, author_name, synopsis FROM "BookDetails" WHERE author_name IS NULL OR amazon_synopsis IS NULL')
+        data = cur.fetchall()
+
+        for i in range(NUM_THREADS):
+            t = threading.Thread(target=worker_thread_author_synopsis, args=(i, ))
+            # t.daemon = True
+            t.start()
+
+        task_num = 1
+        for d in data:
+            if DEBUG > 1:
+                with print_lock:
+                    print(f'[Main Thread] Adding Book {task_num}/{len(data)} to queue:', d[0], d[1])
+            task_num += 1
+            book_queue.put(d)
+
+        with print_lock:
+            print(f'[Main Thread] Waiting for all {task_num-1} tasks to be marked complete')
+        book_queue.join()
+        print(threading.enumerate())
+
+        # Kill all of the threads
+        for i in range(NUM_THREADS):
+            book_queue.put(None)
+        book_queue.join()
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        with print_lock:
+            print('[scrap_books] ERROR:', error)
+    finally:
+        with print_lock:
+            print('')
+        if tcp is not None:
+            tcp.closeall()
+            with print_lock:
+                print('Database connection closed.')
+        with print_lock:
+            print("Added {} books".format(count))
+            print("Execution time = {0:.5f}s".format(time.time() - start))
+            print("Execution date = {}".format(datetime.now()))
+
 
 if __name__ == '__main__':
-    scrap_books()
+    scrap_books_for_missing_authors_synopsis()

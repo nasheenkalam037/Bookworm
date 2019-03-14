@@ -9,7 +9,6 @@ INSERT INTO public."Books"(
     RETURNING book_id
 '''
 
-
 def save_book(conn, book):
     try:
         cur = conn.cursor()
@@ -25,6 +24,43 @@ def save_book(conn, book):
     except Exception as err:
         print('Error Saving book:', err, book)
 
+update_book_sql = '''
+UPDATE public."Books" SET synopsis=%s WHERE book_id=%s
+'''
+
+def update_book(conn, book_id, authors_synopsis):
+    try:
+        cur = conn.cursor()
+        save_authors(conn, book_id, authors_synopsis)
+        if authors_synopsis['synopsis']:
+            cur.execute(update_book_sql, authors_synopsis['synopsis'], book_id)
+            conn.commit()
+            
+        update_amazon_details(conn, book_id, authors_synopsis['synopsis'])
+
+        return book_id
+    except Exception as err:
+        print('Error Saving book:', err, book_id)
+
+def update_synopsis(conn, book_id, synopsis):
+    try:
+        cur = conn.cursor()
+        cur.execute(update_book_sql, (synopsis, book_id))
+        conn.commit()
+
+        update_amazon_details(conn, book_id, synopsis)
+
+    except Exception as err:
+        print('Error Saving book:', err, book_id)
+
+update_amazon_sql = '''
+UPDATE public."AmazonDetails" SET synopsis=%s WHERE book_id=%s
+'''
+
+def update_amazon_details(conn, book_id, synopsis):
+    cur = conn.cursor()
+    cur.execute(update_amazon_sql, (synopsis, book_id))
+    conn.commit()
 
 insert_cat_sql = '''
 INSERT INTO public."Categories"("name")
@@ -107,3 +143,4 @@ def save_amazon_details(conn, book_id, book):
     cur.execute(insert_amazon_sql,
                 (book_id, az['book_link'], az['rating'], az['num_reviews'], az['synopsis'], az['price']))
     conn.commit()
+
