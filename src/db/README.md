@@ -33,17 +33,17 @@ Setting up the Tables (WITH CONTENT)
     set PGPASSWORD=wxJcTdJYUU3mMAsAa5YD
     ```
 1. Run the following scripts:
-    1. `psql -a -f ./create_tables_insert_data/AmazonDetails.sql`
-    1. `psql -a -f ./create_tables_insert_data/Author.sql`
-    1. `psql -a -f ./create_tables_insert_data/AuthorBooks.sql`
-    1. `psql -a -f ./create_tables_insert_data/BookCategories.sql`
-    1. `psql -a -f ./create_tables_insert_data/BookOfTheDay.sql`
-    1. `psql -a -f ./create_tables_insert_data/Books.sq`
-    1. `psql -a -f  ./create_tables_insert_data/Categories.sql`
-    1. `psql -a -f ./create_tables_insert_data/Reviews.sql`
-    1. `psql -a -f ./create_tables_insert_data/Users.sq`
-    1. `psql -a -f  ./create_tables_insert_data/Views`
-    1. `psql -a -f ./grant_tables_add_constraint.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/AmazonDetails.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/Author.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/AuthorBooks.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/BookCategories.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/BookOfTheDay.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/Books.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/Categories.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/Reviews.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/Users.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/Views.sql`
+    1. `psql -q -a -f ./grant_tables_add_constraint.sql`
 
 Testing your Connection
 -----------------------
