@@ -321,3 +321,6 @@ class RegressionTestAuthenticationSystem(unittest.TestCase):
         else:
             self.fail("Test Failed: Unexpected Error")
             #print("unexpected error")
+
+    def tearDown(self):
+        self.driver.quit()
