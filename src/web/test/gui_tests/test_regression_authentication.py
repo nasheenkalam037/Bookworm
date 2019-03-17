@@ -11,8 +11,8 @@ import unittest
 class RegressionTestAuthenticationSystem(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
-        #self.driver = webdriver.Chrome()
+        #self.driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
+        self.driver = webdriver.Chrome()
 
     def test_regressignin(self):
         # self.driver.implicitly_wait(500)
