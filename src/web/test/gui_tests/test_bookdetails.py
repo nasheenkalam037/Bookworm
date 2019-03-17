@@ -56,7 +56,17 @@ class BookDetailsTest(unittest.TestCase):
         else:
             self.fail('Test Failed: Review block loading error')
 
-        # Case 5: sign in and review
+
+        # Case 5 : Thumbnail verification
+
+        #cover_image = '/images/book_covers/372.jpeg'
+        elem = self.driver.find_element_by_xpath("//img[contains(@src,'372.jpeg')]")
+        if elem.size != 0:
+            pass
+        else:
+            self.fail('Test Failed: Cover not found')
+
+        # Case 6: sign in and review
 
 
         elem = self.driver.find_element_by_class_name('review')
@@ -69,6 +79,7 @@ class BookDetailsTest(unittest.TestCase):
             self.fail('Test Failed: Review log in link load error')
 
         self.review()
+
         self.tearDown()
 
     def review(self):
