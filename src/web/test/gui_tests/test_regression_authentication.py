@@ -11,8 +11,8 @@ import unittest
 class RegressionTestAuthenticationSystem(unittest.TestCase):
 
     def setUp(self):
-        #self.driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
+        #self.driver = webdriver.Chrome()
 
     def test_regressignin(self):
         # self.driver.implicitly_wait(500)
@@ -139,12 +139,7 @@ class RegressionTestAuthenticationSystem(unittest.TestCase):
         elem.send_keys("password")
         self.signin_button()
         self.signin_validation()
-
-
         self.tearDown()
-
-
-
 
     def signup(self):
         elem = self.driver.find_element_by_id("signup")
@@ -175,21 +170,28 @@ class RegressionTestAuthenticationSystem(unittest.TestCase):
         elem.click()
 
 
-
-
     def fieldvalidation(self):
-        x ='Please fill in'
+
+        x = 'Please fill in'
         message = self.driver.find_element_by_id("email").get_attribute("validationMessage")
         message1 = self.driver.find_element_by_id("fullname").get_attribute("validationMessage")
         message2 = self.driver.find_element_by_id("password").get_attribute("validationMessage")
         message3 = self.driver.find_element_by_id("confirmation_password").get_attribute("validationMessage")
 
-        if x in message or x in message1 or x in message2 or x in message3:
+        if x in message:
+            print("Test Passed: Empty field email exists")
             pass
-            #print("Test Passed: Empty field exists")
-
+        elif x in message1:
+            print("Test Passed: Empty field fullname exists")
+            pass
+        elif x in message2:
+            print("Test Passed: Empty field password exists")
+            pass
+        elif x in message3:
+            print("Test Passed: Empty field confirm password exists")
+            pass
         else:
-           self.fail()
+           self.fail('Test Failed: empty field error')
 
 
     def invalid_input(self):
