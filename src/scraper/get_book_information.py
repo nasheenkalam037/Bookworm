@@ -43,7 +43,7 @@ def grab_url_request(url, headers=DEFAULT_HEADERS, params=None, return_soup=Fals
         if not driver:
             chrome_options = Options()
             chrome_options.add_argument("--log-level=3")
-            # options.add_argument("headless")  # remove this line if you want to see the browser popup
+            chrome_options.add_argument("headless")  # remove this line if you want to see the browser popup
             driver = webdriver.Chrome(options=chrome_options)
         driver.get(url)
 
@@ -137,11 +137,11 @@ def fetch_new_book_info(thread_id, book_url):
     '''
 
     try:
-        soup, r = grab_url_request(book_url, return_soup=True)
+        soup = grab_url_request(book_url, return_soup=True, use_webdriver=True)
 
-        if r.status_code != 200:
-            print(f'[Thread {thread_id}] Non 200 Return Code', book_url, r)
-            return None
+        # if r.status_code != 200:
+        #     print(f'[Thread {thread_id}] Non 200 Return Code', book_url, r)
+        #     return None
 
         title = soup.select('#productTitle')[0].text
 
@@ -164,7 +164,8 @@ def fetch_new_book_info(thread_id, book_url):
         price_node = soup.select('.offer-price')
         if len(price_node) > 0:
             if '$' in price_node[0].text:
-                price = float(price_node[0].text.split(' ')[1])
+                # price = float(price_node[0].text.split(' ')[1])
+                price = float(price_node[0].text.split('$')[1])
 
         synopsis = None
         synopsis_node = soup.select('noscript div')
@@ -238,6 +239,48 @@ def fetch_new_book_info(thread_id, book_url):
         print(f'[Thread {thread_id}] An Error occurred while trying to read from', book_url, error)
         return None
 
+def fetch_book_author(thread_id, book_url):
+    try:
+        soup = grab_url_request(book_url, return_soup=True, use_webdriver=True)
+
+        authors = []
+        for a in soup.select('.author a'):
+            print(a.text)
+            authors.append(a.text)
+        
+        return {"authors": authors}
+
+    except Exception as error:
+        print(f'[Thread {thread_id}] An Error occurred while trying to read from', book_url, error)
+        return None
+    
+def fetch_book_authors_synopsis(thread_id, book_url):
+    try:
+        soup = grab_url_request(book_url, return_soup=True, use_webdriver=True)
+
+        authors = []
+        for a in soup.select('.author a'):
+            authors.append(a.text)
+        
+        print("authors: ", authors)
+
+        synopsis = ""
+        synopsis_node = soup.select('#bookDescription_feature_div noscript')
+        # synopsis_node = soup.select('noscript div')
+        if len(synopsis_node) > 0:
+            for node in synopsis_node:
+                if not node.has_attr('class'):
+                    synopsis = node.text
+
+        print("synopsis: ", synopsis)
+
+        
+        return {"authors": authors,
+                "synopsis": synopsis}
+
+    except Exception as error:
+        print(f'[Thread {thread_id}] An Error occurred while trying to read from', book_url, error)
+        return None
 
 def get_amazon_book_cover(thread_id, book_url, filename, folder):
     try:

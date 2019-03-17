@@ -26,8 +26,24 @@ Setting up the Tables (NO CONTENT)
 
 Setting up the Tables (WITH CONTENT)
 ---------------------
-1. Login as either the `root user (postgres)` or `ece651_scraper` and run the script `./create_tables_load_content.sql`
-
+1. Set up the following variables:
+    ```
+    set PGDATABASE=ece651
+    set PGUSER=ece651_scraper
+    set PGPASSWORD=wxJcTdJYUU3mMAsAa5YD
+    ```
+1. Run the following scripts:
+    1. `psql -q -a -f ./create_tables_insert_data/AmazonDetails.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/Author.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/AuthorBooks.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/BookCategories.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/BookOfTheDay.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/Books.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/Categories.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/Reviews.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/Users.sql`
+    1. `psql -q -a -f ./create_tables_insert_data/Views.sql`
+    1. `psql -q -a -f ./grant_tables_add_constraint.sql`
 
 Testing your Connection
 -----------------------
