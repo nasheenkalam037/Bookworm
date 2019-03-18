@@ -1,3 +1,49 @@
-<div>
-Private Account Template
-</div>
+<article id="book_details_page">
+    {{#if user}}
+        <div class="vert-container">
+            <div class="hori-container">
+                <img class="book-cover-lg circle-border" src="/images/user_avatars/{{user.user_id}}.png" />
+
+                <div class="book-details">
+                    <h1 class="no-bottom-pm">{{user.display_name}}</h1>
+                </div>
+            </div>
+
+            <div class="vert-spacing-15"></div>
+
+            <div class="reviews font-normal">
+                {{#if reviews}}
+                    {{#each reviews}}
+                        <div>
+                            <div class="hori-container">
+                                <div style="width: 80px; text-align:center">
+                                    <img style="max-height: 101px;" src="/images/book_covers/{{this.book_id}}.jpeg" />
+                                </div>
+                                <div>
+                                    <div class="font-large">{{this.title}}</div>
+                                    <div>{{{getStarHTML this.rating}}}</div>
+
+                                    <div class="font-small">{{formatDate this.date_created}}</div>
+                                    <div class="user-review-text">
+                                        {{#if this.review}}
+                                            {{this.review}}
+                                        {{else}}
+                                            <i>No review given</i>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                {{else}}
+                    <div class="info">There are no reviews at the moment, why don't you fix that problem.</div>
+                {{/if}}
+            </div>
+        </div>
+    {{else}}
+        <div id="error_msg">
+            You must be logged in to view this page.<br>
+            Please <a href="/account/signin">Sign In</a> to view this page.
+        </div>
+    {{/if}}
+</article>
