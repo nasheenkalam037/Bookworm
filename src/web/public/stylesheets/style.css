@@ -297,9 +297,9 @@ header div.loginbox img {
 
 .bookoftheday .book-description {
   /* use this value to count block height */
-  line-height: 1.3em;
+  line-height: 2.3ex;
   /* max-height = line-height (1.3) * lines max number (10) */
-  max-height: 13em; 
+  max-height: 10.8ex; 
   text-align: left;
 }
 
