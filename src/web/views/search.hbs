@@ -1,10 +1,10 @@
 <div style="width:100%;padding: 20px;">
     <div class="searchbox">
         <form class="input-container" action="/search" method="get">
-            <i class="fa fa-search icon"></i>
             <input class="input-field" id="searchBox" type="text"
                 placeholder="Search using Book Name, Author, or Keyword" name="s"
-                {{#if search_term}}value="{{escapeQuotes search_term}}"{{/if}}>
+                {{#if search_term}}value="{{escapeQuotes search_term}}" {{/if}}>
+            <i class="fa fa-search icon"></i>
         </form>
         {{#if search_term}}
             <span class="font-normal">We found {{num_books}} books matching <span
@@ -23,7 +23,13 @@
                     <span class="book-authors font-normal">By
                         <a href="/author/{{author_id}}/{{author_name}}">{{author_name}}</a>
                     </span>
-                    <span class="book-description font-normal">{{synopsis}}</span>
+                    <span class="book-description font-normal">
+                        {{#if synopsis}}
+                            {{synopsis}}
+                        {{else}}
+                            No synopsis available
+                        {{/if}}
+                    </span>
                 </span>
                 <span class="book-deals">
                     <span class="book-deal">

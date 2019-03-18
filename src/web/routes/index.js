@@ -30,21 +30,23 @@ dummy_data = {
   recommendations: [my_book, my_book, my_book, my_book]
 };
 
-sql_top_books_landing =
-  'SELECT * FROM "BookDetails" ORDER BY amazon_rating DESC NULLS LAST LIMIT 15';
+sql_top_books_landing = 'SELECT * FROM "BookDetails" ORDER BY amazon_rating DESC NULLS LAST,amazon_num_reviews DESC NULLS LAST LIMIT 15';
+sql_todays_book_id = 'SELECT book_id FROM "BookOfTheDay" WHERE date <= now() ORDER BY date DESC limit 1'
+sql_bookoftheday = 'SELECT * FROM "BookDetails" where book_id = ('+sql_todays_book_id+')';
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   // Variable has to be named 'rows'
-  var { rows } = await db.query(sql_top_books_landing);
+  var top_books = await db.query(sql_top_books_landing);
+  var bookoftheday = await db.query(sql_bookoftheday);
 
-  console.log(rows);
+  console.log(bookoftheday);
 
   res.render('index', {
     title: 'The Bookworm',
     user: user.getUser(req.session),
-    bookoftheday: my_book,
-    books: rows,
+    bookoftheday: bookoftheday.rows[0],
+    books: top_books.rows,
     recommendations: [my_book, my_book, my_book, my_book]
   });
 });
@@ -65,11 +67,10 @@ router.get('/all', async function(req, res, next) {
   });
 });
 
-
 sql_author_details = 'SELECT * FROM "Author" WHERE author_id = $1';
 sql_author_books =
   'SELECT * FROM "BookDetails" ' +
-  'WHERE book_id in ( '+
+  'WHERE book_id in ( ' +
   'SELECT book_id FROM "AuthorBooks" WHERE author_id = $1 ' +
   ') ORDER BY book_id ASC';
 sql_coauthors =
@@ -79,16 +80,12 @@ sql_coauthors =
   'SELECT book_id FROM "AuthorBooks" WHERE author_id = $1 ' +
   ') AND ab.author_id != $1';
 /* GET book details page. */
-router.get('/author/:authorId(\\d+)/:authorName', async function(
-  req,
-  res,
-  next
-) {
+router.get('/author/:authorId(\\d+)/:authorName', async function(req, res, next) {
   var { rows } = await db.query(sql_author_details, [req.params['authorId']]);
   if (rows.length > 0) {
     author_name = rows[0]['name'];
     author_id = rows[0]['author_id'];
-    
+
     var { rows } = await db.query(sql_author_books, [req.params['authorId']]);
     books = rows;
 
@@ -107,8 +104,7 @@ router.get('/author/:authorId(\\d+)/:authorName', async function(
     // render the error page
     res.status(404);
     res.render('error', {
-      message:
-        'We are sorry, the book you are searching for could not be found.'
+      message: 'We are sorry, the book you are searching for could not be found.'
     });
   }
 });
@@ -116,22 +112,20 @@ router.get('/author/:authorId(\\d+)/:authorName', async function(
 /* GET Search page. */
 sql_search_title = 'SELECT * FROM public."BookDetails" WHERE title ILIKE $1';
 router.get('/search', async function(req, res, next) {
-
   var books = [];
-  if('s' in req.query) {
+  if ('s' in req.query) {
     var searchTerm = '%' + req.query.s + '%';
     var { rows } = await db.query(sql_search_title, [searchTerm]);
 
     books = rows;
   }
 
-
   res.render('search', {
     title: 'The Bookworm Search Page',
     user: user.getUser(req.session),
     books: books,
     num_books: books.length,
-    search_term: ('s' in req.query)? req.query.s : null
+    search_term: 's' in req.query ? req.query.s : null
   });
 });
 
