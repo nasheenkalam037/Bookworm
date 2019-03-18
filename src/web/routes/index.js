@@ -30,7 +30,7 @@ dummy_data = {
   recommendations: [my_book, my_book, my_book, my_book]
 };
 
-sql_top_books_landing = 'SELECT * FROM "BookDetails" ORDER BY amazon_rating DESC NULLS LAST LIMIT 15';
+sql_top_books_landing = 'SELECT * FROM "BookDetails" ORDER BY amazon_rating DESC NULLS LAST,amazon_num_reviews DESC NULLS LAST LIMIT 15';
 sql_todays_book_id = 'SELECT book_id FROM "BookOfTheDay" WHERE date <= now() ORDER BY date DESC limit 1'
 sql_bookoftheday = 'SELECT * FROM "BookDetails" where book_id = ('+sql_todays_book_id+')';
 
