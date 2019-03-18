@@ -264,6 +264,10 @@ header div.loginbox img {
 }
 .book-description {
   display: block;
+  max-height: 250px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  /* white-space: nowrap; */
 }
 .book-deals {
   margin-left: 50px;

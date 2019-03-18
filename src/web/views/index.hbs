@@ -42,13 +42,11 @@
 
     <div class="bookoftheday">
         <div class="book">
-            <img class="book-cover" src="{{bookoftheday.book_cover}}" />
+            <img class="book-cover" src="/images/book_covers/{{bookoftheday.book_id}}.jpeg" />
             <span class="book-details">
                 <a href="#" class="book-title font-large">{{bookoftheday.title}}</a>
                 <span class="book-authors font-normal">By
-                    {{#each bookoftheday.authors}}
-                    <a href="/author/{{this}}">{{this}}</a>
-                    {{/each}}
+                    <a href="/author/{{bookoftheday.author_id}}/{{bookoftheday.author_name}}">{{bookoftheday.author_name}}</a>
                 </span>
                 <span class="book-description font-normal">{{bookoftheday.synopsis}}</span>
             </span>
