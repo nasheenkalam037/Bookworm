@@ -3,7 +3,7 @@ var router = express.Router();
 const db = require('../db');
 const user = require('../helpers/user');
 
-sql_book_details = 'SELECT * FROM "Books" WHERE book_id = $1 LIMIT 1';
+sql_book_details = 'SELECT * FROM "BookDetails" WHERE book_id = $1 LIMIT 1';
 sql_book_authors =
   'SELECT * FROM "Author" as a INNER JOIN "AuthorBooks" ab on ' + 'a.author_id = ab.author_id WHERE ab.book_id = $1';
 sql_book_categories =
@@ -46,6 +46,7 @@ async function getBook(bookId) {
 router.get('/:bookId(\\d+)/:bookTitle', async function(req, res, next) {
   var book = await getBook(req.params['bookId']);
   if (book) {
+    console.log(book);
     res.render('details', {
       title: 'The Bookworm',
       user: user.getUser(req.session),

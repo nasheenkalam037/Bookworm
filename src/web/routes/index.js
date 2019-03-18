@@ -109,6 +109,39 @@ router.get('/author/:authorId(\\d+)/:authorName', async function(req, res, next)
   }
 });
 
+
+sql_category_details = 'SELECT * FROM "Categories" WHERE categories_id = $1';
+sql_category_books =
+  'SELECT * FROM "BookDetails" ' +
+  'WHERE book_id in ( ' +
+  'SELECT book_id FROM "BookCategories" WHERE category_id = $1 ' +
+  ') ORDER BY title ASC';
+/* GET book details page. */
+router.get('/category/:categoryId(\\d+)/:categoryName', async function(req, res, next) {
+  var { rows } = await db.query(sql_category_details, [req.params['categoryId']]);
+  if (rows.length > 0) {
+    category_name = rows[0]['name'];
+    category_id = rows[0]['categories_id'];
+
+    var { rows } = await db.query(sql_category_books, [req.params['categoryId']]);
+    books = rows;
+
+    res.render('category', {
+      title: 'The Bookworm',
+      user: req.session.user ? req.session.user : null,
+      category_id: category_id,
+      category_name: category_name,
+      books: books
+    });
+  } else {
+    // render the error page
+    res.status(404);
+    res.render('error', {
+      message: 'We are sorry, the book you are searching for could not be found.'
+    });
+  }
+});
+
 /* GET Search page. */
 sql_search_title = 'SELECT * FROM public."BookDetails" WHERE title ILIKE $1';
 router.get('/search', async function(req, res, next) {
