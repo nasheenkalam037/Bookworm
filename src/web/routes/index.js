@@ -126,11 +126,10 @@ router.get('/category/:categoryId(\\d+)/:categoryName', async function(req, res,
     var { rows } = await db.query(sql_category_books, [req.params['categoryId']]);
     books = rows;
 
-    res.render('category', {
+    res.render('book_list', {
       title: 'The Bookworm',
       user: req.session.user ? req.session.user : null,
-      category_id: category_id,
-      category_name: category_name,
+      heading: 'Books in the <i>'+category_name+'</i> Category',
       books: books
     });
   } else {
