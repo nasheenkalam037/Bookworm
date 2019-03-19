@@ -55,9 +55,29 @@
                         {{book.isbn10}}
                     </li>
                 {{/if}}
+
+                {{#if book.amazon_link}}
+                    <li>
+                        <b>Amazon:</b>
+                        <a href="{{book.amazon_link}}">Click here to buy
+                        </a>
+                        {{#if book.amazon_price}}
+                            <ul style="list-style-type: circle">
+                                <li><b>Price:</b> ${{book.amazon_price}}</li>
+                                {{#if book.amazon_num_reviews}}
+                                    <li><b>Number of Reviews:</b> {{book.amazon_num_reviews}}</li>
+                                {{/if}}
+                                {{#if book.amazon_rating}}
+                                    <li><b>Average Rating:</b> {{book.amazon_rating}}</li>
+                                {{/if}}
+                            </ul>
+                        {{/if}}
+                    </li>
+                {{/if}}
+
                 {{#if book.categories}}
                     <li>
-                        <b>Genres:</b>
+                        <b>Categories:</b><br/>
                         <ul class="book_categories">
                             {{#each book.categories}}
                                 <li><a href="/category/{{this.category_id}}/{{this.name}}">{{this.name}}</a></li>

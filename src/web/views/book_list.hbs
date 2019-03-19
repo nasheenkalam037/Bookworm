@@ -1,26 +1,5 @@
 <article id="book_details_page">
-    <div class="vert-container">
-        <div class="hori-container">
-            <img class="book-cover-lg" src="/images/authors/{{author_id}}.jpeg" />
-
-            <div class="book-details">
-                <h1 class="no-bottom-pm">{{author_name}}</h1>
-                <div class="font-normal no-top-pm no-bottom-pm">
-                    {{#if coauthors}}
-                        Written books with:
-                        <ul class="authors">
-                            {{#each coauthors}}
-                                <li><a href="/author/{{this.author_id}}/{{this.name}}">{{this.name}}</a></li>
-                            {{/each}}
-                        </ul>
-                    {{else}}
-                        No Co-Authors found
-                    {{/if}}
-                </div>
-            </div>
-        </div>
-
-        <div class="heading font-xlarge">Books By this Author</div>
+        <div class="heading font-xlarge">{{{heading}}}</div>
 
         <div class="vert-spacing-15"></div>
 
