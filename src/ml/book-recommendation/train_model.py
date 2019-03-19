@@ -135,6 +135,9 @@ pre, pre_op = tf.metrics.precision(labels=eval_x, predictions=eval_y)
 init = tf.global_variables_initializer()
 local_init = tf.local_variables_initializer()
 
+# Add ops to save and restore all the variables.
+saver = tf.train.Saver()
+
 # Train the Model
 with tf.Session() as session:
     session.run(init)
@@ -183,13 +186,17 @@ with tf.Session() as session:
     recs = predictions[~i1.isin(i2)]
     recs = recs.sort_values(['user', 'rating'], ascending=[True, False])
     recs = recs.groupby('user').head(k)
-    recs.to_csv('output.csv', sep=',', index=False, header=False)
+    recs.to_csv('prediction.csv', sep=',', index=False, header=False)
+
+    # Save the variables to disk.
+    save_path = saver.save(session, '/tmp/book_recommendation_model.ckpt')
+    print("Model saved in path: %s" % save_path)
 
     # creare un vettore dove ci sono per ogni utente i suoi 10 movies
 
-    test = test_data
+    # test = test_data
 
-    test = test.sort_values(['user', 'rating'], ascending=[True, False])
+    # test = test.sort_values(['user', 'rating'], ascending=[True, False])
 
     #test = test.groupby('user').head(k) #.reset_index(drop=True)
     #test_list = test.as_matrix(columns=['item']).reshape((-1))
