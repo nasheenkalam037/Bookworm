@@ -8,6 +8,52 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 import unittest
 
+
+def review(self):
+    elem = self.driver.find_element_by_xpath("//a[contains (@href,'/account/signin')]")
+    elem.click()
+
+    try:
+        elem = self.driver.find_element_by_id("email")
+        elem.send_keys("automation_test@gmail.com")
+
+        elem = self.driver.find_element_by_id("password")
+        elem.send_keys("bookworm123")
+
+        login = self.driver.find_element_by_id("login")
+        login.click()
+
+    except:
+        self.fail('Test Failed: Login to review failed')
+
+    try:
+        self.driver.get("http://127.0.0.1:3000/book/372/The%20Horus%20Heresy:%20Master%20of%20Mankind")
+
+        elem = self.driver.find_element_by_xpath("//select[@name='rating']/option[text()='3']")
+        elem.click()
+
+        elem1 = self.driver.find_element_by_class_name('review-comment')
+        elem1.clear()
+        elem1.send_keys('This is a test review by automation user')
+
+        elem2 = self.driver.find_element_by_class_name('review-btn')
+        elem2.click()
+
+        # review verification
+        elem = self.driver.find_element_by_class_name('user-review-text')
+        if 'This is a test review by automation user' in elem.text:
+            pass
+        else:
+            self.fail('Test Failed: Review load error')
+
+
+    except:
+        self.fail('Test Failed: Review Add failed')
+
+
+def tearDown(self):
+    self.driver.quit()
+
 class BookDetailsTest(unittest.TestCase):
 
     def setUp(self):
@@ -16,10 +62,8 @@ class BookDetailsTest(unittest.TestCase):
 
     def test_bookdetails(self):
 
-        self.driver.get("http://127.0.0.1:3000/")
+        self.driver.get("http://127.0.0.1:3000/book/372/The%20Horus%20Heresy:%20Master%20of%20Mankind")
 
-        elem= self.driver.find_element_by_xpath("//*[contains (@href,'/book/372/The Horus Heresy: Master of Mankind')]")
-        elem.click()
 
         # Case 1 : Verify Routing using matching ISBN of Book
 
@@ -32,7 +76,7 @@ class BookDetailsTest(unittest.TestCase):
 
         # Case 2 : Verify author information is loaded and correct
 
-        elem = self.driver.find_element_by_xpath("//*[contains (@href,'/author/499/Aaron Dembski-Bowden')]")
+        elem = self.driver.find_element_by_xpath("//*[contains (@href,'/author/1509/Aaron Dembski-Bowden')]")
         if 'Aaron Dembski-Bowden' in elem.text:
             pass
         else:
@@ -69,7 +113,7 @@ class BookDetailsTest(unittest.TestCase):
         # Case 6: sign in and review
 
 
-        elem = self.driver.find_element_by_class_name('review')
+        elem = self.driver.find_element_by_class_name('submit-review')
         sign_in_review='Please login to write a review for this book'
 
         if sign_in_review in elem.text:
@@ -78,50 +122,11 @@ class BookDetailsTest(unittest.TestCase):
         else:
             self.fail('Test Failed: Review log in link load error')
 
-        self.review()
+        review(self)
 
-        self.tearDown()
-
-    def review(self):
-
-        elem = self.driver.find_element_by_xpath("//a[contains (@href,'/account/signin')]")
-        elem.click()
-
-        try:
-            elem = self.driver.find_element_by_id("email")
-            elem.send_keys("automation_test@gmail.com")
-
-            elem = self.driver.find_element_by_id("password")
-            elem.send_keys("bookworm123")
-
-            login = self.driver.find_element_by_id("login")
-            login.click()
-
-        except:
-            self.fail('Test Failed: Login to review failed')
-
-        try:
-            elem = self.driver.find_element_by_xpath("//*[contains (@href,'/book/372/The Horus Heresy: Master of Mankind')]")
-            elem.click()
-
-            elem=self.driver.find_element_by_xpath("//select[@name='rating']/option[text()='3']")
-            elem.click()
-
-            elem1 = self.driver.find_element_by_class_name('review-comment')
-            elem1.clear()
-            elem1.send_keys('This is a test review by automation user')
-
-            elem2=self.driver.find_element_by_class_name('review-btn')
-            elem2.click()
-
-            # data verification adding pending as book details page is not loading
+        tearDown(self)
 
 
-        except:
-            self.fail('Test Failed: Review Add failed')
-
-    def tearDown(self):
-        self.driver.quit()
 
 
 
