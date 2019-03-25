@@ -244,6 +244,9 @@ header div.loginbox img {
 .recommendationlist .book {
   margin-bottom: 10px;
 }
+.recommendationlist .book-description {
+  text-align: left;
+}
 /*******************************************************************************************
        BOOKS
 *******************************************************************************************/
