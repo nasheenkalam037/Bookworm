@@ -7,40 +7,60 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 
 import unittest
+import psycopg2
+from psycopg2.pool import ThreadedConnectionPool
+from config import config
+
+driver = None
+
+remove_reviews_sql = 'DELETE FROM "Reviews" where user_id = %s'
+def remove_user_reviews(user_id):
+    try:
+        params = config()
+        tcp = ThreadedConnectionPool(1, 10, **params)
+        conn = tcp.getconn()
+        cur = conn.cursor()
+        cur.execute(remove_reviews_sql, (user_id,))
+        conn.commit()
+    except Exception as err:
+        pass
 
 
 def review(self):
-    elem = self.driver.find_element_by_xpath("//a[contains (@href,'/account/signin')]")
+    global driver
+    elem = driver.find_element_by_xpath("//a[contains (@href,'/account/signin')]")
     elem.click()
 
+    remove_user_reviews(3)
+
     try:
-        elem = self.driver.find_element_by_id("email")
+        elem = driver.find_element_by_id("email")
         elem.send_keys("automation_test@gmail.com")
 
-        elem = self.driver.find_element_by_id("password")
-        elem.send_keys("bookworm123")
+        elem = driver.find_element_by_id("password")
+        elem.send_keys("password")
 
-        login = self.driver.find_element_by_id("login")
+        login = driver.find_element_by_id("login")
         login.click()
 
     except:
         self.fail('Test Failed: Login to review failed')
 
     try:
-        self.driver.get("http://127.0.0.1:3000/book/372/The%20Horus%20Heresy:%20Master%20of%20Mankind")
+        driver.get("http://127.0.0.1:3000/book/372/The%20Horus%20Heresy:%20Master%20of%20Mankind")
 
-        elem = self.driver.find_element_by_xpath("//select[@name='rating']/option[text()='3']")
+        elem = driver.find_element_by_xpath("//select[@name='rating']/option[text()='3']")
         elem.click()
 
-        elem1 = self.driver.find_element_by_class_name('review-comment')
+        elem1 = driver.find_element_by_class_name('review-comment')
         elem1.clear()
         elem1.send_keys('This is a test review by automation user')
 
-        elem2 = self.driver.find_element_by_class_name('review-btn')
+        elem2 = driver.find_element_by_class_name('review-btn')
         elem2.click()
 
         # review verification
-        elem = self.driver.find_element_by_class_name('user-review-text')
+        elem = driver.find_element_by_class_name('user-review-text')
         if 'This is a test review by automation user' in elem.text:
             pass
         else:
@@ -51,23 +71,27 @@ def review(self):
         self.fail('Test Failed: Review Add failed')
 
 
-def tearDown(self):
-    self.driver.quit()
-
 class BookDetailsTest(unittest.TestCase):
 
     def setUp(self):
-        #self.driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
-        self.driver = webdriver.Chrome()
+        global driver
+        #driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
+        if not driver:
+            driver = webdriver.Chrome()
+
+    @classmethod
+    def tearDownClass(cls):
+        # print('Calling TearDown')
+        if driver:
+            driver.quit()
 
     def test_bookdetails(self):
+        global driver
 
-        self.driver.get("http://127.0.0.1:3000/book/372/The%20Horus%20Heresy:%20Master%20of%20Mankind")
-
+        driver.get("http://127.0.0.1:3000/book/372/The%20Horus%20Heresy:%20Master%20of%20Mankind")
 
         # Case 1 : Verify Routing using matching ISBN of Book
-
-        elem = self.driver.find_element_by_class_name('product-detail')
+        elem = driver.find_element_by_class_name('product-detail')
         x = '978-1784967116'
         if x in elem.text:
             pass
@@ -75,26 +99,23 @@ class BookDetailsTest(unittest.TestCase):
             self.fail('Test Failed: Book detail mismatch')
 
         # Case 2 : Verify author information is loaded and correct
-
-        elem = self.driver.find_element_by_xpath("//*[contains (@href,'/author/1509/Aaron Dembski-Bowden')]")
+        elem = driver.find_element_by_xpath("//*[contains (@href,'/author/1509/Aaron Dembski-Bowden')]")
         if 'Aaron Dembski-Bowden' in elem.text:
             pass
         else:
             self.fail('Test Failed: Author mismatch')
 
         # Case 3: Synopsis loaded and correct
-
         synopsis='While Horus’ rebellion burns across the galaxy, a very different kind of war rages beneath the Imperial Palace.'
-        elem=self.driver.find_element_by_xpath("//p[contains (@class,'font-normal')]")
+        elem=driver.find_element_by_xpath("//p[contains (@class,'font-normal')]")
         if synopsis in elem.text:
             pass
         else:
             self.fail('Test Failed: Synopsis mismatch')
 
         # Case 4: Review block verification
-
         review_text='Customer Reviews'
-        elem = self.driver.find_element_by_xpath("//h4[contains (@class,'no-bottom-pm')]")
+        elem = driver.find_element_by_xpath("//h4[contains (@class,'no-bottom-pm')]")
         if review_text in elem.text:
             pass
         else:
@@ -102,18 +123,15 @@ class BookDetailsTest(unittest.TestCase):
 
 
         # Case 5 : Thumbnail verification
-
         #cover_image = '/images/book_covers/372.jpeg'
-        elem = self.driver.find_element_by_xpath("//img[contains(@src,'372.jpeg')]")
+        elem = driver.find_element_by_xpath("//img[contains(@src,'372.jpeg')]")
         if elem.size != 0:
             pass
         else:
             self.fail('Test Failed: Cover not found')
 
         # Case 6: sign in and review
-
-
-        elem = self.driver.find_element_by_class_name('submit-review')
+        elem = driver.find_element_by_class_name('submit-review')
         sign_in_review='Please login to write a review for this book'
 
         if sign_in_review in elem.text:
@@ -124,12 +142,8 @@ class BookDetailsTest(unittest.TestCase):
 
         review(self)
 
-        tearDown(self)
 
 
-
-
-
-
-
+if __name__ == '__main__':
+    unittest.main()
 

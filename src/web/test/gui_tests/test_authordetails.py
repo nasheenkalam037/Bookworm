@@ -101,12 +101,10 @@ class AuthorDetailsTest(unittest.TestCase):
         self.driver = webdriver.Chrome()
 
     def test_authordetails(self):
-
         self.driver.get("http://127.0.0.1:3000/author/1509/Aaron%20Dembski-Bowden")
 
 
         # Case 1 : Verify Routing using matching Title of Author
-
         elem= self.driver.find_element_by_class_name('no-bottom-pm')
         name='Aaron Dembski-Bowden'
 
@@ -131,7 +129,9 @@ class AuthorDetailsTest(unittest.TestCase):
 
         bookDeals(self)
 
-        tearDown(self)
+    def tearDown(self):
+       if self.driver:
+           self.driver.quit()
 
 
 

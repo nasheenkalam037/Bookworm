@@ -24,7 +24,7 @@ class TestSignInUpSystem(unittest.TestCase):
         elem.send_keys("automation_test23@gmail.com")
 
         elem = self.driver.find_element_by_id("password")
-        elem.send_keys("bookworm123")
+        elem.send_keys("password")
 
         login = self.driver.find_element_by_id("login")
         login.click()
@@ -34,7 +34,7 @@ class TestSignInUpSystem(unittest.TestCase):
             elem.send_keys("automation_test@gmail.com")
 
             elem = self.driver.find_element_by_id("password")
-            elem.send_keys("bookworm123")
+            elem.send_keys("password")
 
             login = self.driver.find_element_by_id("login")
             login.click()
@@ -46,7 +46,7 @@ class TestSignInUpSystem(unittest.TestCase):
                 pass
 
             if elem:
-                if 'Hello Automation User' in elem.text:
+                if 'Hello automation_test@gmail.com' in elem.text:
                     #self.driver.implicitly_wait(200)
                     # print("Test Passed : signin completed")
                     pass

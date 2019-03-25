@@ -55,9 +55,9 @@ class Searchtest(unittest.TestCase):
     def setUp(self):
         #self.driver = webdriver.Chrome('/home/nasheen/Documents/ECE651/chromedriver')
         self.driver = webdriver.Chrome()
-        self.driver.get("http://127.0.0.1:3000/")
 
     def test_search(self):
+        self.driver.get("http://127.0.0.1:3000/")
         search_box = self.driver.find_element_by_class_name("input-field")
 
         # case 1: test with positive case: should find result
@@ -79,7 +79,9 @@ class Searchtest(unittest.TestCase):
         searchResultCount(self)
         nullResultVerification(self)
 
-        #tearDown(self)
+    def tearDown(self):
+       if self.driver:
+           self.driver.quit()
 
 
 

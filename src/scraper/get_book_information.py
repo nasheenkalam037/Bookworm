@@ -43,7 +43,7 @@ def grab_url_request(url, headers=DEFAULT_HEADERS, params=None, return_soup=Fals
         if not driver:
             chrome_options = Options()
             chrome_options.add_argument("--log-level=3")
-            chrome_options.add_argument("headless")  # remove this line if you want to see the browser popup
+            # chrome_options.add_argument("headless")  # remove this line if you want to see the browser popup
             driver = webdriver.Chrome(options=chrome_options)
         driver.get(url)
 
@@ -89,7 +89,7 @@ def search_amazon_for_book(thread_id, book_title, book_author):
 
         all_links = soup.select('a')
         count_links = 0
-        print(f'Number of links found via soup: {len(all_links)}')
+        # print(f'Number of links found via soup: {len(all_links)}')
         for a in all_links:
             if not a.has_attr('href'):
                 continue

@@ -44,10 +44,10 @@ class TestSignInUpSystem(unittest.TestCase):
                 elem.send_keys("automation_test@gmail.com")
 
                 elem = self.driver.find_element_by_id("password")
-                elem.send_keys("bookworm123")
+                elem.send_keys("password")
 
                 elem = self.driver.find_element_by_id("confirmation_password")
-                elem.send_keys("bookworm123")
+                elem.send_keys("password")
 
                 signup = self.driver.find_element_by_id("signup")
                 signup.click()
@@ -67,10 +67,12 @@ class TestSignInUpSystem(unittest.TestCase):
 
                 if elem_error:
                     if 'did you forget' in elem_error.text:
-                        print("Test Passed: Error - User Already Exists")
+                        # print("Test Passed: Error - User Already Exists")
+                        pass
                 elif elem_welcome:
                     if 'Automation User' in elem_welcome.text:
-                        print ("Test Passed: User created")
+                        # print ("Test Passed: User created")
+                        pass
                     else:
                         self.fail('Test Failed: Wrong Username Displayed')
 

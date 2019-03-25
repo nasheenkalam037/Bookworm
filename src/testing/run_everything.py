@@ -21,7 +21,7 @@ def run_all():
 
     print('\n')
     print('*'*50)
-    print('* UNIT TESTS')
+    print('* SYSTEM TESTS')
     print('*'*50)
     run_all_system_tests.run_all()
 
