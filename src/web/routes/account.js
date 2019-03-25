@@ -91,6 +91,7 @@ router.post('/signup', async function(req, res, next) {
             error = 'Unable to add user to table';
           }
         } catch (e) {
+          console.warn(e);
           error = 'Duplicate Email found in table, did you forget your password?';
         }
       } else {

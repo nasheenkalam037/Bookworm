@@ -33,6 +33,7 @@ dummy_data = {
 sql_top_books_landing = 'SELECT * FROM "BookDetails" ORDER BY amazon_rating DESC NULLS LAST,amazon_num_reviews DESC NULLS LAST LIMIT 15';
 sql_todays_book_id = 'SELECT book_id FROM "BookOfTheDay" WHERE date <= now() ORDER BY date DESC limit 1'
 sql_bookoftheday = 'SELECT * FROM "BookDetails" where book_id = ('+sql_todays_book_id+')';
+sql_random_books = 'SELECT * FROM "BookDetails" order by random() LIMIT $1';
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
@@ -40,14 +41,26 @@ router.get('/', async function(req, res, next) {
   var top_books = await db.query(sql_top_books_landing);
   var bookoftheday = await db.query(sql_bookoftheday);
 
-  console.log(bookoftheday);
+  var myuser = user.getUser(req.session);
+
+  var recommendations = [my_book, my_book, my_book, my_book];
+  if(myuser) {
+    // TODO for logged in users
+    console.log('Grabbing recommendations doe user', myuser);
+  } else {
+    console.log('Grabbing random recommendations');
+    recommendations = await db.query(sql_random_books, [10]);
+    recommendations = recommendations.rows
+  }
+
+  console.log(recommendations);
 
   res.render('index', {
     title: 'The Bookworm',
-    user: user.getUser(req.session),
+    user: myuser,
     bookoftheday: bookoftheday.rows[0],
     books: top_books.rows,
-    recommendations: [my_book, my_book, my_book, my_book]
+    recommendations: recommendations
   });
 });
 

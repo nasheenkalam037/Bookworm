@@ -121,6 +121,8 @@ ALTER TABLE ONLY public."Users"
 GRANT ALL ON TABLE public."Users" TO ece651_ml;
 GRANT ALL ON TABLE public."Users" TO ece651_web;
 GRANT ALL ON TABLE public."Users" TO ece651_scraper;
+GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_web;
+GRANT ALL ON SEQUENCE public."Users_user_id_sequence" TO ece651_ml;
 
 --- Reviews
 ALTER TABLE ONLY public."Reviews"
