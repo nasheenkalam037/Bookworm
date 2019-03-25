@@ -8,6 +8,48 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 import unittest
 
+
+def searchPageConfirmation(self, param):
+    page = self.driver.current_url
+    if param in page:
+        pass
+        value = self.driver.find_element_by_id("searchBox").get_attribute("value")
+        if param in value:
+            pass
+        else:
+            self.fail("Test Fail: Search parameter wrong")
+    else:
+        self.fail("Test fail: search page broken")
+
+
+
+def searchResultCount(self):
+    try:
+        searchcount = self.driver.find_element_by_xpath("//*[contains(text(), 'books matching')]")
+        pass
+
+    except:
+        self.fail("Test Failed: search result load error")
+
+
+
+def searchResultVerification(self):
+    try:
+        searchresult = self.driver.find_element_by_xpath("//*[contains(text(), 'Holt McDougal Library, High School with Connections: Individual Reader 1984')]")
+        pass
+
+    except:
+        self.fail("Test Failed: search result incorrect")
+
+
+def nullResultVerification(self):
+    try:
+        searchresult = self.driver.find_element_by_xpath("//*[contains(., 'Sorry, we could not find the book you were looking for.')]")
+        pass
+
+    except:
+        self.fail("Test Failed: search result incorrect")
+
 class Searchtest(unittest.TestCase):
 
     def setUp(self):
@@ -22,9 +64,9 @@ class Searchtest(unittest.TestCase):
 
         param='1984'
         search_box.send_keys(param,Keys.RETURN)
-        self.searchPageConfirmation(param)
-        self.searchResultCount()
-        self.searchResultVerification()
+        searchPageConfirmation(self,param)
+        searchResultCount(self)
+        searchResultVerification(self)
 
         # case 2: test with negative case: should not find any result
 
@@ -33,58 +75,13 @@ class Searchtest(unittest.TestCase):
         #param2='1984'
         param2 = 'sdfgsdfgsdfgsdfgdsfgsfgsdfgsdfg'
         search_box.send_keys(param2, Keys.RETURN)
-        self.searchPageConfirmation(param2)
-        self.searchResultCount()
-        self.nullResultVerification()
+        searchPageConfirmation(self,param2)
+        searchResultCount(self)
+        nullResultVerification(self)
 
-        self.tearDown()
+        #tearDown(self)
 
-    def searchPageConfirmation(self,param):
 
-        page = self.driver.current_url
-        if param in page:
-            pass
-            #print('Test Passed: Search page for data loaded')
-            value = self.driver.find_element_by_id("searchBox").get_attribute("value")
-            if param in value:
-                pass
-                #print('Test Passed: Input correct')
-            else:
-                self.fail("Test Fail: Search parameter wrong")
-                #print('Test Fail: Search parameter wrong')
-        else:
-            self.fail("Test fail: search page broken")
-            #print('Test fail: search page broken')
-
-    def searchResultCount(self):
-        try:
-            searchcount = self.driver.find_element_by_xpath("//*[contains(text(), 'books matching')]")
-            pass
-            #print("Test passed: search result loaded")
-        except:
-            self.fail("Test Failed: search result load error")
-            # print("Test Failed: search result load error")
-            # pass
-
-    def searchResultVerification(self):
-        try:
-            searchresult = self.driver.find_element_by_xpath("//*[contains(text(), 'Holt McDougal Library, High School with Connections: Individual Reader 1984')]")
-            pass
-            #print("Test passed: Search verified")
-        except:
-            self.fail("Test Failed: search result incorrect")
-            #print("Test Failed: search result incorrect")
-            #pass
-
-    def nullResultVerification(self):
-        try:
-            searchresult = self.driver.find_element_by_xpath("//*[contains(., 'Sorry, we could not find the book you were looking for.')]")
-            pass
-            #print("Test passed: Search verified - no result found")
-        except:
-            self.fail("Test Failed: search result incorrect")
-            #print("Test Failed: search result incorrect")
-            pass
 
 
 
