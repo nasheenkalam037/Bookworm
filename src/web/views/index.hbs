@@ -50,7 +50,8 @@
         <div class="book">
             <img class="book-cover" src="/images/book_covers/{{bookoftheday.book_id}}.jpeg" />
             <span class="book-details">
-                <a href="/book/{{bookoftheday.book_id}}/{{bookoftheday.title}}" class="book-title font-large">{{bookoftheday.title}}</a>
+                <a href="/book/{{bookoftheday.book_id}}/{{bookoftheday.title}}"
+                    class="book-title font-large">{{bookoftheday.title}}</a>
                 <span class="book-authors font-normal">By
                     <a
                         href="/author/{{bookoftheday.author_id}}/{{bookoftheday.author_name}}">{{bookoftheday.author_name}}</a>
@@ -66,13 +67,11 @@
     <div class="recommendationlist">
         {{#each recommendations}}
             <div class="book">
-                <img class="book-cover" src="{{book_cover}}" />
+                <img class="book-cover" src="/images/book_covers/{{book_id}}.jpeg" />
                 <span class="book-details">
                     <a href="#" class="book-title font-large">{{title}}</a>
                     <span class="book-authors font-normal">By
-                        {{#each authors}}
-                            <a href="/author/{{this}}">{{this}}</a>
-                        {{/each}}
+                        <a href="/author/{{author_id}}/{{author_name}}">{{author_name}}</a>
                     </span>
                     <span class="book-description font-normal">{{synopsis}}</span>
                 </span>
