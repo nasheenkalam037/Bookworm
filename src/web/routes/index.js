@@ -49,7 +49,7 @@ router.get('/', async function(req, res, next) {
     console.log('Grabbing recommendations doe user', myuser);
   } else {
     console.log('Grabbing random recommendations');
-    recommendations = await db.query(sql_random_books, [4]);
+    recommendations = await db.query(sql_random_books, [10]);
     recommendations = recommendations.rows
   }
 
