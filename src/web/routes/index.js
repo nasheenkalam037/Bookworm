@@ -30,10 +30,16 @@ dummy_data = {
   recommendations: [my_book, my_book, my_book, my_book]
 };
 
-sql_top_books_landing = 'SELECT * FROM "BookDetails" ORDER BY amazon_rating DESC NULLS LAST,amazon_num_reviews DESC NULLS LAST LIMIT 15';
-sql_todays_book_id = 'SELECT book_id FROM "BookOfTheDay" WHERE date <= now() ORDER BY date DESC limit 1'
-sql_bookoftheday = 'SELECT * FROM "BookDetails" where book_id = ('+sql_todays_book_id+')';
+sql_top_books_landing =
+  'SELECT * FROM "BookDetails" ORDER BY amazon_rating DESC NULLS LAST,amazon_num_reviews DESC NULLS LAST LIMIT 15';
+sql_todays_book_id = 'SELECT book_id FROM "BookOfTheDay" WHERE date <= now() ORDER BY date DESC limit 1';
+sql_bookoftheday = 'SELECT * FROM "BookDetails" where book_id = (' + sql_todays_book_id + ')';
 sql_random_books = 'SELECT * FROM "BookDetails" order by random() LIMIT $1';
+sql_num_reviews = 'select count(*) from "Reviews" where user_id = $1';
+sql_recommended_books =
+  'select r.likelihood, bd.* from "Recommendations" as r inner join "BookDetails" bd '+
+  'ON r.book_id = bd.book_id where r.user_id = $1 and '+
+  'r.book_id not in (select book_id from "Reviews" where user_id = $1) order by likelihood DESC LIMIT $2';
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
@@ -44,16 +50,23 @@ router.get('/', async function(req, res, next) {
   var myuser = user.getUser(req.session);
 
   var recommendations = [my_book, my_book, my_book, my_book];
-  if(myuser) {
-    // TODO for logged in users
-    console.log('Grabbing recommendations doe user', myuser);
+  if (myuser) {
+    console.log('Grabbing recommendations for user', myuser);
+    var num_reviews = await db.query(sql_num_reviews, [myuser.user_id]);
+    var my_user_id = myuser.user_id;
+    console.log('Number of Reviews:', num_reviews);
+    if (num_reviews.rows[0].count == '0') {
+      my_user_id = 0;
+    }
+    recommendations = await db.query(sql_recommended_books, [my_user_id, 10]);
+    recommendations = recommendations.rows;
   } else {
     console.log('Grabbing random recommendations');
-    recommendations = await db.query(sql_random_books, [10]);
-    recommendations = recommendations.rows
+    recommendations = await db.query(sql_recommended_books, [0, 10]);
+    recommendations = recommendations.rows;
   }
 
-  console.log(recommendations);
+  // console.log(recommendations);
 
   res.render('index', {
     title: 'The Bookworm',
@@ -66,7 +79,7 @@ router.get('/', async function(req, res, next) {
 
 sql_top_books_all = 'SELECT * FROM "BookDetails" ORDER BY book_id DESC';
 
-/* GET home page. */
+/* Display all books. */
 router.get('/all', async function(req, res, next) {
   // Variable has to be named 'rows'
   var { rows } = await db.query(sql_top_books_all);
@@ -77,6 +90,35 @@ router.get('/all', async function(req, res, next) {
     title: 'The Bookworm',
     user: user.getUser(req.session),
     books: rows
+  });
+});
+
+/* display all recommended books. */
+router.get('/recommendations', async function(req, res, next) {
+  var myuser = user.getUser(req.session);
+
+  var recommendations = [my_book, my_book, my_book, my_book];
+  if (myuser) {
+    console.log('Grabbing recommendations for user', myuser);
+    var num_reviews = await db.query(sql_num_reviews, [myuser.user_id]);
+    var my_user_id = myuser.user_id;
+    console.log('Number of Reviews:', num_reviews);
+    if (num_reviews.rows[0].count == '0') {
+      my_user_id = 0;
+    }
+    recommendations = await db.query(sql_recommended_books, [my_user_id, 50]);
+    recommendations = recommendations.rows;
+  } else {
+    console.log('Grabbing random recommendations');
+    recommendations = await db.query(sql_recommended_books, [0, 50]);
+    recommendations = recommendations.rows;
+  }
+
+  res.render('book_list', {
+    title: 'The Bookworm',
+    heading: 'Custom Recommendation List',
+    user: myuser,
+    books: recommendations
   });
 });
 
@@ -122,7 +164,6 @@ router.get('/author/:authorId(\\d+)/:authorName', async function(req, res, next)
   }
 });
 
-
 sql_category_details = 'SELECT * FROM "Categories" WHERE categories_id = $1';
 sql_category_books =
   'SELECT * FROM "BookDetails" ' +
@@ -142,7 +183,7 @@ router.get('/category/:categoryId(\\d+)/:categoryName', async function(req, res,
     res.render('book_list', {
       title: 'The Bookworm',
       user: req.session.user ? req.session.user : null,
-      heading: 'Books in the <i>'+category_name+'</i> Category',
+      heading: 'Books in the <i>' + category_name + '</i> Category',
       books: books
     });
   } else {
