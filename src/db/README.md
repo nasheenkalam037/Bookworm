@@ -27,23 +27,30 @@ Setting up the Tables (NO CONTENT)
 Setting up the Tables (WITH CONTENT)
 ---------------------
 1. Set up the following variables:
+    * **Windows:**
     ```
     set PGDATABASE=ece651
     set PGUSER=ece651_scraper
     set PGPASSWORD=wxJcTdJYUU3mMAsAa5YD
     ```
+    * **Linux:**
+    ```
+    export PGDATABASE=ece651
+    export PGUSER=ece651_scraper
+    export PGPASSWORD=wxJcTdJYUU3mMAsAa5YD
+    ```
 1. Run the following scripts:
-    1. `psql -q -a -f ./create_tables_insert_data/AmazonDetails.sql`
-    1. `psql -q -a -f ./create_tables_insert_data/Author.sql`
-    1. `psql -q -a -f ./create_tables_insert_data/AuthorBooks.sql`
-    1. `psql -q -a -f ./create_tables_insert_data/BookCategories.sql`
-    1. `psql -q -a -f ./create_tables_insert_data/BookOfTheDay.sql`
-    1. `psql -q -a -f ./create_tables_insert_data/Books.sql`
-    1. `psql -q -a -f ./create_tables_insert_data/Categories.sql`
-    1. `psql -q -a -f ./create_tables_insert_data/Reviews.sql`
-    1. `psql -q -a -f ./create_tables_insert_data/Users.sql`
-    1. `psql -q -a -f ./create_tables_insert_data/Views.sql`
-    1. `psql -q -a -f ./grant_tables_add_constraint.sql`
+    1. `psql -q -f ./create_tables_insert_data/AmazonDetails.sql`
+    1. `psql -q -f ./create_tables_insert_data/Author.sql`
+    1. `psql -q -f ./create_tables_insert_data/AuthorBooks.sql`
+    1. `psql -q -f ./create_tables_insert_data/BookCategories.sql`
+    1. `psql -q -f ./create_tables_insert_data/BookOfTheDay.sql`
+    1. `psql -q -f ./create_tables_insert_data/Books.sql`
+    1. `psql -q -f ./create_tables_insert_data/Categories.sql`
+    1. `psql -q -f ./create_tables_insert_data/Reviews.sql`
+    1. `psql -q -f ./create_tables_insert_data/Users.sql`
+    1. `psql -q -f ./create_tables_insert_data/Views.sql`
+    1. `psql -q -f ./grant_tables_add_constraint.sql`
 
 Testing your Connection
 -----------------------
@@ -59,6 +66,13 @@ Testing your Connection
     ```
     * If you have an error, check google and then ask Jon if you still have trouble solving it
 
+
+Adding/Updating Recommendations
+===============================
+Periodically the machine learning algorithm will need to be run to ensure that we have better recommendations.
+To update your database run the following script (make sure your export settings are set above).
+
+1. `psql -q -f ./create_tables_insert_data/Recommendations.sql`
 
 Updating the Database
 =====================
