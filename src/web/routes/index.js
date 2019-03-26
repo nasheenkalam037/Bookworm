@@ -66,7 +66,7 @@ router.get('/', async function(req, res, next) {
     recommendations = recommendations.rows;
   }
 
-  console.log(recommendations);
+  // console.log(recommendations);
 
   res.render('index', {
     title: 'The Bookworm',
@@ -79,7 +79,7 @@ router.get('/', async function(req, res, next) {
 
 sql_top_books_all = 'SELECT * FROM "BookDetails" ORDER BY book_id DESC';
 
-/* GET home page. */
+/* Display all books. */
 router.get('/all', async function(req, res, next) {
   // Variable has to be named 'rows'
   var { rows } = await db.query(sql_top_books_all);
@@ -90,6 +90,35 @@ router.get('/all', async function(req, res, next) {
     title: 'The Bookworm',
     user: user.getUser(req.session),
     books: rows
+  });
+});
+
+/* display all recommended books. */
+router.get('/recommendations', async function(req, res, next) {
+  var myuser = user.getUser(req.session);
+
+  var recommendations = [my_book, my_book, my_book, my_book];
+  if (myuser) {
+    console.log('Grabbing recommendations for user', myuser);
+    var num_reviews = await db.query(sql_num_reviews, [myuser.user_id]);
+    var my_user_id = myuser.user_id;
+    console.log('Number of Reviews:', num_reviews);
+    if (num_reviews.rows[0].count == '0') {
+      my_user_id = 0;
+    }
+    recommendations = await db.query(sql_recommended_books, [my_user_id, 50]);
+    recommendations = recommendations.rows;
+  } else {
+    console.log('Grabbing random recommendations');
+    recommendations = await db.query(sql_recommended_books, [0, 50]);
+    recommendations = recommendations.rows;
+  }
+
+  res.render('book_list', {
+    title: 'The Bookworm',
+    heading: 'Custom Recommendation List',
+    user: myuser,
+    books: recommendations
   });
 });
 
