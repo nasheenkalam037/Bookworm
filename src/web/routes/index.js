@@ -35,10 +35,10 @@ sql_top_books_landing =
 sql_todays_book_id = 'SELECT book_id FROM "BookOfTheDay" WHERE date <= now() ORDER BY date DESC limit 1';
 sql_bookoftheday = 'SELECT * FROM "BookDetails" where book_id = (' + sql_todays_book_id + ')';
 sql_random_books = 'SELECT * FROM "BookDetails" order by random() LIMIT $1';
-sql_num_reviews = 'select count(*) from "Reviews" where user_id = $1';
+sql_num_recommendations = 'select count(*) from "Recommendations" where user_id = $1';
 sql_recommended_books =
-  'select r.likelihood, bd.* from "Recommendations" as r inner join "BookDetails" bd '+
-  'ON r.book_id = bd.book_id where r.user_id = $1 and '+
+  'select r.likelihood, bd.* from "Recommendations" as r inner join "BookDetails" bd ' +
+  'ON r.book_id = bd.book_id where r.user_id = $1 and ' +
   'r.book_id not in (select book_id from "Reviews" where user_id = $1) order by likelihood DESC LIMIT $2';
 
 /* GET home page. */
@@ -52,7 +52,7 @@ router.get('/', async function(req, res, next) {
   var recommendations = [my_book, my_book, my_book, my_book];
   if (myuser) {
     console.log('Grabbing recommendations for user', myuser);
-    var num_reviews = await db.query(sql_num_reviews, [myuser.user_id]);
+    var num_reviews = await db.query(sql_num_recommendations, [myuser.user_id]);
     var my_user_id = myuser.user_id;
     console.log('Number of Reviews:', num_reviews);
     if (num_reviews.rows[0].count == '0') {
@@ -100,7 +100,7 @@ router.get('/recommendations', async function(req, res, next) {
   var recommendations = [my_book, my_book, my_book, my_book];
   if (myuser) {
     console.log('Grabbing recommendations for user', myuser);
-    var num_reviews = await db.query(sql_num_reviews, [myuser.user_id]);
+    var num_reviews = await db.query(sql_num_recommendations, [myuser.user_id]);
     var my_user_id = myuser.user_id;
     console.log('Number of Reviews:', num_reviews);
     if (num_reviews.rows[0].count == '0') {
